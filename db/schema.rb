@@ -10,13 +10,24 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111016103654) do
+ActiveRecord::Schema.define(:version => 20111016103658) do
 
   create_table "clubs", :force => true do |t|
     t.string   "full_name"
     t.string   "symbol"
     t.text     "contact"
     t.text     "email"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "swimmers", :force => true do |t|
+    t.string   "first"
+    t.string   "last"
+    t.integer  "club_id"
+    t.date     "birthday"
+    t.string   "gender"
+    t.string   "registration"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
