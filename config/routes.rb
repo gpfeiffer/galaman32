@@ -1,4 +1,6 @@
 Galaman::Application.routes.draw do
+  resources :qualifications
+
   resources :disciplines
 
   resources :swimmers
