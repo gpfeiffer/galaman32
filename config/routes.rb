@@ -1,4 +1,6 @@
 Galaman::Application.routes.draw do
+  resources :competitions
+
   resources :qualification_times
 
   resources :qualifications
