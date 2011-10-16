@@ -1,23 +1,9 @@
 <h1>Listing disciplines</h1>
 
 <table>
-  <tr>
-    <th>Gender</th>
-    <th>Distance</th>
-    <th>Course</th>
-    <th>Stroke</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
 <% @disciplines.each do |discipline| %>
   <tr>
-    <td><%= discipline.gender %></td>
-    <td><%= discipline.distance %></td>
-    <td><%= discipline.course %></td>
-    <td><%= discipline.stroke %></td>
-    <td><%= link_to 'Show', discipline %></td>
+    <td><%= link_to discipline.name, discipline %></td>
     <td><%= link_to 'Edit', edit_discipline_path(discipline) %></td>
     <td><%= link_to 'Destroy', discipline, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>

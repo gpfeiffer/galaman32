@@ -13,19 +13,19 @@
 
   <div class="field">
     <%= f.label :gender %><br />
-    <%= f.text_field :gender %>
+    <%= f.select :gender, Swimmer::GENDERS, :include_blank => true %>
   </div>
   <div class="field">
     <%= f.label :distance %><br />
-    <%= f.text_field :distance %>
+    <%= f.select :distance, Discipline::DISTANCES, :include_blank => true %>
   </div>
   <div class="field">
     <%= f.label :course %><br />
-    <%= f.text_field :course %>
+    <%= f.select :course, Discipline::COURSES %>
   </div>
   <div class="field">
     <%= f.label :stroke %><br />
-    <%= f.text_field :stroke %>
+    <%= f.select :stroke, Discipline::STROKES, :include_blank => true %>
   </div>
   <div class="actions">
     <%= f.submit %>
