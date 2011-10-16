@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Event:</b>
+  <%= @entry.event_id %>
+</p>
+
+<p>
+  <b>Swimmer:</b>
+  <%= @entry.swimmer_id %>
+</p>
+
+<p>
+  <b>Seed time:</b>
+  <%= @entry.seed_time %>
+</p>
+
+<p>
+  <b>Race time:</b>
+  <%= @entry.race_time %>
+</p>
+
+
+<%= link_to 'Edit', edit_entry_path(@entry) %> |
+<%= link_to 'Back', entries_path %>

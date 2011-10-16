@@ -1,4 +1,6 @@
 Galaman::Application.routes.draw do
+  resources :entries
+
   resources :events
 
   resources :registrations

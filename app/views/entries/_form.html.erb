@@ -1,0 +1,33 @@
+<%= form_for(@entry) do |f| %>
+  <% if @entry.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@entry.errors.count, "error") %> prohibited this entry from being saved:</h2>
+
+      <ul>
+      <% @entry.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :event_id %><br />
+    <%= f.text_field :event_id %>
+  </div>
+  <div class="field">
+    <%= f.label :swimmer_id %><br />
+    <%= f.text_field :swimmer_id %>
+  </div>
+  <div class="field">
+    <%= f.label :seed_time %><br />
+    <%= f.text_field :seed_time %>
+  </div>
+  <div class="field">
+    <%= f.label :race_time %><br />
+    <%= f.text_field :race_time %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
