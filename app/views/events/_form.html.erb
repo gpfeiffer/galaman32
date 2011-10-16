@@ -11,24 +11,24 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :competition_id %><br />
-    <%= f.text_field :competition_id %>
-  </div>
+  <%= f.hidden_field :competition_id %>
+
+  <h3><%= @event.competition.name %></h3>
+
   <div class="field">
     <%= f.label :discipline_id %><br />
-    <%= f.text_field :discipline_id %>
+    <%= f.select :discipline_id, Discipline.all.map {|x| [x.name, x.id]} %>
   </div>
   <div class="field">
-    <%= f.label :pos %><br />
+    <%= f.label :pos, "Position" %><br />
     <%= f.text_field :pos %>
   </div>
   <div class="field">
-    <%= f.label :age_min %><br />
+    <%= f.label :age_min, "Minimal Age" %><br />
     <%= f.text_field :age_min %>
   </div>
   <div class="field">
-    <%= f.label :age_max %><br />
+    <%= f.label :age_max, "Maximal Age" %><br />
     <%= f.text_field :age_max %>
   </div>
   <div class="actions">

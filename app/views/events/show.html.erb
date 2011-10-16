@@ -2,29 +2,25 @@
 
 <p>
   <b>Competition:</b>
-  <%= @event.competition_id %>
+  <%= @event.competition.name %>
 </p>
 
 <p>
   <b>Discipline:</b>
-  <%= @event.discipline_id %>
+  <%= @event.discipline.name %>
 </p>
 
 <p>
-  <b>Pos:</b>
+  <b>Position:</b>
   <%= @event.pos %>
 </p>
 
 <p>
-  <b>Age min:</b>
-  <%= @event.age_min %>
-</p>
-
-<p>
-  <b>Age max:</b>
-  <%= @event.age_max %>
+  <b>Age Group:</b>
+  <%= @event.age_min %> -
+  <%= @event.age_max %> years
 </p>
 
 
 <%= link_to 'Edit', edit_event_path(@event) %> |
-<%= link_to 'Back', events_path %>
+<%= link_to 'Back', @event.competition %>

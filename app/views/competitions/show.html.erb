@@ -7,9 +7,38 @@
 (<%= @competition.date %>)
 </p>
 
+<h3>Registered Swimmers</h3>
+
+
+<table>
+<tr>
+<td>Swimmer</td>
+<td>Team</td>
+      <% @competition.events.each do |event| %>
+        <td><%= sprintf("%02d", event.pos) %></td>
+      <% end %>
+</tr>
+<% @competition.swimmers.each do |swimmer| %>
+  <tr>
+      <td><%= link_to swimmer.name, swimmer %> [<%= swimmer.age(@competition.date) %>]</td>
+      <td><%= swimmer.club.symbol %></td>
+      <% @competition.events.each do |event| %>
+        <td>
+	<% if event.swimmer_ids.include?(swimmer.id) %>
+	x 
+	<% elsif event.permits?(swimmer) %>
+	&square; 
+        <% end %>
+        </td>
+      <% end %>
+  </tr>
+<% end %>
+</table>
+
 <hr/>
 <%= render 'events' %>
 <hr/>
 
 <%= link_to 'Edit', edit_competition_path(@competition) %> |
+<%= link_to 'Clubs', clubs_path %> |
 <%= link_to 'Back', competitions_path %>

@@ -25,6 +25,7 @@ class EventsController < ApplicationController
   # GET /events/new.xml
   def new
     @event = Event.new
+    @event[:competition_id] = params[:competition_id]
 
     respond_to do |format|
       format.html # new.html.erb
@@ -44,7 +45,7 @@ class EventsController < ApplicationController
 
     respond_to do |format|
       if @event.save
-        format.html { redirect_to(@event, :notice => 'Event was successfully created.') }
+        format.html { redirect_to(@event.competition, :notice => 'Event was successfully created.') }
         format.xml  { render :xml => @event, :status => :created, :location => @event }
       else
         format.html { render :action => "new" }

@@ -1,5 +1,9 @@
 class Swimmer < ActiveRecord::Base
   belongs_to :club
+  has_many :registrations
+  has_many :competitions, :through => :registrations
+  has_many :entries
+  has_many :events, :through => :entries
 
   GENDERS = ["f", "m"]
 

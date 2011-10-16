@@ -3,6 +3,8 @@ class RegistrationsController < ApplicationController
   # GET /registrations.xml
   def index
     @registrations = Registration.all
+    @competition = Competition.find(params[:competition_id])
+    @club = Club.find(params[:club_id])
 
     respond_to do |format|
       format.html # index.html.erb
