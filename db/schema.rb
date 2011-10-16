@@ -10,13 +10,73 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111016103658) do
+ActiveRecord::Schema.define(:version => 20111016103714) do
 
   create_table "clubs", :force => true do |t|
     t.string   "full_name"
     t.string   "symbol"
     t.text     "contact"
     t.text     "email"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "competitions", :force => true do |t|
+    t.string   "name"
+    t.string   "location"
+    t.date     "date"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "disciplines", :force => true do |t|
+    t.string   "gender"
+    t.integer  "distance"
+    t.string   "course"
+    t.string   "stroke"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "entries", :force => true do |t|
+    t.integer  "event_id"
+    t.integer  "swimmer_id"
+    t.integer  "seed_time"
+    t.integer  "race_time"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "events", :force => true do |t|
+    t.integer  "competition_id"
+    t.integer  "discipline_id"
+    t.integer  "pos"
+    t.integer  "age_min"
+    t.integer  "age_max"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "qualification_times", :force => true do |t|
+    t.integer  "qualification_id"
+    t.integer  "discipline_id"
+    t.string   "gender"
+    t.integer  "age_min"
+    t.integer  "age_max"
+    t.integer  "time"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "qualifications", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "registrations", :force => true do |t|
+    t.integer  "competition_id"
+    t.integer  "swimmer_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
