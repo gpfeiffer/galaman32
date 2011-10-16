@@ -11,6 +11,10 @@
     </div>
   <% end %>
 
+  <%= f.hidden_field :club_id %>
+
+  <h3><%= @swimmer.club.full_name %></h3> 
+
   <div class="field">
     <%= f.label :first %><br />
     <%= f.text_field :first %>
@@ -20,19 +24,20 @@
     <%= f.text_field :last %>
   </div>
   <div class="field">
-    <%= f.label :club_id %><br />
-    <%= f.text_field :club_id %>
-  </div>
-  <div class="field">
     <%= f.label :birthday %><br />
-    <%= f.date_select :birthday %>
+    <%= f.date_select :birthday,
+            :default => Time.now - 10.years, 
+            :end_year => Time.now.year - 5, 
+            :start_year => Time.now.year - 20,
+            :include_blank => true, 
+            :order => [:day, :month, :year] %>
   </div>
   <div class="field">
     <%= f.label :gender %><br />
-    <%= f.text_field :gender %>
+    <%= f.select :gender, Swimmer::GENDERS, :include_blank => true %>
   </div>
   <div class="field">
-    <%= f.label :registration %><br />
+    <%= f.label :registration, "Swim Ireland ID" %><br />
     <%= f.text_field :registration %>
   </div>
   <div class="actions">

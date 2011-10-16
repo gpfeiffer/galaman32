@@ -1,14 +1,9 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <b>Full name:</b>
+<h2>
   <%= @club.full_name %>
-</p>
-
-<p>
-  <b>Symbol:</b>
-  <%= @club.symbol %>
-</p>
+  (<%= @club.symbol %>)
+</h2>
 
 <p>
   <b>Contact:</b>
@@ -20,6 +15,9 @@
   <%= @club.email %>
 </p>
 
+<hr/>
+<%= render 'swimmers' %>
+<hr/>
 
 <%= link_to 'Edit', edit_club_path(@club) %> |
 <%= link_to 'Back', clubs_path %>

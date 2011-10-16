@@ -25,6 +25,8 @@ class SwimmersController < ApplicationController
   # GET /swimmers/new.xml
   def new
     @swimmer = Swimmer.new
+    @club = Club.find(params[:club_id])
+    @swimmer[:club_id] = @club.id
 
     respond_to do |format|
       format.html # new.html.erb
@@ -44,7 +46,7 @@ class SwimmersController < ApplicationController
 
     respond_to do |format|
       if @swimmer.save
-        format.html { redirect_to(@swimmer, :notice => 'Swimmer was successfully created.') }
+        format.html { redirect_to(@swimmer.club, :notice => 'Swimmer was successfully created.') }
         format.xml  { render :xml => @swimmer, :status => :created, :location => @swimmer }
       else
         format.html { render :action => "new" }
@@ -60,7 +62,7 @@ class SwimmersController < ApplicationController
 
     respond_to do |format|
       if @swimmer.update_attributes(params[:swimmer])
-        format.html { redirect_to(@swimmer, :notice => 'Swimmer was successfully updated.') }
+        format.html { redirect_to(@swimmer.club, :notice => 'Swimmer was successfully updated.') }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }

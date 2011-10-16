@@ -2,24 +2,20 @@
 
 <table>
   <tr>
-    <th>Full name</th>
-    <th>Symbol</th>
+    <th>name</th>
     <th>Contact</th>
     <th>Email</th>
-    <th></th>
     <th></th>
     <th></th>
   </tr>
 
 <% @clubs.each do |club| %>
   <tr>
-    <td><%= club.full_name %></td>
-    <td><%= club.symbol %></td>
+    <td><%= link_to club.name, club %></td>
     <td><%= club.contact %></td>
     <td><%= club.email %></td>
-    <td><%= link_to 'Show', club %></td>
     <td><%= link_to 'Edit', edit_club_path(club) %></td>
-    <td><%= link_to 'Destroy', club, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= link_to 'Delete', club, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>
 </table>

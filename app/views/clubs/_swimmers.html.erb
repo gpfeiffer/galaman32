@@ -2,32 +2,24 @@
 
 <table>
   <tr>
-    <th>First</th>
-    <th>Last</th>
-    <th>Club</th>
+    <th>Name</th>
     <th>Birthday</th>
-    <th>Gender</th>
     <th>Registration</th>
-    <th></th>
     <th></th>
     <th></th>
   </tr>
 
-<% @swimmers.each do |swimmer| %>
+<% @club.swimmers.each do |swimmer| %>
   <tr>
-    <td><%= swimmer.first %></td>
-    <td><%= swimmer.last %></td>
-    <td><%= swimmer.club_id %></td>
-    <td><%= swimmer.birthday %></td>
-    <td><%= swimmer.gender %></td>
+    <td><%= link_to swimmer.name, swimmer %> (<%= swimmer.gender %>)</td>
+    <td><%= swimmer.birthday %> [<%= swimmer.age %>]</td>
     <td><%= swimmer.registration %></td>
-    <td><%= link_to 'Show', swimmer %></td>
-    <td><%= link_to 'Edit', edit_swimmer_path(swimmer) %></td>
-    <td><%= link_to 'Destroy', swimmer, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= link_to 'Edit', edit_swimmer_path(swimmer, :club_id => @club) %></td>
+    <td><%= link_to 'Delete', swimmer, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New Swimmer', new_swimmer_path %>
+<%= link_to 'New Swimmer', new_swimmer_path(:club_id => @club) %>
