@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Gender:</b>
+  <%= @discipline.gender %>
+</p>
+
+<p>
+  <b>Distance:</b>
+  <%= @discipline.distance %>
+</p>
+
+<p>
+  <b>Course:</b>
+  <%= @discipline.course %>
+</p>
+
+<p>
+  <b>Stroke:</b>
+  <%= @discipline.stroke %>
+</p>
+
+
+<%= link_to 'Edit', edit_discipline_path(@discipline) %> |
+<%= link_to 'Back', disciplines_path %>

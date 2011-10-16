@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  gender: MyString
+  distance: 1
+  course: MyString
+  stroke: MyString
+
+two:
+  gender: MyString
+  distance: 1
+  course: MyString
+  stroke: MyString
