@@ -1,0 +1,41 @@
+<%= form_for(@qualification_time) do |f| %>
+  <% if @qualification_time.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@qualification_time.errors.count, "error") %> prohibited this qualification_time from being saved:</h2>
+
+      <ul>
+      <% @qualification_time.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :qualification_id %><br />
+    <%= f.text_field :qualification_id %>
+  </div>
+  <div class="field">
+    <%= f.label :discipline_id %><br />
+    <%= f.text_field :discipline_id %>
+  </div>
+  <div class="field">
+    <%= f.label :gender %><br />
+    <%= f.text_field :gender %>
+  </div>
+  <div class="field">
+    <%= f.label :age_min %><br />
+    <%= f.text_field :age_min %>
+  </div>
+  <div class="field">
+    <%= f.label :age_max %><br />
+    <%= f.text_field :age_max %>
+  </div>
+  <div class="field">
+    <%= f.label :time %><br />
+    <%= f.text_field :time %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

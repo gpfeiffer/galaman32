@@ -1,0 +1,33 @@
+<h1>Listing qualification_times</h1>
+
+<table>
+  <tr>
+    <th>Qualification</th>
+    <th>Discipline</th>
+    <th>Gender</th>
+    <th>Age min</th>
+    <th>Age max</th>
+    <th>Time</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @qualification_times.each do |qualification_time| %>
+  <tr>
+    <td><%= qualification_time.qualification_id %></td>
+    <td><%= qualification_time.discipline_id %></td>
+    <td><%= qualification_time.gender %></td>
+    <td><%= qualification_time.age_min %></td>
+    <td><%= qualification_time.age_max %></td>
+    <td><%= qualification_time.time %></td>
+    <td><%= link_to 'Show', qualification_time %></td>
+    <td><%= link_to 'Edit', edit_qualification_time_path(qualification_time) %></td>
+    <td><%= link_to 'Destroy', qualification_time, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Qualification time', new_qualification_time_path %>
