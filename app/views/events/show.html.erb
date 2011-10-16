@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Competition:</b>
+  <%= @event.competition_id %>
+</p>
+
+<p>
+  <b>Discipline:</b>
+  <%= @event.discipline_id %>
+</p>
+
+<p>
+  <b>Pos:</b>
+  <%= @event.pos %>
+</p>
+
+<p>
+  <b>Age min:</b>
+  <%= @event.age_min %>
+</p>
+
+<p>
+  <b>Age max:</b>
+  <%= @event.age_max %>
+</p>
+
+
+<%= link_to 'Edit', edit_event_path(@event) %> |
+<%= link_to 'Back', events_path %>
