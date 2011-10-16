@@ -1,0 +1,41 @@
+<%= form_for(@swimmer) do |f| %>
+  <% if @swimmer.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@swimmer.errors.count, "error") %> prohibited this swimmer from being saved:</h2>
+
+      <ul>
+      <% @swimmer.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :first %><br />
+    <%= f.text_field :first %>
+  </div>
+  <div class="field">
+    <%= f.label :last %><br />
+    <%= f.text_field :last %>
+  </div>
+  <div class="field">
+    <%= f.label :club_id %><br />
+    <%= f.text_field :club_id %>
+  </div>
+  <div class="field">
+    <%= f.label :birthday %><br />
+    <%= f.date_select :birthday %>
+  </div>
+  <div class="field">
+    <%= f.label :gender %><br />
+    <%= f.text_field :gender %>
+  </div>
+  <div class="field">
+    <%= f.label :registration %><br />
+    <%= f.text_field :registration %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

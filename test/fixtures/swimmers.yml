@@ -1,0 +1,17 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  first: MyString
+  last: MyString
+  club_id: 1
+  birthday: 2011-10-16
+  gender: MyString
+  registration: MyString
+
+two:
+  first: MyString
+  last: MyString
+  club_id: 1
+  birthday: 2011-10-16
+  gender: MyString
+  registration: MyString

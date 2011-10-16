@@ -1,4 +1,6 @@
 Galaman::Application.routes.draw do
+  resources :swimmers
+
   resources :clubs
 
   # The priority is based upon order of creation:

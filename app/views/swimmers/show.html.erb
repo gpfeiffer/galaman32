@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>First:</b>
+  <%= @swimmer.first %>
+</p>
+
+<p>
+  <b>Last:</b>
+  <%= @swimmer.last %>
+</p>
+
+<p>
+  <b>Club:</b>
+  <%= @swimmer.club_id %>
+</p>
+
+<p>
+  <b>Birthday:</b>
+  <%= @swimmer.birthday %>
+</p>
+
+<p>
+  <b>Gender:</b>
+  <%= @swimmer.gender %>
+</p>
+
+<p>
+  <b>Registration:</b>
+  <%= @swimmer.registration %>
+</p>
+
+
+<%= link_to 'Edit', edit_swimmer_path(@swimmer) %> |
+<%= link_to 'Back', swimmers_path %>
