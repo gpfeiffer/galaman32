@@ -1,4 +1,6 @@
 class Swimmer < ActiveRecord::Base
+  default_scope :order => [:last, :first]
+
   belongs_to :club
   has_many :registrations
   has_many :competitions, :through => :registrations
@@ -12,6 +14,9 @@ class Swimmer < ActiveRecord::Base
   end
 
   def age (dat = DateTime.now)
+    if self.birthday == nil
+      return 0
+    end
     dob = self.birthday
     age = dat.year - dob.year
     if dob + age.years > dat
