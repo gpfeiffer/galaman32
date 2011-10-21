@@ -1,35 +1,26 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <b>Qualification:</b>
-  <%= @qualification_time.qualification_id %>
-</p>
+<h3>
+  <%= @qualification_time.qualification.name %> Time
+</h3>
 
 <p>
   <b>Discipline:</b>
-  <%= @qualification_time.discipline_id %>
+  <%= @qualification_time.discipline.name %>
 </p>
 
 <p>
-  <b>Gender:</b>
-  <%= @qualification_time.gender %>
-</p>
-
-<p>
-  <b>Age min:</b>
+  <b>Age</b>
   <%= @qualification_time.age_min %>
-</p>
-
-<p>
-  <b>Age max:</b>
+    -
   <%= @qualification_time.age_max %>
 </p>
 
 <p>
   <b>Time:</b>
-  <%= @qualification_time.time %>
+  <%= time_to_msc(@qualification_time.time) %>
 </p>
 
 
 <%= link_to 'Edit', edit_qualification_time_path(@qualification_time) %> |
-<%= link_to 'Back', qualification_times_path %>
+<%= link_to 'Back', @qualification_time.qualification %>
