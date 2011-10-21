@@ -16,20 +16,21 @@
   <h3><%= @event.competition.name %></h3>
 
   <div class="field">
+    <%= f.label :pos, "Event No." %>
+    <%= f.select :pos, available_poss(@event.competition) %>
+  </div>
+  <div class="field">
     <%= f.label :discipline_id %><br />
-    <%= f.select :discipline_id, Discipline.all.map {|x| [x.name, x.id]} %>
+    <%= f.select :gender, Swimmer::GENDERS, :include_blank => true %>
+    <%= f.select :distance, Discipline::DISTANCES, :include_blank => true %>
+    <%= f.select :course, Discipline::COURSES %>
+    <%= f.select :stroke, Discipline::STROKES, :include_blank => true %>
   </div>
   <div class="field">
-    <%= f.label :pos, "Position" %><br />
-    <%= f.text_field :pos %>
-  </div>
-  <div class="field">
-    <%= f.label :age_min, "Minimal Age" %><br />
-    <%= f.text_field :age_min %>
-  </div>
-  <div class="field">
-    <%= f.label :age_max, "Maximal Age" %><br />
-    <%= f.text_field :age_max %>
+    <%= f.label :age_min, "Age from" %>
+    <%= f.text_field :age_min, :size => 2 %>
+    <%= f.label :age_max, "to" %>
+    <%= f.text_field :age_max, :size => 2 %>
   </div>
   <div class="actions">
     <%= f.submit %>

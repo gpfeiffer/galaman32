@@ -4,6 +4,32 @@ class Event < ActiveRecord::Base
   has_many :entries
   has_many :swimmers, :through => :entries
 
+  attr_accessor :gender, :distance, :course, :stroke
+
+  def gender
+    if self.discipline
+      return self.discipline.gender
+    end
+  end
+
+  def distance
+    if self.discipline
+      return self.discipline.distance
+    end
+  end
+
+  def course
+    if self.discipline
+      return self.discipline.course
+    end
+  end
+
+  def stroke
+    if self.discipline
+      return self.discipline.stroke
+    end
+  end
+
   def age_range
     self.age_min..self.age_max
   end
