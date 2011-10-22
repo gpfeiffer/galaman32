@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Welcome to the world of Blue Fin</h1>
+
+<p>It's now <%= Time.zone.now.strftime('%H:%M:%S (%Z) on %A, %B %d, %Y') %>.</p>
+
+<ul>
+<li>List <%= link_to "Clubs", clubs_path %>.</li>
+<li>List <%= link_to "Competitions", competitions_path %>.</li>
+</ul>
+
+<% 25.times do %>
+ <br />
+<% end %>
