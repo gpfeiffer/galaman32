@@ -1,26 +1,28 @@
-<h1>Listing qualification_times</h1>
-
-<table>
-  <tr>
-    <th>Discipline</th>
-    <th>Age</th>
-    <th>Time</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @qualification.qualification_times.each do |qualification_time| %>
-  <tr>
-    <td><%= qualification_time.discipline.name %></td>
-    <td><%= qualification_time.age_min %> - <%= qualification_time.age_max %></td>
-    <td><%= time_to_msc(qualification_time.time) %></td>
-    <td><%= link_to 'Show', qualification_time %></td>
-    <td><%= link_to 'Edit', edit_qualification_time_path(qualification_time, :qualification_id => @qualification) %></td>
-    <td><%= link_to 'Destroy', qualification_time, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
+<% @qualification.courses.each do |course| %>
+<% @qualification.genders.each do |gender| %>
+<table class="qualification">
+<tr>
+<th><%= {'f' => "Female", 'm' => "Male"}[gender] %> (<%= course %>)</th>
+<% @qualification.age_groups.each do |age_group| %>
+  <th><%= age_group[0] %> 
+<% if age_group[1] != age_group[0] %>
+	- <%= age_group[1] %>
+<% end %>
+  </th>
+<% end %>
+</tr>
+<% @qualification.filter_disciplines(gender, course).each do |discipline| %>
+<tr>
+<th class="discipline"><%= discipline.stroke %> <%= discipline.distance %>m</th>
+<% @qualification.age_groups.each do |age_group| %>
+  <td align="right"><%= t = @qualification.filter_time(discipline, age_group) 
+                        t ? (link_to t, t) : nil %></td>
+<% end %>
+</tr>
 <% end %>
 </table>
+<% end %>
+<% end %>
 
 <br />
 
