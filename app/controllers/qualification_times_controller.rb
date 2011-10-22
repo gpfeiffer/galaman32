@@ -26,8 +26,6 @@ class QualificationTimesController < ApplicationController
   def new
     @qualification_time = QualificationTime.new
     @qualification_time[:qualification_id] = params[:qualification_id]
-    @qualification_time[:age_min] = "0"
-    @qualification_time[:age_max] = "99"
 
     respond_to do |format|
       format.html # new.html.erb
