@@ -3,7 +3,6 @@
 one:
   qualification_id: 1
   discipline_id: 1
-  gender: MyString
   age_min: 1
   age_max: 1
   time: 1
@@ -11,7 +10,6 @@ one:
 two:
   qualification_id: 1
   discipline_id: 1
-  gender: MyString
   age_min: 1
   age_max: 1
   time: 1
