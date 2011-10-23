@@ -5,20 +5,20 @@ class Entry < ActiveRecord::Base
   attr_accessor :mins, :secs, :centis
 
   def centis
-    if self.seed_time
-      return self.seed_time % 100
+    if self.time
+      return self.time % 100
     end
   end
 
   def secs
-    if self.seed_time
-      return (self.seed_time / 100) % 60
+    if self.time
+      return (self.time / 100) % 60
     end
   end
 
   def mins
-    if self.seed_time
-      return self.seed_time / 6000
+    if self.time
+      return self.time / 6000
     end
   end
 

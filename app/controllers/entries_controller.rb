@@ -43,7 +43,7 @@ class EntriesController < ApplicationController
   # POST /entries.xml
   def create
     @entry = Entry.new(params[:entry])
-    @entry[:seed_time] = time_from_msc(params[:entry])
+    @entry[:time] = time_from_msc(params[:entry])
 
     respond_to do |format|
       if @entry.save
@@ -60,7 +60,7 @@ class EntriesController < ApplicationController
   # PUT /entries/1.xml
   def update
     @entry = Entry.find(params[:id])
-    @entry[:seed_time] = time_from_msc(params[:entry])
+    @entry[:time] = time_from_msc(params[:entry])
 
     respond_to do |format|
       if @entry.update_attributes(params[:entry])
