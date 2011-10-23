@@ -1,25 +1,19 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <b>Competition:</b>
+<h2>
   <%= @event.competition.name %>
-</p>
+</h2>
 
-<p>
-  <b>Discipline:</b>
+<h3>
+  Event <%= @event.pos %>.
   <%= @event.discipline.name %>
-</p>
-
-<p>
-  <b>Position:</b>
-  <%= @event.pos %>
-</p>
-
-<p>
-  <b>Age Group:</b>
-  <%= @event.age_min %> -
+  : <%= @event.age_min %> -
   <%= @event.age_max %> years
-</p>
+</h3>
+
+<hr />
+<%= render 'swimmers' %>
+<hr />
 
 
 <%= link_to 'Edit', edit_event_path(@event) %> |
