@@ -4,6 +4,8 @@ class Event < ActiveRecord::Base
   has_many :entries
   has_many :swimmers, :through => :entries
 
+  default_scope :order => :pos
+
   attr_accessor :gender, :distance, :course, :stroke
 
   def gender
