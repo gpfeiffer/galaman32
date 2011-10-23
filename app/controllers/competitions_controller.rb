@@ -14,6 +14,7 @@ class CompetitionsController < ApplicationController
   # GET /competitions/1.xml
   def show
     @competition = Competition.find(params[:id])
+    @club = Club.find(params[:club_id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -68,7 +69,7 @@ class CompetitionsController < ApplicationController
     
     respond_to do |format|
       if @competition.update_attributes(params[:competition])
-        format.html { redirect_to(registrations_path(:competition_id => @competition.id, :club_id => club.id),
+        format.html { redirect_to(competition_path(:id => @competition.id, :club_id => club.id),
  :notice => 'Registration successfully submitted.') }
         format.xml  { head :ok }
       else

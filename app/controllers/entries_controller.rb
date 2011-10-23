@@ -25,6 +25,8 @@ class EntriesController < ApplicationController
   # GET /entries/new.xml
   def new
     @entry = Entry.new
+    @entry[:event_id] = params[:event_id]
+    @entry[:swimmer_id] = params[:swimmer_id]
 
     respond_to do |format|
       format.html # new.html.erb
@@ -41,10 +43,11 @@ class EntriesController < ApplicationController
   # POST /entries.xml
   def create
     @entry = Entry.new(params[:entry])
+    @entry[:seed_time] = time_from_msc(params[:entry])
 
     respond_to do |format|
       if @entry.save
-        format.html { redirect_to(@entry, :notice => 'Entry was successfully created.') }
+        format.html { redirect_to(competition_path(:id => @entry.event.competition_id, :club_id => @entry.swimmer.club_id), :notice => 'Entry was successfully created.') }
         format.xml  { render :xml => @entry, :status => :created, :location => @entry }
       else
         format.html { render :action => "new" }
@@ -57,10 +60,11 @@ class EntriesController < ApplicationController
   # PUT /entries/1.xml
   def update
     @entry = Entry.find(params[:id])
+    @entry[:seed_time] = time_from_msc(params[:entry])
 
     respond_to do |format|
       if @entry.update_attributes(params[:entry])
-        format.html { redirect_to(@entry, :notice => 'Entry was successfully updated.') }
+        format.html { redirect_to(competition_path(:id => @entry.event.competition_id, :club_id => @entry.swimmer.club_id), :notice => 'Entry was successfully updated.') }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }

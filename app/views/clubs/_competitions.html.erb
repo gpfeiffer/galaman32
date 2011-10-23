@@ -1,0 +1,11 @@
+<h2>Competitons.</h2>
+
+<ul>
+<% Competition.all.each do |competition| %>
+
+  <li> 
+      <%= link_to competition.name, competition_path(:id => competition.id, :club_id => @club.id) %>
+  </li>
+
+<% end %>
+</ul>

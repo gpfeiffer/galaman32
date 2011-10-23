@@ -1,11 +1,10 @@
-<h1>Listing swimmers</h1>
+<h2>Swimmers.</h2>
 
 <table>
   <tr>
     <th>Name</th>
     <th>Birthday</th>
     <th>Registration</th>
-    <th></th>
     <th></th>
   </tr>
 
@@ -14,7 +13,6 @@
     <td><%= link_to swimmer.name, swimmer %> (<%= swimmer.gender %>)</td>
     <td><%= swimmer.birthday %> [<%= swimmer.age %>]</td>
     <td><%= swimmer.registration %></td>
-    <td><%= link_to 'Edit', edit_swimmer_path(swimmer, :club_id => @club) %></td>
     <td><%= link_to 'Delete', swimmer, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>

@@ -1,0 +1,30 @@
+<h3>Registered Swimmers (<%= club.symbol %>)</h3>
+
+
+<table>
+<tr>
+<td>Swimmer</td>
+      <% @competition.events.each do |event| %>
+        <th><span title="<%= event.pos %>. <%= event.discipline.name %>"><%= sprintf("%02d", event.pos) %></span></th>
+      <% end %>
+</tr>
+<% (@competition.swimmers & club.swimmers).each do |swimmer| %>
+  <tr>
+      <td><%= link_to swimmer.name, swimmer %> [<%= swimmer.age(@competition.date) %>]</td>
+      <% @competition.events.each do |event| %>
+        <td align="center">
+	<% if event.swimmer_ids.include?(swimmer.id) %>
+	<%= t = Entry.where(:event_id => event.id, :swimmer_id => swimmer.id).first 
+            link_to t, t %>
+	<% elsif event.permits?(swimmer) %>
+	<%= link_to (raw "&square;"), new_entry_path(:event_id => event.id, :swimmer_id => swimmer.id) %> 
+        <% end %>
+        </td>
+      <% end %>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'Register Swimmers', registrations_path(:competition_id => @competition,  :club_id => club) %>

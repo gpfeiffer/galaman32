@@ -1,11 +1,10 @@
-<h1>Events</h1>
+<h3>Events</h3>
 
 <table>
   <tr>
     <th>No.</th>
     <th>Discipline</th>
     <th>Age</th>
-    <th></th>
     <th></th>
   </tr>
 
@@ -14,7 +13,6 @@
     <td><%= event.pos %></td>
     <td><%= link_to event.discipline.name, event %></td>
     <td><%= event.age_min %> - <%= event.age_max %></td>
-    <td><%= link_to 'Edit', edit_event_path(event, :competition_id => @competition) %></td>
     <td><%= link_to 'Destroy', event, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>

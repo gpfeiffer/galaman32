@@ -1,25 +1,21 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Listing registrations</h1>
+<h1>Registrations.</h1>
 
-<% @registrations.each do |registration| %>
-    <%= registration.swimmer_id %>, 
-<% end %>
+<h2><%= @competition.name %></h2>
+<%= @competition.location %>,
+<%= @competition.date %> 
 
-
-<br />
-
-<%= link_to 'New Registration', new_registration_path %>
-
-<h2>Registering <%= @club.name %> swimmers for <%= @competition.name %>
-on <%= @competition.date %> in <%= @competition.location %> </h2>
+<h2><%= @club.name %>.</h2>
 
 <%= form_for @competition do |f| %>
     <%= hidden_field_tag :club_id, @club.id %>
     <% @club.swimmers.each do |swimmer| %>
         <%= check_box_tag("competition[swimmer_ids][]", swimmer.id,
         @competition.swimmers.include?(swimmer)) %>
-        <%= label_tag swimmer.name %> <br />
+        <%= swimmer.name %> <br />
     <% end %>
     <%= f.submit "Submit Registrations" %>
 <% end %>
+
+<br />

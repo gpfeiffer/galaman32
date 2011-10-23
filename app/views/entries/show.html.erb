@@ -2,24 +2,18 @@
 
 <p>
   <b>Event:</b>
-  <%= @entry.event_id %>
+  <%= @entry.event.discipline.name %>
 </p>
 
 <p>
   <b>Swimmer:</b>
-  <%= @entry.swimmer_id %>
+  <%= @entry.swimmer.name %>
 </p>
 
 <p>
   <b>Seed time:</b>
-  <%= @entry.seed_time %>
+  <%= time_to_msc(@entry.seed_time) %>
 </p>
-
-<p>
-  <b>Race time:</b>
-  <%= @entry.race_time %>
-</p>
-
 
 <%= link_to 'Edit', edit_entry_path(@entry) %> |
 <%= link_to 'Back', entries_path %>
