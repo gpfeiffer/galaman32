@@ -4,15 +4,11 @@
   <tr>
     <th>Name</th>
     <th></th>
-    <th></th>
-    <th></th>
   </tr>
 
 <% @qualifications.each do |qualification| %>
   <tr>
-    <td><%= qualification.name %></td>
-    <td><%= link_to 'Show', qualification %></td>
-    <td><%= link_to 'Edit', edit_qualification_path(qualification) %></td>
+    <td><%= link_to qualification.name, qualification %></td>
     <td><%= link_to 'Destroy', qualification, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>
