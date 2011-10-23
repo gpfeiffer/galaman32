@@ -4,10 +4,8 @@ one:
   event_id: 1
   swimmer_id: 1
   seed_time: 1
-  race_time: 1
 
 two:
   event_id: 1
   swimmer_id: 1
   seed_time: 1
-  race_time: 1
