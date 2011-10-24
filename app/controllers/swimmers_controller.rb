@@ -25,8 +25,7 @@ class SwimmersController < ApplicationController
   # GET /swimmers/new.xml
   def new
     @swimmer = Swimmer.new
-    @club = Club.find(params[:club_id])
-    @swimmer[:club_id] = @club.id
+    @swimmer[:club_id] = params[:club_id]
 
     respond_to do |format|
       format.html # new.html.erb
