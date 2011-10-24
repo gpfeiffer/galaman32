@@ -1,8 +1,9 @@
 class Event < ActiveRecord::Base
   belongs_to :competition
   belongs_to :discipline
-  has_many :entries
+  has_many :entries, :dependent => :destroy
   has_many :swimmers, :through => :entries
+  has_many :results, :through => :entries
 
   default_scope :order => :pos
 
