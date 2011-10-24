@@ -25,6 +25,7 @@ class ResultsController < ApplicationController
   # GET /results/new.xml
   def new
     @result = Result.new
+    @result[:entry_id] = params[:entry_id]
 
     respond_to do |format|
       format.html # new.html.erb
@@ -41,10 +42,11 @@ class ResultsController < ApplicationController
   # POST /results.xml
   def create
     @result = Result.new(params[:result])
+    @result[:time] = time_from_msc(params[:result])
 
     respond_to do |format|
       if @result.save
-        format.html { redirect_to(@result, :notice => 'Result was successfully created.') }
+        format.html { redirect_to(@result.entry.event, :notice => 'Result was successfully created.') }
         format.xml  { render :xml => @result, :status => :created, :location => @result }
       else
         format.html { render :action => "new" }
@@ -57,6 +59,7 @@ class ResultsController < ApplicationController
   # PUT /results/1.xml
   def update
     @result = Result.find(params[:id])
+    @result[:time] = time_from_msc(params[:result])
 
     respond_to do |format|
       if @result.update_attributes(params[:result])

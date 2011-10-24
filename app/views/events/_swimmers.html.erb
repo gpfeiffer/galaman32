@@ -1,6 +1,5 @@
 <h3>Heat 1</h3>
 
-
 <table>
 <tr>
 <th>Name</th>
@@ -9,22 +8,18 @@
 <th>Seed Time</th>
 <th>Result</th>
 </tr>
-<% @event.swimmers.each do |swimmer| %>
+<% @event.entries.each do |entry| %>
   <tr>
-      <td><%= link_to swimmer.name, swimmer %></td>
-      <td align="right"><%= swimmer.age(@event.competition.date) %></td>
-      <td><%= swimmer.club.symbol %></td>
-      <td align="right"><%= Entry.where(:event_id => @event.id, :swimmer_id => swimmer.id).first %></td>
-      <td>
-        <%= text_field_tag("event[mins][]", 
-	Entry.where(:event_id => @event.id, :swimmer_id => swimmer.id).first.mins,
-        { :size => 2 } ) %>
-        <%= text_field_tag("event[secs][]", 
-	Entry.where(:event_id => @event.id, :swimmer_id => swimmer.id).first.secs,
-        { :size => 2 } ) %>
-        <%= text_field_tag("event[centis][]", 
-	Entry.where(:event_id => @event.id, :swimmer_id => swimmer.id).first.centis,
-        { :size => 2 } ) %>
+      <td><%= link_to entry.swimmer.name, entry.swimmer %></td>
+      <td align="right"><%= entry.swimmer.age(@event.competition.date) %></td>
+      <td><%= entry.swimmer.club.symbol %></td>
+      <td align="right"><%= entry %></td>
+      <td align="right">
+	<% if entry.result %>
+	  <%= link_to entry.result, entry.result %>
+	<% else %>
+	  <%= link_to '__:__.__', new_result_path(:entry_id => entry.id) %>
+        <% end %>
       </td>
   </tr>
 <% end %>

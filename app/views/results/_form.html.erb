@@ -11,13 +11,18 @@
     </div>
   <% end %>
 
+  <%= f.hidden_field :entry_id %>
+
+  <h2><%= @result.entry.event.competition.name %></h2>
+  <h3><%= @result.entry.event.discipline.name %></h3>
+
+  <h1><%= @result.entry.swimmer.name %> (<%= @result.entry.swimmer.club.symbol %>)</h1>
+
+  <p>Seed Time: <%= @result.entry %></p>
+
   <div class="field">
-    <%= f.label :entry_id %><br />
-    <%= f.text_field :entry_id %>
-  </div>
-  <div class="field">
-    <%= f.label :time %><br />
-    <%= f.text_field :time %>
+    <%= f.label :time, "Result" %>
+    <%= f.text_field :mins, :size => 2 %>:<%= f.text_field :secs, :size => 2 %>.<%= f.text_field :centis, :size => 2 %>
   </div>
   <div class="actions">
     <%= f.submit %>
