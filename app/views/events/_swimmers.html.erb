@@ -17,6 +17,7 @@
       <td align="right">
 	<% if entry.result %>
 	  <%= link_to entry.result, entry.result %>
+	  <%= entry.result.comment %> 
 	<% else %>
 	  <%= link_to '__:__.__', new_result_path(:entry_id => entry.id) %>
         <% end %>
