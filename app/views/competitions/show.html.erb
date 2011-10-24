@@ -10,8 +10,11 @@
 <hr/>
 <%= render 'events' %>
 <hr/>
+
+<% if @club %>
 <%= render :partial => 'swimmers', :locals => { :club => @club } %>
 <hr/>
+<% end %>
 
 <%= link_to 'Edit', edit_competition_path(@competition) %> |
 <%= link_to 'Clubs', clubs_path %> |

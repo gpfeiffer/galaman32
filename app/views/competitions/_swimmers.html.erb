@@ -14,10 +14,10 @@
       <% @competition.events.each do |event| %>
         <td align="center">
 	<% if event.swimmer_ids.include?(swimmer.id) %>
-	<%= t = Entry.where(:event_id => event.id, :swimmer_id => swimmer.id).first 
+  	  <%= t = Entry.where(:event_id => event.id, :swimmer_id => swimmer.id).first 
             link_to t, t %>
 	<% elsif event.permits?(swimmer) %>
-	<%= link_to (raw "&square;"), new_entry_path(:event_id => event.id, :swimmer_id => swimmer.id) %> 
+	  <%= link_to (raw "&square;"), new_entry_path(:event_id => event.id, :swimmer_id => swimmer.id) %> 
         <% end %>
         </td>
       <% end %>
