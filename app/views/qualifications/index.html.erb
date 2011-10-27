@@ -1,15 +1,10 @@
-<h1>Listing qualifications</h1>
+<h1>Qualifications</h1>
 
 <table>
-  <tr>
-    <th>Name</th>
-    <th></th>
-  </tr>
-
 <% @qualifications.each do |qualification| %>
   <tr>
     <td><%= link_to qualification.name, qualification %></td>
-    <td><%= link_to 'Destroy', qualification, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= link_to image_tag('delete.png', :class => "icon"), qualification, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>
 </table>

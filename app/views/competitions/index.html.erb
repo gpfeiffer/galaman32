@@ -1,21 +1,12 @@
-<h1>Listing competitions</h1>
+<h1>Competitions</h1>
 
 <table>
-  <tr>
-    <th>Name</th>
-    <th>Location</th>
-    <th>Date</th>
-    <th></th>
-    <th></th>
-  </tr>
-
 <% @competitions.each do |competition| %>
   <tr>
-    <td><%= link_to competition.name, competition %></td>
-    <td><%= competition.location %></td>
-    <td><%= competition.date %></td>
-    <td><%= link_to 'Edit', edit_competition_path(competition) %></td>
-    <td><%= link_to 'Destroy', competition, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= link_to competition.name, competition %>
+    (<%= competition.location %>,
+    <%= competition.date %>)</td>
+    <td><%= link_to image_tag('delete.png', :class => "icon"), competition, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>
 </table>
