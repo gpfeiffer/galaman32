@@ -1,0 +1,10 @@
+<h2>Results</h2>
+
+<% r = @swimmer.results.group_by { |x| x.entry.event.discipline_id } %>
+<% r.keys.each do |k| %>
+  <h3><%= Discipline.find(k).name %></h3>
+  <% r[k].each do |x| %>
+    <%= x.entry.event.competition.date %>
+    <%= x %> <br />
+  <% end %>
+<% end %>

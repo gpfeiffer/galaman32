@@ -1,27 +1,27 @@
 <p id="notice"><%= notice %></p>
 
-<h2>
-  <%= @swimmer.name %>
-</h2>
-
 <h3>
   <%= @swimmer.club.name %>
 </h3>
 
+<h1>
+  <%= @swimmer.name %> (<%= @swimmer.gender %>)
+</h1>
+
 <p>
   <b>Birthday:</b>
   <%= @swimmer.birthday %>
+  [<%= @swimmer.age %>]
 </p>
 
 <p>
-  <b>Gender:</b>
-  <%= @swimmer.gender %>
-</p>
-
-<p>
-  <b>Registration:</b>
+  <b>Swim Ireland ID:</b>
   <%= @swimmer.registration %>
 </p>
+
+<hr />
+<%= render 'results' %>
+<hr />
 
 
 <%= link_to 'Edit', edit_swimmer_path(@swimmer) %> |
