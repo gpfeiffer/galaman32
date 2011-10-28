@@ -1,7 +1,7 @@
 <h1>Competitions</h1>
 
 <table>
-<% @competitions.each do |competition| %>
+<% @competitions.reverse_each do |competition| %>
   <tr>
     <td><%= link_to competition.name, competition %>
     (<%= competition.location %>,
