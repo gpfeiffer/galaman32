@@ -10,10 +10,10 @@
 
 <% @competition.events.each do |event| %>
   <tr>
-    <td><%= event.pos %></td>
+    <td align="right"><%= event.pos %></td>
     <td><%= link_to event.discipline.name, event %></td>
     <td><%= event.age_min %> - <%= event.age_max %></td>
-    <td><%= link_to 'Destroy', event, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= link_to image_tag('delete.png', :class => "icon"), event, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>
 </table>

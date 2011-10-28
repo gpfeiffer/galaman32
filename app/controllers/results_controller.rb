@@ -63,7 +63,7 @@ class ResultsController < ApplicationController
 
     respond_to do |format|
       if @result.update_attributes(params[:result])
-        format.html { redirect_to(@result, :notice => 'Result was successfully updated.') }
+        format.html { redirect_to(@result.entry.event, :notice => 'Result was successfully updated.') }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }

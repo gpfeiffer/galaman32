@@ -1,19 +1,11 @@
 <h2>Swimmers.</h2>
 
 <table>
-  <tr>
-    <th>Name</th>
-    <th>Birthday</th>
-    <th>Registration</th>
-    <th></th>
-  </tr>
-
 <% @club.swimmers.each do |swimmer| %>
   <tr>
-    <td><%= link_to swimmer.name, swimmer %> (<%= swimmer.gender %>)</td>
-    <td><%= swimmer.birthday %> [<%= swimmer.age %>]</td>
-    <td><%= swimmer.registration %></td>
-    <td><%= link_to 'Delete', swimmer, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td align="right"><%= swimmer.registration %></td>
+    <td><%= link_to swimmer.name, swimmer %> [<%= swimmer.age %>]</td>
+    <td><%= link_to image_tag('delete.png', :class => "icon"), swimmer, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>
 </table>
