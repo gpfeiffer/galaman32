@@ -2,6 +2,7 @@ class Entry < ActiveRecord::Base
   belongs_to :swimmer
   belongs_to :event
   has_one :result, :dependent => :destroy
+#  belongs_to :discipline, :through => :event
 
   attr_accessor :mins, :secs, :centis
 
@@ -21,6 +22,10 @@ class Entry < ActiveRecord::Base
     if self.time
       return self.time / 6000
     end
+  end
+
+  def discipline
+    event.discipline
   end
 
   def to_s

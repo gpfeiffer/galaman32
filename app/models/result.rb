@@ -1,5 +1,6 @@
 class Result < ActiveRecord::Base
   belongs_to :entry
+#  belongs_to :discipline, :through => :entry
 
   attr_accessor :mins, :secs, :centis
 
@@ -19,6 +20,10 @@ class Result < ActiveRecord::Base
     if self.time
       return self.time / 6000
     end
+  end
+
+  def discipline
+    entry.discipline
   end
 
   def to_s
