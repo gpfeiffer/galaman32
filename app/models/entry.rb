@@ -1,9 +1,9 @@
 class Entry < ActiveRecord::Base
-  belongs_to :swimmer
   belongs_to :registration
+  has_one :swimmer, :through => :registration
   belongs_to :event
+#  has_one :discipline, :through => :event
   has_one :result, :dependent => :destroy
-#  belongs_to :discipline, :through => :event
 
   attr_accessor :mins, :secs, :centis
 
