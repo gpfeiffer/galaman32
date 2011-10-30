@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Competition:</b>
+  <%= @standard.competition_id %>
+</p>
+
+<p>
+  <b>Qualification:</b>
+  <%= @standard.qualification_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_standard_path(@standard) %> |
+<%= link_to 'Back', standards_path %>

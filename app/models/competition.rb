@@ -4,4 +4,6 @@ class Competition < ActiveRecord::Base
   has_many :disciplines, :through => :events
   has_many :registrations, :dependent => :destroy
   has_many :swimmers, :through => :registrations
+  has_many :standards
+  has_many :qualifications, :through => :standards
 end

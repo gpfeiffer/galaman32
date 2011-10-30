@@ -1,4 +1,6 @@
 Galaman::Application.routes.draw do
+  resources :standards
+
   resources :results
 
   get "home/index"
