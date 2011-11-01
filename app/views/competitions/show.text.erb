@@ -5,6 +5,7 @@
 
 \begin{document}
 
+\thispagestyle{empty}
 \section*{\textbf{\textsf{<%= @competition.name %>
     (<%= @competition.location %>,
     <%= @competition.date %>)}}}
@@ -32,11 +33,16 @@ Swimmer
 <% entry = event.entries.select { |x| x.swimmer == swimmer }.first %>
 <% if entry %>
 <% qualification = Qualification.find(4) %>
-<% age = swimmer.age(@competition.date + 6.months) %>
+<% age = swimmer.age(@competition.date + 8.months) %>
 <% qt = qualification.qualification_times.where(:discipline_id => event.discipline.id) %>
 <% qt = qt.select { |x| x.age_range.include?(age) }.first %>
 & <%= time_to_msc(entry.time) %>
-& <%= time_to_msc(entry.result.time) %>
+& 
+<% if entry.result.time > 0 %>
+<%= time_to_msc(entry.result.time) %>
+<% else %>
+<%= entry.result.comment %>
+<% end %>
 & <%= time_to_msc(qt.time) %>
 <% else %>
 &&&
