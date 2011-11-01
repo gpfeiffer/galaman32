@@ -3,7 +3,7 @@ class CompetitionsController < ApplicationController
   # GET /competitions.xml
   def index
     @competitions = Competition.all
-
+    
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @competitions }
@@ -21,6 +21,9 @@ class CompetitionsController < ApplicationController
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @competition }
+      format.text { 
+        render :file => 'competitions/show.text.erb'
+      }
     end
   end
 

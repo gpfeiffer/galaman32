@@ -48,6 +48,10 @@ class QualificationTime < ActiveRecord::Base
     end
   end
 
+  def age_range
+    self.age_min..self.age_max
+  end
+
   def to_s
     if self.mins > 0
       sprintf('%d:%02d.%02d', self.mins, self.secs, self.centis)

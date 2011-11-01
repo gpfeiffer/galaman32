@@ -1,0 +1,67 @@
+\documentclass[12pt,a4paper,landscape]{amsart}
+\usepackage[margin=1in]{geometry}
+\usepackage{parskip}
+\usepackage{array}
+
+\begin{document}
+
+\section*{\textbf{\textsf{<%= @competition.name %>
+    (<%= @competition.location %>,
+    <%= @competition.date %>)}}}
+
+\sf
+\extrarowheight3pt
+
+<% Swimmer::GENDERS.each do |sex| %>
+<% events = @competition.events.select { |x| x.discipline.gender == sex } %>
+
+\begin{tabular}{|p{3cm}|<%= 'rrr|' * events.count %>} 
+\hline
+Swimmer
+<% events.each do |event| %>
+  <% discipline = event.discipline %>
+  & \multicolumn{3}{|c|}{<%= event.pos %>. <%= discipline.distance %>m <%= truncate(discipline.stroke,  :length => 9) %>}
+<% end %>\\ \hline
+<% events.count.times do %>
+& {\tiny seed} & {\tiny result} & {\tiny division 2} 
+<% end %>
+\\
+<% @competition.swimmers.where(:gender => sex).each do |swimmer| %>
+<%= swimmer.name %>
+<% events.each do |event| %>
+<% entry = event.entries.select { |x| x.swimmer == swimmer }.first %>
+<% if entry %>
+<% qualification = Qualification.find(4) %>
+<% age = swimmer.age(@competition.date + 6.months) %>
+<% qt = qualification.qualification_times.where(:discipline_id => event.discipline.id) %>
+<% qt = qt.select { |x| x.age_range.include?(age) }.first %>
+& <%= time_to_msc(entry.time) %>
+& <%= time_to_msc(entry.result.time) %>
+& <%= time_to_msc(qt.time) %>
+<% else %>
+&&&
+<% end %>
+<% end %>\\
+<% end %>
+\hline
+\end{tabular}
+<% end %>
+
+\vfill
+
+{\tiny <%= Time.now %>}\hfill{\tiny \copyright 2011 Blue Fin Gala Manager}
+
+\end{document}
+
+\begin{tabular}{|lrrr|} \hline
+<% @competition.events.each do |event| %>
+\multicolumn{4}{|l|}{Event <%= event.pos %>. <%= event.discipline.name %>}\\
+\hline
+<% event.entries.each do |entry| %>
+  <%= entry.swimmer.name %> & <%= entry.time %> && \\
+<% end %>
+\hline
+<% end %>
+\end{tabular}
+\end{document}
+
