@@ -15,6 +15,12 @@ class Discipline < ActiveRecord::Base
     "Ind Medley"
   ]
 
+  validates :gender, :distance, :course, :stroke, :presence => true
+  validates :gender, :inclusion => Swimmer::GENDERS
+  validates :distance, :inclusion => DISTANCES
+  validates :course, :inclusion => COURSES
+  validates :stroke, :inclusion => STROKES
+
   def name
     sprintf("%s [%s] %dm (%s)", self.stroke, self.gender, self.distance, self.course)
   end

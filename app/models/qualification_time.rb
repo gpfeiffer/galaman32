@@ -2,8 +2,9 @@ class QualificationTime < ActiveRecord::Base
   belongs_to :qualification
   belongs_to :discipline
 
-  attr_accessor :mins, :secs, :centis
+  validates :time, :presence => true
 
+  attr_accessor :mins, :secs, :centis
   attr_accessor :gender, :distance, :course, :stroke
 
   def centis

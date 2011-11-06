@@ -6,4 +6,6 @@ class Competition < ActiveRecord::Base
   has_many :swimmers, :through => :registrations
   has_many :standards
   has_many :qualifications, :through => :standards
+
+  validates :name, :date, :presence => true
 end
