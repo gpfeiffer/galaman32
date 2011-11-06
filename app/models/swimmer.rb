@@ -4,9 +4,7 @@ class Swimmer < ActiveRecord::Base
   belongs_to :club
   has_many :registrations
   has_many :competitions, :through => :registrations
-  has_many :entries
-  has_many :events, :through => :entries
-  has_many :results, :through => :entries
+  has_many :entries, :through => :registrations
 
   GENDERS = ["f", "m"]
 
@@ -14,16 +12,15 @@ class Swimmer < ActiveRecord::Base
     "#{self.last}, #{self.first}"
   end
 
-  def age (dat = DateTime.now)
-    if self.birthday == nil
-      return 0
-    end
-    dob = self.birthday
-    age = dat.year - dob.year
-    if dob + age.years > dat
-      age -= 1
-    end
-    return age
+  def age(date = DateTime.now)
+    return 0 unless birthday
+    age = date.year - birthday.year
+    return age unless birthday + age.years > date
+    return age - 1
+  end
+
+  def results
+    entries.map { |entry| entry.result }.compact
   end
 
   def personal_best(discipline)
