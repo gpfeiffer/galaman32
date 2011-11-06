@@ -21,7 +21,7 @@
 Swimmer
 <% events.each do |event| %>
   <% discipline = event.discipline %>
-  & \multicolumn{3}{|c|}{<%= event.pos %>. <%= discipline.distance %>m <%= truncate(discipline.stroke,  :length => 9) %>}
+  & \multicolumn{3}{c|}{<%= event.pos %>. <%= discipline.distance %>m <%= truncate(discipline.stroke,  :length => 9) %>}
 <% end %>\\ \hline
 <% events.count.times do %>
 & {\tiny seed} & {\tiny result} & {\tiny division 2} 
@@ -36,7 +36,12 @@ Swimmer
 <% age = swimmer.age(@competition.date + 8.months) %>
 <% qt = qualification.qualification_times.where(:discipline_id => event.discipline.id) %>
 <% qt = qt.select { |x| x.age_range.include?(age) }.first %>
-& <%= time_to_msc(entry.time) %>
+& 
+<% if entry.time > 0 %>
+<%= time_to_msc(entry.time) %>
+<% else %>
+\phantom{0:00.00}\llap{NT}
+<% end %>
 & 
 <% if entry.result.time > 0 %>
 <%= time_to_msc(entry.result.time) %>
