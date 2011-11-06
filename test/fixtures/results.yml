@@ -1,9 +1,9 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:
-  entry_id: 1
+  entry: one
   time: 1
 
 two:
-  entry_id: 1
+  entry: two
   time: 1

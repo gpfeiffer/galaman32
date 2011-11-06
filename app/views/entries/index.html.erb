@@ -3,7 +3,7 @@
 <table>
   <tr>
     <th>Event</th>
-    <th>Swimmer</th>
+    <th>Registration</th>
     <th>Seed time</th>
     <th></th>
     <th></th>
@@ -13,7 +13,7 @@
 <% @entries.each do |entry| %>
   <tr>
     <td><%= entry.event_id %></td>
-    <td><%= entry.swimmer_id %></td>
+    <td><%= entry.registration_id %></td>
     <td><%= entry.time %></td>
     <td><%= link_to 'Show', entry %></td>
     <td><%= link_to 'Edit', edit_entry_path(entry) %></td>

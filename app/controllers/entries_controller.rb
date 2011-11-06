@@ -26,7 +26,7 @@ class EntriesController < ApplicationController
   def new
     @entry = Entry.new
     @entry[:event_id] = params[:event_id]
-    @entry[:swimmer_id] = params[:swimmer_id]
+    @entry[:registration_id] = params[:registration_id]
 
     respond_to do |format|
       format.html # new.html.erb

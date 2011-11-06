@@ -12,7 +12,7 @@ class EventsControllerTest < ActionController::TestCase
   end
 
   test "should get new" do
-    get :new
+    get :new, :competition_id => @event.competition.to_param
     assert_response :success
   end
 
@@ -21,7 +21,7 @@ class EventsControllerTest < ActionController::TestCase
       post :create, :event => @event.attributes
     end
 
-    assert_redirected_to event_path(assigns(:event))
+    assert_redirected_to competition_path(assigns(:event).competition)
   end
 
   test "should show event" do

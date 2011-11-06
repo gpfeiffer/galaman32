@@ -1,9 +1,9 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:
-  competition_id: 1
-  swimmer_id: 1
+  competition: one
+  swimmer: one
 
 two:
-  competition_id: 1
-  swimmer_id: 1
+  competition: two
+  swimmer: two

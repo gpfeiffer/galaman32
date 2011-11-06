@@ -12,7 +12,7 @@ class QualificationTimesControllerTest < ActionController::TestCase
   end
 
   test "should get new" do
-    get :new
+    get :new, :qualification_id => @qualification_time.qualification.to_param
     assert_response :success
   end
 
@@ -21,7 +21,7 @@ class QualificationTimesControllerTest < ActionController::TestCase
       post :create, :qualification_time => @qualification_time.attributes
     end
 
-    assert_redirected_to qualification_time_path(assigns(:qualification_time))
+    assert_redirected_to qualification_path(assigns(:qualification_time).qualification)
   end
 
   test "should show qualification_time" do
@@ -36,7 +36,7 @@ class QualificationTimesControllerTest < ActionController::TestCase
 
   test "should update qualification_time" do
     put :update, :id => @qualification_time.to_param, :qualification_time => @qualification_time.attributes
-    assert_redirected_to qualification_time_path(assigns(:qualification_time))
+    assert_redirected_to qualification_path(assigns(:qualification_time).qualification)
   end
 
   test "should destroy qualification_time" do
@@ -44,6 +44,6 @@ class QualificationTimesControllerTest < ActionController::TestCase
       delete :destroy, :id => @qualification_time.to_param
     end
 
-    assert_redirected_to qualification_times_path
+    assert_redirected_to qualification_path(assigns(:qualification_time).qualification)
   end
 end

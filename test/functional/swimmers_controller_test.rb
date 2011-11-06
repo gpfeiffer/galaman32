@@ -12,7 +12,7 @@ class SwimmersControllerTest < ActionController::TestCase
   end
 
   test "should get new" do
-    get :new
+    get :new, :club_id => @swimmer.club.to_param
     assert_response :success
   end
 
@@ -21,7 +21,7 @@ class SwimmersControllerTest < ActionController::TestCase
       post :create, :swimmer => @swimmer.attributes
     end
 
-    assert_redirected_to swimmer_path(assigns(:swimmer))
+    assert_redirected_to club_path(assigns(:swimmer).club)
   end
 
   test "should show swimmer" do
@@ -36,7 +36,7 @@ class SwimmersControllerTest < ActionController::TestCase
 
   test "should update swimmer" do
     put :update, :id => @swimmer.to_param, :swimmer => @swimmer.attributes
-    assert_redirected_to swimmer_path(assigns(:swimmer))
+    assert_redirected_to club_path(assigns(:swimmer).club)
   end
 
   test "should destroy swimmer" do

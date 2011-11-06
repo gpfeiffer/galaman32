@@ -1,15 +1,15 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:
-  qualification_id: 1
-  discipline_id: 1
+  qualification: one
+  discipline: one
   age_min: 1
   age_max: 1
   time: 1
 
 two:
-  qualification_id: 1
-  discipline_id: 1
+  qualification: two
+  discipline: two
   age_min: 1
   age_max: 1
   time: 1

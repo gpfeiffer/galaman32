@@ -17,7 +17,7 @@
   <h2><%= @entry.event.competition.name %></h2>
   <h3><%= @entry.event.discipline.name %></h3>
 
-  <h1><%= @entry.swimmer.name %> (<%= @entry.swimmer.club.symbol %>)</h1>
+  <h1><%= @entry.registration.swimmer.name %> (<%= @entry.registration.swimmer.club.symbol %>)</h1>
 
   <div class="field">
     <%= f.label :time, "Seed Time" %>

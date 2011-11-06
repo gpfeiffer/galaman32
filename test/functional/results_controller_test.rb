@@ -12,7 +12,7 @@ class ResultsControllerTest < ActionController::TestCase
   end
 
   test "should get new" do
-    get :new
+    get :new, :entry_id => @result.entry.to_param
     assert_response :success
   end
 
@@ -21,7 +21,7 @@ class ResultsControllerTest < ActionController::TestCase
       post :create, :result => @result.attributes
     end
 
-    assert_redirected_to result_path(assigns(:result))
+    assert_redirected_to event_path(assigns(:result).entry.event)
   end
 
   test "should show result" do
@@ -36,7 +36,7 @@ class ResultsControllerTest < ActionController::TestCase
 
   test "should update result" do
     put :update, :id => @result.to_param, :result => @result.attributes
-    assert_redirected_to result_path(assigns(:result))
+    assert_redirected_to event_path(assigns(:result).entry.event)
   end
 
   test "should destroy result" do

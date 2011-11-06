@@ -3,7 +3,7 @@
 one:
   first: MyString
   last: MyString
-  club_id: 1
+  club: one
   birthday: 2011-10-16
   gender: MyString
   registration: MyString
@@ -11,7 +11,7 @@ one:
 two:
   first: MyString
   last: MyString
-  club_id: 1
+  club: two
   birthday: 2011-10-16
   gender: MyString
   registration: MyString

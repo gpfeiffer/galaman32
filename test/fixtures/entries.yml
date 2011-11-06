@@ -1,11 +1,11 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:
-  event_id: 1
-  swimmer_id: 1
+  event: one
+  registration: one
   time: 1
 
 two:
-  event_id: 1
-  swimmer_id: 1
+  event: two
+  registration: two
   time: 1

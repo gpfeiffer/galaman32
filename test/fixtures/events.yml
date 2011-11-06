@@ -1,15 +1,15 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:
-  competition_id: 1
-  discipline_id: 1
+  competition: one
+  discipline: one
   pos: 1
   age_min: 1
   age_max: 1
 
 two:
-  competition_id: 1
-  discipline_id: 1
+  competition: two
+  discipline: two
   pos: 1
   age_min: 1
   age_max: 1
