@@ -3,9 +3,6 @@ require 'test_helper'
 class EntriesControllerTest < ActionController::TestCase
   setup do
     @entry = entries(:one)
-    @entry[:mins] = 1
-    @entry[:secs] = 1
-    @entry[:centis] = 1
   end
 
   test "should get index" do

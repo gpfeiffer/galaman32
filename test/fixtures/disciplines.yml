@@ -1,13 +1,13 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:
-  gender: MyString
-  distance: 1
-  course: MyString
-  stroke: MyString
+  gender: f
+  distance: 100
+  course: SC
+  stroke: Freestyle
 
 two:
-  gender: MyString
-  distance: 1
-  course: MyString
-  stroke: MyString
+  gender: m
+  distance: 200
+  course: LC
+  stroke: Breaststroke
