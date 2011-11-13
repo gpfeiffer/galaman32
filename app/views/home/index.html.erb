@@ -2,7 +2,13 @@
 
 <h1>Welcome to the World of Competitive Swimming.</h1>
 
-<p>It's now <%= Time.zone.now.strftime('%H:%M:%S (%Z) on %A, %B %d, %Y') %>.</p>
+<p>It's now <%= @time.strftime('%H:%M:%S (%Z) on %A, %B %d, %Y') %>.</p>
+
+<% if @birthdays.any? %>
+  <p>
+   Happy Birthday <%= @birthdays.map { |birthday| birthday.first }.to_sentence %>.
+  </p>
+<% end %>
 
 <p>
 From here you can access:
