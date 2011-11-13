@@ -8,10 +8,10 @@ class Discipline < ActiveRecord::Base
   DISTANCES = [50, 100, 200, 400]
   COURSES = ["SC", "LC"]
   STROKES = [
+    "Freestyle", 
     "Backstroke", 
     "Breaststroke", 
     "Butterfly", 
-    "Freestyle", 
     "Ind Medley"
   ]
 
