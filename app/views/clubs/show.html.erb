@@ -14,14 +14,21 @@
   <b>Email:</b>
   <%= @club.email %>
 </p>
-
-<hr/>
-<%= render 'swimmers' %>
-<hr/>
-<%= render 'competitions' %>
 <hr/>
 
+<h2>Swimmers.</h2>
+<table>
+<%= render @club.swimmers %>
+</table>
+<br />
+<%= link_to 'New Swimmer', new_swimmer_path(:club_id => @club) %>
+<hr/>
 
+<h2>Competitons.</h2>
+<ul>
+<%= render Competition.all.reverse %>
+</ul>
+<hr/>
 
 <%= link_to 'Edit', edit_club_path(@club) %> |
 <%= link_to 'Back', clubs_path %>

@@ -1,0 +1,5 @@
+<tr>
+  <td align="right"><%= swimmer.registration %></td>
+  <td><%= link_to swimmer.name, swimmer %> [<%= swimmer.age %>]</td>
+  <td><%= link_to image_tag('delete.png', :class => "icon"), swimmer, :confirm => 'Are you sure?', :method => :delete %></td>
+</tr>

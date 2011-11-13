@@ -4,24 +4,46 @@
   <%= @swimmer.club.name %>
 </h3>
 
-<h1>
+<table class="fact-sheet">
+<tr class="fact-main">
+<td colspan="3">
   <%= @swimmer.name %> (<%= @swimmer.gender %>)
-</h1>
-
-<p>
-  <b>Birthday:</b>
-  <%= @swimmer.birthday %>
-  [<%= @swimmer.age %>]
-</p>
-
-<p>
-  <b>Swim Ireland ID:</b>
+</td>
+</tr>
+<tr class="fact-minor">
+<td>
+  <b>Age:</b>
+</td>
+<td colspan="2" align="right">
+  <%= @swimmer.age %>
+  [<%= @swimmer.birthday %>]
+</td>
+</tr>
+<tr class="fact-minor">
+<td>
+  <b>ID:</b>
+</td>
+<td colspan="2" align="right">
   <%= @swimmer.registration %>
-</p>
+</td>
+</tr>
 
-<hr />
-<%= render 'results' %>
-<hr />
+<% r = @swimmer.results.group_by { |x| x.entry.event.discipline } %>
+<% r.keys.each do |discipline| %>
+<tr class="fact-major"><td colspan="2"><b>
+<%= discipline.stroke %> <%= discipline.distance %>m <%= discipline.course %>
+</b></td>
+<td align="right"><%= @swimmer.personal_best(discipline)%></td></tr>
+  <% r[discipline].each do |result| %>
+<tr class="fact-minor">
+<td><%= result.entry.event.competition.date %></td>
+<td><%= result.entry.event.competition.name %></td>
+<td align="right"><%= result %></td>
+</tr>
+  <% end %>
+<% end %>
+</table>
+
 
 
 <%= link_to 'Edit', edit_swimmer_path(@swimmer) %> |

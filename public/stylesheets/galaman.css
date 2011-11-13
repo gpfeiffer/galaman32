@@ -103,3 +103,39 @@ th.discipline {
     text-align: left;
     font-weight: normal;
 }
+
+table.fact-sheet {
+    border-collapse: collapse;
+    border: 3px solid blue;
+}
+
+table.fact-sheet tr td {
+    border: 1px solid blue;
+}
+
+tr.fact-main {
+    height: 32px;
+    padding: 2px;
+    background: #fffddd;
+    font-size: 21px;
+    font-weight: bold;
+}
+
+tr.fact-main td {
+    height: 24px;
+    padding: 2px;
+    font-size: 21px;
+    font-weight: bold;
+}
+
+tr.fact-minor {
+    background: #fff959;
+}
+
+tr.fact-minor td {
+    font-size: 10px;
+}
+
+tr.fact-major {
+    background: #fffddd;
+}
