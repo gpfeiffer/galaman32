@@ -5,7 +5,7 @@ class Discipline < ActiveRecord::Base
 
   # FIXME: make sure no event or qualification_time is refering before delete
 
-  DISTANCES = [50, 100, 200, 400]
+  DISTANCES = [50, 100, 200, 400, 800, 1500]
   COURSES = ["SC", "LC"]
   STROKES = [
     "Freestyle", 
