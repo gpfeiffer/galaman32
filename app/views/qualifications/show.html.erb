@@ -15,7 +15,7 @@
   <% @qualification.age_groups.each do |age_group| %>
     <h3>
       <%= {'f' => "Girls", 'm' => "Boys"}[gender] %> (<%= age_group[0] %>
-      <% if age_group[1] != age_group[0] %>
+      <% if age_group[1] != age_group[0] then %>
 	- <%= age_group[1] %>
       <% end %>
       years old)
