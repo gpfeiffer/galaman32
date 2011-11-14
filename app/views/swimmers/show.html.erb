@@ -4,30 +4,50 @@
   <%= @swimmer.club.name %>
 </h3>
 
-<table class="fact-sheet">
-<tr class="fact-main">
-<td colspan="3">
-  <%= @swimmer.name %> (<%= @swimmer.gender %>)
-</td>
-</tr>
-<tr class="fact-minor">
-<td>
-  <b>Age:</b>
-</td>
-<td colspan="2" align="right">
-  <%= @swimmer.age %>
-  [<%= @swimmer.birthday %>]
-</td>
-</tr>
-<tr class="fact-minor">
-<td>
-  <b>ID:</b>
-</td>
-<td colspan="2" align="right">
-  <%= @swimmer.registration %>
-</td>
-</tr>
+<h1> 
+  <%= @swimmer.name %>
+</h1>
 
+<p>
+  <b>Age:</b>
+  <%= @swimmer.age %>
+  [<%= @swimmer.birthday %>],
+  <b>ID:</b>
+  <%= @swimmer.registration %>.
+</p>
+
+<br/>
+<br/>
+
+<h2>Personal Best</h2>
+<table class="fact-sheet">
+<tr class="fact-major">
+<th></th>
+<% Discipline::STROKES.each do |stroke| %>
+  <th style="width:80px"><%= truncate(stroke, :length => 12) %></th>
+<% end %>
+</tr>
+<% @rows.each do |row| %>
+  <tr class="fact-major" align="right">
+    <th><%= row[:distance] %>m <%= row[:course] %></th>
+    <% Discipline::STROKES.each do |stroke| %>
+      <% discipline = @results.keys.select { |discipline| discipline.stroke == stroke and discipline.distance == row[:distance] and discipline.course == row[:course] }.first %>
+      <td>
+        <% if discipline %>
+          <% best = best_result(@results[discipline]) %>
+          <code><%= best %>&nbsp;<br/>(<%= best.entry.event.competition.date.strftime("%d-%m-%y") %>)</code>
+        <% end %>
+      </td>
+    <% end %>
+  </tr>
+<% end %>
+</table>
+
+<br/>
+<br/>
+
+<h2>Individual Results</h2>
+<table class="fact-sheet">
 <% r = @swimmer.results.group_by { |x| x.entry.event.discipline } %>
 <% r.keys.each do |discipline| %>
 <tr class="fact-major"><td colspan="2"><b>
@@ -43,7 +63,6 @@
   <% end %>
 <% end %>
 </table>
-
 
 
 <%= link_to 'Edit', edit_swimmer_path(@swimmer) %> |

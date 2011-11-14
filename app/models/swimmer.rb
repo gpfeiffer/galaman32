@@ -28,7 +28,7 @@ class Swimmer < ActiveRecord::Base
 
   def personal_best(discipline)
     best = nil
-    results.select{ |x| x.discipline == discipline }.each do |result|
+    results.select { |x| x.discipline == discipline }.each do |result|
       if not best or best.time == 0 or result.time < best.time
         best = result
       end
