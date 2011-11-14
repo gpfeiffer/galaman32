@@ -8,6 +8,45 @@
 <%= render 'qualification_times' %>
 <hr />
 
+<br/>
+<br/>
+
+<% @qualification.genders.each do |gender| %>
+  <% @qualification.age_groups.each do |age_group| %>
+    <h3>
+      <%= {'f' => "Girls", 'm' => "Boys"}[gender] %> (<%= age_group[0] %>
+      <% if age_group[1] != age_group[0] %>
+	- <%= age_group[1] %>
+      <% end %>
+      years old)
+    </h3>
+
+    <% times = @qualification.qualification_times.select { |x| x.discipline.gender == gender and [x.age_min, x.age_max] == age_group } %>
+    <% rows = times.group_by { |x| [x.discipline.distance, x.discipline.course] } %>
+    <% keys = rows.keys.sort_by { |x| [x[0], -x[1][0]] } %>
+
+    <table class="fact-sheet">
+      <tr class="fact-major">
+        <th></th>
+        <% Discipline::STROKES.each do |stroke| %>
+          <th style="width:80px"><%= truncate(stroke, :length => 12) %></th>
+        <% end %>
+      </tr>
+      <% keys.each do |key| %>
+        <tr class="fact-major">
+          <th>
+            <%= key[0] %>m <%= key[1] %>
+          </th>
+          <% Discipline::STROKES.each do |stroke| %>
+            <td align="right"><code><%= rows[key].select { |x| x.discipline.stroke == stroke }.first %></code></td>
+          <% end %>
+        <tr>
+      <% end %>
+    </table>
+  <% end %>
+<% end %>
+
+<br />
 
 <%= link_to 'Edit', edit_qualification_path(@qualification) %> |
 <%= link_to 'Back', qualifications_path %>
