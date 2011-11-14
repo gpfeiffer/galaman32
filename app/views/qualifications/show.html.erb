@@ -23,7 +23,7 @@
 
     <% times = @qualification.qualification_times.select { |x| x.discipline.gender == gender and [x.age_min, x.age_max] == age_group } %>
     <% rows = times.group_by { |x| [x.discipline.distance, x.discipline.course] } %>
-    <% keys = rows.keys.sort_by { |x| [x[0], -x[1][0]] } %>
+    <% keys = rows.keys.sort_by { |x| [x[0], -x[1][0].ord] } %>
 
     <table class="fact-sheet">
       <tr class="fact-major">

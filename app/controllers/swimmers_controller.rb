@@ -15,7 +15,7 @@ class SwimmersController < ApplicationController
   def show
     @swimmer = Swimmer.find(params[:id])
     @results = @swimmer.results.group_by { |result| result.discipline }
-    @rows = @results.keys.map { |x| { :distance => x.distance, :course => x.course } }.sort_by { |x| [x[:distance], -x[:course][0]] }.uniq 
+    @rows = @results.keys.map { |x| { :distance => x.distance, :course => x.course } }.sort_by { |x| [x[:distance], -x[:course][0].ord] }.uniq 
 
     respond_to do |format|
       format.html # show.html.erb
