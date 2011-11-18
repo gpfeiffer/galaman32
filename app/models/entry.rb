@@ -4,6 +4,7 @@ class Entry < ActiveRecord::Base
   belongs_to :event
 #  has_one :discipline, :through => :event
   has_one :result, :dependent => :destroy
+  belongs_to :heat
 
   attr_accessor :mins, :secs, :centis
 
