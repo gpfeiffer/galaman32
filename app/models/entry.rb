@@ -30,7 +30,9 @@ class Entry < ActiveRecord::Base
   end
 
   def to_s
-    if self.mins > 0
+    if self.time == 0
+      'NT'
+    elsif self.mins > 0
       sprintf('%d:%02d.%02d', self.mins, self.secs, self.centis)
     else
       sprintf('%d.%02d', self.secs, self.centis)

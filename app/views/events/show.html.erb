@@ -6,13 +6,23 @@
 
 <h3>
   Event <%= @event.pos %>.
-  <%= @event.discipline.name %>
-  : <%= @event.age_min %> -
-  <%= @event.age_max %> years
+  <%= @event.discipline.name %>: 
+  <%= @event.age_range_to_s %>
 </h3>
 
-<hr />
-<%= render 'swimmers' %>
+<table class="fact-sheet">
+<tr class="fact-major">
+<th>Name</th>
+<th>Age</th>
+<th>Team</th>
+<th>Seed Time</th>
+<th>Result</th>
+</tr>
+<%= render @event.entries.select { |x| x.time > 0 }.sort_by(&:time) %>
+<%= render @event.entries.select { |x| x.time == 0 }.sort_by { |x| x.swimmer.birthday } %>
+</table>
+
+<br />
 <hr />
 
 

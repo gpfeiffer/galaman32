@@ -35,7 +35,7 @@
       <td>
         <% if discipline %>
           <% best = best_result(@results[discipline]) %>
-          <code><%= best %>&nbsp;<br/>(<%= best.entry.event.competition.date.strftime("%d-%m-%y") %>)</code>
+          <%= best %><br/>(<%= best.entry.event.competition.date.strftime("%d-%m-%y") %>)
         <% end %>
       </td>
     <% end %>

@@ -1,0 +1,14 @@
+<tr class="fact-major">
+    <td><%= link_to entry.swimmer.name, entry.swimmer %></td>
+    <td align="right"><%= entry.swimmer.age(@event.competition.date) %></td>
+    <td><%= entry.swimmer.club.symbol %></td>
+    <td align="right"><%= entry %></td>
+    <td align="right">
+      <% if entry.result %>
+        <%= link_to entry.result, entry.result %>
+      <% else %>
+        <%= link_to '__:__.__', new_result_path(:entry_id => entry.id) %>
+      <% end %>
+    </td>
+</tr>
+

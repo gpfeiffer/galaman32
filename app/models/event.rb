@@ -37,6 +37,22 @@ class Event < ActiveRecord::Base
     self.age_min..self.age_max
   end
 
+  def age_range_to_s
+    if age_min == 0
+      if age_max == 99
+        'all ages'
+      else
+        "#{age_max} years and under"
+      end
+    else
+      if age_max == 99
+        "#{age_min} years and over"
+      else
+        "#{age_min} - #{age_max} years"
+      end
+    end
+  end
+
   def permits?(swimmer)
     swimmer.gender == self.discipline.gender and 
       self.age_range.include?(swimmer.age(self.competition.date)) 
