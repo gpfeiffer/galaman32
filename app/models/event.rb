@@ -4,6 +4,7 @@ class Event < ActiveRecord::Base
   has_many :entries, :dependent => :destroy
   has_many :registrations, :through => :entries
   has_many :results, :through => :entries
+  has_many :heats
 
   default_scope :order => :pos
 
@@ -56,5 +57,14 @@ class Event < ActiveRecord::Base
   def permits?(swimmer)
     swimmer.gender == self.discipline.gender and 
       self.age_range.include?(swimmer.age(self.competition.date)) 
+  end
+
+  def seeded_entries
+    entries.select { |x| x.time > 0 }.sort_by(&:time) +
+      entries.select { |x| x.time == 0 }.sort_by { |x| x.swimmer.birthday } 
+  end
+
+  def to_heats(width = 6)
+    seeded_entries.in_groups_of(width)
   end
 end
