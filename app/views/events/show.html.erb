@@ -18,8 +18,7 @@
 <th>Seed Time</th>
 <th>Result</th>
 </tr>
-<%= render @event.entries.select { |x| x.time > 0 }.sort_by(&:time) %>
-<%= render @event.entries.select { |x| x.time == 0 }.sort_by { |x| x.swimmer.birthday } %>
+<%= render @event.seeded_entries %>
 </table>
 
 <br />
@@ -27,4 +26,6 @@
 
 
 <%= link_to 'Edit', edit_event_path(@event) %> |
+<%= link_to 'Make Heats', new_heat_path(:event => @event) %> |
+<%= link_to 'Heats', heats_path(:event => @event) %> |
 <%= link_to 'Back', @event.competition %>
