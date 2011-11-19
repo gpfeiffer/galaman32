@@ -1,4 +1,6 @@
 <tr class="fact-major">
+    <td><%= entry.heat.pos if entry.heat %></td>
+    <td><%= entry.lane %></td>
     <td><%= link_to entry.swimmer.name, entry.swimmer %></td>
     <td align="right"><%= entry.swimmer.age(@event.competition.date) %></td>
     <td><%= entry.swimmer.club.symbol %></td>

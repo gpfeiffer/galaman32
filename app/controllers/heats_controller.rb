@@ -2,7 +2,9 @@ class HeatsController < ApplicationController
   # GET /heats
   # GET /heats.xml
   def index
-    @heats = Heat.all
+    @event = Event.find(params[:event_id])
+    @heats = @event.heats
+    @lanes = @event.entries.map { |x| x.lane }.sort.uniq
 
     respond_to do |format|
       format.html # index.html.erb
@@ -24,7 +26,7 @@ class HeatsController < ApplicationController
   # GET /heats/new
   # GET /heats/new.xml
   def new
-    @heat = Heat.new
+    @event = Event.find(params[:event_id])
 
     respond_to do |format|
       format.html # new.html.erb
@@ -40,17 +42,21 @@ class HeatsController < ApplicationController
   # POST /heats
   # POST /heats.xml
   def create
-    @heat = Heat.new(params[:heat])
+    @event = Event.find(params[:event_id])
+    @event.heats.each { |heat| heat.destroy }
+    pos = 0
+    @event.to_heats.each do |list|
+      pos += 1
+      heat = Heat.new
+      heat.pos = pos
+      @event.heats << heat
+      heat.entries = list
+    end
 
     respond_to do |format|
-      if @heat.save
-        format.html { redirect_to(@heat, :notice => 'Heat was successfully created.') }
-        format.xml  { render :xml => @heat, :status => :created, :location => @heat }
-      else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @heat.errors, :status => :unprocessable_entity }
+      format.html { redirect_to(@event, :notice => 'Heats were successfully created.') }
+      format.xml  { render :xml => @heat, :status => :created, :location => @heat }
       end
-    end
   end
 
   # PUT /heats/1

@@ -1,23 +1,46 @@
-<h1>Listing heats</h1>
+<h1>Event <%= @event.pos %>: <%= @event.discipline.name %></h1>
 
-<table>
-  <tr>
-    <th>Pos</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+<table class="fact-sheet">
+<tr class="fact-major">
+<th>Heat</th>
+<th>Lane</th>
+<th>Name</th>
+<th>Age</th>
+<th>Team</th>
+<th>Seed Time</th>
+<th>Result</th>
+</tr>
 
 <% @heats.each do |heat| %>
-  <tr>
-    <td><%= heat.pos %></td>
-    <td><%= link_to 'Show', heat %></td>
-    <td><%= link_to 'Edit', edit_heat_path(heat) %></td>
-    <td><%= link_to 'Destroy', heat, :confirm => 'Are you sure?', :method => :delete %></td>
+  <tr class="fact-title">
+    <th colspan="7">Heat <%= heat.pos %> Finals</th>
   </tr>
+
+  <%= render heat.entries.sort_by(&:lane) %>
 <% end %>
 </table>
 
 <br />
+
+<table class="fact-sheet">
+<tr class="fact-major">
+<th>Heat</th>
+<th>Lane</th>
+<th>Name</th>
+<th>Age</th>
+<th>Team</th>
+<th>Seed Time</th>
+<th>Result</th>
+</tr>
+
+<% @lanes.each do |lane| %>
+  <tr class="fact-title">
+    <th colspan="7">Lane <%= lane %></th>
+  </tr>
+
+  <%= render @event.entries.where(:lane => lane).sort_by { |x| x.heat.pos } %>
+<% end %>
+</table>
+
 
 <%= link_to 'New Heat', new_heat_path %>

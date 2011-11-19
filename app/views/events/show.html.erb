@@ -12,6 +12,8 @@
 
 <table class="fact-sheet">
 <tr class="fact-major">
+<th></th>
+<th></th>
 <th>Name</th>
 <th>Age</th>
 <th>Team</th>
@@ -24,8 +26,7 @@
 <br />
 <hr />
 
-
 <%= link_to 'Edit', edit_event_path(@event) %> |
-<%= link_to 'Make Heats', new_heat_path(:event => @event) %> |
-<%= link_to 'Heats', heats_path(:event => @event) %> |
+<%= link_to 'Seed', new_heat_path(:event_id => @event) %> |
+<%= link_to 'Heats', heats_path(:event_id => @event) %> |
 <%= link_to 'Back', @event.competition %>

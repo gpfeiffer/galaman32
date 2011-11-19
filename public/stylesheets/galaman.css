@@ -110,6 +110,7 @@ table.fact-sheet {
 }
 
 table.fact-sheet tr th {
+    border-top: 1px solid blue;
     border-bottom: 1px solid blue;
 }
 
@@ -145,4 +146,10 @@ tr.fact-major td {
     padding-right: 12px;
     font-family: Verdana,Courier,"Courier New",monospace;
     background: #fffddd;
+}
+
+tr.fact-title th {
+    text-align: left;
+    background: blue;
+    color: white;
 }

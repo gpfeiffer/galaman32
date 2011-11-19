@@ -64,7 +64,24 @@ class Event < ActiveRecord::Base
       entries.select { |x| x.time == 0 }.sort_by { |x| x.swimmer.birthday } 
   end
 
+  def lane_helper(width, index)
+    if index % 2 == 0
+      width / 2 - index / 2
+    else
+      width / 2 + (index + 1) / 2
+    end
+  end
+
   def to_heats(width = 6)
-    seeded_entries.in_groups_of(width)
+    list = seeded_entries.in_groups_of(width, false)
+    if list.count > 1 and (width - list[-1].count) > 1
+      list[-2, 2] = (list[-2] + list[-1]).in_groups(2, false)
+    end
+    list.reverse!
+    list.each do |entries|
+      entries.each_index do |index|
+        entries[index].lane = lane_helper(width, index)
+      end
+    end
   end
 end
