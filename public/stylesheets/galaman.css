@@ -148,6 +148,14 @@ tr.fact-major td {
     background: #fffddd;
 }
 
+tr.times-major td {
+    padding-left: 12px;
+    padding-right: 12px;
+    font-family: Verdana,Courier,"Courier New",monospace;
+    background: #fffddd;
+    border: 1px solid blue;
+}
+
 tr.fact-title th {
     text-align: left;
     background: blue;
