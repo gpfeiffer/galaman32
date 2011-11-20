@@ -28,6 +28,11 @@ class EntriesController < ApplicationController
     @entry[:event_id] = params[:event_id]
     @entry[:registration_id] = params[:registration_id]
 
+    # find personal best a use as default seed time
+    swimmer = Registration.find(params[:registration_id]).swimmer
+    discipline = Event.find(params[:event_id]).discipline
+    @entry[:time] = swimmer.personal_best(discipline).time
+
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @entry }
