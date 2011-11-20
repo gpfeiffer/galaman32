@@ -8,4 +8,14 @@ module ResultsHelper
     end
     return best
   end
+
+  # how to graph a list of results (of the same swimmer)
+  def graph_results(results)
+    swimmer = results.first.entry.swimmer
+    graph = []
+    results.each do |result|
+      graph << [(result.entry.event.competition.date - (swimmer.birthday+8.years)).to_i, result.time]
+    end
+    return graph
+  end
 end
