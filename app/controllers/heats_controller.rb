@@ -54,7 +54,7 @@ class HeatsController < ApplicationController
     end
 
     respond_to do |format|
-      format.html { redirect_to(@event, :notice => 'Heats were successfully created.') }
+      format.html { redirect_to(heats_path(:event_id => @event.id), :notice => 'Heats were successfully created.') }
       format.xml  { render :xml => @heat, :status => :created, :location => @heat }
       end
   end
