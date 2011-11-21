@@ -1,6 +1,6 @@
 <%= @event.competition.name %>
 
-Event <%= @event.pos %>. <%= @event.discipline.name %>: <%= @event.age_range_to_s %>
+Event <%= @event.pos %>. <%= @event.discipline.name %>: <%= ages_to_words(@event.age_range) %>
 
 <%= sprintf("%-20s %3s %-7s %9s", 'Name', 'Age', 'Team', 'Seed Time') %>  Result
 

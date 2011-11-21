@@ -7,7 +7,7 @@
 <h3>
   Event <%= @event.pos %>.
   <%= @event.discipline.name %>: 
-  <%= @event.age_range_to_s %>
+  <%= ages_to_words(@event.age_range) %>
 </h3>
 
 <table class="fact-sheet">
