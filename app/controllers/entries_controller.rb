@@ -31,7 +31,10 @@ class EntriesController < ApplicationController
     # find personal best a use as default seed time
     swimmer = Registration.find(params[:registration_id]).swimmer
     discipline = Event.find(params[:event_id]).discipline
-    @entry[:time] = swimmer.personal_best(discipline).time
+    best = swimmer.personal_best(discipline)
+    if best
+      @entry[:time] = best.time
+    end
 
     respond_to do |format|
       format.html # new.html.erb

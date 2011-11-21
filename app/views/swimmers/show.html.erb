@@ -28,14 +28,17 @@
 <% end %>
 </tr>
 <% @rows.each do |row| %>
-  <tr class="fact-major" align="right">
+  <tr class="times-major" align="right">
     <th><%= row[:distance] %>m <%= row[:course] %></th>
     <% Discipline::STROKES.each do |stroke| %>
       <% discipline = @results.keys.select { |discipline| discipline.stroke == stroke and discipline.distance == row[:distance] and discipline.course == row[:course] }.first %>
       <td>
         <% if discipline %>
+          <% @results[discipline] = @results[discipline].sort_by { |x| x.entry.event.competition.date } %>
           <% best = best_result(@results[discipline]) %>
-          <%= best %><br/>(<%= best.entry.event.competition.date.strftime("%d-%m-%y") %>)
+	  <% if best %>
+            <%= best %><br/>(<%= best.entry.event.competition.date.strftime("%d-%m-%y") %>)
+          <% end %>
         <% end %>
       </td>
     <% end %>
@@ -48,18 +51,31 @@
 
 <h2>Individual Results</h2>
 <table class="fact-sheet">
-<% r = @swimmer.results.group_by { |x| x.entry.event.discipline } %>
+<% r = @results %>
 <% r.keys.each do |discipline| %>
-<tr class="fact-major"><td colspan="2"><b>
-<%= discipline.stroke %> <%= discipline.distance %>m <%= discipline.course %>
-</b></td>
-<td align="right"><%= @swimmer.personal_best(discipline)%></td></tr>
+  <tr class="fact-major">
+    <td colspan="2">
+      <b>
+        <%= discipline.stroke %>
+        <%= discipline.distance %>m 
+        <%= discipline.course %>
+      </b>
+    </td>
+    <td align="right"><%= best_result(r[discipline]) %></td>
+  </tr>
+  <tr>
+    <td colspan="3">
+      <% @lc = GoogleChart::LineChart.new("600x300", "My Results", true) %>
+      <% @lc.data "Results", graph_results(r[discipline]), '00ff00' %>
+      <%= image_tag(@lc.to_url) %>
+    </td>
+  </tr>
   <% r[discipline].each do |result| %>
-<tr class="fact-minor">
-<td><%= result.entry.event.competition.date %></td>
-<td><%= result.entry.event.competition.name %></td>
-<td align="right"><%= result %></td>
-</tr>
+    <tr class="fact-minor">
+      <td><%= result.entry.event.competition.date %></td>
+      <td><%= result.entry.event.competition.name %></td>
+      <td align="right"><%= result %></td>
+    </tr>
   <% end %>
 <% end %>
 </table>
