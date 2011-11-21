@@ -2,7 +2,7 @@
 
 <h1>Event <%= @event.pos %>: <%= @event.discipline.name %></h1>
 
-<% @event.competition.qualifications.first.age_groups.each do |age_group| %>
+<% @event.competition.qualifications.first.age_ranges.each do |ages| %>
 
 <table class="fact-sheet">
 <tr class="fact-major">
@@ -15,7 +15,7 @@
 <th>Result</th>
 </tr>
 
-<%= render @results.select { |x| age_group.include? x.entry.swimmer.age(@event.competition.date) }.sort_by(&:time).map{ |x| x.entry } %>
+<%= render @results.select { |x| ages.include? x.entry.swimmer.age(@event.competition.date) }.sort_by(&:time).map{ |x| x.entry } %>
 
 </table>
 

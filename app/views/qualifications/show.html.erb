@@ -12,16 +12,12 @@
 <br/>
 
 <% @qualification.genders.each do |gender| %>
-  <% @qualification.age_groups.each do |age_group| %>
+  <% @qualification.age_ranges.each do |ages| %>
     <h3>
-      <%= {'f' => "Girls", 'm' => "Boys"}[gender] %> (<%= age_group[0] %>
-      <% if age_group[1] != age_group[0] then %>
-	- <%= age_group[1] %>
-      <% end %>
-      years old)
+      <%= {'f' => "Girls", 'm' => "Boys"}[gender] %> (<%= ages_to_words(ages) %>)
     </h3>
 
-    <% times = @qualification.qualification_times.select { |x| x.discipline.gender == gender and [x.age_min, x.age_max] == age_group } %>
+    <% times = @qualification.qualification_times.select { |x| x.discipline.gender == gender and x.age_range == ages } %>
     <% rows = times.group_by { |x| [x.discipline.distance, x.discipline.course] } %>
     <% keys = rows.keys.sort_by { |x| [x[0], -x[1][0].ord] } %>
 

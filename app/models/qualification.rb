@@ -6,16 +6,16 @@ class Qualification < ActiveRecord::Base
 
   validates :name, :presence => true
 
-  def age_groups
-    qualification_times.each.map { |x| [x.age_min, x.age_max] }.sort.uniq
+  def age_ranges
+    qualification_times.each.map { |x| x.age_range }.sort_by(&:first).uniq
   end
 
   def filter_disciplines(gender, course)
     disciplines.uniq.find_all { |x| x.gender == gender and x.course == course }
   end
 
-  def filter_time(discipline, age_group)
-    qualification_times.select{ |x| x.discipline == discipline and [x.age_min, x.age_max] == age_group }.first
+  def filter_time(discipline, ages)
+    qualification_times.select{ |x| x.discipline == discipline and x.age_range == ages }.first
   end
 
   def courses

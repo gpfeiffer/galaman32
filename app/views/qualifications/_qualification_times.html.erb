@@ -3,19 +3,15 @@
 <table class="qualification">
 <tr>
 <th><%= {'f' => "Female", 'm' => "Male"}[gender] %> (<%= course %>)</th>
-<% @qualification.age_groups.each do |age_group| %>
-  <th><%= age_group[0] %> 
-<% if age_group[1] != age_group[0] %>
-	- <%= age_group[1] %>
-<% end %>
-  </th>
+<% @qualification.age_ranges.each do |ages| %>
+  <th><%= ages_to_s(ages) %></th>
 <% end %>
 </tr>
 <% @qualification.filter_disciplines(gender, course).each do |discipline| %>
 <tr>
 <th class="discipline"><%= discipline.stroke %> <%= discipline.distance %>m</th>
-<% @qualification.age_groups.each do |age_group| %>
-  <td align="right"><%= t = @qualification.filter_time(discipline, age_group) 
+<% @qualification.age_ranges.each do |ages| %>
+  <td align="right"><%= t = @qualification.filter_time(discipline, ages) 
                         t ? (link_to t, t) : nil %></td>
 <% end %>
 </tr>
