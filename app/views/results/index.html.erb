@@ -2,6 +2,8 @@
 
 <h1>Event <%= @event.pos %>: <%= @event.discipline.name %></h1>
 
+<% @event.competition.qualifications.first.age_groups.each do |age_group| %>
+
 <table class="fact-sheet">
 <tr class="fact-major">
 <th>Heat</th>
@@ -13,9 +15,11 @@
 <th>Result</th>
 </tr>
 
-<%= render @results.map { |x| x.entry } %>
+<%= render @results.select { |x| age_group.include? x.entry.swimmer.age(@event.competition.date) }.sort_by(&:time).map{ |x| x.entry } %>
 
 </table>
+
+<% end %>
 
 <br />
 <hr />
