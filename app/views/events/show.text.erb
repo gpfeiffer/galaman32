@@ -1,0 +1,8 @@
+<%= @event.competition.name %>
+
+Event <%= @event.pos %>. <%= @event.discipline.name %>: <%= @event.age_range_to_s %>
+
+<%= sprintf("%-20s %3s %-7s %9s", 'Name', 'Age', 'Team', 'Seed Time') %>  Result
+
+<%= render @event.seeded_entries %>
+
