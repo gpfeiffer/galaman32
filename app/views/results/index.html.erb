@@ -1,25 +1,18 @@
-<h1>Listing results</h1>
+<p id="notice"><%= notice %></p>
 
-<table>
-  <tr>
-    <th>Entry</th>
-    <th>Time</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+<h1>Event <%= @event.pos %>: <%= @event.discipline.name %></h1>
 
-<% @results.each do |result| %>
-  <tr>
-    <td><%= result.entry_id %></td>
-    <td><%= result.time %></td>
-    <td><%= link_to 'Show', result %></td>
-    <td><%= link_to 'Edit', edit_result_path(result) %></td>
-    <td><%= link_to 'Destroy', result, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
-<% end %>
+<table class="fact-sheet">
+<tr class="fact-major">
+<th>Heat</th>
+<th>Lane</th>
+<th>Name</th>
+<th>Age</th>
+<th>Team</th>
+<th>Seed Time</th>
+<th>Result</th>
+</tr>
+
+<%= render @results.map { |x| x.entry } %>
+
 </table>
-
-<br />
-
-<%= link_to 'New Result', new_result_path %>

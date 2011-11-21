@@ -2,7 +2,8 @@ class ResultsController < ApplicationController
   # GET /results
   # GET /results.xml
   def index
-    @results = Result.all
+    @event = Event.find(params[:event_id])
+    @results = @event.results.sort_by(&:time)
 
     respond_to do |format|
       format.html # index.html.erb

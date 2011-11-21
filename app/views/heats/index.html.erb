@@ -44,5 +44,10 @@
 <% end %>
 </table>
 
+<br />
+<hr />
 
-<%= link_to 'New Heat', new_heat_path %>
+<%= link_to 'Entries', @event %> |
+<%= link_to 'Heats', heats_path(:event_id => @event) %> |
+<%= link_to 'Results', results_path(:event_id => @event) %> |
+<%= link_to 'Back', @event.competition %>
