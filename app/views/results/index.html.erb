@@ -3,22 +3,46 @@
 <h1>Event <%= @event.pos %>: <%= @event.discipline.name %></h1>
 
 <% @event.competition.qualifications.first.age_ranges.each do |ages| %>
+<% results = @results.select { |x| ages.include? x.entry.swimmer.age(@event.competition.date) } %>
+<% if results %>
+
+<h2><%= ages_to_words(ages) %></h2>
 
 <table class="fact-sheet">
 <tr class="fact-major">
-<th>Heat</th>
-<th>Lane</th>
-<th>Name</th>
+<th style="width:50px">Pos</th>
+<th style="width:175px">Name</th>
 <th>Age</th>
 <th>Team</th>
-<th>Seed Time</th>
-<th>Result</th>
+<th style="width:75px">Result</th>
 </tr>
 
-<%= render @results.select { |x| ages.include? x.entry.swimmer.age(@event.competition.date) }.sort_by(&:time).map{ |x| x.entry } %>
+<% results.select { |x| x.time > 0 }.sort_by(&:time).each_with_index do |result, index| %>
+
+<tr class="fact-major">
+  <td align="right"><%= index+1 %>.</td>
+  <td><%= link_to result.entry.swimmer.name, result.entry.swimmer %></td>
+  <td align="right"><%= result.entry.swimmer.age(@event.competition.date) %></td>
+  <td><%= result.entry.swimmer.club.symbol %></td>
+  <td align="right"><%= result %></td>
+</tr>
+
+<% end %>
+
+<% results.select { |x| x.time == 0 }.sort_by { |x| x.entry.swimmer.birthday }.each do |result| %>
+
+<tr class="fact-major">
+  <td></td>
+  <td><%= link_to result.entry.swimmer.name, result.entry.swimmer %></td>
+  <td align="right"><%= result.entry.swimmer.age(@event.competition.date) %></td>
+  <td><%= result.entry.swimmer.club.symbol %></td>
+  <td align="right"><%= result.comment %></td>
+
+<% end %>
 
 </table>
 
+<% end %>
 <% end %>
 
 <br />
