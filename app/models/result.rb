@@ -28,7 +28,11 @@ class Result < ActiveRecord::Base
 
   def to_s
     if self.time == 0
-      self.comment
+      if self.comment
+        self.comment
+      else
+        '0'
+      end        
     elsif self.mins > 0
       sprintf('%d:%02d.%02d', self.mins, self.secs, self.centis)
     else
