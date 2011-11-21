@@ -25,6 +25,7 @@ class StandardsController < ApplicationController
   # GET /standards/new.xml
   def new
     @standard = Standard.new
+    @standard[:competition_id] = params[:competition_id]
 
     respond_to do |format|
       format.html # new.html.erb
@@ -44,7 +45,7 @@ class StandardsController < ApplicationController
 
     respond_to do |format|
       if @standard.save
-        format.html { redirect_to(@standard, :notice => 'Standard was successfully created.') }
+        format.html { redirect_to(@standard.competition, :notice => 'Standard was successfully created.') }
         format.xml  { render :xml => @standard, :status => :created, :location => @standard }
       else
         format.html { render :action => "new" }

@@ -11,13 +11,13 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :competition_id %><br />
-    <%= f.text_field :competition_id %>
-  </div>
+  <h2><%= @standard.competition.name %></h2>
+
+  <%= f.hidden_field :competition_id %>
+
   <div class="field">
     <%= f.label :qualification_id %><br />
-    <%= f.text_field :qualification_id %>
+    <%= f.select :qualification_id, Qualification.all.map{ |x| [x.name, x.id] } %>
   </div>
   <div class="actions">
     <%= f.submit %>

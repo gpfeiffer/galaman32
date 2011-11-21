@@ -1,11 +1,14 @@
 <h3>Qualification Standards</h3>
 
-<ul>
-<% @competition.qualifications.each do |qualification| %>
-<li><%= qualification.name %></li>
+<table>
+<% @competition.standards.each do |standard| %>
+  <tr>
+    <td><%= link_to standard.qualification.name, standard.qualification %></td>
+    <td><%= link_to image_tag('delete.png', :class => "icon"), standard, :confirm => 'Are you sure?', :method => :delete %></td>
+  <tr>
 <% end %>
-</ul>
+</table>
 
 <br />
 
-<%= link_to 'Select Qualification Standards', standards_path(:competition_id => @competition) %>
+<%= link_to 'Select Qualification Standards', new_standard_path(:competition_id => @competition) %>
