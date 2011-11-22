@@ -25,4 +25,16 @@ class Qualification < ActiveRecord::Base
   def genders
     qualification_times.each.map { |x| x.gender }.sort.uniq
   end
+
+  # how to graph a qualification
+  def to_graph(swimmer, discipline)
+    graph = []
+    dob =  swimmer.birthday
+    qualification_times.find_all_by_discipline_id(discipline.id).each do |qt|
+      graph << [[((dob + qt.age_range.first.years) - (dob + 8.years)).to_i, 0].max, qt.time]
+      graph << [[((dob + (qt.age_range.last + 1).years - 1.day) - (dob + 8.years)).to_i, 0].max, qt.time]
+    end
+    return graph
+  end
+
 end

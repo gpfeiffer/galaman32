@@ -66,7 +66,10 @@
   <tr>
     <td colspan="3">
       <% @lc = GoogleChart::LineChart.new("600x300", "My Results", true) %>
-      <% @lc.data "Results", graph_results(r[discipline]), '00ff00' %>
+      <% @lc.data "Results", graph_results(r[discipline]), '000000' %>
+      <% @lc.data "A", Qualification.find_by_name("A").to_graph(@swimmer, discipline), 'ff0000' %>
+      <% @lc.data "B", Qualification.find_by_name("B").to_graph(@swimmer, discipline), '00ff00' %>
+      <% @lc.shape_marker :circle, :color => '0000ff', :data_set_index => 0, :data_point_index => -1, :pixel_size => 6 %>
       <%= image_tag(@lc.to_url) %>
     </td>
   </tr>
