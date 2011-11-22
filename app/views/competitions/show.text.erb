@@ -1,7 +1,11 @@
 <%= @competition.name %> (<%= @competition.date %>)
 
-<%= @club.name %> entries.
+<% Swimmer::GENDERS.each do |gender| %>
 
-<%= sprintf("%-20s %s  %-7s %9s", 'Name', 'Birthday  ', 'Club', 'Seed Time') %>
+<%= @club.name %> <%= { 'f' => 'Girls', 'm' => 'Boys' }[gender] %>.
 
-<%= render @competition.events %>
+<%= sprintf("%-20s  %-10s  % 10s", 'Name', 'Birthday', 'SI Member') %>
+
+<%= render @competition.registrations.select{ |x| x.swimmer.gender == gender }.sort_by { |x| x.swimmer.name } %>
+
+<% end %>
