@@ -26,6 +26,20 @@ class Result < ActiveRecord::Base
     entry.discipline
   end
 
+  def qualify
+    if time == 0
+      return nil
+    end
+    best = nil
+    entry.competition.qualifications.each do |qualification|
+      qt = qualification.qualification_times.select { |x| x.discipline == discipline and x.age_range.include? entry.swimmer.age(entry.competition.date) }.first
+      if qt.time > time and (not best or qt.time < best[:time])
+        best = { :time => qt.time, :qualification => qualification }
+      end
+    end
+    return best
+  end
+
   def to_s
     if self.time == 0
       if self.comment

@@ -4,7 +4,7 @@
 
 <% @event.competition.qualifications.first.age_ranges.each do |ages| %>
 <% results = @results.select { |x| ages.include? x.entry.swimmer.age(@event.competition.date) } %>
-<% if results %>
+<% if not results.empty? %>
 
 <h2><%= ages_to_words(ages) %></h2>
 
@@ -15,6 +15,7 @@
 <th>Age</th>
 <th>Team</th>
 <th style="width:75px">Result</th>
+<th></th>
 </tr>
 
 <% results.select { |x| x.time > 0 }.sort_by(&:time).each_with_index do |result, index| %>
@@ -24,7 +25,13 @@
   <td><%= link_to result.entry.swimmer.name, result.entry.swimmer %></td>
   <td align="right"><%= result.entry.swimmer.age(@event.competition.date) %></td>
   <td><%= result.entry.swimmer.club.symbol %></td>
-  <td align="right"><%= result %></td>
+  <td align="right"><%= result %></td>  
+  <td align="right">
+    <% qu = result.qualify %>
+    <% if qu %>
+      <%= qu[:qualification].name %>
+    <% end %>
+  </td>
 </tr>
 
 <% end %>
@@ -37,6 +44,7 @@
   <td align="right"><%= result.entry.swimmer.age(@event.competition.date) %></td>
   <td><%= result.entry.swimmer.club.symbol %></td>
   <td align="right"><%= result.comment %></td>
+  <td></td>
 
 <% end %>
 
