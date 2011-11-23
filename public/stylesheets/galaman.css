@@ -156,6 +156,10 @@ tr.times-major td {
     border: 1px solid blue;
 }
 
+tr.times-major th {
+    background: #fffddd;
+}
+
 tr.fact-title th {
     text-align: left;
     background: blue;
