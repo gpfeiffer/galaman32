@@ -10,6 +10,8 @@ class Event < ActiveRecord::Base
 
   attr_accessor :gender, :distance, :course, :stroke
 
+  validates :age_min, :age_max, :competition_id, :discipline_id, :presence => true
+
   def gender
     if self.discipline
       return self.discipline.gender

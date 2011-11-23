@@ -9,6 +9,8 @@ class Entry < ActiveRecord::Base
 
   attr_accessor :mins, :secs, :centis
 
+  validates :event_id, :registration_id, :presence => true
+
   def centis
     if self.time
       return self.time % 100

@@ -4,6 +4,8 @@ class Result < ActiveRecord::Base
 
   attr_accessor :mins, :secs, :centis
 
+  validates :entry_id, :presence => true
+
   def centis
     if self.time
       return self.time % 100

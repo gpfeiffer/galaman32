@@ -8,7 +8,7 @@ class Swimmer < ActiveRecord::Base
 
   GENDERS = ["f", "m"]
 
-  validates :first, :last, :birthday, :gender, :registration, :presence => true
+  validates :first, :last, :birthday, :gender, :club_id, :presence => true
   validates :gender, :inclusion => GENDERS
 
   def name

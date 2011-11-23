@@ -2,7 +2,7 @@ class QualificationTime < ActiveRecord::Base
   belongs_to :qualification
   belongs_to :discipline
 
-  validates :time, :presence => true
+  validates :age_min, :age_max, :qualification_id, :discipline_id, :time, :presence => true
 
   attr_accessor :mins, :secs, :centis
   attr_accessor :gender, :distance, :course, :stroke
