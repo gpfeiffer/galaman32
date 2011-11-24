@@ -26,6 +26,39 @@ class Qualification < ActiveRecord::Base
     qualification_times.each.map { |x| x.gender }.sort.uniq
   end
 
+  # provide a table of times for a given gender and age
+  def to_table(gender, age)
+
+    # select applicable qualification times, return nil if none apply.
+    times = qualification_times.select { |x| x.gender == gender and x.age_range.include? age }
+    if times.blank?
+      return
+    end
+
+    # compute the address of each stroke in the list of strokes
+    strokes = Discipline::STROKES
+    col = {}
+    strokes.each_with_index { |stroke, index| col[stroke] = index }
+
+    # compute at table title
+    title = { 'f' => "Girls", 'm' => "Boys" }[gender]
+
+    # group times by discipline and course, fill into table slots.
+    rows = times.group_by { |x| [x.discipline.distance, x.discipline.course] } 
+    keys = rows.keys.sort_by { |x| [x[0], -x[1][0].ord] }
+    body = []
+    keys.each do |key| 
+      list = strokes.map { }
+      rows[key].each do |qt|
+        list[col[qt.discipline.stroke]] = qt
+      end
+      body << { :label => key[0].to_s + "m " + key[1], :list => list }
+    end
+
+    # return table
+    { :title => title, :heads => strokes, :body => body }
+  end
+
   # how to graph a qualification
   def to_graph(swimmer, discipline)
     graph = []

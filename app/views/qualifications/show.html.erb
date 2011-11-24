@@ -13,32 +13,33 @@
 
 <% @qualification.genders.each do |gender| %>
   <% @qualification.age_ranges.each do |ages| %>
+    <% table = @qualification.to_table(gender, ages.first) %>
+    <% if table %>
     <h3>
-      <%= {'f' => "Girls", 'm' => "Boys"}[gender] %> (<%= ages_to_words(ages) %>)
+      <%= table[:title] %> (<%= ages_to_words(ages) %>)
     </h3>
-
-    <% times = @qualification.qualification_times.select { |x| x.discipline.gender == gender and x.age_range == ages } %>
-    <% rows = times.group_by { |x| [x.discipline.distance, x.discipline.course] } %>
-    <% keys = rows.keys.sort_by { |x| [x[0], -x[1][0].ord] } %>
 
     <table class="fact-sheet">
       <tr class="fact-major">
         <th></th>
-        <% Discipline::STROKES.each do |stroke| %>
-          <th style="width:80px"><%= truncate(stroke, :length => 12) %></th>
+        <% table[:heads].each do |head| %>
+          <th style="width:80px">
+            <%= head %>
+          </th>
         <% end %>
       </tr>
-      <% keys.each do |key| %>
+      <% table[:body].each do |row| %>
         <tr class="times-major">
           <th>
-            <%= key[0] %>m <%= key[1] %>
+            <%= row[:label] %>
           </th>
-          <% Discipline::STROKES.each do |stroke| %>
-            <td align="right"><code><%= rows[key].select { |x| x.discipline.stroke == stroke }.first %></code></td>
+          <% row[:list].each do |qt| %>
+            <td align="right"><%= qt %></td>
           <% end %>
         <tr>
       <% end %>
     </table>
+    <% end%>
   <% end %>
 <% end %>
 
