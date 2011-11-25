@@ -47,7 +47,7 @@ class Event < ActiveRecord::Base
 
   def seeded_entries
     entries.select { |x| x.time > 0 }.sort_by(&:time) +
-      entries.select { |x| x.time == 0 }.sort_by { |x| x.swimmer.birthday } 
+      entries.select { |x| x.time == 0 }.sort_by { |x| x.swimmer.birthday }.reverse
   end
 
   def lane_helper(width, index)
