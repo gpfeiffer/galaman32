@@ -72,7 +72,7 @@ class EntriesController < ApplicationController
 
     respond_to do |format|
       if @entry.update_attributes(params[:entry])
-        format.html { redirect_to(competition_path(:id => @entry.event.competition_id, :club_id => @entry.swimmer.club_id), :notice => 'Entry was successfully updated.') }
+        format.html { redirect_to(competition_path(:id => @entry.competition.id, :club_id => @entry.swimmer.club_id), :notice => 'Entry was successfully updated.') }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -88,7 +88,7 @@ class EntriesController < ApplicationController
     @entry.destroy
 
     respond_to do |format|
-      format.html { redirect_to(entries_url) }
+      format.html { redirect_to competition_path(:id => @entry.competition.id, :club_id => @entry.swimmer.club_id) }
       format.xml  { head :ok }
     end
   end
