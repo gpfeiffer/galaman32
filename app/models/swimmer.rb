@@ -12,7 +12,11 @@ class Swimmer < ActiveRecord::Base
   validates :gender, :inclusion => GENDERS
 
   def name
-    "#{self.last}, #{self.first}"
+    "#{last}, #{first}"
+  end
+
+  def first_last
+    "#{first} #{last}"
   end
 
   def age(date = DateTime.now)

@@ -1,12 +1,13 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Welcome to the World of Competitive Swimming.</h1>
+<h1>Welcome ...</h1>
+<h2>... to the Blue Fin World of Competitive Swimming.</h2>
 
 <p>It's now <%= @time.strftime('%H:%M:%S (%Z) on %A, %B %d, %Y') %>.</p>
 
 <% if @birthdays.any? %>
   <p>
-   Happy Birthday <%= @birthdays.map { |birthday| birthday.first }.to_sentence %>.
+   Happy Birthday <%= @birthdays.map { |birthday| birthday.first_last }.to_sentence %>.
   </p>
 <% end %>
 
