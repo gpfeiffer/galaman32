@@ -39,4 +39,14 @@ class Swimmer < ActiveRecord::Base
     end
     return best
   end
+
+  def age_in_days
+    (DateTime.now - birthday).to_i
+  end
+
+  # mark today in the graph
+  def today_marker
+    x = (DateTime.now - (birthday + 8.years)).to_i
+    return [[x, 0], [x, 12000]]
+  end
 end

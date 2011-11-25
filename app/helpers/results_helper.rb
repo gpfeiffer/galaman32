@@ -14,8 +14,14 @@ module ResultsHelper
     swimmer = results.first.entry.swimmer
     graph = []
     results.each do |result|
-      graph << [(result.entry.event.competition.date - (swimmer.birthday+8.years)).to_i, result.time]
+      if result.time > 0
+        graph << [(result.entry.event.competition.date - (swimmer.birthday+8.years)).to_i, result.time]
+      end
     end
-    return graph
+    # HACK: a single point doesn't seem to get an x-value
+    if graph.count == 1
+      graph << [graph[0][0]+1, graph[0][1]]
+    end
+    return graph.sort_by { |x| x[0] }
   end
 end

@@ -67,7 +67,7 @@ class Qualification < ActiveRecord::Base
       graph << [[((dob + qt.age_range.first.years) - (dob + 8.years)).to_i, 0].max, qt.time]
       graph << [[((dob + (qt.age_range.last + 1).years - 1.day) - (dob + 8.years)).to_i, 0].max, qt.time]
     end
-    return graph
+    return graph.sort_by { |x| x[0] }
   end
 
 end
