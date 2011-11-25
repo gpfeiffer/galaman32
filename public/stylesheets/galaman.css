@@ -141,6 +141,11 @@ tr.fact-major {
     background: #fffddd;
 }
 
+tr.fact-major th {
+    border: 1px solid blue;
+    background: #fff959;
+}
+
 tr.fact-major td {
     padding-left: 12px;
     padding-right: 12px;
@@ -157,7 +162,9 @@ tr.times-major td {
 }
 
 tr.times-major th {
-    background: #fffddd;
+    padding-left: 12px;
+    padding-right: 12px;
+    background: #fff959;
 }
 
 tr.fact-title th {

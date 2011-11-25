@@ -24,7 +24,7 @@
         <th></th>
         <% table[:heads].each do |head| %>
           <th style="width:80px">
-            <%= head %>
+            <%= truncate(head, :length => 9) %>
           </th>
         <% end %>
       </tr>
