@@ -2,12 +2,21 @@ class ResultsController < ApplicationController
   # GET /results
   # GET /results.xml
   def index
+    if params[:event_id]
+      @event = Event.find(params[:event_id])
+      @results = @event.results.sort_by(&:time)
+    elsif params[:competition_id]
+      @competition = Competition.find(params[:competition_id])
+    end
+
     @event = Event.find(params[:event_id])
-    @results = @event.results.sort_by(&:time)
 
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @results }
+      format.text { 
+        render :file => 'results/index.text.erb'
+      }
     end
   end
 
