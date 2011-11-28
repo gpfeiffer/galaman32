@@ -50,12 +50,11 @@ class HeatsController < ApplicationController
   # POST /heats.xml
   def create
     @event = Event.find(params[:event_id])
+
     @event.heats.each { |heat| heat.destroy }
-    pos = 0
-    @event.to_heats.each do |list|
-      pos += 1
+    @event.to_heats(params[:width].to_i).each_with_index do |list, index|
       heat = Heat.new
-      heat.pos = pos
+      heat.pos = index + 1
       @event.heats << heat
       heat.entries = list
     end
