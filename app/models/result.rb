@@ -1,6 +1,5 @@
 class Result < ActiveRecord::Base
   belongs_to :entry
-#  belongs_to :discipline, :through => :entry
 
   attr_accessor :mins, :secs, :centis
 
@@ -26,6 +25,14 @@ class Result < ActiveRecord::Base
 
   def discipline
     entry.discipline
+  end
+
+  def swimmer
+    entry.swimmer
+  end
+
+  def competition
+    entry.competition
   end
 
   def qualify
