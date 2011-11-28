@@ -1,3 +1,10 @@
+<%= '=' * 54 %>
 Event <%= event.pos %>. <%= event.discipline.name %>
-====================================================
-<%= render event.entries.sort_by { |x| x.swimmer.name } %>
+<%= '-' * 54 %>
+<% event.qualification_times.each do |qt| %>
+    <%= raw sprintf("%8s", ages_to_s(qt.age_range)) %>  <%= qt.qualification.name %> <%= qt %>
+<% end %>
+<%= '=' * 54 %>
+<%= sprintf("%-25s %-6s %9s    Result", 'Name [Age]', 'Team', 'Seed Time') %>
+<%= '-' * 54 %>
+<%= render event.seeded_entries %>

@@ -1,1 +1,1 @@
-    <%= sprintf("%sm %-13s:", entry.discipline.distance, entry.discipline.stroke) %> <%= entry %>
+<%= sprintf("%-25s %-6s %9s    __:__.__", entry.swimmer.name + " [" + entry.swimmer.age(entry.competition.date).to_s + "]", entry.swimmer.club.symbol, entry.to_s) %>

@@ -1,11 +1,7 @@
-<%= @competition.name %> (<%= @competition.date %>)
+<%= @competition.name %> 
+(<%= @competition.location %>, <%= @competition.date %>)
+Meet Programme
 
-<% Swimmer::GENDERS.each do |gender| %>
-
-<%= @club.name %> <%= { 'f' => 'Girls', 'm' => 'Boys' }[gender] %>.
-
-<%= sprintf("%-20s  %-10s  % 10s", 'Name', 'Birthday', 'SI Member') %>
-
-<%= render @competition.registrations.select{ |x| x.swimmer.gender == gender }.sort_by { |x| x.swimmer.name } %>
-
-<% end %>
+<%= render @competition.events %>
+<%= '-' * 54 %>
+        <%= Time.now.strftime("Printed on %Y-%m-%d") %> by Blue Fin GalaManager.

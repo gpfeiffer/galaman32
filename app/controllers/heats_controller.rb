@@ -2,13 +2,20 @@ class HeatsController < ApplicationController
   # GET /heats
   # GET /heats.xml
   def index
-    @event = Event.find(params[:event_id])
-    @heats = @event.heats
-    @lanes = @event.entries.map { |x| x.lane }.sort.uniq
+    if params[:event_id]
+      @event = Event.find(params[:event_id])
+      @heats = @event.heats
+      @lanes = @event.entries.map { |x| x.lane }.sort.uniq
+    elsif params[:competition_id]
+      @competition = Competition.find(params[:competition_id])
+    end
 
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @heats }
+      format.text { 
+        render :file => 'heats/index.text.erb'
+      }
     end
   end
 

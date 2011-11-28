@@ -70,4 +70,13 @@ class Event < ActiveRecord::Base
       end
     end
   end
+
+  def qualification_times
+    times = []
+    competition.qualifications.each do |qualification|
+      times += qualification.qualification_times.select { |x| x.discipline == discipline and age_range.include? x.age_range }
+    end
+    times.sort_by { |x| [x.age_min, x.time] }
+  end
+
 end
