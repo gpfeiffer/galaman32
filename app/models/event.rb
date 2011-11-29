@@ -79,4 +79,15 @@ class Event < ActiveRecord::Base
     times.sort_by { |x| [x.age_min, x.time] }
   end
 
+  def qualification_age_ranges
+    age_ranges = qualification_times.map { |x| x.age_range }.sort_by(&:first).uniq
+    age_ranges << age_range unless age_ranges.any?
+    age_ranges
+  end
+
+  def listed_results(ages)
+    list = results.select { |x| ages.include? x.swimmer.age(competition.date) }
+    list.select { |x| x.time > 0 }.sort_by(&:time) + 
+      list.select { |x| x.time == 0 }.sort_by { |x| x.entry.swimmer.birthday }
+  end
 end

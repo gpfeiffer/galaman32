@@ -4,7 +4,6 @@ class ResultsController < ApplicationController
   def index
     if params[:event_id]
       @event = Event.find(params[:event_id])
-      @results = @event.results.sort_by(&:time)
     elsif params[:competition_id]
       @competition = Competition.find(params[:competition_id])
     end

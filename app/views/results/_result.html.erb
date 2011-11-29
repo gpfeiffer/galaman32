@@ -1,0 +1,13 @@
+<tr class="fact-major">
+  <td align="right"><% ordinal_number(result.place) %></td>
+  <td><%= link_to result.swimmer.name, result.swimmer %></td>
+  <td align="right"><%= result.swimmer.age(@event.competition.date) %></td>
+  <td><%= result.swimmer.club.symbol %></td>
+  <td align="right"><%= link_to result, result %></td>  
+  <td align="right">
+    <% qu = result.qualify %>
+    <% if qu %>
+      <%= qu[:qualification].name %>
+    <% end %>
+  </td>
+</tr>

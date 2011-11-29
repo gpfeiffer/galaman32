@@ -1,4 +1,8 @@
 module ResultsHelper
+  def ordinal_number(obj)
+    obj.blank? ? "" : "#{obj}."     
+  end
+
   def best_result(results)
     best = nil
     results.each do |result|
