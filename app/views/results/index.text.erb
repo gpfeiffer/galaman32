@@ -1,0 +1,7 @@
+<% if @event %>
+<%= render :partial => 'event', :object => @event %>
+<% elsif @competition %>
+<%= render :partial => 'competition', :object => @competition %>
+<% else %>
+<%= render @results %>
+<% end %>

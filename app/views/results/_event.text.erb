@@ -1,0 +1,13 @@
+<%= '=' * 54 %>
+Event <%= event.pos %>. <%= event.discipline.name %>
+<%= '-' * 54 %>
+<% event.qualification_age_ranges.each do |ages| %>
+<% results = event.listed_results(ages) %>
+<% if not results.empty? %>
+<%= ages_to_words(ages) %>
+<%= '-' * 54 %>
+ Plc  Name  Age Team Result
+<%= '-' * 54 %>
+<%= render results %>
+<% end %>
+<% end %>

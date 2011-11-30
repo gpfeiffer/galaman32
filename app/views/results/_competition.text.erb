@@ -1,0 +1,5 @@
+<%= competition.name %>
+(<%= competition.location %>, <%= competition.date %>)
+Results.
+
+<%= render :partial => 'event', :collection => competition.events %>

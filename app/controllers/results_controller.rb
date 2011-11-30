@@ -6,9 +6,9 @@ class ResultsController < ApplicationController
       @event = Event.find(params[:event_id])
     elsif params[:competition_id]
       @competition = Competition.find(params[:competition_id])
+    else
+      @results = Result.all
     end
-
-    @event = Event.find(params[:event_id])
 
     respond_to do |format|
       format.html # index.html.erb
