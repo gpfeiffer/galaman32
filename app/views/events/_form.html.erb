@@ -17,7 +17,7 @@
 
   <div class="field">
     <%= f.label :pos, "Event No." %>
-    <%= f.select :pos, available_poss(@event.competition) %>
+    <%= f.select :pos, available_poss(@event.competition, @event) %>
   </div>
   <div class="field">
     <%= f.label :discipline_id %><br />
