@@ -13,36 +13,28 @@ class Event < ActiveRecord::Base
   validates :age_min, :age_max, :competition_id, :discipline_id, :presence => true
 
   def gender
-    if self.discipline
-      return self.discipline.gender
-    end
+    discipline and discipline.gender
   end
 
   def distance
-    if self.discipline
-      return self.discipline.distance
-    end
+    discipline and discipline.distance
   end
 
   def course
-    if self.discipline
-      return self.discipline.course
-    end
+    discipline and discipline.course
   end
 
   def stroke
-    if self.discipline
-      return self.discipline.stroke
-    end
+    discipline and discipline.stroke
   end
 
   def age_range
-    self.age_min..self.age_max
+    age_min..age_max
   end
 
   def permits?(swimmer)
-    swimmer.gender == self.discipline.gender and 
-      self.age_range.include?(swimmer.age(self.competition.date)) 
+    swimmer.gender == gender and 
+      age_range.include?(swimmer.age(competition.date)) 
   end
 
   def seeded_entries
