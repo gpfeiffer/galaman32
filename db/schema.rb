@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111202183932) do
+ActiveRecord::Schema.define(:version => 20111202203410) do
 
   create_table "clubs", :force => true do |t|
     t.string   "full_name"
@@ -94,6 +94,7 @@ ActiveRecord::Schema.define(:version => 20111202183932) do
     t.timestamp "created_at"
     t.timestamp "updated_at"
     t.integer   "age"
+    t.integer   "invitation_id"
   end
 
   create_table "results", :force => true do |t|
