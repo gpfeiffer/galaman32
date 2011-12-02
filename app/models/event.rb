@@ -86,7 +86,7 @@ class Event < ActiveRecord::Base
   end
 
   def listed_results(ages)
-    list = results.select { |x| ages.include? x.swimmer.age(competition.date) }
+    list = results.select { |x| ages.include? x.entry.registration.age }
     list.select { |x| x.time > 0 }.sort_by(&:time) + 
       list.select { |x| x.time == 0 }.sort_by { |x| x.entry.swimmer.birthday }
   end

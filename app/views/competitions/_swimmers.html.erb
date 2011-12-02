@@ -10,7 +10,7 @@
 <% @competition.registrations.select { |x| x.club == club }.each do |registration| %>
 <% swimmer = registration.swimmer %>
   <tr>
-      <td><%= link_to swimmer.name, swimmer %> [<%= swimmer.age(@competition.date) %>]</td>
+      <td><%= link_to swimmer.name, swimmer %> [<%= registration.age %>]</td>
       <% @competition.events.each do |event| %>
         <td align="center">
 	<% entry = registration.entries.where(:event_id => event).first %>

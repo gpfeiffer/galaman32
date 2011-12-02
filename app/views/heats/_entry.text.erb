@@ -1,1 +1,1 @@
-<%= sprintf("%2s. %-25s %-6s %9s", entry.lane, entry.swimmer.name + " [" + entry.swimmer.age(entry.competition.date).to_s + "]", entry.swimmer.club.symbol, entry.to_s) %><%= (' ' * 4 + '_' * 8) * 2 %>
+<%= sprintf("%2s. %-25s %-6s %9s", entry.lane, entry.swimmer.name + " [" + entry.registration.age.to_s + "]", entry.swimmer.club.symbol, entry.to_s) %><%= (' ' * 4 + '_' * 8) * 2 %>
