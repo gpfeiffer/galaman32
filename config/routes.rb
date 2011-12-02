@@ -1,4 +1,6 @@
 Galaman::Application.routes.draw do
+  resources :invitations
+
   resources :heats
 
   resources :standards
