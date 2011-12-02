@@ -49,6 +49,11 @@ class Result < ActiveRecord::Base
     return best
   end
 
+  def merit
+    qu = qualify
+    qu ? qu[:qualification].name : ""
+  end
+
   def to_s
     if self.time == 0
       if self.comment
