@@ -1,6 +1,7 @@
 GEM
   remote: http://rubygems.org/
   specs:
+    Ascii85 (1.0.1)
     abstract (1.0.0)
     actionmailer (3.0.10)
       actionpack (= 3.0.10)
@@ -40,7 +41,12 @@ GEM
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
     mime-types (1.16)
+    pdf-reader (0.10.1)
+      Ascii85 (~> 1.0.0)
     polyglot (0.3.2)
+    prawn (0.12.0)
+      pdf-reader (>= 0.9.0)
+      ttfunk (~> 1.0.2)
     rack (1.2.3)
     rack-mount (0.6.14)
       rack (>= 1.0.0)
@@ -67,6 +73,7 @@ GEM
     treetop (1.4.10)
       polyglot
       polyglot (>= 0.3.1)
+    ttfunk (1.0.3)
     tzinfo (0.3.29)
     yaml_db (0.2.2)
 
@@ -75,6 +82,7 @@ PLATFORMS
 
 DEPENDENCIES
   gchartrb
+  prawn
   rails (= 3.0.10)
   sqlite3
   yaml_db

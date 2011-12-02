@@ -32,3 +32,6 @@ gem 'gchartrb', :require => 'google_chart'
 # end
 
 gem 'yaml_db'
+
+# gem 'pdfkit'
+gem 'prawn'

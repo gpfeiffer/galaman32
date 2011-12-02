@@ -21,6 +21,7 @@ class EventsController < ApplicationController
       format.text {
         render :file => 'events/show.text.erb'
       }
+      format.pdf { render :layout => false }
     end
   end
 
