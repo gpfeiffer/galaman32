@@ -16,7 +16,7 @@
 	<% entry = registration.entries.where(:event_id => event).first %>
 	<% if entry %>
           <%= link_to entry, entry %>
-	<% elsif event.permits?(swimmer) %>
+	<% elsif event.permits? registration %>
 	  <%= link_to (raw "&square;"), new_entry_path(:event_id => event.id, :registration_id => registration.id) %> 
         <% end %>
         </td>

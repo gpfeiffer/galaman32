@@ -32,9 +32,8 @@ class Event < ActiveRecord::Base
     age_min..age_max
   end
 
-  def permits?(swimmer)
-    swimmer.gender == gender and 
-      age_range.include?(swimmer.age(competition.date)) 
+  def permits?(registration)
+    registration.swimmer.gender == gender and age_range.include? registration.age
   end
 
   def seeded_entries
