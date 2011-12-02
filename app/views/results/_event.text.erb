@@ -6,7 +6,7 @@ Event <%= event.pos %>. <%= event.discipline.name %>
 <% if not results.empty? %>
 <%= ages_to_words(ages) %>
 <%= '-' * 54 %>
- Plc  Name  Age Team Result
+<%= sprintf("%4s %-25s %-6s %9s", "Plc",  "Name [Age]", "Team", "Result") %>
 <%= '-' * 54 %>
 <%= render results %>
 <% end %>
