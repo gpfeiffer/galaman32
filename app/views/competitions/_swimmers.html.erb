@@ -9,6 +9,7 @@
 </tr>
 <% @competition.registrations.select { |x| x.club == club }.each do |registration| %>
 <% swimmer = registration.swimmer %>
+<% registration.age ||= swimmer.age(@competition.date) %>
   <tr>
       <td><%= link_to swimmer.name, swimmer %> [<%= registration.age %>]</td>
       <% @competition.events.each do |event| %>
