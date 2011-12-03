@@ -16,11 +16,6 @@
 <%= link_to 'Heats (text)', heats_path(:competition_id => @competition.id, :format => :text) %>
 <br />
 
-<% if @club %>
-<%= render :partial => 'swimmers', :locals => { :club => @club } %>
-<hr/>
-<% end %>
-
 <%= link_to 'Edit', edit_competition_path(@competition) %> |
 <%= link_to 'Clubs', clubs_path %> |
 <%= link_to 'Back', competitions_path %>
