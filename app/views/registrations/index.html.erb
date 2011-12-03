@@ -8,11 +8,11 @@
 
 <h2><%= @club.name %>.</h2>
 
-<%= form_for @competition do |f| %>
+<%= form_for @invitation do |f| %>
     <%= hidden_field_tag :club_id, @club.id %>
     <% @club.swimmers.each do |swimmer| %>
-        <%= check_box_tag("competition[swimmer_ids][]", swimmer.id,
-        @competition.swimmers.include?(swimmer)) %>
+        <%= check_box_tag("invitation[swimmer_ids][]", swimmer.id,
+        @invitation.swimmers.include?(swimmer)) %>
         <%= swimmer.name %> <br />
     <% end %>
     <%= f.submit "Submit Registrations" %>

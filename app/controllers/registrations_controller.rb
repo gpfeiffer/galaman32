@@ -2,9 +2,9 @@ class RegistrationsController < ApplicationController
   # GET /registrations
   # GET /registrations.xml
   def index
-    @competition = Competition.find(params[:competition_id])
-    @club = Club.find(params[:club_id])
-    @registrations = @competition.registrations.select { |x| x.swimmer.club == @club }
+    @invitation = Invitation.find(params[:invitation_id])
+    @club = @invitation.club
+    @competition = @invitation.competition
 
     respond_to do |format|
       format.html # index.html.erb
@@ -12,7 +12,7 @@ class RegistrationsController < ApplicationController
       format.text { 
         render :file => 'registrations/index.text.erb'
       }
-      format.pdf { render :layout => false }
+#      format.pdf { render :layout => false }
     end
   end
 

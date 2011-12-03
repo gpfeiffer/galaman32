@@ -1,15 +1,33 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <b>Club:</b>
-  <%= @invitation.club_id %>
-</p>
+<h2><%= @club.name %> @ <%= @competition.name %></h2>
 
 <p>
-  <b>Competition:</b>
-  <%= @invitation.competition_id %>
+  <%= @competition.location %>
+(<%= @competition.date %>)
 </p>
 
+<hr/>
+<h3>Qualifications</h3>
+<%= @competition.qualifications.map { |x| x.name }.to_sentence %>.
+<hr/>
+<h3>Events</h3>
 
-<%= link_to 'Edit', edit_invitation_path(@invitation) %> |
-<%= link_to 'Back', invitations_path %>
+<table>
+  <tr>
+    <th>No.</th>
+    <th>Discipline</th>
+    <th>Age</th>
+    <th></th>
+  </tr>
+  <%= render @competition.events %>
+</table>
+
+<br />
+<hr />
+
+<%= render :partial => 'swimmers', :locals => { :club => @club } %>
+<hr/>
+
+<%= link_to 'Back to Club', @club %> |
+<%= link_to 'Back to Competition', @competition %>

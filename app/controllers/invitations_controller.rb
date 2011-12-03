@@ -14,6 +14,8 @@ class InvitationsController < ApplicationController
   # GET /invitations/1.xml
   def show
     @invitation = Invitation.find(params[:id])
+    @club = @invitation.club
+    @competition = @invitation.competition
 
     respond_to do |format|
       format.html # show.html.erb
