@@ -77,7 +77,7 @@ class StandardsController < ApplicationController
     @standard.destroy
 
     respond_to do |format|
-      format.html { redirect_to(standards_url) }
+      format.html { redirect_to @standard.competition, :notice => 'Standard was successfully deleted.' }
       format.xml  { head :ok }
     end
   end
