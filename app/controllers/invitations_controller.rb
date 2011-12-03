@@ -27,6 +27,7 @@ class InvitationsController < ApplicationController
   # GET /invitations/new.xml
   def new
     @invitation = Invitation.new
+    @invitation[:competition_id] = params[:competition_id]
 
     respond_to do |format|
       format.html # new.html.erb
@@ -46,7 +47,7 @@ class InvitationsController < ApplicationController
 
     respond_to do |format|
       if @invitation.save
-        format.html { redirect_to(@invitation, :notice => 'Invitation was successfully created.') }
+        format.html { redirect_to(@invitation.competition, :notice => 'Invitation was successfully created.') }
         format.xml  { render :xml => @invitation, :status => :created, :location => @invitation }
       else
         format.html { render :action => "new" }
@@ -78,7 +79,7 @@ class InvitationsController < ApplicationController
     @invitation.destroy
 
     respond_to do |format|
-      format.html { redirect_to(invitations_url) }
+      format.html { redirect_to(@invitation.competition, :notice => 'Invitation was successfully deleted.') }
       format.xml  { head :ok }
     end
   end

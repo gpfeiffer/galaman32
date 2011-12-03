@@ -10,12 +10,16 @@
 <hr/>
 <%= render 'qualifications' %>
 <hr/>
+<%= render 'invitations' %>
+<hr/>
 <%= render 'events' %>
 <hr/>
 
+
+
 <%= link_to 'Heats (text)', heats_path(:competition_id => @competition.id, :format => :text) %>
 <br />
+<hr />
 
 <%= link_to 'Edit', edit_competition_path(@competition) %> |
-<%= link_to 'Clubs', clubs_path %> |
 <%= link_to 'Back', competitions_path %>

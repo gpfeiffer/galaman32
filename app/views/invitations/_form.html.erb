@@ -11,15 +11,15 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <h2><%= @invitation.competition.name %></h2>
+  
+  <%= f.hidden_field :competition_id %>
+
+   <div class="field">
     <%= f.label :club_id %><br />
-    <%= f.text_field :club_id %>
-  </div>
-  <div class="field">
-    <%= f.label :competition_id %><br />
-    <%= f.text_field :competition_id %>
-  </div>
-  <div class="actions">
+    <%= f.select :club_id, (Club.all - @invitation.competition.invitations.map { |x| x.club }).map{ |x| [x.name, x.id] } %>
+   </div>
+   <div class="actions">
     <%= f.submit %>
   </div>
 <% end %>
