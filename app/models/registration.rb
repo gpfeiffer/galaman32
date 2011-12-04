@@ -7,4 +7,12 @@ class Registration < ActiveRecord::Base
   has_many :events, :through => :entries
 
   validates :invitation_id, :swimmer_id, :presence => true
+
+  before_save :compute_and_assign_age_on_the_day
+
+  private
+
+  def compute_and_assign_age_on_the_day
+    self.age = swimmer.age(invitation.competition.date)
+  end
 end
