@@ -21,7 +21,7 @@ class EntriesControllerTest < ActionController::TestCase
       post :create, :entry => @entry.attributes
     end
 
-    assert_redirected_to competition_path(assigns(:entry).event.competition, :club_id => @entry.swimmer.club_id)
+    assert_redirected_to invitation_path(assigns(:entry).invitation, :club_id => @entry.swimmer.club_id)
   end
 
   test "should show entry" do
@@ -36,7 +36,7 @@ class EntriesControllerTest < ActionController::TestCase
 
   test "should update entry" do
     put :update, :id => @entry.to_param, :entry => @entry.attributes
-    assert_redirected_to competition_path(assigns(:entry).event.competition, :club_id => @entry.swimmer.club_id)
+    assert_redirected_to invitation_path(assigns(:entry).invitation, :club_id => @entry.swimmer.club_id)
   end
 
   test "should destroy entry" do
@@ -44,6 +44,6 @@ class EntriesControllerTest < ActionController::TestCase
       delete :destroy, :id => @entry.to_param
     end
 
-    assert_redirected_to competition_path(:id => @entry.competition.id, :club_id => @entry.swimmer.club_id)
+    assert_redirected_to invitation_path(assigns(:entry).invitation, :club_id => @entry.swimmer.club_id)
   end
 end

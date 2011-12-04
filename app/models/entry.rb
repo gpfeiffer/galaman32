@@ -1,6 +1,7 @@
 class Entry < ActiveRecord::Base
   belongs_to :registration
   has_one :swimmer, :through => :registration
+  has_one :invitation, :through => :registration
   belongs_to :event
   has_one :competition, :through => :event
 #  has_one :discipline, :through => :event
