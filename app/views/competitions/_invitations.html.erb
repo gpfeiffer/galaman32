@@ -4,7 +4,7 @@
 
 <% @competition.invitations.each do |invitation| %>
   <tr>
-    <td><%= link_to invitation.club.name, invitation.club %></td>
+    <td><%= link_to invitation.club.name, invitation %></td>
     <td><%= link_to image_tag('delete.png', :class => "icon"), invitation, :confirm => 'Are you sure?', :method => :delete %></td>
 
   </tr>
