@@ -6,19 +6,20 @@ class HeatsControllerTest < ActionController::TestCase
   end
 
   test "should get index" do
-    get :index
+    get :index, :event_id => events(:one).to_param
     assert_response :success
     assert_not_nil assigns(:heats)
   end
 
   test "should get new" do
-    get :new
+    get :new, :event_id => events(:one).to_param
     assert_response :success
   end
 
   test "should create heat" do
+    @event = events(:one)
     assert_difference('Heat.count') do
-      post :create, :heat => @heat.attributes
+      post :create, :heat => @heat.attributes, :event_id => @event, :width => 6
     end
 
     assert_redirected_to heat_path(assigns(:heat))

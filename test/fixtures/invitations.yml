@@ -1,9 +1,9 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:
-  club_id: 1
-  competition_id: 1
+  club: one
+  competition: one
 
 two:
-  club_id: 1
-  competition_id: 1
+  club: two
+  competition: two

@@ -6,9 +6,9 @@ class RegistrationsControllerTest < ActionController::TestCase
   end
 
   test "should get index" do
-    get :index, :club_id => @registration.club.to_param, :competition_id => @registration.competition.to_param
+    get :index, :club_id => @registration.club.to_param, :invitation_id => @registration.invitation.to_param
     assert_response :success
-    assert_not_nil assigns(:registrations)
+    assert_not_nil assigns(:invitation)
   end
 
   test "should get new" do

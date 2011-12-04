@@ -12,7 +12,7 @@ class InvitationsControllerTest < ActionController::TestCase
   end
 
   test "should get new" do
-    get :new
+    get :new, :competition_id => competitions(:one).to_param
     assert_response :success
   end
 
@@ -21,7 +21,7 @@ class InvitationsControllerTest < ActionController::TestCase
       post :create, :invitation => @invitation.attributes
     end
 
-    assert_redirected_to invitation_path(assigns(:invitation))
+    assert_redirected_to @invitation.competition
   end
 
   test "should show invitation" do
@@ -44,6 +44,6 @@ class InvitationsControllerTest < ActionController::TestCase
       delete :destroy, :id => @invitation.to_param
     end
 
-    assert_redirected_to invitations_path
+    assert_redirected_to @invitation.competition
   end
 end

@@ -6,9 +6,9 @@ class ResultsControllerTest < ActionController::TestCase
   end
 
   test "should get index" do
-    get :index
+    get :index, :event_id => events(:one).to_param
     assert_response :success
-    assert_not_nil assigns(:results)
+    assert_not_nil assigns(:event)
   end
 
   test "should get new" do

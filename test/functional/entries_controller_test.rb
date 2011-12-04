@@ -44,6 +44,6 @@ class EntriesControllerTest < ActionController::TestCase
       delete :destroy, :id => @entry.to_param
     end
 
-    assert_redirected_to entries_path
+    assert_redirected_to competition_path(:id => @entry.competition.id, :club_id => @entry.swimmer.club_id)
   end
 end

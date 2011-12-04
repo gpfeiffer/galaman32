@@ -12,7 +12,7 @@ class StandardsControllerTest < ActionController::TestCase
   end
 
   test "should get new" do
-    get :new
+    get :new, :competition_id => competitions(:one).to_param
     assert_response :success
   end
 
@@ -21,7 +21,7 @@ class StandardsControllerTest < ActionController::TestCase
       post :create, :standard => @standard.attributes
     end
 
-    assert_redirected_to standard_path(assigns(:standard))
+    assert_redirected_to @standard.competition
   end
 
   test "should show standard" do
@@ -44,6 +44,6 @@ class StandardsControllerTest < ActionController::TestCase
       delete :destroy, :id => @standard.to_param
     end
 
-    assert_redirected_to standards_path
+    assert_redirected_to @standard.competition
   end
 end
