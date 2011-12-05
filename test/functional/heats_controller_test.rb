@@ -6,7 +6,7 @@ class HeatsControllerTest < ActionController::TestCase
   end
 
   test "should get index" do
-    get :index, :event_id => events(:one).to_param
+    get :index, :competition_id => competitions(:one).to_param
     assert_response :success
     assert_not_nil assigns(:heats)
   end
