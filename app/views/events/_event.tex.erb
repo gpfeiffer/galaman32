@@ -1,0 +1,41 @@
+\subsection*{Event <%= event.pos %>. <%= event.discipline.to_words %>}
+
+\begin{center}
+\tablefirsthead{}
+\tablehead{}
+\tabletail{}
+\tablelasttail{}
+\begin{supertabular}{|llr|}
+\toprule
+<% event.qualification_times.each do |qt| %>
+  <%= ages_to_words(qt.age_range) %> & <%= qt.qualification.name %> & <%= qt %> \\
+<% end %>
+\bottomrule
+\end{supertabular}
+\end{center}
+
+\begin{center}
+\tablefirsthead{%
+\toprule
+& Name, Age & Team & \llap{Seed Time} & Result \\
+\midrule%
+}
+\tablehead{%
+\toprule
+\multicolumn{4}{l}{\textbf{\ldots\ Event <%= event.pos %>. <%= event.discipline.to_words %>}}\\
+\midrule%
+& Name, Age & Team & \llap{Seed Time} & Result \\
+\midrule%
+}
+\tabletail{%
+&&&&\ldots\\
+}
+\tablelasttail{%
+\bottomrule%
+}
+\begin{supertabular}{r@{ }llrc}
+<% event.seeded_entries.each_with_index do |entry, index| %>
+  <%= render :partial => 'events/entry', :object => entry, :locals => { :index => index } %>
+<% end %>
+\end{supertabular}
+\end{center}

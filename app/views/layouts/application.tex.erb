@@ -1,0 +1,21 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=.5in,includefoot]{geometry}
+\usepackage{supertabular}
+\usepackage{booktabs}
+\usepackage{parskip}
+\usepackage{array}
+
+\renewcommand{\familydefault}{\sfdefault}
+
+\begin{document}
+
+\twocolumn
+
+<%= yield %>
+
+\vfill
+
+\hfill
+\footnotesize{Printed at <%= Time.now.strftime('%H:%M:%S (%Z) on %A, %B %d, %Y') %> by Blue Fin GalaManager.}
+\end{document}

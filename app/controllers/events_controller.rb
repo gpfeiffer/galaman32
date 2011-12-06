@@ -18,6 +18,10 @@ class EventsController < ApplicationController
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @event }
+      format.tex {
+        render :file => 'events/show.tex.erb',
+        :layout => 'layouts/application.tex.erb'
+      }
       format.text {
         render :file => 'events/show.text.erb'
       }

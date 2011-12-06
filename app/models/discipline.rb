@@ -24,4 +24,8 @@ class Discipline < ActiveRecord::Base
   def name
     sprintf("%s [%s] %dm (%s)", self.stroke, self.gender, self.distance, self.course)
   end
+
+  def to_words
+    sprintf("%s %dm %s (%s)",  { 'f' => "Girls", 'm' => "Boys" }[gender], distance, stroke, course)
+  end
 end
