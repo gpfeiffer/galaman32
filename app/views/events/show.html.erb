@@ -13,14 +13,15 @@
 <table class="fact-sheet">
 <tr class="fact-major">
 <th></th>
-<th></th>
 <th>Name</th>
 <th>Age</th>
 <th>Team</th>
 <th>Seed Time</th>
 <th>Result</th>
 </tr>
-<%= render @event.seeded_entries %>
+<% @event.seeded_entries.each_with_index do |entry, index| %>
+  <%= render :partial => 'events/entry', :object => entry, :locals => { :index => index } %>
+<% end %>
 </table>
 
 <br />
