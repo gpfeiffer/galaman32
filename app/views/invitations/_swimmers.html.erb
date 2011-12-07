@@ -1,16 +1,18 @@
 <h3>Registered Swimmers (<%= club.symbol %>)</h3>
 
-<table>
-<tr>
-<td>Swimmer</td>
-      <% @competition.events.each do |event| %>
-        <th><span title="<%= event.pos %>. <%= event.discipline.name %>"><%= sprintf("%02d", event.pos) %></span></th>
-      <% end %>
-</tr>
-<% @competition.registrations.select { |x| x.club == club }.each do |registration| %>
-<% swimmer = registration.swimmer %>
-  <tr>
-      <td><%= link_to swimmer.name, swimmer %> [<%= registration.age %>]</td>
+<table class="fact-sheet">
+  <tr class="times-major">
+    <th>Swimmer</th>
+    <th>Age</th>
+    <% @competition.events.each do |event| %>
+      <th><span title="<%= event.pos %>. <%= event.discipline.name %>"><%= sprintf("%02d", event.pos) %></span></th>
+    <% end %>
+  </tr>
+<% @invitation.registrations.sort_by { |x| x.swimmer.name }.each do |registration| %>
+  <% swimmer = registration.swimmer %>
+  <tr class="times-major">
+      <td><%= link_to swimmer.name, swimmer %></td>
+      <td align="right"><%= registration.age %></td>
       <% @competition.events.each do |event| %>
         <td align="center">
 	<% entry = registration.entries.where(:event_id => event).first %>

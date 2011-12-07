@@ -164,6 +164,7 @@ tr.times-major th {
     padding-left: 12px;
     padding-right: 12px;
     background: #fff959;
+    border: 1px solid blue;
 }
 
 tr.fact-title th {
