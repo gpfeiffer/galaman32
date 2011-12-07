@@ -12,7 +12,7 @@
 <br/>
 
 <% @qualification.genders.each do |gender| %>
-  <% @qualification.age_ranges.each do |ages| %>
+  <% @qualification.age_ranges(gender).each do |ages| %>
     <% table = @qualification.to_table(gender, ages.first) %>
     <% if table %>
     <h3>

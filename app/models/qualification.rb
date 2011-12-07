@@ -6,8 +6,8 @@ class Qualification < ActiveRecord::Base
 
   validates :name, :presence => true
 
-  def age_ranges
-    qualification_times.each.map { |x| x.age_range }.sort_by(&:first).uniq
+  def age_ranges(gender)
+    qualification_times.select { |x| x.gender == gender }.each.map { |x| x.age_range }.sort_by(&:first).uniq
   end
 
   def filter_disciplines(gender, course)
@@ -15,7 +15,7 @@ class Qualification < ActiveRecord::Base
   end
 
   def filter_time(discipline, ages)
-    qualification_times.select{ |x| x.discipline == discipline and x.age_range == ages }.first
+    qualification_times.select { |x| x.discipline == discipline and x.age_range == ages }.first
   end
 
   def courses
