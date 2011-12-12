@@ -11,7 +11,11 @@ Galaman::Application.routes.draw do
 
   resources :entries
 
-  resources :events
+  resources :events do
+    member do
+      get 'list'
+    end
+  end
 
   resources :registrations
 

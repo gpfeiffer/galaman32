@@ -62,6 +62,10 @@ class Event < ActiveRecord::Base
     end
   end
 
+  def seeded?
+    heats.any?
+  end
+
   def qualification_times
     times = []
     competition.qualifications.each do |qualification|
@@ -80,5 +84,18 @@ class Event < ActiveRecord::Base
     list = results.select { |x| ages.include? x.entry.registration.age }
     list.select { |x| x.time > 0 }.sort_by(&:time) + 
       list.select { |x| x.time == 0 }.sort_by { |x| x.entry.swimmer.birthday }
+  end
+
+  # how to put a place on each valid result
+  def list!
+    qualification_age_ranges.each do |ages|
+      list = results.select { |x| ages.include? x.entry.registration.age }
+      list = list.select { |x| x.time > 0 }.sort_by(&:time)
+      times = list.map { |x| x.time }
+      list.each do |result|
+        result.place = times.index(result.time) + 1
+        result.save
+      end
+    end
   end
 end

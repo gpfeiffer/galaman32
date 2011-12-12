@@ -29,6 +29,11 @@
 
 <%= link_to 'Edit', edit_event_path(@event) %> |
 <%= link_to 'Seed', new_heat_path(:event_id => @event) %> |
-<%= link_to 'Heats', heats_path(:event_id => @event) %> |
+<% if @event.seeded? %>
+  <%= link_to 'Heats', heats_path(:event_id => @event) %> 
+<% else %>
+  Heats
+<% end %> |
+<%= link_to 'List', list_event_path(@event), :confirm => 'Are you sure?' %> |
 <%= link_to 'Results', results_path(:event_id => @event) %> |
 <%= link_to 'Back', @event.competition %>

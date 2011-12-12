@@ -90,4 +90,15 @@ class EventsController < ApplicationController
       format.xml  { head :ok }
     end
   end
+
+  # GET /events/1/list
+  def list
+    @event = Event.find(params[:id])
+    @event.list!
+
+    respond_to do |format|
+      format.html { redirect_to results_path(:event_id => @event) }
+      format.xml  { head :ok }
+    end
+  end
 end
