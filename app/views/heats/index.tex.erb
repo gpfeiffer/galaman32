@@ -1,0 +1,9 @@
+<% if @event %>
+<%= render :partial => 'event', :object => @event %>
+<% elsif @competition %>
+<%= @competition.name %>
+(<%= @competition.location %>, <%= @competition.date %>)
+Heat Sheet.
+
+<%= render :partial => 'event', :collection => @competition.events %>
+<% end %>

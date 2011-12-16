@@ -1,0 +1,24 @@
+\subsection*{Event <%= event.pos %>. <%= event.discipline.to_words %>}
+
+\begin{center}
+\tablefirsthead{%
+\toprule
+L. & Name, Age & Team & \llap{Seed Time} & Result \\
+}
+\tablehead{%
+\toprule
+\multicolumn{4}{l}{\textbf{\ldots\ Event <%= event.pos %>. <%= event.discipline.to_words %>}}\\
+\midrule%
+L. & Name, Age & Team & \llap{Seed Time} & Result \\
+\midrule%
+}
+\tabletail{%
+&&&&\ldots\\
+}
+\tablelasttail{%
+\bottomrule%
+}
+\begin{supertabular}{r@{ }llrc}
+<%= render :partial => 'heat', :collection => event.heats %>
+\end{supertabular}
+\end{center}

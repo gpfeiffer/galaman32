@@ -1,0 +1,3 @@
+\multicolumn{5}{l}{Heat <%= heat.pos %>}\\
+\midrule
+<%= render :partial => 'entry', :collection => heat.entries.sort_by(&:lane) %>
