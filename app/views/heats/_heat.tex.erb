@@ -1,3 +1,12 @@
-\multicolumn{5}{l}{Heat <%= heat.pos %>}\\
+\vbox{\textbf{Heat <%= heat.pos %>}
+
+\begin{tabular}{rp{4cm}p{12mm}r}
+\toprule
+Lane & Name, Age & Team & \hbox to 15mm{}\llap{Seed Time} \\
 \midrule
 <%= render :partial => 'entry', :collection => heat.entries.sort_by(&:lane) %>
+\bottomrule
+\end{tabular}
+}
+\bigskip
+
