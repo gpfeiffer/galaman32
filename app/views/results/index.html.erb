@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Event <%= @event.pos %>: <%= @event.discipline.name %></h1>
+<h1>Event <%= @event.pos %>: <%= @event.discipline.to_words %></h1>
 
 <% @event.qualification_age_ranges.each do |ages| %>
   <% results = @event.listed_results(ages) %>
