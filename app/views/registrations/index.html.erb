@@ -9,13 +9,29 @@
 <h2><%= @club.name %>.</h2>
 
 <%= form_for @invitation do |f| %>
-    <%= hidden_field_tag :club_id, @club.id %>
-    <% @club.swimmers.each do |swimmer| %>
-        <%= check_box_tag("invitation[swimmer_ids][]", swimmer.id,
-        @invitation.swimmers.include?(swimmer)) %>
-        <%= swimmer.name %> <br />
+  <%= hidden_field_tag :club_id, @club.id %>
+  <%= link_to_function("Select All","checkboxes.each(function(e){ e.checked = 1 })") %> |
+  <%= link_to_function("Clear All","checkboxes.each(function(e){ e.checked = 0 })") %> <br /> <br />
+<% Swimmer::GENDERS.each do |sex| %>
+<table class="fact-sheet">
+  <% @club.swimmers.where(:gender => sex).each do |swimmer| %>
+<tr class="fact-major">
+<td>    <%= check_box_tag("invitation[swimmer_ids][]", swimmer.id,
+    @invitation.swimmers.include?(swimmer)) %> </td>
+<td>        <%= swimmer.name %> </td>
+</tr>
     <% end %>
+</table>
+&nbsp;
+<% end %>
+    <br />
+    <br />
     <%= f.submit "Submit Registrations" %>
 <% end %>
 
 <br />
+
+<script type="text/javascript" charset="utf-8">
+var checkboxes = [];
+$$('input').each(function(e){ if(e.type == 'checkbox') checkboxes.push(e) });
+</script>

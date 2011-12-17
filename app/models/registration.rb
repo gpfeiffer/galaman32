@@ -10,6 +10,10 @@ class Registration < ActiveRecord::Base
 
   before_save :compute_and_assign_age_on_the_day
 
+  def gender
+    swimmer.gender
+  end
+
   private
 
   def compute_and_assign_age_on_the_day
