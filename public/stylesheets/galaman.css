@@ -106,6 +106,10 @@ th.discipline {
 
 table.fact-sheet {
     border-collapse: collapse;
+    display: inline;
+}
+
+table.fact-sheet tbody {
     border: 3px solid blue;
 }
 
