@@ -10,7 +10,17 @@ class Event < ActiveRecord::Base
 
   attr_accessor :gender, :distance, :course, :stroke
 
-  validates :age_min, :age_max, :competition_id, :discipline_id, :presence => true
+  validates :age_min, :age_max, :presence => true, 
+    :numericality => { :only_integer => true, :greater_than_or_equal_to => 0 }
+  validates :competition_id, :discipline_id, :presence => true
+
+  validate :age_max_must_not_be_less_than_age_min
+
+  def age_max_must_not_be_less_than_age_min
+    if age_max < age_min
+      errors.add(:age_max, "must not be less than Age min")
+    end
+  end
 
   def gender
     discipline and discipline.gender

@@ -2,10 +2,21 @@ class QualificationTime < ActiveRecord::Base
   belongs_to :qualification
   belongs_to :discipline
 
-  validates :age_min, :age_max, :qualification_id, :discipline_id, :time, :presence => true
+  validates :age_min, :age_max, :presence => true, 
+    :numericality => { :only_integer => true, :greater_than_or_equal_to => 0 }
+
+  validates :qualification_id, :discipline_id, :time, :presence => true
 
   attr_accessor :mins, :secs, :centis
   attr_accessor :gender, :distance, :course, :stroke
+
+  validate :age_max_must_not_be_less_than_age_min
+
+  def age_max_must_not_be_less_than_age_min
+    if age_max < age_min
+      errors.add(:age_max, "must not be less than Age min")
+    end
+  end
 
   def centis
     if self.time
