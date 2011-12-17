@@ -15,7 +15,7 @@
 
 <% @heats.each do |heat| %>
   <tr class="fact-title">
-    <th colspan="7">Heat <%= heat.pos %> Finals</th>
+    <th colspan="7">Heat <%= heat.pos %></th>
   </tr>
 
   <%= render heat.entries.sort_by(&:lane) %>
