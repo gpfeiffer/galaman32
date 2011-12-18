@@ -76,6 +76,16 @@ class Event < ActiveRecord::Base
     heats.any?
   end
 
+  def lanes
+    list = []
+    entries.each do |entry|
+      lane = entry.lane
+      list[lane] ||= []
+      list[lane] << entry
+    end
+    return list
+  end
+
   def qualification_times
     times = []
     competition.qualifications.each do |qualification|
