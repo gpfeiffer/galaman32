@@ -6,10 +6,10 @@
 <p>It's now <%= @time.strftime('%H:%M:%S (%Z) on %A, %B %d, %Y') %>.</p>
 
 <% if @birthdays.any? %>
-  <p style="font-size:28px">
-<%= image_tag('cake.png', :size => '60x80') %>
+  <p>
+<%= image_tag('balloons.png', :align => 'middle', :width => '30') %>
    Happy Birthday to <%= @birthdays.map { |birthday| birthday.first_last }.to_sentence %>!
-<%= image_tag('balloons.png', :size => '60x90') %>
+<%= image_tag('balloons.png', :align => 'middle', :width => '30') %>
   </p>
 <% end %>
 
