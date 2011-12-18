@@ -1,4 +1,8 @@
 Galaman::Application.routes.draw do
+  get "lanes/index"
+
+  get "lanes/show"
+
   resources :invitations
 
   resources :heats
