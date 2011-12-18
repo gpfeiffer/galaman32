@@ -17,14 +17,14 @@
 \begin{center}
 \tablefirsthead{%
 \toprule
-& Name, Age & Team & \llap{Seed Time} & Result \\
+& {\footnotesize Name, Age} & {\footnotesize Team} & \hbox to 15mm{}\llap{\footnotesize Seed Time} & {\footnotesize Result} \\
 \midrule%
 }
 \tablehead{%
 \toprule
 \multicolumn{4}{l}{\textbf{\ldots\ Event <%= event.pos %>. <%= event.discipline.to_words %>}}\\
 \midrule%
-& Name, Age & Team & \llap{Seed Time} & Result \\
+& {\footnotesize Name, Age} & {\footnotesize Team} & \hbox to 15mm{}\llap{\footnotesize Seed Time} & {\footnotesize Result} \\
 \midrule%
 }
 \tabletail{%
@@ -33,7 +33,7 @@
 \tablelasttail{%
 \bottomrule%
 }
-\begin{supertabular}{r@{ }llrc}
+\begin{supertabular}{r@{ }p{35mm}p{8mm}rc}
 <% event.seeded_entries.each_with_index do |entry, index| %>
   <%= render :partial => 'events/entry', :object => entry, :locals => { :index => index } %>
 <% end %>
