@@ -1,0 +1,17 @@
+<% event.lanes.each_with_index do |lane, index| %>
+<% if not lane.blank? %>
+\clearpage
+\subsection*{Event <%= event.pos %>. <%= event.discipline.to_words %>}
+\vbox{
+\section*{Lane <%= index %>.}
+\begin{tabular}{rp{5cm}p{15mm}rc}
+\toprule
+{\footnotesize Heat} & {\footnotesize Name, Age} & {\footnotesize Team} & \hbox to 15mm{}\llap{\footnotesize Seed Time} \\
+\midrule
+<%= render :partial => 'entry', :collection => lane.sort_by { |x| x.heat.pos } %>
+\bottomrule
+\end{tabular}
+}
+<% end %>
+<% end %>
+

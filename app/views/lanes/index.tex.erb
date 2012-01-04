@@ -1,10 +1,12 @@
 <% if @event %>
 <%= render :partial => 'event', :object => @event %>
 <% elsif @competition %>
-\twocolumn
+\large
+\extrarowheight12pt
 \section*{<%= @competition.name %>}
 <%= @competition.location %>, <%= @competition.date %>
-\section*{Heat Sheet}
+\section*{Lane Sheets}
 
 <%= render :partial => 'event', :collection => @competition.events %>
 <% end %>
+
