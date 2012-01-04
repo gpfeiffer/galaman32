@@ -25,6 +25,17 @@ class Discipline < ActiveRecord::Base
     sprintf("%s [%s] %dm (%s)", self.stroke, self.gender, self.distance, self.course)
   end
 
+  def nickname
+    dict = {
+    "Freestyle" => 'Free', 
+    "Backstroke" => 'Back', 
+    "Breaststroke" => 'Breast', 
+    "Butterfly" => 'Fly', 
+    "Ind Medley" => 'IM'
+    }
+    sprintf("%dm %s", distance, dict[stroke])
+  end
+
   def to_words
     sprintf("%s %dm %s (%s)",  { 'f' => "Girls", 'm' => "Boys" }[gender], distance, stroke, course)
   end
