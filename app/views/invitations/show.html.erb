@@ -23,5 +23,9 @@
 <%= render :partial => 'swimmers', :locals => { :club => @club } %>
 <hr/>
 
+<%= render :partial => 'results', :locals => { :club => @club } %>
+<hr/>
+
 <%= link_to 'Back to Club', @club %> |
+<%= link_to 'Results', results_path(:invitation_id => @invitation) %> |
 <%= link_to 'Back to Competition', @competition %>

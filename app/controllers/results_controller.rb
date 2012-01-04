@@ -4,6 +4,9 @@ class ResultsController < ApplicationController
   def index
     if params[:event_id]
       @event = Event.find(params[:event_id])
+    elsif params[:invitation_id]
+      @invitation = Invitation.find(params[:invitation_id])
+      @competition = @invitation.competition
     elsif params[:competition_id]
       @competition = Competition.find(params[:competition_id])
     else

@@ -1,0 +1,27 @@
+\thispagestyle{empty}
+\section*{<%= @competition.name %>}
+<%= @competition.location %>, <%= @competition.date %>
+\section*{Results}
+
+<% Swimmer::GENDERS.each do |sex| %>
+  <% events =  @competition.events.select { |x| x.gender == sex } %>
+
+\begin{tabular}{p{4cm}<%= 'r' * events.count %>}
+    \toprule
+    Swimmer, Age
+    <% events.each do |event| %>
+      & \hbox to 18mm{}\llap{<%= event.discipline.nickname %>}
+    <% end %>
+    \\ \midrule
+<% @invitation.registrations.select { |x| x.gender == sex }.sort_by { |x| x.swimmer.name }.each do |registration| %>
+  <% swimmer = registration.swimmer %>
+      <%= swimmer.first_last %>, <%= registration.age %>
+      <% @competition.events.select { |x| x.gender == sex }.each do |event| %>
+	<% entry = registration.entries.where(:event_id => event).first %>
+        & <%= entry.result if entry %>
+      <% end %>
+      \\
+<% end %>
+\bottomrule
+\end{tabular}
+<% end %>
