@@ -55,7 +55,7 @@ class EntriesController < ApplicationController
 
     respond_to do |format|
       if @entry.save
-        format.html { redirect_to(invitation_path(:id => @entry.invitation.id, :club_id => @entry.swimmer.club_id), :notice => 'Entry was successfully created.') }
+        format.html { redirect_to @entry.invitation, :notice => 'Entry was successfully created.' }
         format.xml  { render :xml => @entry, :status => :created, :location => @entry }
       else
         format.html { render :action => "new" }

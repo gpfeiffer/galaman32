@@ -18,7 +18,7 @@
       <% @competition.events.select { |x| x.gender == sex }.each do |event| %>
         <td align="center">
 	<% entry = registration.entries.where(:event_id => event).first %>
-	<% if entry %>
+	<% if entry and entry.result %>
           <%= link_to entry.result, entry.result %>
         <% end %>
         </td>
