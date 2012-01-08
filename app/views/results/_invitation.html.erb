@@ -1,0 +1,37 @@
+<h2><%= @competition.name %></h2>
+<%= @competition.location %>, <%= @competition.date %>
+<hr/>
+<h3>Results (<%= invitation.club.symbol %>)</h3>
+
+<% Swimmer::GENDERS.each do |sex| %>
+
+<table class="fact-sheet">
+  <tr class="times-major">
+    <th>Swimmer</th>
+    <th>Age</th>
+    <% @competition.events.select { |x| x.gender == sex }.each do |event| %>
+      <th><%= event.discipline.nickname %></th>
+    <% end %>
+  </tr>
+<% @invitation.registrations.select { |x| x.gender == sex }.sort_by { |x| x.swimmer.name }.each do |registration| %>
+  <% swimmer = registration.swimmer %>
+  <tr class="times-major">
+      <td><%= link_to swimmer.name, swimmer %></td>
+      <td align="right"><%= registration.age %></td>
+      <% @competition.events.select { |x| x.gender == sex }.each do |event| %>
+        <td align="center">
+	<% entry = registration.entries.where(:event_id => event).first %>
+	<% if entry and entry.result %>
+          <%= link_to entry.result, entry.result %>
+        <% end %>
+        </td>
+      <% end %>
+  </tr>
+<% end %>
+</table>
+<br />
+<br />
+<% end %>
+
+<hr/>
+<%= link_to 'Back', invitation %>
