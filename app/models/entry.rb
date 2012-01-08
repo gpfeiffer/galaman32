@@ -4,7 +4,7 @@ class Entry < ActiveRecord::Base
   has_one :invitation, :through => :registration
   belongs_to :event
   has_one :competition, :through => :event
-#  has_one :discipline, :through => :event
+  has_one :discipline, :through => :event
   has_one :result, :dependent => :destroy
   belongs_to :heat
 
@@ -13,34 +13,24 @@ class Entry < ActiveRecord::Base
   validates :event_id, :registration_id, :presence => true
 
   def centis
-    if self.time
-      return self.time % 100
-    end
+    time % 100 if time
   end
 
   def secs
-    if self.time
-      return (self.time / 100) % 60
-    end
+    (time / 100) % 60 if time
   end
 
   def mins
-    if self.time
-      return self.time / 6000
-    end
-  end
-
-  def discipline
-    event.discipline
+    time / 6000 if time
   end
 
   def to_s
-    if self.time == 0
+    if time == 0
       'NT'
-    elsif self.mins > 0
-      sprintf('%d:%02d.%02d', self.mins, self.secs, self.centis)
+    elsif mins > 0
+      sprintf('%d:%02d.%02d', mins, secs, centis)
     else
-      sprintf('%d.%02d', self.secs, self.centis)
+      sprintf('%d.%02d', secs, centis)
     end
   end
 end
