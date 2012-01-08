@@ -1,0 +1,6 @@
+\twocolumn
+\section*{<%= @competition.name %>}
+<%= @competition.location %>, <%= @competition.date %>
+\section*{Results.}
+
+<%= render :partial => 'event', :collection => competition.events %>

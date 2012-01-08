@@ -1,0 +1,31 @@
+\subsection*{Event <%= event.pos %>. <%= event.discipline.to_words %>}
+
+<% event.qualification_age_ranges.each do |ages| %>
+<% results = event.listed_results(ages) %>
+<% if not results.empty? %>
+\begin{center}
+<%= ages_to_words(ages) %>
+\tablefirsthead{%
+\toprule
+{\footnotesize Plc} & {\footnotesize Name, Age} & {\footnotesize Team} & \hbox to 15mm{}\llap{\footnotesize Result} \\
+\midrule%
+}
+\tablehead{%
+\toprule
+\multicolumn{4}{l}{\textbf{\ldots\ <%= event.pos %>. <%= event.discipline.to_words %>} <%= raw ages_to_tex(ages) %>}\\
+\midrule%
+{\footnotesize Plc} & {\footnotesize Name, Age} & {\footnotesize Team} & \hbox to 15mm{}\llap{\footnotesize Result} \\
+\midrule%
+}
+\tabletail{%
+&&&&\ldots\\
+}
+\tablelasttail{%
+\bottomrule%
+}
+\begin{supertabular}{r@{ }p{35mm}p{12mm}rc}
+<%= render results %>
+\end{supertabular}
+\end{center}
+<% end %>
+<% end %>
