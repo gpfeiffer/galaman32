@@ -1,4 +1,6 @@
 class CompetitionsController < ApplicationController
+  skip_before_filter :authorize, :only => :index
+
   # GET /competitions
   # GET /competitions.xml
   def index

@@ -20,6 +20,13 @@
     <%= link_to "Clubs", clubs_path %><br/>
     <%= link_to "Competitions", competitions_path %><br/>
     <%= link_to "Qualifications", qualifications_path %><br/>
+    <br/>
+    <% if session[:user_id] %>
+      <%=  link_to 'Logout', logout_path, :method => :delete %>
+	  (logged in as <%= User.find(session[:user_id]).name %>)<br/>
+    <% else %>
+    <%= link_to "Login", login_path %><br/>
+    <% end %>
   </div>
   <div id="main">
     <%= yield %>
