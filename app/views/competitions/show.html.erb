@@ -17,10 +17,11 @@
 
 
 
-<%= link_to 'Heats (text)', heats_path(:competition_id => @competition.id, :format => :text) %>
 <br />
 <hr />
 
 <%= link_to 'Edit', edit_competition_path(@competition) %> |
-<%= link_to 'Results(tex)', results_path(:competition_id => @competition.id, :format => :tex) %> |
+<%= link_to 'Programme (pdf)', competition_path(@competition, :format => :tex) %> |
+<%= link_to 'Heats (pdf)', heats_path(:competition_id => @competition.id, :format => :tex) %> |
+<%= link_to 'Results (pdf)', results_path(:competition_id => @competition.id, :format => :tex) %> |
 <%= link_to 'Back', competitions_path %>
