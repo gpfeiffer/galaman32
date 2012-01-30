@@ -1,12 +1,14 @@
+\onecolumn
+\large
+\extrarowheight12pt
 <% if @event %>
 <%= render :partial => 'event', :object => @event %>
 <% elsif @competition %>
-\large
-\extrarowheight12pt
 \section*{<%= @competition.name %>}
 <%= @competition.location %>, <%= @competition.date %>
 \section*{Lane Sheets}
 
 <%= render :partial => 'event', :collection => @competition.events %>
+\end{document}
 <% end %>
 

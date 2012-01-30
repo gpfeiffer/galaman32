@@ -1,7 +1,6 @@
 <% if @event %>
 <%= render :partial => 'event', :object => @event %>
 <% elsif @competition %>
-\twocolumn
 \section*{<%= @competition.name %>}
 <%= @competition.location %>, <%= @competition.date %>
 \section*{Heat Sheet}

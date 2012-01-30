@@ -21,7 +21,8 @@
 <hr />
 
 <%= link_to 'Edit', edit_competition_path(@competition) %> |
-<%= link_to 'Programme (pdf)', competition_path(@competition, :format => :tex) %> |
-<%= link_to 'Heats (pdf)', heats_path(:competition_id => @competition.id, :format => :tex) %> |
+<%= link_to 'Programme (pdf)', competition_path(@competition, :format => :tex), :target => "_blank" %> |
+<%= link_to 'Heats (pdf)', heats_path(:competition_id => @competition.id, :format => :tex), :target => "_blank" %> |
+<%= link_to 'Lanes (pdf)', lanes_path(:competition_id => @competition.id, :format => :tex), :target => "_blank" %> |
 <%= link_to 'Results (pdf)', results_path(:competition_id => @competition.id, :format => :tex), :target => "_blank" %> |
 <%= link_to 'Back', competitions_path %>
