@@ -55,8 +55,10 @@ class Result < ActiveRecord::Base
   end
 
   def to_s
-    if self.time == 0
-      if self.comment
+    if self.time.blank? 
+      '-'
+    elsif self.time == 0
+      if self.comment.present?
         self.comment
       else
         '0'

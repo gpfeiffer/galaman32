@@ -1,0 +1,26 @@
+<tr class="fact-major">
+    <td><%= entry.heat.pos if entry.heat %></td>
+    <td><%= entry.lane %></td>
+    <td><%= link_to entry.swimmer.name, entry.swimmer %></td>
+    <td align="right"><%= entry.registration.age %></td>
+    <td><%= entry.swimmer.club.symbol %></td>
+    <td align="right"><%= entry %></td>
+    <td align="right">
+      <div id=<%= 'entry_' + entry.id.to_s %>>
+      <% if entry.result and entry.result.time %>
+        <%= link_to entry.result, entry.result %>
+      <% else %>
+        <%# entry.result = Result.new(:time => 0) %>
+        <% entry.result = Result.new %>
+        <%= form_for entry.result, :remote => true do |f| %>
+          <%= f.text_field :mins, :size => 2 %>:
+          <%= f.text_field :secs, :size => 2 %>.
+          <%= f.text_field :centis, :size => 2 %>
+          <%= f.text_field :comment, :size => 6 %>
+          <%= f.submit '!' %>
+        <% end %>
+        <%# entry.save %>
+      <% end %>
+      </div>
+    </td>
+</tr>

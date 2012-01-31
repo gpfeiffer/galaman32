@@ -1,2 +1,37 @@
-<h1>Lanes#index</h1>
-<p>Find me in app/views/lanes/index.html.erb</p>
+<p id="notice"><%= notice %></p>
+
+<h1>Event <%= @event.pos %>: <%= @event.discipline.to_words %></h1>
+
+<h2>Lanes.</h2>
+
+<%# form_for :result, :url => update_event_path(@event) do %>
+<table class="fact-sheet">
+<tr class="fact-major">
+<th>Heat</th>
+<th>Lane</th>
+<th>Name</th>
+<th>Age</th>
+<th>Team</th>
+<th>Seed Time</th>
+<th>Result</th>
+</tr>
+
+<% @lanes.each_with_index do |lane, index| %>
+<% if not lane.blank? %>
+  <tr class="fact-title">
+    <th colspan="7">Lane <%= index %></th>
+  </tr>
+<%= render :partial => 'entry', :collection => lane.sort_by { |x| x.heat.pos } %>
+<% end %>
+<% end %>
+</table>
+<%# submit_tag %>
+<%# end %>
+
+<br />
+<hr />
+
+<%= link_to 'Entries', @event %> |
+<%= link_to 'Heats', heats_path(:event_id => @event) %> |
+<%= link_to 'Results', results_path(:event_id => @event) %> |
+<%= link_to 'Back', @event.competition %>

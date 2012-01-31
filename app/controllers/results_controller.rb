@@ -86,9 +86,11 @@ class ResultsController < ApplicationController
       if @result.update_attributes(params[:result])
         format.html { redirect_to(@result.entry.event, :notice => 'Result was successfully updated.') }
         format.xml  { head :ok }
+        format.js
       else
         format.html { render :action => "edit" }
         format.xml  { render :xml => @result.errors, :status => :unprocessable_entity }
+        format.js
       end
     end
   end
