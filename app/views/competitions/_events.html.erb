@@ -1,18 +1,20 @@
 <h3>Events</h3>
 
-<table>
-  <tr>
+<table class="fact-sheet">
+  <tr class="fact-major">
     <th>No.</th>
     <th>Discipline</th>
     <th>Age</th>
     <th></th>
+    <th></th>
   </tr>
 
 <% @competition.events.each do |event| %>
-  <tr>
-    <td align="right"><%= event.pos %></td>
-    <td><%= link_to event.discipline.name, event %></td>
-    <td><%= event.age_min %> - <%= event.age_max %></td>
+  <tr class="fact-major">
+    <td align="right"><%= ordinal_number(event.pos) %></td>
+    <td><%= link_to event.discipline.to_words, event %></td>
+    <td><%= ages_to_words(event.age_range) %></td>
+    <td align="right"><%= event.entries.count %> entries</td>
     <td><%= link_to image_tag('delete.png', :class => "icon"), event, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>
