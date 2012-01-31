@@ -34,6 +34,11 @@
 <% else %>
   Heats
 <% end %> |
+<% if @event.seeded? %>
+  <%= link_to 'Lanes', lanes_path(:event_id => @event) %> 
+<% else %>
+  Lanes
+<% end %> |
 <%= link_to 'List', list_event_path(@event), :confirm => 'Are you sure?' %> |
 <%= link_to 'Results', results_path(:event_id => @event) %> |
 <%= link_to 'Back', @event.competition %>
