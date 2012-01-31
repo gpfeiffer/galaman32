@@ -18,8 +18,7 @@ class LanesController < ApplicationController
         File.open(tex, 'w') { |io| io.write(code) }
         system("pdflatex -output-directory #{dir} #{tex}")
         pdf = File.join(dir, 'lanes.pdf')
-        render :file => pdf, :layout => false
-#, :content_type => "application/pdf"
+        render :file => pdf, :layout => false, :content_type => "application/pdf"
       }
     end
   end
