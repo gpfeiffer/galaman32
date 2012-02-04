@@ -10,7 +10,6 @@
       <% if entry.result and entry.result.time %>
         <%= link_to entry.result, entry.result %>
       <% else %>
-        <%# entry.result = Result.new(:time => 0) %>
         <% entry.result = Result.new %>
         <%= form_for entry.result, :remote => true do |f| %>
           <%= f.text_field :mins, :size => 2 %>:
@@ -19,7 +18,6 @@
           <%= f.text_field :comment, :size => 6 %>
           <%= f.submit '!' %>
         <% end %>
-        <%# entry.save %>
       <% end %>
       </div>
     </td>
