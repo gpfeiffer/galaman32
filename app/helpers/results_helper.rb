@@ -6,7 +6,7 @@ module ResultsHelper
   def best_result(results)
     best = nil
     results.each do |result|
-      if result.time > 0 and (best == nil or best.time > result.time)
+      if result.time and result.time > 0 and (best == nil or best.time > result.time)
         best = result
       end
     end
@@ -18,7 +18,7 @@ module ResultsHelper
     swimmer = results.first.entry.swimmer
     graph = []
     results.each do |result|
-      if result.time > 0
+      if result.time and result.time > 0
         graph << [(result.entry.event.competition.date - (swimmer.birthday+8.years)).to_i, result.time]
       end
     end

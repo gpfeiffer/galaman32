@@ -102,7 +102,7 @@ class Event < ActiveRecord::Base
 
   def listed_results(ages)
     list = results.select { |x| ages.include? x.entry.registration.age }
-    list.select { |x| x.time > 0 }.sort_by(&:time) + 
+    list.select { |x| x.time and x.time > 0 }.sort_by(&:time) + 
       list.select { |x| x.time == 0 }.sort_by { |x| x.entry.swimmer.birthday }
   end
 
@@ -110,7 +110,7 @@ class Event < ActiveRecord::Base
   def list!
     qualification_age_ranges.each do |ages|
       list = results.select { |x| ages.include? x.entry.registration.age }
-      list = list.select { |x| x.time > 0 }.sort_by(&:time)
+      list = list.select { |x| x.time and x.time > 0 }.sort_by(&:time)
       times = list.map { |x| x.time }
       list.each do |result|
         result.place = times.index(result.time) + 1
