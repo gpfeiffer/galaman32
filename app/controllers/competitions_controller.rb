@@ -16,9 +16,6 @@ class CompetitionsController < ApplicationController
   # GET /competitions/1.xml
   def show
     @competition = Competition.find(params[:id])
-    if params[:club_id]
-      @club = Club.find(params[:club_id])
-    end
 
     respond_to do |format|
       format.html # show.html.erb
@@ -74,27 +71,11 @@ class CompetitionsController < ApplicationController
   # PUT /competitions/1.xml
   def update
     @competition = Competition.find(params[:id])
-    if params[:club_id]
-      club = Club.find(params[:club_id])
-
-      params[:competition] ||= {}
-      params[:competition][:swimmer_ids] ||= []
-      swimmer_ids = @competition.swimmer_ids - club.swimmer_ids 
-      params[:competition][:swimmer_ids].each { |x| swimmer_ids << x.to_i }
-      swimmer_ids.sort!
-      params[:competition][:swimmer_ids] = swimmer_ids
-    end
     
     respond_to do |format|
       if @competition.update_attributes(params[:competition])
         format.html { 
-          if club
-            redirect_to(competition_path(:id => @competition.id, :club_id => club.id),
-                        :notice => 'Registration successfully submitted.') 
-          else
-            redirect_to(@competition,
-                        :notice => 'Competition successfully updated.') 
-          end
+          redirect_to(@competition, :notice => 'Competition successfully updated.') 
         }
         format.xml  { head :ok }
       else
