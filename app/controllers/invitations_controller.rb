@@ -60,6 +60,13 @@ class InvitationsController < ApplicationController
   # PUT /invitations/1.xml
   def update
     @invitation = Invitation.find(params[:id])
+    swimmer_ids = params[:invitation][:swimmer_ids].map { |x| x.to_i }
+    swimmer_ids = @invitation.swimmer_ids - swimmer_ids
+    @invitation.registrations.each do |registration|
+      if swimmer_ids.include? registration.swimmer_id
+        registration.destroy
+      end
+    end
 
     respond_to do |format|
       if @invitation.update_attributes(params[:invitation])
