@@ -1,18 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<h3>
-  <%= @event.competition.name %>
-(<%= @event.competition.date %>,
-<%= @event.competition.location %>)
-</h3>
-
-<h1>
-  Event <%= @event.pos %>.
-  <%= @event.discipline.to_words %>
-</h1>
-<h4>
-  <%= ages_to_words(@event.age_range) %>
-</h4>
+<%= render 'events/navigation' %>
 
 <h2>Lanes.</h2>
 
@@ -43,4 +31,3 @@
 <br />
 <hr />
 
-<%= render 'events/navigation' %>

@@ -1,0 +1,28 @@
+<hr />
+<%= link_to 'Entries', @event %> |
+<% if @event.seeded? %>
+  <%= link_to 'Heats', heats_path(:event_id => @event) %> 
+<% else %>
+  Heats
+<% end %> |
+<% if @event.seeded? %>
+  <%= link_to 'Lanes', lanes_path(:event_id => @event) %> 
+<% else %>
+  Lanes
+<% end %> |
+<%= link_to 'Results', results_path(:event_id => @event) %> 
+<hr />
+
+<h3>
+  <%= link_to @event.competition.name, @event.competition %>
+(<%= @event.competition.date %>,
+<%= @event.competition.location %>)
+</h3>
+
+<h1>
+  Event <%= @event.pos %>.
+  <%= @event.discipline.to_words %>
+</h1>
+<h4>
+  <%= ages_to_words(@event.age_range) %>
+</h4>
