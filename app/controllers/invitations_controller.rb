@@ -20,6 +20,15 @@ class InvitationsController < ApplicationController
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @invitation }
+      format.tex {
+        code = render_to_string
+        dir = File.join(Rails.root, 'tmp', 'latex')
+        tex = File.join(dir, 'invitation.tex')
+        File.open(tex, 'w') { |io| io.write(code) }
+        system("pdflatex -output-directory #{dir} #{tex}")
+        pdf = File.join(dir, 'invitation.pdf')
+        render :file => pdf, :layout => false, :content_type => "application/pdf"
+      }
     end
   end
 

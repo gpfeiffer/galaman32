@@ -1,0 +1,47 @@
+\onecolumn
+\thispagestyle{empty}
+\begin{minipage}[t]{.5\textwidth}
+\section*{<%= @competition.name %>}
+<%= @competition.location %>, <%= @competition.date %>
+
+\section*{Gala Entries}
+
+\subsection*{<%= @club.name %>}
+
+<%= @invitation.registrations.count %> registered swimmers
+for <%= @invitation.registrations.map { |x| x.entries.count }.sum %> events in total.
+\end{minipage}
+%
+\begin{minipage}[t]{.5\textwidth}
+\subsection*{Events.}
+
+\begin{enumerate}
+<% @competition.events.each do |event| %>
+\item <%= event.discipline.to_words %>: <%= ages_to_words(event.age_range) %>
+<% end %>
+\end{enumerate}
+\end{minipage}
+
+\subsection*{Registered Swimmers.}
+<% Swimmer::GENDERS.each do |sex| %>
+\begin{tabular}[t]{p{3cm}c<%= 'c' * @competition.events.select { |x| x.gender == sex }.count %>}
+\toprule
+\textbf{Swimmer} & \textbf{DOB} 
+    <% @competition.events.select { |x| x.gender == sex }.each do |event| %>
+      & <%= ordinal_number (event.pos) %>
+    <% end %> \\
+\midrule
+<% @invitation.registrations.select { |x| x.gender == sex }.sort_by { |x| x.swimmer.name }.each do |registration| %>
+  <% swimmer = registration.swimmer %>
+<%= swimmer.first_last %> &
+<%= swimmer.birthday %>
+      <% @competition.events.select { |x| x.gender == sex }.each do |event| %>
+&	<% entry = registration.entries.where(:event_id => event).first %>
+        <%= entry if entry %>
+      <% end %>
+\\
+<% end %>
+\bottomrule
+\end{tabular}
+\hfill
+<% end %>
