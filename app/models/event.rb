@@ -8,7 +8,7 @@ class Event < ActiveRecord::Base
 
   default_scope :order => :pos
 
-  attr_accessor :gender, :distance, :course, :stroke
+  attr_accessor :gender, :distance, :course, :stroke, :mode
 
   validates :age_min, :age_max, :presence => true, 
     :numericality => { :only_integer => true, :greater_than_or_equal_to => 0 }
@@ -36,6 +36,10 @@ class Event < ActiveRecord::Base
 
   def stroke
     discipline and discipline.stroke
+  end
+
+  def mode
+    discipline and discipline.mode
   end
 
   def age_range

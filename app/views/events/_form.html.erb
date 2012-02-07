@@ -25,6 +25,7 @@
     <%= f.select :distance, Discipline::DISTANCES, :include_blank => true %>
     <%= f.select :course, Discipline::COURSES %>
     <%= f.select :stroke, Discipline::STROKES, :include_blank => true %>
+    <%= f.select :mode, Discipline::MODES %>
   </div>
   <div class="field">
     <%= f.label :age_min, "Age from" %>
