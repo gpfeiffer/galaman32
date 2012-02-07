@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120129201916) do
+ActiveRecord::Schema.define(:version => 20120207100636) do
 
   create_table "clubs", :force => true do |t|
     t.string   "full_name"
@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(:version => 20120129201916) do
     t.string    "stroke"
     t.timestamp "created_at"
     t.timestamp "updated_at"
+    t.string    "type"
   end
 
   create_table "entries", :force => true do |t|

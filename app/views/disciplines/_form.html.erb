@@ -27,6 +27,10 @@
     <%= f.label :stroke %><br />
     <%= f.select :stroke, Discipline::STROKES, :include_blank => true %>
   </div>
+  <div class="field">
+    <%= f.label :type %><br />
+    <%= f.select :type, Discipline::TYPES, :default => "I" %>
+  </div>
   <div class="actions">
     <%= f.submit %>
   </div>
