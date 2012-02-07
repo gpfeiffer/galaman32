@@ -25,6 +25,7 @@ class RelaysController < ApplicationController
   # GET /relays/new.xml
   def new
     @relay = Relay.new
+    @relay[:invitation_id] = params[:invitation_id]
 
     respond_to do |format|
       format.html # new.html.erb
@@ -44,7 +45,7 @@ class RelaysController < ApplicationController
 
     respond_to do |format|
       if @relay.save
-        format.html { redirect_to(@relay, :notice => 'Relay was successfully created.') }
+        format.html { redirect_to(@relay.invitation, :notice => 'Relay was successfully created.') }
         format.xml  { render :xml => @relay, :status => :created, :location => @relay }
       else
         format.html { render :action => "new" }

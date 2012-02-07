@@ -1,0 +1,20 @@
+<h3>Relay Teams (<%= club.symbol %>)</h3>
+
+<table class="fact-sheet">
+  <tr class="times-major">
+    <th>Name</th>
+    <th>F/M</th>
+    <th>Ages</th>
+  </tr>
+  <% @invitation.relays.each do |relay| %>
+  <tr class="times-major">
+      <td><%= link_to relay.name, relay %></td>
+      <td><%= relay.gender %></td>
+      <td align="right"><%= ages_to_words(relay.age_range) %></td>
+  </tr>
+  <% end %>
+</table>
+<br />
+<br />
+
+<%= link_to 'Add Relay Team', new_relay_path(:invitation_id => @invitation) %>

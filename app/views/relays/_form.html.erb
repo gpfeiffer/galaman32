@@ -11,21 +11,23 @@
     </div>
   <% end %>
 
+  <%= f.hidden_field :invitation_id %>
+
+  <h3><%= @relay.invitation.club.name %> @ <%= @relay.invitation.competition.name %></h3>
+
   <div class="field">
     <%= f.label :name %><br />
     <%= f.text_field :name %>
   </div>
   <div class="field">
-    <%= f.label :age_min %><br />
-    <%= f.text_field :age_min %>
+    <%= f.label :age_min, "Age from" %>
+    <%= f.text_field :age_min, :size => 2  %>
+    <%= f.label :age_max, "to" %>
+    <%= f.text_field :age_max, :size => 2  %>
   </div>
   <div class="field">
-    <%= f.label :age_max %><br />
-    <%= f.text_field :age_max %>
-  </div>
-  <div class="field">
-    <%= f.label :invitation_id %><br />
-    <%= f.text_field :invitation_id %>
+    <%= f.label :gender %>
+    <%= f.select :gender, Swimmer::GENDERS, :include_blank => true %>
   </div>
   <div class="actions">
     <%= f.submit %>

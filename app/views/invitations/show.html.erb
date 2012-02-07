@@ -8,7 +8,7 @@
 </p>
 
 <p>
-<%= @invitation.registrations.count %> registered swimmers
+<%= @invitation.registrations.count %> swimmers registered
 for <%= @invitation.registrations.map { |x| x.entries.count }.sum %> events in total.
 </p>
 
@@ -25,6 +25,10 @@ for <%= @invitation.registrations.map { |x| x.entries.count }.sum %> events in t
 <br />
 <hr />
 <%= render :partial => 'swimmers', :locals => { :club => @club } %>
+
+<br />
+<hr />
+<%= render :partial => 'relays', :locals => { :club => @club } %>
 
 <hr/>
 <%= link_to 'Back to Club', @club %> |
