@@ -7,7 +7,7 @@
     <th>Swimmer</th>
     <th>Birthday</th>
     <th>Age</th>
-    <% @competition.events.select { |x| x.gender == sex }.each do |event| %>
+    <% @competition.events.select { |x| not x.relay? and x.gender == sex }.each do |event| %>
       <th><span title="<%= event.pos %>. <%= event.discipline.name %>"><%= sprintf("%02d", event.pos) %></span></th>
     <% end %>
   </tr>
@@ -17,7 +17,7 @@
       <td><%= link_to swimmer.name, swimmer %></td>
       <td><%= swimmer.birthday %></td>
       <td align="right"><%= registration.age %></td>
-      <% @competition.events.select { |x| x.gender == sex }.each do |event| %>
+      <% @competition.events.select { |x| not x.relay? and x.gender == sex }.each do |event| %>
         <td align="center">
 	<% entry = registration.entries.where(:event_id => event).first %>
 	<% if entry %>

@@ -46,6 +46,10 @@ class Event < ActiveRecord::Base
     age_min..age_max
   end
 
+  def relay?
+    discipline and discipline.relay?
+  end
+
   def permits?(registration)
     registration.swimmer.gender == gender and age_range.include? registration.age
   end
