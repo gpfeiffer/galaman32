@@ -14,14 +14,14 @@ class Discipline < ActiveRecord::Base
     "Butterfly", 
     "Ind Medley"
   ]
-  TYPES = [ "I", "R" ] # Individual or Relay
+  MODES = [ "I", "R" ] # Individual or Relay
 
-  validates :gender, :distance, :course, :stroke, :type, :presence => true
+  validates :gender, :distance, :course, :stroke, :mode, :presence => true
   validates :gender, :inclusion => Swimmer::GENDERS
   validates :distance, :inclusion => DISTANCES
   validates :course, :inclusion => COURSES
   validates :stroke, :inclusion => STROKES
-  validates :type, :inclusion => TYPES
+  validates :mode, :inclusion => MODES
 
   def name
     sprintf("%s [%s] %dm (%s)", self.stroke, self.gender, self.distance, self.course)

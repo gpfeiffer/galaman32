@@ -4,7 +4,7 @@
 <% @disciplines.each do |discipline| %>
   <tr>
     <td><%= link_to discipline.name, discipline %></td>
-    <td><%= discipline.type %></td>
+    <td><%= discipline.mode %></td>
     <td><%= link_to 'Edit', edit_discipline_path(discipline) %></td>
     <td><%= link_to 'Destroy', discipline, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
