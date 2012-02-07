@@ -1,16 +1,26 @@
 class Entry < ActiveRecord::Base
   belongs_to :registration
   has_one :swimmer, :through => :registration
-  has_one :invitation, :through => :registration
   belongs_to :event
   has_one :competition, :through => :event
   has_one :discipline, :through => :event
   has_one :result, :dependent => :destroy
   belongs_to :heat
+  belongs_to :relay
 
   attr_accessor :mins, :secs, :centis
 
-  validates :event_id, :registration_id, :presence => true
+  validates :event_id, :presence => true
+
+  # FIXME: validate either registration_id or relay_id is present but not both
+
+  def invitation
+    if relay then
+      relay.invitation
+    else
+      registration.invitation
+    end
+  end
 
   def centis
     time % 100 if time

@@ -27,13 +27,16 @@ class EntriesController < ApplicationController
     @entry = Entry.new
     @entry[:event_id] = params[:event_id]
     @entry[:registration_id] = params[:registration_id]
+    @entry[:relay_id] = params[:relay_id]
 
-    # find personal best a use as default seed time
-    swimmer = Registration.find(params[:registration_id]).swimmer
-    discipline = Event.find(params[:event_id]).discipline
-    best = swimmer.personal_best(discipline)
-    if best
-      @entry[:time] = best.time
+    if params[:registration_id]
+      # find personal best a use as default seed time
+      swimmer = Registration.find(params[:registration_id]).swimmer
+      discipline = Event.find(params[:event_id]).discipline
+      best = swimmer.personal_best(discipline)
+      if best
+        @entry[:time] = best.time
+      end
     end
 
     respond_to do |format|

@@ -5,12 +5,25 @@
     <th>Name</th>
     <th>F/M</th>
     <th>Ages</th>
+    <% @competition.events.select { |x| x.relay? }.each do |event| %>
+      <th><span title="<%= event.pos %>. <%= event.discipline.name %>"><%= sprintf("%02d", event.pos) %></span></th>
+    <% end %>
   </tr>
   <% @invitation.relays.each do |relay| %>
   <tr class="times-major">
       <td><%= link_to relay.name, relay %></td>
       <td><%= relay.gender %></td>
       <td align="right"><%= ages_to_words(relay.age_range) %></td>
+      <% @competition.events.select { |x| x.relay? }.each do |event| %>
+        <td align="center">
+	<% entry = event.entries.where(:relay_id => relay).first %>
+	<% if entry %>
+          <%= link_to entry, entry %>
+	<% elsif event.permits_relay? relay %>
+	  <%= link_to (raw "&square;"), new_entry_path(:event_id => event.id, :relay_id => relay.id) %> 
+        <% end %>
+        </td>
+      <% end %>
   </tr>
   <% end %>
 </table>

@@ -1,8 +1,14 @@
 <tr class="fact-major">
     <td align="right"><%= index + 1 %>.</td>
+<% if entry.relay %>
+    <td><%= link_to entry.relay.name, entry.relay %></td>
+    <td align="right"><%= ages_to_s entry.relay.age_range %></td>
+    <td><%= entry.relay.club.symbol %></td>
+<% else %>
     <td><%= link_to entry.swimmer.first_last, entry.swimmer %></td>
     <td align="right"><%= entry.registration.age %></td>
     <td><%= entry.swimmer.club.symbol %></td>
+<% end %>
     <td align="right"><%= entry %></td>
     <td align="right">
       <% if entry.result %>

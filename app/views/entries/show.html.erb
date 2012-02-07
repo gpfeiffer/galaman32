@@ -6,8 +6,13 @@
 </p>
 
 <p>
+<% if @entry.relay %>
+  <b>Relay Team:</b>
+  <%= @entry.relay.name %>
+<% else %>
   <b>Swimmer:</b>
   <%= @entry.swimmer.name %>
+<% end %>
 </p>
 
 <p>

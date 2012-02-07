@@ -22,4 +22,5 @@
 
 
 <%= link_to 'Edit', edit_relay_path(@relay) %> |
+<%= link_to 'Destroy', @relay, :confirm => 'Are you sure?', :method => :delete %> |
 <%= link_to 'Back', relays_path %>

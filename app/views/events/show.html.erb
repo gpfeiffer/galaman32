@@ -5,6 +5,7 @@
 <h2>Entries.</h2>
 
 <table class="fact-sheet">
+
 <tr class="fact-major">
 <th></th>
 <th>Name</th>
@@ -13,8 +14,14 @@
 <th>Seed Time</th>
 <th>Result</th>
 </tr>
+<% if @event.relay? %>
+<% @event.entries.each_with_index do |entry, index| %>
+  <%= render :partial => 'events/entry', :object => entry, :locals => { :index => index } %>
+<% end %>
+<% else %>
 <% @event.seeded_entries.each_with_index do |entry, index| %>
   <%= render :partial => 'events/entry', :object => entry, :locals => { :index => index } %>
+<% end %>
 <% end %>
 </table>
 
