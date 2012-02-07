@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @relay.name %>
+</p>
+
+<p>
+  <b>Age min:</b>
+  <%= @relay.age_min %>
+</p>
+
+<p>
+  <b>Age max:</b>
+  <%= @relay.age_max %>
+</p>
+
+<p>
+  <b>Invitation:</b>
+  <%= @relay.invitation_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_relay_path(@relay) %> |
+<%= link_to 'Back', relays_path %>

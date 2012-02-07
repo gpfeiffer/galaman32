@@ -1,0 +1,2 @@
+module RelaysHelper
+end

@@ -1,0 +1,29 @@
+<h1>Listing relays</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Age min</th>
+    <th>Age max</th>
+    <th>Invitation</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @relays.each do |relay| %>
+  <tr>
+    <td><%= relay.name %></td>
+    <td><%= relay.age_min %></td>
+    <td><%= relay.age_max %></td>
+    <td><%= relay.invitation_id %></td>
+    <td><%= link_to 'Show', relay %></td>
+    <td><%= link_to 'Edit', edit_relay_path(relay) %></td>
+    <td><%= link_to 'Destroy', relay, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Relay', new_relay_path %>

@@ -1,0 +1,33 @@
+<%= form_for(@relay) do |f| %>
+  <% if @relay.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@relay.errors.count, "error") %> prohibited this relay from being saved:</h2>
+
+      <ul>
+      <% @relay.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :age_min %><br />
+    <%= f.text_field :age_min %>
+  </div>
+  <div class="field">
+    <%= f.label :age_max %><br />
+    <%= f.text_field :age_max %>
+  </div>
+  <div class="field">
+    <%= f.label :invitation_id %><br />
+    <%= f.text_field :invitation_id %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
