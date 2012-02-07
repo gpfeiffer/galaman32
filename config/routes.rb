@@ -1,4 +1,6 @@
 Galaman::Application.routes.draw do
+  resources :relays
+
   get "admin" => 'admin#index'
 
   controller :sessions do
