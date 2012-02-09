@@ -102,7 +102,7 @@ class ResultsController < ApplicationController
     @result.destroy
 
     respond_to do |format|
-      format.html { redirect_to(results_url) }
+      format.html { redirect_to @result.entry.event }
       format.xml  { head :ok }
     end
   end
