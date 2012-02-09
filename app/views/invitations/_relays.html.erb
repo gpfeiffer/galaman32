@@ -2,6 +2,7 @@
 
 <table class="fact-sheet">
   <tr class="times-major">
+    <th></th>
     <th>Name</th>
     <th>F/M</th>
     <th>Ages</th>
@@ -9,8 +10,9 @@
       <th><span title="<%= event.pos %>. <%= event.discipline.name %>"><%= sprintf("%02d", event.pos) %></span></th>
     <% end %>
   </tr>
-  <% @invitation.relays.each do |relay| %>
+  <% @invitation.relays.each_with_index do |relay, index| %>
   <tr class="times-major">
+      <td>R<%= index + 1 %></td>
       <td><%= link_to relay.name, relay %></td>
       <td><%= relay.gender.upcase %></td>
       <td align="right"><%= ages_to_words(relay.age_range) %></td>

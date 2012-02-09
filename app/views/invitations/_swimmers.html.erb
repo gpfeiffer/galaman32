@@ -10,6 +10,9 @@
     <% @competition.events.select { |x| not x.relay? and x.gender == sex }.each do |event| %>
       <th><span title="<%= event.pos %>. <%= event.discipline.name %>"><%= sprintf("%02d", event.pos) %></span></th>
     <% end %>
+    <% @invitation.relays.select { |x| x.gender == sex }.each do |relay| %>
+      <th><span title="<%= relay.name %>">R<%= @invitation.relays.index(relay) + 1 %></span> </th>
+    <% end %>
   </tr>
 <% @invitation.registrations.select { |x| x.gender == sex }.sort_by { |x| x.swimmer.name }.each do |registration| %>
   <% swimmer = registration.swimmer %>
@@ -27,6 +30,16 @@
         <% end %>
         </td>
       <% end %>
+    <% @invitation.relays.select { |x| x.gender == sex }.each do |relay| %>
+        <td align="center">
+	<% seat = registration.seats.where(:relay_id => relay).first %>
+	<% if seat %>
+          <%= link_to 'X', seat %>
+	<% elsif relay.permits? registration %>
+	  <%= link_to '_', new_seat_path(:relay_id => relay.id, :registration_id => registration.id) %> 
+        <% end %>
+        </td>
+    <% end %>
   </tr>
 <% end %>
 </table>

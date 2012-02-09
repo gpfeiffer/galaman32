@@ -25,6 +25,8 @@ class SeatsController < ApplicationController
   # GET /seats/new.xml
   def new
     @seat = Seat.new
+    @seat[:relay_id] = params[:relay_id]
+    @seat[:registration_id] = params[:registration_id]
 
     respond_to do |format|
       format.html # new.html.erb
@@ -44,7 +46,7 @@ class SeatsController < ApplicationController
 
     respond_to do |format|
       if @seat.save
-        format.html { redirect_to(@seat, :notice => 'Seat was successfully created.') }
+        format.html { redirect_to(@seat.relay.invitation, :notice => 'Seat was successfully created.') }
         format.xml  { render :xml => @seat, :status => :created, :location => @seat }
       else
         format.html { render :action => "new" }
@@ -60,7 +62,7 @@ class SeatsController < ApplicationController
 
     respond_to do |format|
       if @seat.update_attributes(params[:seat])
-        format.html { redirect_to(@seat, :notice => 'Seat was successfully updated.') }
+        format.html { redirect_to(@seat.relay.invitation, :notice => 'Seat was successfully updated.') }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }

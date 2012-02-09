@@ -2,12 +2,12 @@
 
 <p>
   <b>Relay:</b>
-  <%= @seat.relay_id %>
+  <%= @seat.relay.name %>
 </p>
 
 <p>
   <b>Swimmer:</b>
-  <%= @seat.swimmer_id %>
+  <%= @seat.registration.swimmer.name %>
 </p>
 
 <p>
@@ -17,4 +17,5 @@
 
 
 <%= link_to 'Edit', edit_seat_path(@seat) %> |
-<%= link_to 'Back', seats_path %>
+<%= link_to 'Destroy', @seat, :confirm => 'Are you sure?', :method => :delete %> |
+<%= link_to 'Back', @seat.registration.invitation %>
