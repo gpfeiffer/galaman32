@@ -5,6 +5,8 @@ class Registration < ActiveRecord::Base
   has_one :competition, :through => :invitation
   has_many :entries, :dependent => :destroy
   has_many :events, :through => :entries
+  has_many :seats, :dependent => :destroy
+  has_many :relays, :through => :seats
 
   validates :invitation_id, :swimmer_id, :presence => true
 
