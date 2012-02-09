@@ -9,7 +9,7 @@
 
 <%= @competition.invitations.count %> clubs have registered
 <%= @competition.registrations.count %> swimmers for
-<%= @competition.events.map { |x| x.entries.count }.sum %> individual entries
+<%= @competition.registrations.map { |x| x.entries.count }.sum %> individual entries
 and 
 <%= @competition.invitations.map { |x| x.relays.count }.sum %> relay entries.
 
