@@ -1,0 +1,27 @@
+<h1>Listing seats</h1>
+
+<table>
+  <tr>
+    <th>Relay</th>
+    <th>Swimmer</th>
+    <th>Pos</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @seats.each do |seat| %>
+  <tr>
+    <td><%= seat.relay_id %></td>
+    <td><%= seat.swimmer_id %></td>
+    <td><%= seat.pos %></td>
+    <td><%= link_to 'Show', seat %></td>
+    <td><%= link_to 'Edit', edit_seat_path(seat) %></td>
+    <td><%= link_to 'Destroy', seat, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Seat', new_seat_path %>
