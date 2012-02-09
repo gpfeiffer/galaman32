@@ -120,11 +120,13 @@ class Event < ActiveRecord::Base
   def listed_results(ages)
     if relay? then
       list = results.select { |x| ages.include? x.entry.relay.age_range }
+      list.select { |x| x.time and x.time > 0 }.sort_by(&:time) + 
+        list.select { |x| x.time == 0 }.sort_by { |x| x.entry.name }
     else
       list = results.select { |x| ages.include? x.entry.registration.age }
+      list.select { |x| x.time and x.time > 0 }.sort_by(&:time) + 
+        list.select { |x| x.time == 0 }.sort_by { |x| x.entry.swimmer.birthday }
     end
-    list.select { |x| x.time and x.time > 0 }.sort_by(&:time) + 
-      list.select { |x| x.time == 0 }.sort_by { |x| x.entry.swimmer.birthday }
   end
 
   # how to put a place on each valid result
