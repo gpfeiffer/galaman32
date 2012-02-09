@@ -9,7 +9,9 @@
 \subsection*{<%= @club.name %>}
 
 <%= @invitation.registrations.count %> registered swimmers
-for <%= @invitation.registrations.map { |x| x.entries.count }.sum %> events in total.
+for \\ 
+<%= @invitation.registrations.map { |x| x.entries.count }.sum %> individual events in total and \\
+<%= @invitation.relays.map { |x| x.entries.count }.sum %> relay events.
 \end{minipage}
 %
 \begin{minipage}[t]{.5\textwidth}
@@ -24,10 +26,10 @@ for <%= @invitation.registrations.map { |x| x.entries.count }.sum %> events in t
 
 \subsection*{Registered Swimmers.}
 <% Swimmer::GENDERS.each do |sex| %>
-\begin{tabular}[t]{p{3cm}c<%= 'c' * @competition.events.select { |x| x.gender == sex }.count %>}
+\begin{tabular}[t]{p{3cm}c<%= 'c' * @competition.events.select { |x| not x.relay? and x.gender == sex }.count %>}
 \toprule
 \textbf{Swimmer} & \textbf{DOB} 
-    <% @competition.events.select { |x| x.gender == sex }.each do |event| %>
+    <% @competition.events.select { |x| not x.relay? and x.gender == sex }.each do |event| %>
       & <%= ordinal_number (event.pos) %>
     <% end %> \\
 \midrule
@@ -35,7 +37,7 @@ for <%= @invitation.registrations.map { |x| x.entries.count }.sum %> events in t
   <% swimmer = registration.swimmer %>
 <%= swimmer.first_last %> &
 <%= swimmer.birthday %>
-      <% @competition.events.select { |x| x.gender == sex }.each do |event| %>
+      <% @competition.events.select { |x| not x.relay? and x.gender == sex }.each do |event| %>
 &	<% entry = registration.entries.where(:event_id => event).first %>
         <%= entry if entry %>
       <% end %>
@@ -43,5 +45,26 @@ for <%= @invitation.registrations.map { |x| x.entries.count }.sum %> events in t
 <% end %>
 \bottomrule
 \end{tabular}
-\hfill
+\hfill\mbox{}
 <% end %>
+
+\subsection*{Relay Teams.}
+\begin{tabular}[t]{p{3cm}cc<%= 'c' * @competition.events.select { |x| x.relay? }.count %>}
+\toprule
+\textbf{Name} & \textbf{F/M} & \textbf{Ages}
+    <% @competition.events.select { |x| x.relay? }.each do |event| %>
+      & <%= ordinal_number (event.pos) -%>
+    <% end %> \\
+\midrule
+  <% @invitation.relays.each do |relay| %>
+<%= relay.name %> &
+<%= relay.gender.upcase %> &
+<%= raw ages_to_tex(relay.age_range) %> 
+      <% @competition.events.select { |x| x.relay? }.each do |event| %>
+	<% entry = event.entries.where(:relay_id => relay).first %>
+	& <%= entry if entry %>
+      <% end %>
+\\
+<% end %>
+\bottomrule
+\end{tabular}

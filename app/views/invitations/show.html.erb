@@ -9,7 +9,9 @@
 
 <p>
 <%= @invitation.registrations.count %> swimmers registered
-for <%= @invitation.registrations.map { |x| x.entries.count }.sum %> events in total.
+for <%= @invitation.registrations.map { |x| x.entries.count }.sum %> individual events in total
+and
+<%= @invitation.relays.map { |x| x.entries.count }.sum %> relay events.
 </p>
 
 <hr/>
