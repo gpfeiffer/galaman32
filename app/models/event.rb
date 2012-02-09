@@ -59,8 +59,13 @@ class Event < ActiveRecord::Base
   end
 
   def seeded_entries
-    entries.select { |x| x.time > 0 }.sort_by(&:time) +
-      entries.select { |x| x.time == 0 }.sort_by { |x| x.swimmer.birthday }.reverse
+    if relay? then
+      entries.select { |x| x.time > 0 }.sort_by(&:time) +
+        entries.select { |x| x.time == 0 }.sort_by { |x| [x.age, x.name] }
+    else
+      entries.select { |x| x.time > 0 }.sort_by(&:time) +
+        entries.select { |x| x.time == 0 }.sort_by { |x| x.swimmer.birthday }.reverse
+    end
   end
 
   def lane_helper(width, index)
@@ -72,7 +77,7 @@ class Event < ActiveRecord::Base
   end
 
   def to_heats(width = 6)
-    list = seeded_entries.in_groups_of(width, false)
+    list = (relay? ? entries : seeded_entries).in_groups_of(width, false)
     if list.count > 1 and (width - list[-1].count) > 1
       list[-2, 2] = (list[-2] + list[-1]).in_groups(2, false)
     end
@@ -113,7 +118,11 @@ class Event < ActiveRecord::Base
   end
 
   def listed_results(ages)
-    list = results.select { |x| ages.include? x.entry.registration.age }
+    if relay? then
+      list = results.select { |x| ages.include? x.entry.relay.age_range }
+    else
+      list = results.select { |x| ages.include? x.entry.registration.age }
+    end
     list.select { |x| x.time and x.time > 0 }.sort_by(&:time) + 
       list.select { |x| x.time == 0 }.sort_by { |x| x.entry.swimmer.birthday }
   end
@@ -121,7 +130,11 @@ class Event < ActiveRecord::Base
   # how to put a place on each valid result
   def list!
     qualification_age_ranges.each do |ages|
-      list = results.select { |x| ages.include? x.entry.registration.age }
+      if relay? then
+        list = results.select { |x| ages.include? x.entry.relay.age_range }
+      else
+        list = results.select { |x| ages.include? x.entry.registration.age }
+      end
       list = list.select { |x| x.time and x.time > 0 }.sort_by(&:time)
       times = list.map { |x| x.time }
       list.each do |result|

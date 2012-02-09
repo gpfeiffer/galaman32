@@ -14,14 +14,8 @@
 <th>Seed Time</th>
 <th>Result</th>
 </tr>
-<% if @event.relay? %>
-<% @event.entries.each_with_index do |entry, index| %>
-  <%= render :partial => 'events/entry', :object => entry, :locals => { :index => index } %>
-<% end %>
-<% else %>
 <% @event.seeded_entries.each_with_index do |entry, index| %>
   <%= render :partial => 'events/entry', :object => entry, :locals => { :index => index } %>
-<% end %>
 <% end %>
 </table>
 
