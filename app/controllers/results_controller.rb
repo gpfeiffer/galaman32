@@ -24,7 +24,7 @@ class ResultsController < ApplicationController
         dir = File.join(Rails.root, 'tmp', 'latex')
         tex = File.join(dir, 'results.tex')
         File.open(tex, 'w') { |io| io.write(code) }
-        system("pdflatex -output-directory #{dir} #{tex}")
+        system("pdflatex -interaction=batchmode -output-directory #{dir} #{tex}")
         pdf = File.join(dir, 'results.pdf')
         render :file => pdf, :layout => false, :content_type => "application/pdf"
       }

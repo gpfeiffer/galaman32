@@ -28,7 +28,7 @@ class CompetitionsController < ApplicationController
         dir = File.join(Rails.root, 'tmp', 'latex')
         tex = File.join(dir, 'competition.tex')
         File.open(tex, 'w') { |io| io.write(code) }
-        system("pdflatex -output-directory #{dir} #{tex}")
+        system("pdflatex -interaction=batchmode -output-directory #{dir} #{tex}")
         pdf = File.join(dir, 'competition.pdf')
         render :file => pdf, :layout => false, :content_type => "application/pdf"
       }
