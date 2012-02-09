@@ -22,6 +22,22 @@ class Entry < ActiveRecord::Base
     end
   end
 
+  def name
+    relay ? relay.name : swimmer.first_last
+  end
+
+  def age
+    relay ? relay.age_max : registration.age
+  end
+
+  def club
+    relay ? relay.club : swimmer.club
+  end
+
+  def subject
+    relay ? relay : swimmer
+  end
+
   def centis
     time % 100 if time
   end
