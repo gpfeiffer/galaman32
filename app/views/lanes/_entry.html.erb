@@ -1,9 +1,9 @@
 <tr class="fact-major">
     <td><%= entry.heat.pos if entry.heat %></td>
     <td><%= entry.lane %></td>
-    <td><%= link_to entry.swimmer.name, entry.swimmer %></td>
-    <td align="right"><%= entry.registration.age %></td>
-    <td><%= entry.swimmer.club.symbol %></td>
+    <td><%= link_to entry.name, entry.subject %></td>
+    <td align="right"><%= entry.age %></td>
+    <td><%= entry.club.symbol %></td>
     <td align="right"><%= entry %></td>
     <td align="right">
       <div id=<%= 'entry_' + entry.id.to_s %>>

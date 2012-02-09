@@ -1,8 +1,8 @@
 <tr class="fact-major">
   <td align="right"><%= ordinal_number(result.place) %></td>
-  <td><%= link_to result.swimmer.name, result.swimmer %></td>
-  <td align="right"><%= result.entry.registration.age %></td>
-  <td><%= result.swimmer.club.symbol %></td>
+  <td><%= link_to result.entry.name, result.entry.subject %></td>
+  <td align="right"><%= result.entry.age %></td>
+  <td><%= result.entry.club.symbol %></td>
   <td align="right"><%= link_to result, result %></td>  
   <td align="right">
     <% qu = result.qualify %>
