@@ -10,6 +10,6 @@ class Relay < ActiveRecord::Base
   end
 
   def permits?(registration)
-    registration.swimmer.gender == gender and age_max >= registration.age
+    seats.count < 4 and registration.swimmer.gender == gender and age_max >= registration.age
   end
 end
