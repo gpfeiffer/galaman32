@@ -78,7 +78,7 @@ class SeatsController < ApplicationController
     @seat.destroy
 
     respond_to do |format|
-      format.html { redirect_to(seats_url) }
+      format.html { redirect_to @seat.relay.invitation, :notice => 'Seat was successfully destroyed.' }
       format.xml  { head :ok }
     end
   end

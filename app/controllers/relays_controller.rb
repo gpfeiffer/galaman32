@@ -61,7 +61,7 @@ class RelaysController < ApplicationController
 
     respond_to do |format|
       if @relay.update_attributes(params[:relay])
-        format.html { redirect_to(@relay, :notice => 'Relay was successfully updated.') }
+        format.html { redirect_to(@relay.invitation, :notice => 'Relay was successfully updated.') }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }

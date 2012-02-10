@@ -1,6 +1,6 @@
 <% qu = result.qualify %>
 <%= ordinal_number(result.place) %> &
-<%= result.swimmer.first_last %>, <%= result.entry.registration.age %> & 
-<%= result.swimmer.club.symbol %> &
+<%= result.entry.name %>, <%= result.entry.age %> & 
+<%= result.entry.club.symbol %> &
 <%= result %> &
 <%= qu and qu[:qualification].name %> \\
