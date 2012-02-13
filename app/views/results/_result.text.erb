@@ -1,6 +1,6 @@
 <% qu = result.qualify %>
 <%= sprintf("%4s %-25s %-6s %9s",
   "#{ordinal_number(result.place)}",
-  "#{result.swimmer.name} [#{result.entry.registration.age}]", 
-  result.swimmer.club.symbol, 
+  "#{result.entry.name}, #{result.entry.age}", 
+  result.entry.club.symbol, 
   result.to_s) %> <%= qu and qu[:qualification].name %>
