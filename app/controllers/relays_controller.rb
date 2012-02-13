@@ -77,7 +77,7 @@ class RelaysController < ApplicationController
     @relay.destroy
 
     respond_to do |format|
-      format.html { redirect_to(relays_url) }
+      format.html { redirect_to @relay.invitation, :notice => 'Relay was successfully destroyed.' }
       format.xml  { head :ok }
     end
   end
