@@ -4,12 +4,13 @@
 <h3>Results (<%= invitation.club.symbol %>)</h3>
 
 <% Swimmer::GENDERS.each do |sex| %>
+  <% events = @competition.individual_events.select { |x| x.gender == sex } %>
 
 <table class="fact-sheet">
   <tr class="times-major">
     <th>Swimmer</th>
     <th>Age</th>
-    <% @competition.events.select { |x| x.gender == sex }.each do |event| %>
+    <% events.each do |event| %>
       <th><%= event.discipline.nickname %></th>
     <% end %>
   </tr>
@@ -18,7 +19,7 @@
   <tr class="times-major">
       <td><%= link_to swimmer.name, swimmer %></td>
       <td align="right"><%= registration.age %></td>
-      <% @competition.events.select { |x| x.gender == sex }.each do |event| %>
+      <% events.each do |event| %>
         <td align="center">
 	<% entry = registration.entries.where(:event_id => event).first %>
 	<% if entry and entry.result %>

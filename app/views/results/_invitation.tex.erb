@@ -4,7 +4,7 @@
 \section*{Results}
 
 <% Swimmer::GENDERS.each do |sex| %>
-  <% events =  @competition.events.select { |x| x.gender == sex } %>
+  <% events = @competition.individual_events.select { |x| x.gender == sex } %>
 
 \begin{tabular}{p{4cm}<%= 'r' * events.count %>}
     \toprule
@@ -16,9 +16,16 @@
 <% @invitation.registrations.select { |x| x.gender == sex }.sort_by { |x| x.swimmer.name }.each do |registration| %>
   <% swimmer = registration.swimmer %>
       <%= swimmer.first_last %>, <%= registration.age %>
-      <% @competition.events.select { |x| x.gender == sex }.each do |event| %>
+      <% events.each do |event| %>
 	<% entry = registration.entries.where(:event_id => event).first %>
-        & <%= entry.result if entry %>
+        & 
+<% if entry %>
+  <%= entry.result if entry %>
+  <% qu = entry.result.qualify -%>\rlap{
+        <%= '*' if entry.time == 0 or entry.time > entry.result.time %>
+        <%= qu and qu[:qualification].name %>}
+
+<% end %>
       <% end %>
       \\
 <% end %>
