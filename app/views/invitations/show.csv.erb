@@ -1,14 +1,15 @@
 <% Swimmer::GENDERS.each do |sex| %>
+<% events = @competition.individual_events.select { |x| x.gender == sex } %>
 <%= "Swimmer, DOB" -%>
-<% @competition.events.select { |x| x.gender == sex }.each do |event| %>
+<% events.each do |event| %>
 , <%= ordinal_number (event.pos) -%>
 <% end %>
 
 <% @invitation.registrations.select { |x| x.gender == sex }.sort_by { |x| x.swimmer.name }.each do |registration| %>
 <% swimmer = registration.swimmer %>
 <%= swimmer.first_last %>, <%= swimmer.birthday -%>
-<% @competition.events.select { |x| x.gender == sex }.each do |event| %>
-<% entry = registration.entries.where(:event_id => event).first %>
+<% events.each do |event| %>
+<% entry = Entry.find_by_event_id_and_registration_id(event, registration) %>
 , <%= entry if entry -%>
 <% end %>
 

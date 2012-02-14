@@ -17,7 +17,7 @@
   <% swimmer = registration.swimmer %>
       <%= swimmer.first_last %>, <%= registration.age %>
       <% events.each do |event| %>
-	<% entry = registration.entries.where(:event_id => event).first %>
+	<% entry = Entry.find_by_event_id_and_registration_id(event, registration) %>
         & 
 <% if entry %>
   <%= entry.result if entry %>

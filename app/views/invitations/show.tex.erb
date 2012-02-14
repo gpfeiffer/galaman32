@@ -26,10 +26,11 @@ for \\
 
 \subsection*{Registered Swimmers.}
 <% Swimmer::GENDERS.each do |sex| %>
-\begin{tabular}[t]{p{3cm}c<%= 'c' * @competition.events.select { |x| not x.relay? and x.gender == sex }.count %>}
+  <% events = @competition.individual_events.select { |x| x.gender == sex } %>
+\begin{tabular}[t]{p{3cm}c<%= 'c' * events.count %>}
 \toprule
 \textbf{Swimmer} & \textbf{DOB} 
-    <% @competition.events.select { |x| not x.relay? and x.gender == sex }.each do |event| %>
+    <% events.each do |event| %>
       & <%= ordinal_number (event.pos) %>
     <% end %> \\
 \midrule
@@ -37,8 +38,8 @@ for \\
   <% swimmer = registration.swimmer %>
 <%= swimmer.first_last %> &
 <%= swimmer.birthday %>
-      <% @competition.events.select { |x| not x.relay? and x.gender == sex }.each do |event| %>
-&	<% entry = registration.entries.where(:event_id => event).first %>
+      <% events.each do |event| %>
+&	<% entry = Entry.find_by_event_id_and_registration_id(event, registration) %>
         <%= entry if entry %>
       <% end %>
 \\
@@ -49,10 +50,11 @@ for \\
 <% end %>
 
 \subsection*{Relay Teams.}
-\begin{tabular}[t]{p{3cm}cc<%= 'c' * @competition.events.select { |x| x.relay? }.count %>}
+<% events = @competition.relay_events %>
+\begin{tabular}[t]{p{3cm}cc<%= 'c' * events.count %>}
 \toprule
 \textbf{Name} & \textbf{F/M} & \textbf{Ages}
-    <% @competition.events.select { |x| x.relay? }.each do |event| %>
+    <% events.each do |event| %>
       & <%= ordinal_number (event.pos) -%>
     <% end %> \\
 \midrule
@@ -60,8 +62,8 @@ for \\
 <%= relay.name %> &
 <%= relay.gender.upcase %> &
 <%= raw ages_to_tex(relay.age_range) %> 
-      <% @competition.events.select { |x| x.relay? }.each do |event| %>
-	<% entry = event.entries.where(:relay_id => relay).first %>
+      <% events.each do |event| %>
+	<% entry = Entry.find_by_event_id_and_relay_id(event, relay) %>
 	& <%= entry if entry %>
       <% end %>
 \\

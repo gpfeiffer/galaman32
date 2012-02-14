@@ -1,3 +1,4 @@
+<% events = @competition.relay_events %>
 <h3>Relay Teams (<%= club.symbol %>)</h3>
 
 <table class="fact-sheet">
@@ -6,7 +7,7 @@
     <th>Name</th>
     <th>F/M</th>
     <th>Ages</th>
-    <% @competition.events.select { |x| x.relay? }.each do |event| %>
+    <% events.each do |event| %>
       <th><span title="<%= event.pos %>. <%= event.discipline.name %>"><%= sprintf("%02d", event.pos) %></span></th>
     <% end %>
   </tr>
@@ -16,9 +17,9 @@
       <td><%= link_to relay.name, relay %></td>
       <td><%= relay.gender.upcase %></td>
       <td align="right"><%= ages_to_words(relay.age_range) %></td>
-      <% @competition.events.select { |x| x.relay? }.each do |event| %>
+      <% events.each do |event| %>
         <td align="center">
-	<% entry = event.entries.where(:relay_id => relay).first %>
+	<% entry = Entry.find_by_event_id_and_relay_id(event, relay) %>
 	<% if entry %>
           <%= link_to entry, entry %>
 	<% elsif event.permits_relay? relay %>

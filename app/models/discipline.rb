@@ -23,12 +23,12 @@ class Discipline < ActiveRecord::Base
   validates :stroke, :inclusion => STROKES
   validates :mode, :inclusion => MODES
 
-  def relay?
+  def is_relay?
     mode == "R"
   end
 
   def name
-    sprintf("%s [%s] %s%dm (%s)", stroke, gender, relay? ? "4x" : "", distance, course)
+    sprintf("%s [%s] %s%dm (%s)", stroke, gender, is_relay? ? "4x" : "", distance, course)
   end
 
   def nickname
@@ -43,7 +43,7 @@ class Discipline < ActiveRecord::Base
   end
 
   def to_words
-    if relay? then
+    if is_relay? then
       sprintf("%s 4x%dm %s Relay (%s)",  { 'f' => "Girls", 'm' => "Boys" }[gender], distance, stroke, course)
     else
       sprintf("%s %dm %s (%s)",  { 'f' => "Girls", 'm' => "Boys" }[gender], distance, stroke, course)

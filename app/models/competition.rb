@@ -11,10 +11,10 @@ class Competition < ActiveRecord::Base
   validates :name, :date, :presence => true
 
   def individual_events
-    events.select { |x| not x.relay? }
+    events.select { |x| not x.is_relay? }
   end
 
   def relay_events
-    events.select { |x| x.relay? }
+    events.select { |x| x.is_relay? }
   end
 end

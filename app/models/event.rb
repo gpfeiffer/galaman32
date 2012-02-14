@@ -46,8 +46,8 @@ class Event < ActiveRecord::Base
     age_min..age_max
   end
 
-  def relay?
-    discipline and discipline.relay?
+  def is_relay?
+    discipline and discipline.is_relay?
   end
 
   def permits_relay?(relay)
@@ -59,7 +59,7 @@ class Event < ActiveRecord::Base
   end
 
   def seeded_entries
-    if relay? then
+    if is_relay? then
       entries.select { |x| x.time > 0 }.sort_by(&:time) +
         entries.select { |x| x.time == 0 }.sort_by { |x| [x.age, x.name] }
     else
@@ -77,7 +77,7 @@ class Event < ActiveRecord::Base
   end
 
   def to_heats(width = 6)
-    list = (relay? ? entries : seeded_entries).in_groups_of(width, false)
+    list = (is_relay? ? entries : seeded_entries).in_groups_of(width, false)
     if list.count > 1 and (width - list[-1].count) > 1
       list[-2, 2] = (list[-2] + list[-1]).in_groups(2, false)
     end
@@ -118,7 +118,7 @@ class Event < ActiveRecord::Base
   end
 
   def listed_results(ages)
-    if relay? then
+    if is_relay? then
       list = results.select { |x| ages.include? x.entry.relay.age_range }
       list.select { |x| x.time and x.time > 0 }.sort_by(&:time) + 
         list.select { |x| x.time == 0 }.sort_by { |x| x.entry.name }
@@ -132,7 +132,7 @@ class Event < ActiveRecord::Base
   # how to put a place on each valid result
   def list!
     qualification_age_ranges.each do |ages|
-      if relay? then
+      if is_relay? then
         list = results.select { |x| ages.include? x.entry.relay.age_range }
       else
         list = results.select { |x| ages.include? x.entry.registration.age }
