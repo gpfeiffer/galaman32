@@ -10,8 +10,8 @@ class Qualification < ActiveRecord::Base
     qualification_times.select { |x| x.gender == gender }.each.map { |x| x.age_range }.sort_by(&:first).uniq
   end
 
-  def filter_disciplines(gender, course)
-    disciplines.uniq.find_all { |x| x.gender == gender and x.course == course }
+  def filter_disciplines(gender, course) 
+    disciplines.find_all_by_gender_and_course(gender, course).uniq.sort_by { |x| [Discipline::STROKES.index(x.stroke), x.distance] }
   end
 
   def filter_time(discipline, ages)
