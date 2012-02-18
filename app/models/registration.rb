@@ -1,7 +1,7 @@
 class Registration < ActiveRecord::Base
   belongs_to :swimmer
-  has_one :club, :through => :swimmer
   belongs_to :invitation
+  belongs_to :club
   has_one :competition, :through => :invitation
   has_many :entries, :dependent => :destroy
   has_many :events, :through => :entries
