@@ -3,8 +3,9 @@
 <head>
   <title>Galaman</title>
   <%= favicon_link_tag %>
-  <%= stylesheet_link_tag "scaffold" %>
-  <%= stylesheet_link_tag "galaman" %>
+  <%= stylesheet_link_tag "scaffold", :media => "all" %>
+  <%= stylesheet_link_tag "galaman", :media => "all" %>
+  <%= stylesheet_link_tag "print", :media => "print" %>
   <%= javascript_include_tag :defaults %>
   <%= csrf_meta_tag %>
 </head>
