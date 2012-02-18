@@ -8,7 +8,7 @@ class QualificationTime < ActiveRecord::Base
   validates :qualification_id, :discipline_id, :time, :presence => true
 
   attr_accessor :mins, :secs, :centis
-  attr_accessor :gender, :distance, :course, :stroke
+  attr_accessor :gender, :distance, :course, :stroke, :mode
 
   validate :age_max_must_not_be_less_than_age_min
 
@@ -37,27 +37,23 @@ class QualificationTime < ActiveRecord::Base
   end
 
   def gender
-    if self.discipline
-      return self.discipline.gender
-    end
+    discipline and discipline.gender
   end
 
   def distance
-    if self.discipline
-      return self.discipline.distance
-    end
+    discipline and discipline.distance
   end
 
   def course
-    if self.discipline
-      return self.discipline.course
-    end
+    discipline and discipline.course
   end
 
   def stroke
-    if self.discipline
-      return self.discipline.stroke
-    end
+    discipline and discipline.stroke
+  end
+
+  def mode
+    discipline and discipline.mode
   end
 
   def age_range
