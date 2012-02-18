@@ -10,7 +10,7 @@ class Registration < ActiveRecord::Base
 
   validates :invitation_id, :swimmer_id, :presence => true
 
-  before_save :compute_and_assign_age_on_the_day
+  before_save :assign_age_and_club
 
   def gender
     swimmer.gender
@@ -18,7 +18,8 @@ class Registration < ActiveRecord::Base
 
   private
 
-  def compute_and_assign_age_on_the_day
-    self.age = swimmer.age(invitation.competition.date)
+  def assign_age_and_club
+    age = swimmer.age(invitation.competition.date)
+    club = swimmer.club
   end
 end

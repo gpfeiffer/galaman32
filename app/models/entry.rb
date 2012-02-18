@@ -31,7 +31,7 @@ class Entry < ActiveRecord::Base
   end
 
   def club
-    relay ? relay.club : swimmer.club
+    relay ? relay.club : registration.club
   end
 
   def subject
