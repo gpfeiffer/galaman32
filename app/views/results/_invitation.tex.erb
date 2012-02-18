@@ -1,7 +1,7 @@
 \thispagestyle{empty}
 \section*{<%= @competition.name %>}
 <%= @competition.location %>, <%= @competition.date %>
-\section*{Results}
+\section*{Results (<%= @invitation.club.symbol %>)}
 
 <% Swimmer::GENDERS.each do |sex| %>
   <% events = @competition.individual_events.select { |x| x.gender == sex } %>
@@ -20,11 +20,10 @@
 	<% entry = Entry.find_by_event_id_and_registration_id(event, registration) %>
         & 
 <% if entry %>
-  <%= entry.result if entry %>
-  <% qu = entry.result.qualify -%>\rlap{
-        <%= '*' if entry.time == 0 or entry.time > entry.result.time %>
-        <%= qu and qu[:qualification].name %>}
-
+<%= entry.result -%>
+<% qu = entry.result.qualify %>\rlap{%
+ <%= '*' if entry.result.time > 0 and (entry.time == 0 or entry.time > entry.result.time) -%>
+ <%= qu and qu[:qualification].name -%>}
 <% end %>
       <% end %>
       \\

@@ -1,0 +1,30 @@
+\small
+\thispagestyle{empty}
+\subsection*{<%= @swimmer.club.full_name %>}
+\section*{<%= @swimmer.name %>}
+<%= @swimmer.birthday %> (<%= @swimmer.gender.upcase %>). Swim Ireland ID: <%= @swimmer.registration %>.
+
+\section*{PB Times}
+
+\begin{tabular}{|r|<%= 'p{1.5cm}|'*Discipline::STROKES.count %>}
+\toprule
+<% Discipline::STROKES.each do |stroke| %>
+&  \textbf{<%= truncate(stroke, :length => 9) %>}
+<% end %>
+<% @rows.each do |row| %>
+\\\midrule
+    \textbf{<%= row[:distance] %>m <%= row[:course] %>}
+    <% Discipline::STROKES.each do |stroke| %>
+      <% discipline = @results.keys.select { |discipline| discipline.stroke == stroke and discipline.distance == row[:distance] and discipline.course == row[:course] }.first %>
+&
+        <% if discipline %>
+          <% @results[discipline] = @results[discipline].sort_by { |x| x.entry.event.competition.date } %>
+          <% best = best_result(@results[discipline]) %>
+	  <% if best %>
+            {\hfill <%= best %>\newline\mbox{}\hfill{\footnotesize <%= best.entry.event.competition.date.strftime("%d/%m/%y") %>}}
+          <% end %>
+        <% end %>
+    <% end %>
+<% end %>
+\\\bottomrule
+\end{tabular}
