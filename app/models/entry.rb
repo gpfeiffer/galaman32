@@ -23,7 +23,7 @@ class Entry < ActiveRecord::Base
   end
 
   def name
-    relay ? relay.name : swimmer.first_last
+    relay ? relay.name : registration.swimmer.first_last
   end
 
   def age
@@ -35,7 +35,7 @@ class Entry < ActiveRecord::Base
   end
 
   def subject
-    relay ? relay : swimmer
+    relay ? relay : registration.swimmer
   end
 
   def centis
