@@ -1,15 +1,19 @@
 <p id="notice"><%= notice %></p>
 
+<h2><%= @registration.swimmer.name %></h2>
+
+<h3><%= @registration.competition.name %> (<%= @registration.competition.date %>)</h3>
+
+
 <p>
-  <b>Invitation:</b>
-  <%= @registration.invitation_id %>
+  <b>Age:</b>
+  <%= @registration.age %>
 </p>
 
 <p>
-  <b>Swimmer:</b>
-  <%= @registration.swimmer_id %>
+  <b>Club:</b>
+  <%= @registration.club.name %>
 </p>
-
 
 <%= link_to 'Edit', edit_registration_path(@registration) %> |
-<%= link_to 'Back', registrations_path %>
+<%= link_to 'Back', @registration.invitation %>

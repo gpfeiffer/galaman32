@@ -11,17 +11,20 @@
     </div>
   <% end %>
 
+<h2><%= @registration.swimmer.name %></h2>
+
+<h3><%= @registration.competition.name %> (<%= @registration.competition.date %>)</h3>
+
+  <%= f.hidden_field :invitation_id %>
+  <%= f.hidden_field :swimmer_id %>
+
   <div class="field">
-    <%= f.label :invitation_id %><br />
-    <%= f.text_field :invitation_id %>
+    <%= f.label :age %><br />
+    <%= f.text_field :age %>
   </div>
   <div class="field">
-    <%= f.label :swimmer_id %><br />
-    <%= f.text_field :swimmer_id %>
-  </div>
-  <div class="field">
-    <%= f.label :club_id %><br />
-    <%= f.text_field :club_id %>
+    <%= f.label :club_id, "Club" %><br />
+    <%= f.select :club_id, Club.all.map{ |x| [x.name, x.id] } %>
   </div>
   <div class="actions">
     <%= f.submit %>

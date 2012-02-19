@@ -10,7 +10,7 @@ class Registration < ActiveRecord::Base
 
   validates :invitation_id, :swimmer_id, :presence => true
 
-  before_save :assign_age_and_club
+  before_create :assign_age_and_club
 
   def gender
     swimmer.gender

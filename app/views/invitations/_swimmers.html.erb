@@ -19,7 +19,7 @@
     <% @invitation.registrations.select { |x| x.gender == sex }.sort_by { |x| x.swimmer.name }.each do |registration| %>
       <% swimmer = registration.swimmer %>
       <tr class="times-major">
-        <td><%= link_to swimmer.name, swimmer %></td>
+        <td><%= link_to swimmer.name, registration %></td>
         <td><%= swimmer.birthday %></td>
         <td align="right"><%= registration.age %></td>
         <% events.each do |event| %>
