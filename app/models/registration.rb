@@ -19,7 +19,7 @@ class Registration < ActiveRecord::Base
   private
 
   def assign_age_and_club
-    age = swimmer.age(invitation.competition.date)
-    club = swimmer.club
+    self.age = swimmer.age(invitation.competition.date)
+    self.club = swimmer.club
   end
 end
