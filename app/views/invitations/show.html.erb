@@ -28,9 +28,11 @@ and
 <hr />
 <%= render :partial => 'swimmers', :locals => { :club => @club } %>
 
+<% if @competition.relay_events.any? %>
 <br />
 <hr />
 <%= render :partial => 'relays', :locals => { :club => @club } %>
+<% end %>
 
 <hr/>
 <%= link_to 'Back to Club', @club %> |
