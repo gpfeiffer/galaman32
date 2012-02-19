@@ -15,14 +15,11 @@
   <%= f.hidden_field :registration_id %>
   <%= f.hidden_field :relay_id %>
  
-  <h2><%= @entry.event.competition.name %></h2>
-  <h3><%= @entry.event.discipline.name %></h3>
+  <h2><%= @entry.competition.name %></h2>
+  <h3><%= @entry.discipline.name %></h3>
 
-<% if @entry.relay %>
-  <h1><%= @entry.relay.name %> (<%= @entry.relay.club.symbol %>)</h1>
-<% else %>
-  <h1><%= @entry.registration.swimmer.name %> (<%= @entry.registration.swimmer.club.symbol %>)</h1>
-<% end %>
+  <h1><%= @entry.name %> (<%= @entry.club.symbol %>)</h1>
+
   <div class="field">
     <%= f.label :time, "Seed Time" %>
     <%= f.text_field :mins, :size => 2 %>:<%= f.text_field :secs, :size => 2 %>.<%= f.text_field :centis, :size => 2 %>
