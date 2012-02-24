@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  swimmer_id: 1
+  qualification_id: 1
+  date: 2012-02-24
+
+two:
+  swimmer_id: 1
+  qualification_id: 1
+  date: 2012-02-24

@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Swimmer:</b>
+  <%= @aim.swimmer_id %>
+</p>
+
+<p>
+  <b>Qualification:</b>
+  <%= @aim.qualification_id %>
+</p>
+
+<p>
+  <b>Date:</b>
+  <%= @aim.date %>
+</p>
+
+
+<%= link_to 'Edit', edit_aim_path(@aim) %> |
+<%= link_to 'Back', aims_path %>

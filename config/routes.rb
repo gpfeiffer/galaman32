@@ -1,4 +1,6 @@
 Galaman::Application.routes.draw do
+  resources :aims
+
   resources :seats
 
   resources :relays

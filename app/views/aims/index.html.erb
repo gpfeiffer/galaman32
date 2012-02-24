@@ -1,0 +1,27 @@
+<h1>Listing aims</h1>
+
+<table>
+  <tr>
+    <th>Swimmer</th>
+    <th>Qualification</th>
+    <th>Date</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @aims.each do |aim| %>
+  <tr>
+    <td><%= aim.swimmer_id %></td>
+    <td><%= aim.qualification_id %></td>
+    <td><%= aim.date %></td>
+    <td><%= link_to 'Show', aim %></td>
+    <td><%= link_to 'Edit', edit_aim_path(aim) %></td>
+    <td><%= link_to 'Destroy', aim, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Aim', new_aim_path %>

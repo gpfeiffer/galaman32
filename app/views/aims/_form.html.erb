@@ -1,0 +1,29 @@
+<%= form_for(@aim) do |f| %>
+  <% if @aim.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@aim.errors.count, "error") %> prohibited this aim from being saved:</h2>
+
+      <ul>
+      <% @aim.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :swimmer_id %><br />
+    <%= f.text_field :swimmer_id %>
+  </div>
+  <div class="field">
+    <%= f.label :qualification_id %><br />
+    <%= f.text_field :qualification_id %>
+  </div>
+  <div class="field">
+    <%= f.label :date %><br />
+    <%= f.date_select :date %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
