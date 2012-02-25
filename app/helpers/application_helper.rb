@@ -1,5 +1,8 @@
 module ApplicationHelper
   def time_to_msc(time)
+    if time < 0
+      return "-" + time_to_msc(-time)
+    end
     centis = time % 100
     time /= 100
     secs = time % 60
