@@ -33,6 +33,8 @@ class EventsController < ApplicationController
   def new
     @event = Event.new
     @event[:competition_id] = params[:competition_id]
+    @event[:age_min] =  0
+    @event[:age_max] =  99
 
     respond_to do |format|
       format.html # new.html.erb
