@@ -25,6 +25,8 @@ class AimsController < ApplicationController
   # GET /aims/new.xml
   def new
     @aim = Aim.new
+    @aim[:swimmer_id] = params[:swimmer_id]
+
 
     respond_to do |format|
       format.html # new.html.erb
@@ -44,7 +46,7 @@ class AimsController < ApplicationController
 
     respond_to do |format|
       if @aim.save
-        format.html { redirect_to(@aim, :notice => 'Aim was successfully created.') }
+        format.html { redirect_to(@aim.swimmer, :notice => 'Aim was successfully created.') }
         format.xml  { render :xml => @aim, :status => :created, :location => @aim }
       else
         format.html { render :action => "new" }
@@ -60,7 +62,7 @@ class AimsController < ApplicationController
 
     respond_to do |format|
       if @aim.update_attributes(params[:aim])
-        format.html { redirect_to(@aim, :notice => 'Aim was successfully updated.') }
+        format.html { redirect_to(@aim.swimmer, :notice => 'Aim was successfully updated.') }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }

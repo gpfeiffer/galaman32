@@ -11,13 +11,13 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :swimmer_id %><br />
-    <%= f.text_field :swimmer_id %>
-  </div>
+  <h3><%= @aim.swimmer.first_last %></h3>
+
+  <%= f.hidden_field :swimmer_id %>
+
   <div class="field">
     <%= f.label :qualification_id %><br />
-    <%= f.text_field :qualification_id %>
+    <%= f.select :qualification_id, Qualification.all.map{ |x| [x.name, x.id] } %>
   </div>
   <div class="field">
     <%= f.label :date %><br />
