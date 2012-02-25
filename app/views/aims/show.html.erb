@@ -1,13 +1,11 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <b>Swimmer:</b>
-  <%= @aim.swimmer_id %>
-</p>
+
+<h3><%= @aim.swimmer.first_last %>'s Aim</h3>
 
 <p>
   <b>Qualification:</b>
-  <%= @aim.qualification_id %>
+  <%= @aim.qualification.name %>
 </p>
 
 <p>
@@ -17,4 +15,5 @@
 
 
 <%= link_to 'Edit', edit_aim_path(@aim) %> |
-<%= link_to 'Back', aims_path %>
+<%= link_to 'Destroy', @aim, :confirm => 'Are you sure?', :method => :delete %> |
+<%= link_to 'Back', @aim.swimmer %>

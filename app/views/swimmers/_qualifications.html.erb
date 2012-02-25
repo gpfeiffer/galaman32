@@ -1,9 +1,8 @@
 <h2>Aims.</h2>
 
 <% @swimmer.aims.each do |aim| %>
-    <%= link_to aim.qualification.name, aim.qualification %>
+    <%= link_to aim.qualification.name, aim %>
     <%= aim.date %>
-    <%= link_to image_tag('delete.png', :class => "icon"), aim, :confirm => 'Are you sure?', :method => :delete %>
 
     <% table = aim.qualification.to_table(@swimmer.gender, @swimmer.age(aim.date)) %>
     <% if table %>
