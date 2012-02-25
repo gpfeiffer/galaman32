@@ -1,0 +1,39 @@
+<h2>Aims.</h2>
+
+<% @swimmer.aims.each do |aim| %>
+    <%= link_to aim.qualification.name, aim.qualification %>
+    <%= aim.date %>
+    <%= link_to image_tag('delete.png', :class => "icon"), aim, :confirm => 'Are you sure?', :method => :delete %>
+
+    <% table = aim.qualification.to_table(@swimmer.gender, @swimmer.age(aim.date)) %>
+    <% if table %>
+    <h3>
+      <%= table[:title] %> (<%= @swimmer.age(aim.date) %>)
+    </h3>
+
+    <table class="fact-sheet">
+      <tr class="times-major">
+        <th></th>
+        <% table[:heads].each do |head| %>
+          <th style="width:80px">
+            <%= truncate(head, :length => 9) %>
+          </th>
+        <% end %>
+      </tr>
+      <% table[:body].each do |row| %>
+        <tr class="times-major">
+          <th>
+            <%= row[:label] %>
+          </th>
+          <% row[:list].each do |qt| %>
+            <td align="right"><%= qt %></td>
+          <% end %>
+        <tr>
+      <% end %>
+    </table>
+    <% end%>
+<% end %>
+
+<br />
+
+<%= link_to 'Select Aims', new_aim_path(:swimmer_id => @swimmer) %>
