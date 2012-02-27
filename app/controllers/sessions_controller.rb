@@ -1,5 +1,6 @@
 class SessionsController < ApplicationController
   skip_before_filter :authorize
+  skip_before_filter :authorize_admin
 
   def new
   end
