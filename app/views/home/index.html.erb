@@ -16,9 +16,9 @@
 <p>
 From here you can access:
 <ul>
-<li>List <%= link_to "Clubs", clubs_path %>;</li>
-<li>List <%= link_to "Competitions", competitions_path %>;</li>
-<li>List <%= link_to "Qualifications", qualifications_path %>.</li>
+<li><%= Club.all.count %> <%= link_to "Clubs", clubs_path %>;</li>
+<li><%= Competition.all.count %> <%= link_to "Competitions", competitions_path %>;</li>
+<li><%= Qualification.all.count %> <%= link_to "Qualifications", qualifications_path %>.</li>
 </ul>
 Enjoy!
 </p>

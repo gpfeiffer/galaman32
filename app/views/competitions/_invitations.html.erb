@@ -5,8 +5,8 @@
 <% @competition.invitations.each do |invitation| %>
   <tr class="fact-major">
     <td><%= link_to invitation.club.name, invitation %></td>
-<td align="right"><%= invitation.registrations.count %> swimmers in</td>
-<td align="right"><%= invitation.registrations.map { |x| x.entries.count }.sum %> events</td>
+<td align="right"><%= pluralize(invitation.registrations.count, 'swimmer') %> in</td>
+<td align="right"><%= pluralize(invitation.registrations.map { |x| x.entries.count }.sum, 'event') %></td>
     <td><%= link_to image_tag('delete.png', :class => "icon"), invitation, :confirm => 'Are you sure?', :method => :delete %></td>
 
   </tr>

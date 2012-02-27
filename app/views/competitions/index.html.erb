@@ -6,7 +6,6 @@
     <td><%= competition.date %></td>
     <td><%= link_to competition.name, competition %>
     (<%= competition.location %>)</td>
-    <td><%= link_to image_tag('delete.png', :class => "icon"), competition, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>
 </table>

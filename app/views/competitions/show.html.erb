@@ -7,9 +7,9 @@
 (<%= @competition.date %>)
 </p>
 
-<%= @competition.invitations.count %> clubs have registered
-<%= @competition.registrations.count %> swimmers for
-<%= @competition.registrations.map { |x| x.entries.count }.sum %> individual entries
+<%= pluralize(@competition.invitations.count, 'club has', 'clubs have') %> registered
+<%= pluralize(@competition.registrations.count, 'swimmer') %> for
+<%= pluralize(@competition.registrations.map { |x| x.entries.count }.sum, 'individual entry') %> 
 and 
 <%= @competition.invitations.map { |x| x.relays.count }.sum %> relay entries.
 
@@ -27,6 +27,7 @@ and
 <hr />
 
 <%= link_to 'Edit', edit_competition_path(@competition) %> |
+<%= link_to 'Destroy', @competition, :confirm => 'Are you sure?', :method => :delete  %> |
 <%= link_to 'Programme (pdf)', competition_path(@competition, :format => :tex), :target => "_blank" %> |
 <%= link_to 'Heats (pdf)', heats_path(:competition_id => @competition.id, :format => :tex), :target => "_blank" %> |
 <%= link_to 'Lanes (pdf)', lanes_path(:competition_id => @competition.id, :format => :tex), :target => "_blank" %> |
