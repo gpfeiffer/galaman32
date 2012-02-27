@@ -9,9 +9,14 @@
 \subsection*{<%= @club.name %>}
 
 <%= @invitation.registrations.count %> registered swimmers
-for \\ 
-<%= @invitation.registrations.map { |x| x.entries.count }.sum %> individual events in total and \\
-<%= @invitation.relays.map { |x| x.entries.count }.sum %> relay events.
+for a total of \\ 
+<%= @invitation.registrations.map { |x| x.entries.count }.sum %> individual
+<% relay_count = @invitation.relays.map { |x| x.entries.count }.sum %>
+<% if relay_count > 0 %>
+events and \\
+<%= @invitation.relays.map { |x| x.entries.count }.sum %> relay 
+<% end %>
+events.
 \end{minipage}
 %
 \begin{minipage}[t]{.5\textwidth}
@@ -49,6 +54,7 @@ for \\
 \hfill\mbox{}
 <% end %>
 
+<% if relay_count > 0 %>
 \subsection*{Relay Teams.}
 <% events = @competition.relay_events %>
 \begin{tabular}[t]{p{3cm}cc<%= 'c' * events.count %>}
@@ -69,4 +75,5 @@ for \\
 \\
 <% end %>
 \bottomrule
+<% end %>
 \end{tabular}
