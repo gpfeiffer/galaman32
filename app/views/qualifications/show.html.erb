@@ -46,5 +46,7 @@
 <br />
 <hr />
 
+<% if session[:edit] %>
 <%= link_to 'Edit', edit_qualification_path(@qualification) %> |
+<% end %>
 <%= link_to 'Back', qualifications_path %>

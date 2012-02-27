@@ -22,8 +22,8 @@
 <br />
 <hr />
 
+<% if session[:edit] %>
 <%= link_to 'Edit', edit_event_path(@event) %> |
-<%= link_to 'Seed', new_heat_path(:event_id => @event) %> 
-
-<br />
-<hr />
+<%= link_to 'Seed', new_heat_path(:event_id => @event) %>  |
+<% end %>
+<%= link_to 'Back', @event.competition %>

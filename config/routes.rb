@@ -11,6 +11,8 @@ Galaman::Application.routes.draw do
     get 'login' => :new
     post 'login' => :create
     delete 'logout' => :destroy
+    get 'edit' => :edit
+    get 'view' => :view
   end
 
   resources :users

@@ -13,4 +13,6 @@
 <br />
 <hr />
 
+<% if session[:edit] %>
 <%= link_to 'New Competition', new_competition_path %>
+<% end %>

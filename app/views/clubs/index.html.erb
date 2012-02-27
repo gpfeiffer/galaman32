@@ -4,7 +4,9 @@
 <% @clubs.each do |club| %>
   <tr>
     <td><%= link_to club.name, club %></td>
+<% if session[:edit] %>
     <td><%= link_to image_tag('delete.png', :class => "icon"), club, :confirm => 'Are you sure?', :method => :delete %></td>
+<% end %>
   </tr>
 <% end %>
 </table>
@@ -12,4 +14,6 @@
 <br />
 <hr />
 
+<% if session[:edit] %>
 <%= link_to 'New Club', new_club_path %>
+<% end %>

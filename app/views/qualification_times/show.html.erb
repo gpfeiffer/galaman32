@@ -21,6 +21,9 @@
   <%= time_to_msc(@qualification_time.time) %>
 </p>
 
+<hr />
 
+<% if session[:edit] %>
 <%= link_to 'Edit', edit_qualification_time_path(@qualification_time) %> |
+<% end %>
 <%= link_to 'Back', @qualification_time.qualification %>

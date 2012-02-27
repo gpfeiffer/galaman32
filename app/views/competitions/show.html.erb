@@ -21,15 +21,12 @@ and
 <%= render 'events' %>
 <hr/>
 
-
-
-<br />
-<hr />
-
+<% if session[:edit] %>
 <%= link_to 'Edit', edit_competition_path(@competition) %> |
 <%= link_to 'Destroy', @competition, :confirm => 'Are you sure?', :method => :delete  %> |
 <%= link_to 'Programme (pdf)', competition_path(@competition, :format => :tex), :target => "_blank" %> |
 <%= link_to 'Heats (pdf)', heats_path(:competition_id => @competition.id, :format => :tex), :target => "_blank" %> |
 <%= link_to 'Lanes (pdf)', lanes_path(:competition_id => @competition.id, :format => :tex), :target => "_blank" %> |
 <%= link_to 'Results (pdf)', results_path(:competition_id => @competition.id, :format => :tex), :target => "_blank" %> |
+<% end %>
 <%= link_to 'Back', competitions_path %>

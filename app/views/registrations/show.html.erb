@@ -15,5 +15,7 @@
   <%= @registration.club.name %>
 </p>
 
+<% if session[:edit] %>
 <%= link_to 'Edit', edit_registration_path(@registration) %> |
+<% end %>
 <%= link_to 'Back', @registration.invitation %>

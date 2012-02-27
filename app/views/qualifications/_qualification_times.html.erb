@@ -21,6 +21,8 @@
 <% end %>
 
 <br />
-<hr />
 
+<% if session[:edit] %>
+<hr />
 <%= link_to 'New Qualification time', new_qualification_time_path(:qualification_id => @qualification) %>
+<% end %>

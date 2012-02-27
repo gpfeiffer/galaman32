@@ -107,5 +107,7 @@
 </table>
 
 <br />
+<% if session[:edit] %>
 <%= link_to 'Edit', edit_swimmer_path(@swimmer) %> |
+<% end %>
 <%= link_to 'Back', @swimmer.club %>

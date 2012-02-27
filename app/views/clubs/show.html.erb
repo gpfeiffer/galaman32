@@ -23,8 +23,10 @@
 <br />
 <hr />
 
+<% if session[:edit] %>
 <%= link_to 'New Swimmer', new_swimmer_path(:club_id => @club) %>
 <hr/>
+<% end %>
 
 <h2>Invitations.</h2>
 <ul>
@@ -32,7 +34,9 @@
 </ul>
 <hr/>
 
+<% if session[:edit] %>
 <%= link_to 'Edit', edit_club_path(@club) %> |
+<% end %>
 <%= link_to 'Back', clubs_path %>
 <br />
 <br />

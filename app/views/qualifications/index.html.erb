@@ -4,7 +4,9 @@
 <% @qualifications.each do |qualification| %>
   <tr>
     <td><%= link_to qualification.name, qualification %></td>
+<% if session[:edit] %>
     <td><%= link_to image_tag('delete.png', :class => "icon"), qualification, :confirm => 'Are you sure?', :method => :delete %></td>
+<% end %>
   </tr>
 <% end %>
 </table>
@@ -12,4 +14,6 @@
 <br />
 <hr />
 
+<% if session[:edit] %>
 <%= link_to 'New Qualification', new_qualification_path %>
+<% end %>

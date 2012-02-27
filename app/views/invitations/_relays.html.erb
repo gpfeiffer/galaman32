@@ -1,5 +1,5 @@
 <% events = @competition.relay_events %>
-<h3>Relay Teams (<%= club.symbol %>)</h3>
+<h3>Relay Teams</h3>
 
 <table class="fact-sheet">
   <tr class="times-major">
@@ -23,7 +23,9 @@
 	<% if entry %>
           <%= link_to entry, entry %>
 	<% elsif event.permits_relay? relay %>
-	  <%= link_to (raw "&square;"), new_entry_path(:event_id => event.id, :relay_id => relay.id) %> 
+          <% if session[:edit] %>
+	    <%= link_to (raw "&square;"), new_entry_path(:event_id => event.id, :relay_id => relay.id) %> 
+          <% end %>
         <% end %>
         </td>
       <% end %>
@@ -33,4 +35,6 @@
 <br />
 <br />
 
+<% if session[:edit] %>
 <%= link_to 'Add Relay Team', new_relay_path(:invitation_id => @invitation) %>
+<% end %>

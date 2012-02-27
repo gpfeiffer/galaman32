@@ -19,4 +19,14 @@ class SessionsController < ApplicationController
     redirect_to home_url, :notice => "Logged out"
   end
 
+  def edit
+    session[:edit] = true
+    redirect_to :back
+  end
+
+  def view
+    session[:edit] = false
+    redirect_to :back
+  end
+
 end

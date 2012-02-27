@@ -1,17 +1,16 @@
-<h3>Registered Swimmers (<%= club.symbol %>)</h3>
+<h3>Entries</h3>
 
 <% Swimmer::GENDERS.each do |sex| %>
   <% events = @competition.individual_events.select { |x| x.gender == sex } %>
   <% relays = @invitation.relays.select { |x| x.gender == sex } %>
   <table class="fact-sheet">
     <tr class="times-major">
-      <th>Swimmer</th>
+      <th>Swimmer (<%= sex.upcase %>)</th>
       <th>Birthday</th>
       <th>Age</th>
       <% events.each do |event| %>
         <th><span title="<%= event.pos %>. <%= event.discipline.name %>"><%= sprintf("%02d", event.pos) %></span></th>
       <% end %>
-      <th />
       <% relays.each do |relay| %>
         <th><span title="<%= relay.name %>">R<%= @invitation.relays.index(relay) + 1 %></span> </th>
       <% end %>
@@ -28,11 +27,12 @@
 	  <% if entry %>
             <%= link_to entry, entry %>
 	  <% elsif event.permits? registration %>
-	    <%= link_to (raw "&square;"), new_entry_path(:event_id => event.id, :registration_id => registration.id) %> 
+            <% if session[:edit] %>
+              <%= link_to (raw "&square;"), new_entry_path(:event_id => event.id, :registration_id => registration.id) %> 
+            <% end %>
           <% end %>
           </td>
         <% end %>
-      <td />
         <% relays.each do |relay| %>
           <td align="center">
             <% seat = Seat.find_by_registration_id_and_relay_id(registration, relay) %>
@@ -50,4 +50,6 @@
   <br />
 <% end %>
 
+<% if session[:edit] %>
 <%= link_to 'Register Swimmers', registrations_path(:invitation_id => @invitation) %>
+<% end %>
