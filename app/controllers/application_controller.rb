@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   before_filter :authorize
+  before_filter :authorize_admin, :only => [:new, :create, :edit, :update, :destroy]
   protect_from_forgery
 
   # how to convert a hash with components mins, secs, centis into time
@@ -25,6 +26,12 @@ class ApplicationController < ActionController::Base
   def authorize
     unless User.find_by_id(session[:user_id])
       redirect_to login_url, :notice => "Please log in"
+    end
+  end
+
+  def authorize_admin
+    unless session[:admin]
+      redirect_to home_path, :notice => "Page not readable"
     end
   end
 

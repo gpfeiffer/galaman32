@@ -23,6 +23,16 @@
     <%= f.text_field :email, :size => 40 %>
   </div>
   <div class="field">
+    <%= f.label :admin %><br />
+    <%= f.radio_button :admin, "true" %> Yes
+    <%= f.radio_button :admin, "false" %> No
+  </div>
+  <div class="field">
+    <%= f.label :senior %><br />
+    <%= f.radio_button :senior, "true" %> Yes
+    <%= f.radio_button :senior, "false" %> No
+  </div>
+  <div class="field">
     <%= f.label :password, 'Password' %><br />
     <%= f.password_field :password, :size => 40 %>
   </div>

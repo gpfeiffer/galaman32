@@ -26,11 +26,13 @@
       <% user = User.find(session[:user_id]) %>
       <%= link_to 'Logout', logout_path, :method => :delete %>
 	  (logged in as <%= link_to user.name, user %>)<br/>
+        <% if session[:admin] %>
         <% if session[:edit] %>
           Edit mode (click to <%= link_to 'View', view_path %>)
         <% else %>
           View mode (click to <%= link_to 'Edit', edit_path %>)
         <% end %><br/>
+        <% end %>
     <% else %>
     <%= link_to "Login", login_path %><br/>
     <% end %>

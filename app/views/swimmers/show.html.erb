@@ -52,8 +52,11 @@
 <br/>
 
 <hr />
+
+<% if session[:senior] %>
 <%= render 'qualifications' %>
 <hr />
+<% end %>
 
 
 <h2>Individual Results</h2>
@@ -70,6 +73,7 @@
     </td>
     <td align="right"><%= best_result(r[discipline]) %></td>
   </tr>
+  <% if session[:senior] %>
   <tr>
     <td colspan="3">
       <% @lc = GoogleChart::LineChart.new("600x300", "My Results", true) %>
@@ -95,7 +99,8 @@
     </tr>
 <% end %>
   <% end %>
-<tr><td colspan="3"><hr noshade size="1"/></td></tr>
+  <tr><td colspan="3"><hr noshade size="1"/></td></tr>
+  <% end %>
   <% r[discipline].each do |result| %>
     <tr class="fact-minor">
       <td><%= result.entry.event.competition.date %></td>
