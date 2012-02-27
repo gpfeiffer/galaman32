@@ -34,7 +34,7 @@ events.
   <% events = @competition.individual_events.select { |x| x.gender == sex } %>
 \begin{tabular}[t]{p{3cm}c<%= 'c' * events.count %>}
 \toprule
-\textbf{Swimmer} & \textbf{DOB} 
+\textbf{Swimmer (<%= sex.upcase %>)} & \textbf{DOB} 
     <% events.each do |event| %>
       & <%= ordinal_number (event.pos) %>
     <% end %> \\
