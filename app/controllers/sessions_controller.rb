@@ -11,7 +11,7 @@ class SessionsController < ApplicationController
       session[:user_id]  = user.id
       session[:admin] = user.admin
       session[:senior] = user.senior
-      redirect_to home_url
+      redirect_to user
     else
       redirect_to login_url, :alert => "Invalid user/password combination"
     end
