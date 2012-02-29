@@ -11,15 +11,14 @@
 <p>
   <b>Age:</b>
   <%= @swimmer.age %>
-  [<%= @swimmer.birthday %>],
+  [<%= @swimmer.birthday %>].
   <b>Gender:</b>
   <%= @swimmer.gender.upcase %>.
   <b>ID:</b>
   <%= @swimmer.registration %>.
 </p>
 
-<br/>
-<br/>
+<hr/>
 
 <h2>Personal Best</h2>
 <table class="fact-sheet">
@@ -47,8 +46,6 @@
   </tr>
 <% end %>
 </table>
-
-<br/>
 <br/>
 
 <hr />
@@ -109,9 +106,10 @@
   <% end %>
 <% end %>
 </table>
-
 <br />
+
+<hr />
 <% if session[:edit] %>
 <%= link_to 'Edit', edit_swimmer_path(@swimmer) %> |
 <% end %>
-<%= link_to 'Back', @swimmer.club %>
+<%= link_to 'Back to Club', @swimmer.club %>
