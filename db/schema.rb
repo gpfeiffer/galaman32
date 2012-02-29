@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120227223335) do
+ActiveRecord::Schema.define(:version => 20120229161019) do
 
   create_table "aims", :force => true do |t|
     t.integer  "swimmer_id"
@@ -137,6 +137,13 @@ ActiveRecord::Schema.define(:version => 20120227223335) do
   create_table "standards", :force => true do |t|
     t.integer  "competition_id"
     t.integer  "qualification_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "supports", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "swimmer_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
