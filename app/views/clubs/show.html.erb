@@ -16,10 +16,17 @@
 </p>
 <hr/>
 
-<h2>Swimmers.</h2>
-<table>
-<%= render @club.swimmers %>
+<% Swimmer::GENDERS.each do |sex| %>
+<table class="fact-sheet">
+<th>ID</th>
+<th>Swimmer (<%= sex.upcase %>)</th>
+<th>Age</th>
+<% if session[:edit] %>
+<th></th>
+<% end %>
+<%= render @club.swimmers.where(:gender => sex) %>
 </table>
+<% end %>
 <br />
 <hr />
 
@@ -28,7 +35,7 @@
 <hr/>
 <% end %>
 
-<h2>Invitations.</h2>
+<h3>Invitations.</h3>
 <ul>
 <%= render @club.invitations.sort_by { |x| x.competition.date }.reverse %>
 </ul>
