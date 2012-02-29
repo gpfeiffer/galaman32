@@ -6,19 +6,31 @@
   <fieldset>
     <legend>Please Log In</legend>
 
-    <div>
+<table>
+  <tr> 
+    <td align="right">
       <label for="name">Name:</label>
+    </td>
+    <td>
       <%= text_field_tag :name, params[:name] %>
-    </div>
-
-    <div>
+    </td>
+  </tr>
+  <tr>
+    <td align="right">
       <label for="password">Password:</label>
+    </td>
+    <td>
       <%= password_field_tag :password, params[:password] %>
-    </div>
-
-    <div>
+    </td>
+  </tr>
+  <tr>
+    <td>
+    </td>
+    <td>
       <%= submit_tag "Login" %>
-    </div>
+    </td>
+  </tr>
+</table>
   </fieldset>
 <% end %>
 
