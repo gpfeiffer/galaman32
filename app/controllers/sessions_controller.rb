@@ -20,6 +20,7 @@ class SessionsController < ApplicationController
   def destroy
     session[:senior] = false
     session[:admin] = false
+    session[:edit] = false
     session[:user_id] = nil
     redirect_to home_url, :notice => "Logged out"
   end
