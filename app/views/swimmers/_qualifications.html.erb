@@ -1,3 +1,4 @@
+<% if @swimmer.aims.any? %>
 <h2>Aims.</h2>
 
 <% @swimmer.aims.each do |aim| %>
@@ -34,7 +35,10 @@
 <% end %>
 
 <br />
+<hr />
+<% end %>
 
 <% if session[:edit] %>
 <%= link_to 'Select Aims', new_aim_path(:swimmer_id => @swimmer) %>
+<hr />
 <% end %>

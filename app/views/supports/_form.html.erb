@@ -11,13 +11,13 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :user_id %><br />
-    <%= f.text_field :user_id %>
-  </div>
+  <h3><%= @support.user.name %> supports</h3>
+
+  <%= f.hidden_field :user_id %>
+
   <div class="field">
     <%= f.label :swimmer_id %><br />
-    <%= f.text_field :swimmer_id %>
+    <%= f.select :swimmer_id, Swimmer.all.map{ |x| [x.name, x.id] } %>
   </div>
   <div class="actions">
     <%= f.submit %>

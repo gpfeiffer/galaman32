@@ -25,6 +25,7 @@ class SupportsController < ApplicationController
   # GET /supports/new.xml
   def new
     @support = Support.new
+    @support[:user_id] = params[:user_id]
 
     respond_to do |format|
       format.html # new.html.erb
@@ -44,7 +45,7 @@ class SupportsController < ApplicationController
 
     respond_to do |format|
       if @support.save
-        format.html { redirect_to(@support, :notice => 'Support was successfully created.') }
+        format.html { redirect_to(@support.user, :notice => 'Support was successfully created.') }
         format.xml  { render :xml => @support, :status => :created, :location => @support }
       else
         format.html { render :action => "new" }
@@ -60,7 +61,7 @@ class SupportsController < ApplicationController
 
     respond_to do |format|
       if @support.update_attributes(params[:support])
-        format.html { redirect_to(@support, :notice => 'Support was successfully updated.') }
+        format.html { redirect_to(@support.user, :notice => 'Support was successfully updated.') }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }

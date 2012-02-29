@@ -7,6 +7,8 @@ class Swimmer < ActiveRecord::Base
   has_many :entries, :through => :registrations
   has_many :aims, :dependent => :destroy
   has_many :qualifications, :through => :aims
+  has_many :supports, :dependent => :destroy
+  has_many :users, :through => :supports
 
   GENDERS = ["f", "m"]
 
