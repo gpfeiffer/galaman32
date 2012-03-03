@@ -3,6 +3,8 @@ require 'test_helper'
 class InvitationsControllerTest < ActionController::TestCase
   setup do
     @invitation = invitations(:one)
+    @invitation.registrations << registrations(:one)
+    @competition = @invitation.competition
   end
 
   test "should get index" do
@@ -12,7 +14,7 @@ class InvitationsControllerTest < ActionController::TestCase
   end
 
   test "should get new" do
-    get :new, :competition_id => competitions(:one).to_param
+    get :new, :competition_id => @competition.to_param
     assert_response :success
   end
 
@@ -21,7 +23,7 @@ class InvitationsControllerTest < ActionController::TestCase
       post :create, :invitation => @invitation.attributes
     end
 
-    assert_redirected_to @invitation.competition
+    assert_redirected_to @competition
   end
 
   test "should show invitation" do
@@ -30,7 +32,7 @@ class InvitationsControllerTest < ActionController::TestCase
   end
 
   test "should get edit" do
-    get :edit, :id => @invitation.to_param
+    get :edit, :id => @invitation.to_param, :competition_id => @competition.to_param
     assert_response :success
   end
 

@@ -3,6 +3,8 @@
 one:
   invitation: one
   swimmer: one
+  age: 12
+  club: one
 
 two:
   invitation: two

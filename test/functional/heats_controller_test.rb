@@ -3,23 +3,24 @@ require 'test_helper'
 class HeatsControllerTest < ActionController::TestCase
   setup do
     @heat = heats(:one)
+    @event = @heat.event
+    @event.entries << entries(:one)
   end
 
   test "should get index" do
-    get :index, :competition_id => competitions(:one).to_param
+    get :index
     assert_response :success
     assert_not_nil assigns(:heats)
   end
 
   test "should get new" do
-    get :new, :event_id => events(:one).to_param
+    get :new, :event_id => @event.to_param
     assert_response :success
   end
 
   test "should create heat" do
-    @event = events(:one)
     assert_difference('Heat.count') do
-      post :create, :heat => @heat.attributes, :event_id => @event, :width => 6
+      post :create, :heat => @heat.attributes, :event_id => @event.to_param, :width => 6
     end
 
     assert_redirected_to heat_path(assigns(:heat))

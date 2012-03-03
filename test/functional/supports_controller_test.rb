@@ -12,7 +12,7 @@ class SupportsControllerTest < ActionController::TestCase
   end
 
   test "should get new" do
-    get :new
+    get :new, :user_id => @support.user.to_param
     assert_response :success
   end
 
@@ -21,7 +21,7 @@ class SupportsControllerTest < ActionController::TestCase
       post :create, :support => @support.attributes
     end
 
-    assert_redirected_to support_path(assigns(:support))
+    assert_redirected_to user_path(assigns(:support).user)
   end
 
   test "should show support" do
@@ -36,7 +36,7 @@ class SupportsControllerTest < ActionController::TestCase
 
   test "should update support" do
     put :update, :id => @support.to_param, :support => @support.attributes
-    assert_redirected_to support_path(assigns(:support))
+    assert_redirected_to user_path(assigns(:support).user)
   end
 
   test "should destroy support" do

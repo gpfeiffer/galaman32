@@ -12,7 +12,7 @@ class AimsControllerTest < ActionController::TestCase
   end
 
   test "should get new" do
-    get :new
+    get :new, :swimmer_id => swimmers(:one).to_param
     assert_response :success
   end
 
@@ -21,7 +21,7 @@ class AimsControllerTest < ActionController::TestCase
       post :create, :aim => @aim.attributes
     end
 
-    assert_redirected_to aim_path(assigns(:aim))
+    assert_redirected_to swimmer_path(assigns(:aim).swimmer)
   end
 
   test "should show aim" do
@@ -36,7 +36,7 @@ class AimsControllerTest < ActionController::TestCase
 
   test "should update aim" do
     put :update, :id => @aim.to_param, :aim => @aim.attributes
-    assert_redirected_to aim_path(assigns(:aim))
+    assert_redirected_to swimmer_path(assigns(:aim).swimmer)
   end
 
   test "should destroy aim" do

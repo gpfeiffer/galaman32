@@ -2,6 +2,8 @@
 
 one:
   pos: 1
+  event: one
 
 two:
-  pos: 1
+  pos: 2
+  event: two

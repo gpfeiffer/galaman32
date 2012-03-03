@@ -12,7 +12,7 @@ class RelaysControllerTest < ActionController::TestCase
   end
 
   test "should get new" do
-    get :new
+    get :new, :invitation_id => @relay.invitation.to_param
     assert_response :success
   end
 
@@ -21,7 +21,7 @@ class RelaysControllerTest < ActionController::TestCase
       post :create, :relay => @relay.attributes
     end
 
-    assert_redirected_to relay_path(assigns(:relay))
+    assert_redirected_to invitation_path(assigns(:relay).invitation)
   end
 
   test "should show relay" do
@@ -36,7 +36,7 @@ class RelaysControllerTest < ActionController::TestCase
 
   test "should update relay" do
     put :update, :id => @relay.to_param, :relay => @relay.attributes
-    assert_redirected_to relay_path(assigns(:relay))
+    assert_redirected_to invitation_path(assigns(:relay).invitation)
   end
 
   test "should destroy relay" do
@@ -44,6 +44,6 @@ class RelaysControllerTest < ActionController::TestCase
       delete :destroy, :id => @relay.to_param
     end
 
-    assert_redirected_to relays_path
+    assert_redirected_to invitation_path(assigns(:relay).invitation)
   end
 end

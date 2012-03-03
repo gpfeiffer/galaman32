@@ -5,9 +5,11 @@ one:
   distance: 100
   course: SC
   stroke: Freestyle
+  mode: I
 
 two:
   gender: m
   distance: 200
   course: LC
   stroke: Breaststroke
+  mode: R

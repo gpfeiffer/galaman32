@@ -12,7 +12,7 @@ class SeatsControllerTest < ActionController::TestCase
   end
 
   test "should get new" do
-    get :new
+    get :new, :relay_id => @seat.relay.to_param, :registration_id => @seat.registration.to_param
     assert_response :success
   end
 
@@ -21,7 +21,7 @@ class SeatsControllerTest < ActionController::TestCase
       post :create, :seat => @seat.attributes
     end
 
-    assert_redirected_to seat_path(assigns(:seat))
+    assert_redirected_to invitation_path(assigns(:seat).relay.invitation)
   end
 
   test "should show seat" do
@@ -36,7 +36,7 @@ class SeatsControllerTest < ActionController::TestCase
 
   test "should update seat" do
     put :update, :id => @seat.to_param, :seat => @seat.attributes
-    assert_redirected_to seat_path(assigns(:seat))
+    assert_redirected_to invitation_path(assigns(:seat).relay.invitation)
   end
 
   test "should destroy seat" do
@@ -44,6 +44,6 @@ class SeatsControllerTest < ActionController::TestCase
       delete :destroy, :id => @seat.to_param
     end
 
-    assert_redirected_to seats_path
+    assert_redirected_to invitation_path(assigns(:seat).relay.invitation)
   end
 end

@@ -1,11 +1,11 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:
-  relay_id: 1
-  swimmer_id: 1
+  relay: one
+  registration: one
   pos: 1
 
 two:
-  relay_id: 1
-  swimmer_id: 1
+  relay: two
+  registration: two
   pos: 1
