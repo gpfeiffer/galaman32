@@ -4,6 +4,8 @@
 <% @clubs.each do |club| %>
   <tr>
     <td><%= link_to club.name, club %></td>
+    <td>:</td>
+    <td align="right"><%= club.swimmers.count %> swimmers</td>
 <% if session[:edit] %>
     <td><%= link_to image_tag('delete.png', :class => "icon"), club, :confirm => 'Are you sure?', :method => :delete %></td>
 <% end %>
