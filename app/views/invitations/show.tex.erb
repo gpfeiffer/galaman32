@@ -24,7 +24,8 @@ events.
 
 \begin{enumerate}
 <% @competition.events.each do |event| %>
-\item <%= event.discipline.to_words %>: <%= ages_to_words(event.age_range) %>
+\item[<%= event.pos %>.] 
+<%= event.discipline.to_words %>: <%= ages_to_words(event.age_range) %>
 <% end %>
 \end{enumerate}
 \end{minipage}
@@ -41,7 +42,7 @@ events.
 \midrule
 <% @invitation.registrations.select { |x| x.gender == sex }.sort_by { |x| x.swimmer.name }.each do |registration| %>
   <% swimmer = registration.swimmer %>
-<%= swimmer.first_last %> &
+<%= swimmer.name %> &
 <%= swimmer.birthday %>
       <% events.each do |event| %>
 &	<% entry = Entry.find_by_event_id_and_registration_id(event, registration) %>
