@@ -16,6 +16,14 @@
 </p>
 <hr/>
 
+<h3>Swimmers.</h3>
+
+<%= @club.swimmers.count %> swimmers:
+<%= @club.swimmers.find_all_by_gender('f').count %> girls,
+<%= @club.swimmers.find_all_by_gender('m').count %> boys.
+<br />
+<br />
+
 <% Swimmer::GENDERS.each do |sex| %>
 <table class="fact-sheet">
 <th>ID</th>
