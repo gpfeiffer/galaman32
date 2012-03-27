@@ -5,3 +5,8 @@
 #main {
   margin-left: 0em;
 }
+
+table.fact-sheet {
+    display: table;
+}
+
