@@ -49,8 +49,8 @@ class Swimmer < ActiveRecord::Base
   end
 
   # mark today in the graph
-  def today_marker
+  def today_marker(dist = 100)
     x = (DateTime.now - (birthday + 8.years)).to_i
-    return [[x, 0], [x, 12000]]
+    return [[x, 0], [x, 120 * dist]]
   end
 end
