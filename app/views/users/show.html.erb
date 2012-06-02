@@ -15,6 +15,23 @@
 </ul>
 <hr/>
 <% end %>
+
+<% if  @user.performances.any? %>
+<h3>Performances:</h3>
+<% @user.performances.each do |performance| %>
+<li>
+<%= performance.date %>
+<%= performance.name %>
+<%= performance.time %>
+<%= performance.discipline_id %>
+(<%= performance.competition %>)
+</li>
+<% end %>
+</ul>
+<hr/>
+<% end %>
+
+
 <% if session[:edit] %>
 <%= link_to 'Support', new_support_path(:user_id => @user) %> |
 <%= link_to 'Edit', edit_user_path(@user) %> |

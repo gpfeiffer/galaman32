@@ -1,4 +1,6 @@
 Galaman::Application.routes.draw do
+  resources :performances
+
   resources :supports
 
   resources :aims
@@ -28,7 +30,12 @@ Galaman::Application.routes.draw do
 
   resources :standards
 
-  resources :results
+  resources :results do
+    member do
+      get 'copy'
+    end
+  end
+
 
   get "home/index"
 
