@@ -1,5 +1,6 @@
 class Result < ActiveRecord::Base
   belongs_to :entry
+  delegate :discipline, :swimmer, :competition, :to => :entry
 
   attr_accessor :mins, :secs, :centis
 
@@ -21,18 +22,6 @@ class Result < ActiveRecord::Base
     if self.time
       return self.time / 6000
     end
-  end
-
-  def discipline
-    entry.discipline
-  end
-
-  def swimmer
-    entry.swimmer
-  end
-
-  def competition
-    entry.competition
   end
 
   def qualify
