@@ -1,13 +1,15 @@
 class Event < ActiveRecord::Base
   belongs_to :competition
   belongs_to :discipline
-  delegate :gender, :distance, :course, :stroke, :mode, :is_relay?, :to => :discipline
   has_many :entries, :dependent => :destroy
   has_many :registrations, :through => :entries
   has_many :results, :through => :entries
   has_many :heats, :dependent => :destroy 
 
   default_scope :order => :pos
+
+  attr_writer :gender, :distance, :course, :stroke, :mode
+  delegate :gender, :distance, :course, :stroke, :mode, :is_relay?, :to => :discipline, :allow_nil => true
 
   validates :age_min, :age_max, :presence => true, 
     :numericality => { :only_integer => true, :greater_than_or_equal_to => 0 }
