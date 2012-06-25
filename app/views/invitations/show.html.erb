@@ -8,10 +8,15 @@
 </p>
 
 <p>
+<% nr_relays = @invitation.relays.map { |x| x.entries.count }.sum %>
 <%= @invitation.registrations.count %> swimmers registered
-for <%= @invitation.registrations.map { |x| x.entries.count }.sum %> individual events in total
-and
-<%= @invitation.relays.map { |x| x.entries.count }.sum %> relay events.
+for <%= @invitation.registrations.map { |x| x.entries.count }.sum %> individual events in 
+<% if nr_relays > 0 %>
+total and
+<%= nr_relays %> relay events.
+<% else %>
+total.
+<% end %>
 </p>
 
 <hr/>
