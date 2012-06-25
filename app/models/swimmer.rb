@@ -44,8 +44,8 @@ class Swimmer < ActiveRecord::Base
     return best
   end
 
-  def age_in_days
-    (DateTime.now - birthday).to_i
+  def age_in_days(date = DateTime.now)
+    (date - birthday).to_i
   end
 
   # mark today in the graph
