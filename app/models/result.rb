@@ -58,4 +58,11 @@ class Result < ActiveRecord::Base
       sprintf('%d.%02d', self.secs, self.centis)
     end
   end
+
+  # x = swimmer's age in days, y = time in centiseconds
+  def coordinates
+    return swimmer.age_in_days(competition.date), time
+  end
+
 end
+
