@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
 
 <h3>
-  <%= @swimmer.club.name %>
+<%= link_to @swimmer.club.name, @swimmer.club %>
 </h3>
 
 <h1> 
@@ -50,7 +50,7 @@
 
 <hr />
 
-<% if session[:senior] %>
+<% if session[:admin] || @swimmer.user_ids.include?(session[:user_id]) %>
 <%= render 'qualifications' %>
 <% end %>
 
@@ -69,7 +69,7 @@
     </td>
     <td align="right"><%= best_result(r[discipline]) %></td>
   </tr>
-  <% if session[:senior] %>
+  <% if session[:admin] || @swimmer.user_ids.include?(session[:user_id]) %>
   <tr>
     <td colspan="3">
       <% @lc = GoogleChart::LineChart.new("600x300", "My Results", true) %>
@@ -110,6 +110,5 @@
 
 <hr />
 <% if session[:edit] %>
-<%= link_to 'Edit', edit_swimmer_path(@swimmer) %> |
+<%= link_to 'Edit', edit_swimmer_path(@swimmer) %>
 <% end %>
-<%= link_to 'Back to Club', @swimmer.club %>

@@ -10,6 +10,7 @@
 <% @user.swimmers.each do |swimmer| %>
 <li>
 <%= link_to swimmer.first_last, swimmer %>
+(<%= link_to swimmer.club.symbol, swimmer.club %>)
 </li>
 <% end %>
 </ul>
