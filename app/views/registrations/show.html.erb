@@ -1,20 +1,50 @@
 <p id="notice"><%= notice %></p>
 
-<h2><%= @registration.swimmer.name %></h2>
 
-<h3><%= @registration.competition.name %> (<%= @registration.competition.date %>)</h3>
+<h4><%= @registration.competition.name %> (<%= @registration.competition.date %>)</h4>
+<h2>Registered Swimmer</h2>
+<hr>
 
+<table class="fact-sheet">
+<tr class="times-major">
+  <th>Name:</th>
+  <td><%= link_to @registration.swimmer.name, @registration.swimmer %></td>
+</tr>
+<tr class="times-major">
+  <th>ID:</th>
+  <td><%= @registration.swimmer.registration %></td>
+</tr>
+<tr class="times-major">
+  <th>Age (F/M):</th>
+  <td><%= @registration.age %> (<%= @registration.swimmer.gender.upcase %>)</td>
+</tr>
+<tr class="times-major">
+  <th>Club:</th>
+  <td><%= link_to @registration.club.symbol, @registration.club %></td>
+</tr>
+</table>
+<br>
 
-<p>
-  <b>Age:</b>
-  <%= @registration.age %>
-</p>
-
-<p>
-  <b>Club:</b>
-  <%= @registration.club.name %>
-</p>
-
+<h3>Events</h3>
+<table class="fact-sheet">
+  <tr class="times-major">
+    <th></th>
+    <th>Event</th>
+    <th>Place</th>
+    <th>Result</th>
+    <th>Seed</th>
+  </tr>
+  <% @registration.entries.each do |entry| %>
+    <tr class="times-major">
+      <th><%= link_to entry.event.pos, entry.event %>.</th>
+      <th><%= entry.event.discipline.nickname %></th>
+      <td><%= "#{entry.result.place}." if entry.result %></td>
+      <td><%= entry.result or "" %></td>
+      <td>(<%= entry %>)</td>
+    </tr>
+  <% end %>
+</table>
+<hr>
 <% if session[:edit] %>
 <%= link_to 'Edit', edit_registration_path(@registration) %> |
 <% end %>
