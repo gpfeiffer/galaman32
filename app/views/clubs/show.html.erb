@@ -43,10 +43,11 @@
 <hr/>
 <% end %>
 
-<h3>Invitations.</h3>
+<h3>Recent Invitations.</h3>
 <ul>
-<%= render @club.invitations.sort_by { |x| x.competition.date }.reverse %>
+<%= render @club.invitations.select { |x| x.competition.date.to_datetime > 1.year.ago }.sort_by { |x| x.competition.date }.reverse %>
 </ul>
+... see <%= link_to "all invitations", invitations_path(:club_id => @club) %>.
 <hr/>
 
 <% if session[:edit] %>

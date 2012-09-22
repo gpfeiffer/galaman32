@@ -3,6 +3,7 @@ class InvitationsController < ApplicationController
   # GET /invitations.xml
   def index
     @invitations = Invitation.all
+    @club = Club.find(params[:club_id])
 
     respond_to do |format|
       format.html # index.html.erb
