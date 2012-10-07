@@ -78,7 +78,7 @@ class AimsController < ApplicationController
     @aim.destroy
 
     respond_to do |format|
-      format.html { redirect_to(aims_url) }
+      format.html { redirect_to aim.swimmer }
       format.xml  { head :ok }
     end
   end
