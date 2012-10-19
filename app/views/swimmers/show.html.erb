@@ -38,7 +38,9 @@
           <% @results[discipline] = @results[discipline].sort_by { |x| x.entry.event.competition.date } %>
           <% best = best_result(@results[discipline]) %>
 	  <% if best %>
-            <%= best %><br/>(<%= best.entry.event.competition.date.strftime("%d-%m-%y") %>)
+            <span title="85%: <%= time_to_msc(best.time*100/85) %>">
+              <%= best %><br/>(<%= best.entry.event.competition.date.strftime("%d-%m-%y") %>)
+            </span>
           <% end %>
         <% end %>
       </td>
