@@ -2,6 +2,17 @@
 
 <%= render 'navigation' %>
 
+<table class="fact-sheet">
+<% @event.qualification_times.each do |qt| %>
+<tr class="fact-major">
+<td><%= ages_to_words(qt.age_range) %></td>
+<td><%= qt.qualification.name %></td>
+<td><%= qt %></td>
+</tr>
+<% end %>
+</table>
+
+
 <h2>Entries.</h2>
 
 <table class="fact-sheet">
