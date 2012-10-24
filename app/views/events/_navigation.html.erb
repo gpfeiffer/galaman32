@@ -1,22 +1,22 @@
 <hr />
-<%= link_to 'Entries', @event %> |
+<%= link_to_unless_current 'Entries', @event %> |
 <% if @event.seeded? %>
-  <%= link_to 'Heats', heats_path(:event_id => @event) %> 
+  <%= link_to_unless_current 'Heats', heats_path(:event_id => @event) %> 
 <% else %>
   Heats
 <% end %> |
 <% if @event.seeded? %>
-  <%= link_to 'Lanes', lanes_path(:event_id => @event) %> 
+  <%= link_to_unless_current 'Lanes', lanes_path(:event_id => @event) %> 
 <% else %>
   Lanes
 <% end %> |
-<%= link_to 'Results', results_path(:event_id => @event) %> 
+<%= link_to_unless_current 'Results', results_path(:event_id => @event) %> 
 <hr />
 
 <h3>
   <%= link_to @event.competition.name, @event.competition %>
-(<%= @event.competition.date %>,
-<%= @event.competition.location %>)
+(<%= @event.competition.location %>,
+<%= @event.competition.date %>)
 </h3>
 
 <h1>

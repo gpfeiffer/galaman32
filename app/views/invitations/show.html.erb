@@ -1,11 +1,12 @@
 <p id="notice"><%= notice %></p>
 
-<h2><%= @club.name %> @ <%= @competition.name %></h2>
 
-<p>
-  <%= @competition.location %>
-(<%= @competition.date %>)
-</p>
+<h3>
+  <%= link_to @competition.name, @competition %>
+  (<%= @competition.location %>, <%= @competition.date %>)
+</h3>
+
+<h2><%= link_to @club.name, @club %></h2>
 
 <p>
 <% nr_relays = @invitation.relays.map { |x| x.entries.count }.sum %>
@@ -40,6 +41,4 @@ total.
 <% end %>
 
 <hr/>
-<%= link_to 'Back to Club', @club %> |
-<%= link_to 'Results', results_path(:invitation_id => @invitation) %> |
-<%= link_to 'Back to Competition', @competition %>
+<%= link_to 'Results', results_path(:invitation_id => @invitation) %> 
