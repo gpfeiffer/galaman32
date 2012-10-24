@@ -2,12 +2,23 @@
 
 <%= render 'navigation' %>
 
+<%# FIXME: prepare this table in controller/model ...%>
+<% times = @event.qualification_times %>
+<% names = times.map { |x| x.qualification.name }.uniq %>
+<% ranges = times.map { |x| x.age_range }.uniq %>
 <table class="fact-sheet">
-<% @event.qualification_times.each do |qt| %>
 <tr class="fact-major">
-<td><%= ages_to_words(qt.age_range) %></td>
-<td><%= qt.qualification.name %></td>
-<td><%= qt %></td>
+<th>Age Range</th>
+<% names.each do |name| %>
+<th><%= name %></th>
+<% end %>
+</tr>
+<% ranges.each do |range| %>
+<tr class="fact-major">
+<td><%= ages_to_words(range) %></td>
+<% names.each do |name| %>
+<td><%= times.select { |x| x.age_range == range and x.qualification.name == name }[0] %></td>
+<% end %>
 </tr>
 <% end %>
 </table>
