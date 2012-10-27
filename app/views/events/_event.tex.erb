@@ -5,10 +5,22 @@
 \tablehead{}
 \tabletail{}
 \tablelasttail{}
-\begin{supertabular}{|llr|}
+<%# FIXME: prepare this table in controller/model ...%>
+<% times = event.qualification_times %>
+<% names = times.map { |x| x.qualification.name }.uniq %>
+<% ranges = times.map { |x| x.age_range }.uniq %>
+\begin{supertabular}{|l<%= 'r' * names.count %>|}
 \toprule
-<% event.qualification_times.each do |qt| %>
-  <%= ages_to_words(qt.age_range) %> & <%= qt.qualification.name %> & <%= qt %> \\
+Age Range 
+<% names.each do |name| %>
+& <%= name %>
+<% end %> \\
+\midrule
+<% ranges.each do |range| %>
+<%= ages_to_words(range) %>
+<% names.each do |name| %>
+& <%= times.select { |x| x.age_range == range and x.qualification.name == name }[0] %>
+<% end %> \\
 <% end %>
 \bottomrule
 \end{supertabular}
