@@ -21,11 +21,41 @@
   </div>
   <div class="field">
     <%= f.label :discipline_id %><br />
-    <%= f.select :gender, Swimmer::GENDERS, :include_blank => true %>
-    <%= f.select :distance, Discipline::DISTANCES, :include_blank => true %>
-    <%= f.select :course, Discipline::COURSES %>
-    <%= f.select :stroke, Discipline::STROKES, :include_blank => true %>
-    <%= f.select :mode, Discipline::MODES %>
+    <table style="display: inline">
+    <tr><th colspan="2">Gender</th><tr>
+    <% Swimmer::GENDERS.each do |gender| %>
+      <tr><td align="right"><%= f.label :gender, gender.upcase %></td>
+      <td><%= f.radio_button :gender, gender %></td></tr>
+    <% end %>
+    </table>
+    <table style="display: inline">
+    <tr><th colspan="2">Distance</th><tr>
+    <% Discipline::DISTANCES.each do |distance| %>
+      <tr><td align="right"><%= f.label :distance, distance %></td>
+      <td><%= f.radio_button :distance, distance %></td></tr>
+    <% end %>
+    </table>
+    <table style="display: inline">
+    <tr><th colspan="2">Course</th><tr>
+    <% Discipline::COURSES.each do |course| %>
+      <tr><td align="right"><%= f.label :course, course %></td>
+      <td><%= f.radio_button :course, course %></td></tr>
+    <% end %>
+    </table>
+    <table style="display: inline">
+    <tr><th colspan="2">Stroke</th><tr>
+    <% Discipline::STROKES.each do |stroke| %>
+      <tr><td align="right"><%= f.label :stroke, stroke %></td>
+      <td><%= f.radio_button :stroke, stroke %></td></tr>
+    <% end %>
+    </table>
+    <table style="display: inline">
+    <tr><th colspan="2">Mode</th><tr>
+    <% Discipline::MODES.each do |mode| %>
+      <tr><td align="right"><%= f.label :mode, mode %></td>
+      <td><%= f.radio_button :mode, mode %></td></tr>
+    <% end %>
+    </table>
   </div>
   <div class="field">
     <%= f.label :age_min, "Age from" %>
