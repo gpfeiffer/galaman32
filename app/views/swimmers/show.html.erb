@@ -71,7 +71,7 @@
     </td>
     <td align="right"><%= best_result(r[discipline]) %></td>
   </tr>
-  <% if session[:admin] || @swimmer.user_ids.include?(session[:user_id]) %>
+  <% if session[:admin] || session[:senior] || @swimmer.user_ids.include?(session[:user_id]) %>
   <tr>
     <td colspan="3">
       <% @lc = GoogleChart::LineChart.new("600x300", "My Results", true) %>
