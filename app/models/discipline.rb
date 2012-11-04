@@ -44,9 +44,17 @@ class Discipline < ActiveRecord::Base
 
   def to_words
     if is_relay? then
-      sprintf("%s 4x%dm %s Relay (%s)",  { 'f' => "Girls", 'm' => "Boys" }[gender], distance, stroke, course)
+      sprintf("%s 4x%dm %s Relay (%s)",  { 'f' => "Girls", 'm' => "Boys" }[gender], distance, stroke == "Ind Medley" ? "Medley" : stroke, course)
     else
       sprintf("%s %dm %s (%s)",  { 'f' => "Girls", 'm' => "Boys" }[gender], distance, stroke, course)
     end
+  end
+
+  def to_s
+    to_words
+  end
+
+  def sample_result
+    Result.all.select{ |x| x.discipline == self }.sample
   end
 end

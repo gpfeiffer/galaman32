@@ -1,16 +1,16 @@
-<h1>Listing disciplines</h1>
+<h1>Disciplines</h1>
 
 <table>
-<% @disciplines.each do |discipline| %>
+<% @disciplines.sort_by { |x| [x.gender, Discipline::STROKES.index(x.stroke), x.distance, x.mode, Discipline::COURSES.index(x.course)] }.each do |discipline| %>
   <tr>
-    <td><%= link_to discipline.name, discipline %></td>
-    <td><%= discipline.mode %></td>
-    <td><%= link_to 'Edit', edit_discipline_path(discipline) %></td>
-    <td><%= link_to 'Destroy', discipline, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= link_to discipline, discipline %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
+<hr />
+<% if session[:edit] %>
 <%= link_to 'New Discipline', new_discipline_path %>
+<% end %>
