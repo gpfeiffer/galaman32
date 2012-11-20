@@ -1,4 +1,6 @@
 class DisciplinesController < ApplicationController
+  skip_before_filter :authorize, :only => :index
+
   # GET /disciplines
   # GET /disciplines.xml
   def index
@@ -14,6 +16,7 @@ class DisciplinesController < ApplicationController
   # GET /disciplines/1.xml
   def show
     @discipline = Discipline.find(params[:id])
+    @qts_by_qualification = @discipline.qualification_times.group_by(&:qualification)
 
     respond_to do |format|
       format.html # show.html.erb

@@ -27,12 +27,25 @@
   <%= @discipline.mode %>
 </p>
 
+<% r = @discipline.sample_result %>
+<% if r %>
 <p>
   <b>Sample:</b>
-  <% r = @discipline.sample_result %>
   <%= r %> (<%= r.entry.swimmer.first_last %>, <%= r.entry.club.symbol %>, <%= r.entry.event.competition.date %>)
 </p>
+<% end %>
 
+<% @qts_by_qualification.each do |qualification, times| %>
+<h3><%= qualification.name %></h3>
+<table class="fact-sheet">
+  <% times.sort_by(&:age_min).each do |time| %>
+<tr class="times-major">
+   <th align="right"><%= ages_to_words(time.age_range) %>: </th>
+   <td align="right"><%= time %></td>
+</tr>
+  <% end %>
+</table>
+<% end %>
 
 
 <hr />
