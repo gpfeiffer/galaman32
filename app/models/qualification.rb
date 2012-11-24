@@ -66,7 +66,7 @@ class Qualification < ActiveRecord::Base
     dob =  swimmer.birthday
     qualification_times.find_all_by_discipline_id(discipline.id).each do |qt|
       graph << [[((dob + qt.age_range.first.years) - (dob + 8.years)).to_i, 0].max, qt.time]
-      graph << [[((dob + (qt.age_range.last + 1).years - 1.day) - (dob + 8.years)).to_i, 2922 ].min, qt.time]
+      graph << [[((dob + (qt.age_range.last + 1).years - 1.day) - (dob + 8.years)).to_i, 3652 ].min, qt.time]
     end
     return graph.sort_by { |x| x[0] }
   end
