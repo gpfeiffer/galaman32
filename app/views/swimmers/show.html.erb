@@ -10,11 +10,9 @@
 
 <p>
   <b>Age:</b>
-  <%= @swimmer.age %>
+  <%= "#{@swimmer.age}#{@swimmer.gender}" %>
   [<%= @swimmer.birthday %>].
-  <b>Gender:</b>
-  <%= @swimmer.gender.upcase %>.
-  <b>ID:</b>
+  <b>Swim Ireland ID:</b>
   <%= @swimmer.registration %>.
 </p>
 
