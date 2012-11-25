@@ -44,8 +44,14 @@ class Swimmer < ActiveRecord::Base
     return best
   end
 
+  # compute swimmer's age in days
   def age_in_days(date = DateTime.now)
     (date - birthday).to_i
+  end
+
+  # conversely, compute n-th birthday
+  def date_of_age(age)
+    return birthday + age.years
   end
 
   # mark today in the graph

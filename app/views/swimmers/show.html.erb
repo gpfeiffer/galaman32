@@ -37,7 +37,8 @@
           <% best = best_result(@results[discipline]) %>
 	  <% if best %>
             <span title="85%: <%= time_to_msc(best.time*100/85) %>&#013;80%: <%= time_to_msc(best.time*100/80) %>&#013;75%: <%= time_to_msc(best.time*100/75); %>">
-              <%= best %><br/>(<%= best.entry.event.competition.date.strftime("%d-%m-%y") %>)
+              <%= link_to best, results_path(:swimmer_id => @swimmer, :discipline_id => discipline) %><br/>
+              (<%= best.entry.event.competition.date.strftime("%d-%m-%y") %>)
             </span>
           <% end %>
         <% end %>
@@ -54,61 +55,6 @@
 <%= render 'qualifications' %>
 <% end %>
 
-
-<h2>Individual Results</h2>
-<table class="fact-sheet">
-<% r = @results %>
-<% r.keys.each do |discipline| %>
-  <tr class="fact-major">
-    <td colspan="2">
-      <b>
-        <%= discipline.stroke %>
-        <%= discipline.distance %>m 
-        <%= discipline.course %>
-      </b>
-    </td>
-    <td align="right"><%= best_result(r[discipline]) %></td>
-  </tr>
-  <% if session[:admin] || session[:senior] || @swimmer.user_ids.include?(session[:user_id]) %>
-  <tr>
-    <td colspan="3">
-      <% @lc = GoogleChart::LineChart.new("600x300", "My Results", true) %>
-      <% @lc.data "Results", graph_results(r[discipline]), '000000' %>
-      <% @lc.data "B", Qualification.find_by_name("B").to_graph(@swimmer, discipline), '00ff00' %>
-      <% @lc.data "A", Qualification.find_by_name("A").to_graph(@swimmer, discipline), 'ff0000' %>
-      <% @lc.data "2", Qualification.find_by_name("Division 2").to_graph(@swimmer, discipline), '00ffff' %>
-      <% @lc.data "1", Qualification.find_by_name("Division 1").to_graph(@swimmer, discipline), 'ffff00' %>
-      <% @lc.data "today", @swimmer.today_marker(discipline.distance), '888888' %>
-      <% @lc.shape_marker :circle, :color => '0000ff', :data_set_index => 0, :data_point_index => -1, :pixel_size => 6 %>
-      <%= image_tag(@lc.to_url) %>
-    </td>
-  </tr>
-  <% @swimmer.aims.each do |aim| %>
-<% qt = aim.qualification.qualification_times.select { |x| x.discipline == discipline and x.age_range.include?(@swimmer.age(aim.date)) }.first %>
-<% if qt %>
-    <tr class="fact-minor">
-<td><%= aim.date %></td>
-      <td align="right">
-        <%= aim.qualification.name %>
-      </td>
-<td align="right"><span title="<%= time_to_msc(qt.time-best_result(r[discipline]).time) %>"><%= qt %></span></td>
-    </tr>
-<% end %>
-  <% end %>
-  <tr><td colspan="3"><hr noshade size="1"/></td></tr>
-  <% end %>
-  <% r[discipline].each do |result| %>
-    <tr class="fact-minor">
-      <td><%= result.entry.event.competition.date %></td>
-      <td><%= result.entry.event.competition.name %></td>
-      <td align="right"><%= result %></td>
-    </tr>
-  <% end %>
-<% end %>
-</table>
-<br />
-
-<hr />
 <% if session[:edit] %>
 <%= link_to 'Edit', edit_swimmer_path(@swimmer) %>
 <% end %>

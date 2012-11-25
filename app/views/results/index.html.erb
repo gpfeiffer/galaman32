@@ -4,6 +4,8 @@
 <%= render :partial => 'invitation', :object => @invitation %>
 <% elsif @competition %>
 <%= render :partial => 'competition', :object => @competition %>
+<% elsif @swimmer and @discipline %>
+<%= render :partial => 'swimmer', :object => @swimmer, :discipline => @discipline %>
 <% else %>
 <%= render @results %>
 <% end %>

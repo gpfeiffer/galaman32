@@ -59,10 +59,17 @@ class Result < ActiveRecord::Base
     end
   end
 
-  # x = swimmer's age in days, y = time in centiseconds
-  def coordinates
-    return swimmer.age_in_days(competition.date), time
+  # coordinates: x = date of competition, y = time in milliseconds
+  def x
+    competition.date
   end
 
+  def y
+    10 * time
+  end
+
+  def coordinates
+    return x, y
+  end
 end
 
