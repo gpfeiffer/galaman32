@@ -89,7 +89,7 @@ class SwimmersController < ApplicationController
     @swimmer.destroy
 
     respond_to do |format|
-      format.html { redirect_to(swimmers_url) }
+      format.html { redirect_to @swimmer.club }
       format.xml  { head :ok }
     end
   end
