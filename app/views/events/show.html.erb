@@ -4,6 +4,7 @@
 
 <%# FIXME: prepare this table in controller/model ...%>
 <% times = @event.qualification_times %>
+<% if times.any? %>
 <% names = times.map { |x| x.qualification.name }.uniq %>
 <% ranges = times.map { |x| x.age_range }.uniq %>
 <table class="fact-sheet">
@@ -22,6 +23,7 @@
 </tr>
 <% end %>
 </table>
+<% end%>
 
 
 <h2>Entries.</h2>
