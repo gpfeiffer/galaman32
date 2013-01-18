@@ -33,7 +33,7 @@ events.
 \subsection*{Registered Swimmers.}
 <% Swimmer::GENDERS.each do |sex| %>
   <% events = @competition.individual_events.select { |x| x.gender == sex } %>
-\begin{tabular}[t]{p{3cm}c<%= 'c' * events.count %>}
+\begin{tabular}[t]{p{3.1cm}c<%= 'c' * events.count %>}
 \toprule
 \textbf{Swimmer (<%= sex.upcase %>)} & \textbf{DOB} 
     <% events.each do |event| %>
@@ -42,7 +42,7 @@ events.
 \midrule
 <% @invitation.registrations.select { |x| x.gender == sex }.sort_by { |x| x.swimmer.name }.each do |registration| %>
   <% swimmer = registration.swimmer %>
-<%= swimmer.name %> &
+<%= raw swimmer.name %> &
 <%= swimmer.birthday %>
       <% events.each do |event| %>
 &	<% entry = Entry.find_by_event_id_and_registration_id(event, registration) %>
