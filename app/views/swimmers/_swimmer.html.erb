@@ -1,7 +1,7 @@
 <tr class="fact-major">
   <td align="right"><%= swimmer.registration %></td>
-  <td><%= link_to swimmer.name, swimmer %></td>
-  <td><%= swimmer.age %></td>
+  <td><%= link_to swimmer.name, swimmer %>, <%= swimmer.age %></td>
+  <td><%= swimmer.birthday %></td>
 <% if session[:edit] %>
   <td><%= link_to image_tag('delete.png', :class => "icon"), swimmer, :confirm => 'Are you sure?', :method => :delete %></td>
 <% end %>
