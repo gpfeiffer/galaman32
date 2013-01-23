@@ -8,6 +8,7 @@
     <th></th>
 <% if session[:edit] %>
     <th></th>
+    <th></th>
 <% end %>
   </tr>
 
@@ -18,6 +19,8 @@
     <td><%= ages_to_words(event.age_range) %></td>
     <td align="right"><%= pluralize(event.entries.count, 'entry') %></td>
 <% if session[:edit] %>
+    <td><%= link_to 'Seed', new_heat_path(:event_id => event) %>
+    </td>
     <td><%= link_to image_tag('delete.png', :class => "icon"), event, :confirm => 'Are you sure?', :method => :delete %></td>
 <% end %>
   </tr>
