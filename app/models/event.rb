@@ -38,7 +38,7 @@ class Event < ActiveRecord::Base
   def seeded_entries
     if is_relay? then
       entries.select { |x| x.time > 0 }.sort_by(&:time) +
-        entries.select { |x| x.time == 0 }.sort_by { |x| [x.age, x.name] }
+        entries.select { |x| x.time == 0 }.sort_by { |x| [x.age, x.id.hash % 97] }
     else
       entries.select { |x| x.time > 0 }.sort_by(&:time) +
         entries.select { |x| x.time == 0 }.sort_by { |x| x.swimmer.birthday }.reverse
@@ -54,7 +54,8 @@ class Event < ActiveRecord::Base
   end
 
   def to_heats(width = 6)
-    list = (is_relay? ? entries : seeded_entries).in_groups_of(width, false)
+#    list = (is_relay? ? entries : seeded_entries).in_groups_of(width, false)
+    list = seeded_entries.in_groups_of(width, false)
     if list.count > 1 and (width - list[-1].count) > 1
       list[-2, 2] = (list[-2] + list[-1]).in_groups(2, false)
     end
