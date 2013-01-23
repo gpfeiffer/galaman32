@@ -4,6 +4,12 @@
   <td align="right"><%= result.entry.age %></td>
   <td><%= result.entry.club.symbol %></td>
   <td align="right"><%= result.entry %></td>
+  <td align="right">
+    <% qu = result.entry.qualify %>
+    <% if qu %>
+      <%= qu[:qualification].name %>
+    <% end %>
+  </td>
   <td align="right"><%= link_to result, result %></td>  
   <td align="right">
     <% qu = result.qualify %>
