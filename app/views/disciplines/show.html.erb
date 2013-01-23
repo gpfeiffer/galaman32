@@ -36,7 +36,7 @@
 <% end %>
 
 <% @qts_by_qualification.each do |qualification, times| %>
-<h3><%= qualification.name %></h3>
+<h3><%= link_to qualification.name, qualification_times_path(:qualification_id => qualification, :discipline_id => @discipline) %></h3>
 <table class="fact-sheet">
   <% times.sort_by(&:age_min).each do |time| %>
 <tr class="times-major">
@@ -46,7 +46,6 @@
   <% end %>
 </table>
 <% end %>
-
 
 <hr />
 <% if session[:edit] %>
