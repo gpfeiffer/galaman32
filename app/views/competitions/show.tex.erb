@@ -1,6 +1,11 @@
 \small
 \section*{<%= @competition.name %>}
 <%= @competition.location %>, <%= @competition.date %>
+\section*{Clubs}
+<% @competition.invitations.sort { |x, y| x.club.full_name <=> y.club.full_name }.reverse_each do |invitation| %>
+<%= invitation.club.name %>\\
+<% end %>
+
 \section*{Meet Programme}
 
 <%= render @competition.events %>
