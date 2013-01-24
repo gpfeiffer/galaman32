@@ -19,6 +19,7 @@ class ClubsController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
+      format.csv
       format.xml  { render :xml => @club }
     end
   end
