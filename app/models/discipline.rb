@@ -57,4 +57,8 @@ class Discipline < ActiveRecord::Base
   def sample_result
     Result.all.select{ |x| x.discipline == self }.sample
   end
+
+  def qts_for_qualification(qualification)
+    qualification_times.select { |x| x.qualification == qualification }
+  end
 end

@@ -2,7 +2,13 @@ class QualificationTimesController < ApplicationController
   # GET /qualification_times
   # GET /qualification_times.xml
   def index
-    @qualification_times = QualificationTime.all
+    if params[:discipline_id] and params[:qualification_id]
+      @discipline = Discipline.find(params[:discipline_id])
+      @qualification = Qualification.find(params[:qualification_id])
+      @qualification_times = QualificationTime.find_all_by_discipline_id_and_qualification_id(@discipline.id, @qualification.id)
+    else
+      @qualification_times = QualificationTime.all
+    end
 
     respond_to do |format|
       format.html # index.html.erb
