@@ -50,6 +50,20 @@ class Entry < ActiveRecord::Base
     time / 6000 if time
   end
 
+  def qualify
+    if time == 0
+      return nil
+    end
+    best = nil
+    self.competition.qualifications.each do |qualification|
+      qt = qualification.qualification_times.select { |x| x.discipline == discipline and x.age_range.include? self.registration.age }.first
+      if qt and qt.time > time and (not best or qt.time < best[:time])
+        best = { :time => qt.time, :qualification => qualification }
+      end
+    end
+    return best
+  end
+
   def to_s
     if time == 0
       'NT'
