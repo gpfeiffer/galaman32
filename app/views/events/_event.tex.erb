@@ -1,13 +1,13 @@
 \subsection*{Event <%= event.pos %>. <%= event.discipline.to_words %>}
 
+<%# FIXME: prepare this table in controller/model ...%>
+<% times = event.qualification_times %>
+<% if times.any? %>
 \begin{center}
 \tablefirsthead{}
 \tablehead{}
 \tabletail{}
 \tablelasttail{}
-<%# FIXME: prepare this table in controller/model ...%>
-<% times = event.qualification_times %>
-<% if times.any? %>
 <% names = times.map { |x| x.qualification.name }.uniq %>
 <% ranges = times.map { |x| x.age_range }.uniq %>
 \begin{supertabular}{|l<%= 'r' * names.count %>|}
