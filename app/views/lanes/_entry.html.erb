@@ -6,7 +6,7 @@
     <td><%= entry.club.symbol %></td>
     <td align="right"><%= entry %></td>
     <td align="right">
-      <div id=<%= 'entry_' + entry.id.to_s %>>
+      <div id="<%= "entry_#{entry.id}" %>">
       <% if entry.result and entry.result.time %>
         <%= link_to entry.result, entry.result %>
       <% else %>

@@ -1,1 +1,1 @@
-$("<%= 'entry_' + @result.entry.id.to_s %>").update("<%= @result %>")
+$("<%= "entry_#{@result.entry.id}" %>").update('<%= link_to(@result, @result) %>')
