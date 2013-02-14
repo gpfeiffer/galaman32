@@ -131,7 +131,7 @@ var yScale = d3.time.scale()
       d3.min(data, function(d) { return d[1]; })*0.75,
       d3.max(data, function(d) { return d[1]; })*1.05
     ])
-    .range([h-padding, 0]);
+    .range([0, h-padding]);
 
 var color = [
 "#aec7e8",
@@ -178,13 +178,13 @@ svg.selectAll("rect")
       return xScale(d.from);
     })
     .attr("y", function(d) {
-      return yScale(d.time);
+      return yScale(0);
     })
     .attr("width", function(d) {
       return d.duration * 200;  // FIXME: *compute* the width of a year
     })
     .attr("height", function(d) {
-      return yScale(0) - yScale(d.time)
+      return yScale(d.time) - yScale(0)
     })
     .attr("fill", function(d) {
       return color[d.color];
