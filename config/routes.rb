@@ -1,4 +1,6 @@
 Galaman::Application.routes.draw do
+  resources :skills
+
   resources :performances
 
   resources :supports
