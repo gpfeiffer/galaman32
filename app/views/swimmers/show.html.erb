@@ -43,8 +43,8 @@ results in a particular stroke.
           <% @results[discipline] = @results[discipline].sort_by { |x| x.entry.event.competition.date } %>
           <% best = best_result(@results[discipline]) %>
 	  <% if best %>
-            <span title="85%: <%= time_to_msc(best.time*100/85) %>&#013;80%: <%= time_to_msc(best.time*100/80) %>&#013;75%: <%= time_to_msc(best.time*100/75); %>">
-              <%= link_to best, results_path(:swimmer_id => @swimmer, :discipline_id => discipline) %><br/>
+            <span>
+              <%= link_to best, results_path(:swimmer_id => @swimmer, :discipline_id => discipline), 'data-popup' => true %><br/>
               (<%= best.entry.event.competition.date.strftime("%d-%m-%y") %>)
             </span>
           <% end %>
