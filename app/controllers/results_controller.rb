@@ -111,22 +111,4 @@ class ResultsController < ApplicationController
     end
   end
 
-  # GET /results/1/copy
-  def copy
-    @result = Result.find(params[:id])
-    @user = User.find(params[:user_id])
-    @performance = Performance.new
-    @performance[:time] = @result.time
-    @performance[:name] = @result.swimmer.name
-    @performance[:date] = @result.competition.date
-    @performance[:competition] = @result.competition.name
-    @performance[:discipline_id] = @result.discipline.id
-    @user.performances << @performance
-    @user.save
-
-    respond_to do |format|
-      format.html { redirect_to @user }
-      format.xml  { head :ok }
-    end
-  end
 end

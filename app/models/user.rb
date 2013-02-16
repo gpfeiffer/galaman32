@@ -1,7 +1,6 @@
 class User < ActiveRecord::Base
   has_many :supports, :dependent => :destroy
   has_many :swimmers, :through => :supports
-  has_many :performances
 
   validates :name, :presence => true, :uniqueness => true
 
