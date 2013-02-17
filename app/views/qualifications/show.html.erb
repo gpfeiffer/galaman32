@@ -34,7 +34,7 @@
             <%= row[:label] %>
           </th>
           <% row[:list].each do |qt| %>
-            <td align="right"><%= qt %></td>
+            <td align="right" <%= raw ', title="' + "#{qt.fina_points}" + '"' if qt %>><%= qt %></td>
           <% end %>
         <tr>
       <% end %>

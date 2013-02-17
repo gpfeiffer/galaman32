@@ -12,7 +12,7 @@
 <th class="discipline"><%= discipline.stroke %> <%= discipline.distance %>m</th>
 <% @qualification.age_ranges(gender).each do |ages| %>
   <td align="right"><%= t = @qualification.filter_time(discipline, ages) 
-                        t ? (link_to t, t) : nil %></td>
+                        t ? (link_to t, t, :title => t.fina_points) : nil %></td>
 <% end %>
 </tr>
 <% end %>

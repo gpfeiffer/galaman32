@@ -49,4 +49,11 @@ class QualificationTime < ActiveRecord::Base
       sprintf('%d.%02d', self.secs, self.centis)
     end
   end
+
+  # convert into FINA points
+  def fina_points
+    qualification = Qualification.find_by_name("FINA Base")
+    base_time = QualificationTime.find_by_qualification_id_and_discipline_id(qualification.id, discipline.id).time
+    ((10 * base_time / time.to_f)**3).to_i
+  end
 end
