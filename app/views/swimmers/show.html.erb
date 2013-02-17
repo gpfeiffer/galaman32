@@ -62,6 +62,17 @@ results in a particular stroke.
 <%= render 'qualifications' %>
 <% end %>
 
+<h2>Competitions.</h2>
+
+<ul>
+<% @swimmer.registrations.sort_by { |x| x.competition.date }.reverse_each do |registration| %>
+<%   competition = registration.competition %>
+<li><%= competition.date %>: <%= link_to competition.name, registration %> (<%= competition.location %>)</li>
+<% end %>
+</ul>
+
+<hr />
+
 <% if session[:edit] %>
 <%= link_to 'Edit', edit_swimmer_path(@swimmer) %>
 <% end %>
