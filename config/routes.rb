@@ -19,8 +19,6 @@ Galaman::Application.routes.draw do
     get 'view' => :view
   end
 
-  resources :users
-
   match 'lanes/:id' => 'lanes#show', :via => :get
   match 'lanes' => 'lanes#index', :via => :get
 
