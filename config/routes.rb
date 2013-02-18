@@ -1,6 +1,10 @@
 Galaman::Application.routes.draw do
   devise_for :users
 
+  scope "/admin" do
+    resources :users
+  end
+
   resources :skills
 
   resources :supports
@@ -12,14 +16,6 @@ Galaman::Application.routes.draw do
   resources :relays
 
   get "admin" => 'admin#index'
-
-  controller :sessions do
-    get 'login' => :new
-    post 'login' => :create
-    delete 'logout' => :destroy
-    get 'edit' => :edit
-    get 'view' => :view
-  end
 
   match 'lanes/:id' => 'lanes#show', :via => :get
   match 'lanes' => 'lanes#index', :via => :get
@@ -105,7 +101,7 @@ Galaman::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  root :to => "home#index", :as => 'home'
+  root :to => "home#index"
 
   # See how all your routes lay out with "rake routes"
 

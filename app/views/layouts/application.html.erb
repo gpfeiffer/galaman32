@@ -18,25 +18,18 @@
 </div>
 <div id="columns">
   <div id="side">
-    <%= link_to "Home", home_path %><br/>
+    <%= link_to "Home", root_path %><br/>
     <%= link_to "Clubs", clubs_path %><br/>
     <%= link_to "Competitions", competitions_path %><br/>
     <%= link_to "Disciplines", disciplines_path %><br/>
     <%= link_to "Qualifications", qualifications_path %><br/>
     <br/>
-    <% if session[:user_id] %>
-      <% user = User.find(session[:user_id]) %>
-      <%= link_to 'Logout', logout_path, :method => :delete %>
+    <% if user_signed_in? %>
+      <% user = current_user %>
+        <%= link_to 'Sign out', destroy_user_session_path, :method => :delete, :confirm => "Sign out?" %> 
 	  (logged in as <%= link_to user.name, user %>)<br/>
-        <% if session[:admin] %>
-        <% if session[:edit] %>
-          Edit mode (click to <%= link_to 'View', view_path %>)
-        <% else %>
-          View mode (click to <%= link_to 'Edit', edit_path %>)
-        <% end %><br/>
-        <% end %>
     <% else %>
-    <%= link_to "Login", login_path %><br/>
+    <%= link_to "Sign in", new_user_session_path %><br/>
     <% end %>
   </div>
   <div id="main">
