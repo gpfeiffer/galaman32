@@ -1,9 +1,9 @@
 class AssignmentsController < ApplicationController
+  load_and_authorize_resource
+
   # GET /assignments
   # GET /assignments.xml
   def index
-    @assignments = Assignment.all
-
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @assignments }
@@ -13,8 +13,6 @@ class AssignmentsController < ApplicationController
   # GET /assignments/1
   # GET /assignments/1.xml
   def show
-    @assignment = Assignment.find(params[:id])
-
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @assignment }
@@ -24,7 +22,7 @@ class AssignmentsController < ApplicationController
   # GET /assignments/new
   # GET /assignments/new.xml
   def new
-    @assignment = Assignment.new
+    @assignment.user = User.find(params[:user_id])
 
     respond_to do |format|
       format.html # new.html.erb
@@ -34,17 +32,14 @@ class AssignmentsController < ApplicationController
 
   # GET /assignments/1/edit
   def edit
-    @assignment = Assignment.find(params[:id])
   end
 
   # POST /assignments
   # POST /assignments.xml
   def create
-    @assignment = Assignment.new(params[:assignment])
-
     respond_to do |format|
       if @assignment.save
-        format.html { redirect_to(@assignment, :notice => 'Assignment was successfully created.') }
+        format.html { redirect_to(@assignment.user, :notice => 'Assignment was successfully created.') }
         format.xml  { render :xml => @assignment, :status => :created, :location => @assignment }
       else
         format.html { render :action => "new" }
@@ -56,11 +51,9 @@ class AssignmentsController < ApplicationController
   # PUT /assignments/1
   # PUT /assignments/1.xml
   def update
-    @assignment = Assignment.find(params[:id])
-
     respond_to do |format|
       if @assignment.update_attributes(params[:assignment])
-        format.html { redirect_to(@assignment, :notice => 'Assignment was successfully updated.') }
+        format.html { redirect_to(@assignment.user, :notice => 'Assignment was successfully updated.') }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -72,7 +65,6 @@ class AssignmentsController < ApplicationController
   # DELETE /assignments/1
   # DELETE /assignments/1.xml
   def destroy
-    @assignment = Assignment.find(params[:id])
     @assignment.destroy
 
     respond_to do |format|

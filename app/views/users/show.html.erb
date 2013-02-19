@@ -1,4 +1,5 @@
-<div id="main">
+<h1>User <%= @user.name %></h1>
+
 <p>
   <b>Email:</b>
   <%= @user.email %>
@@ -23,7 +24,9 @@
   </tr>
 </table>
 
-<h3 class="edit-head"><%= 'Role'.pluralize @user.roles.count %></h3>
+<br />
+
+<h3 class="edit-head"><%= pluralize(@user.roles.count, 'Role') %></h3>
 <div class="edit">
 <%= link_to '[+]', new_assignment_path(:user_id => @user) %>
 </div>
@@ -38,6 +41,6 @@
 <% end %>
 </ul>
 
+<hr />
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>
-</div>

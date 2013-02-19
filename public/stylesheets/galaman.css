@@ -176,3 +176,16 @@ tr.fact-title th {
     background: blue;
     color: white;
 }
+
+.edit-head {
+  display: inline;
+}
+
+.edit {
+  display: inline;
+  font-size: smaller;
+  vertical-align: super;
+  a {
+    text-decoration: none;
+  }
+}
