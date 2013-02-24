@@ -1,16 +1,24 @@
 <h1>Disciplines</h1>
 
-<table>
-<% @disciplines.sort_by { |x| [x.gender, Discipline::STROKES.index(x.stroke), x.distance, x.mode, Discipline::COURSES.index(x.course)] }.each do |discipline| %>
-  <tr>
+<% @disciplines.group_by(&:course).each do |course, disciplines_course| %>
+<% disciplines_course.group_by(&:gender).each do |gender, disciplines| %>
+
+
+<table class="fact-sheet">
+<tr>
+<th><%= {'f' => "Female", 'm' => "Male"}[gender] %> (<%= course %>)</th>
+</tr>
+<% disciplines.sort_by { |x| [x.mode, Discipline::STROKES.index(x.stroke), x.distance] }.each do |discipline| %>
+  <tr class="fact-major">
     <td><%= link_to discipline, discipline %></td>
   </tr>
 <% end %>
 </table>
-
+<% end %>
 <br />
+<% end %>
 
 <hr />
-<% if session[:edit] %>
+<% if can? :create, Discipline %>
 <%= link_to 'New Discipline', new_discipline_path %>
 <% end %>

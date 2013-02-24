@@ -1,39 +1,25 @@
 <p id="notice"><%= notice %></p>
 
-<h2><%= @discipline %></h2>
-
-<p>
-  <b>Gender:</b>
-  <%= @discipline.gender %>
-</p>
-
-<p>
-  <b>Distance:</b>
-  <%= @discipline.distance %>
-</p>
-
-<p>
-  <b>Course:</b>
-  <%= @discipline.course %>
-</p>
-
-<p>
-  <b>Stroke:</b>
-  <%= @discipline.stroke %>
-</p>
-
-<p>
-  <b>Mode:</b>
-  <%= @discipline.mode %>
-</p>
+<h1><%= @discipline %></h1>
 
 <% r = @discipline.sample_result %>
 <% if r %>
 <p>
-  <b>Sample:</b>
+  <b>Sample Time:</b>
   <%= r %> (<%= r.entry.swimmer.first_last %>, <%= r.entry.club.symbol %>, <%= r.entry.event.competition.date %>)
 </p>
 <% end %>
+
+<h2>Competitions</h2>
+
+<ul>
+<% @discipline.events.sort_by { |x| x.competition.date }.reverse_each do |event| %>
+<% competition = event.competition %>
+<li><%= competition.date %>: <%= link_to competition.name, event %> (<%= competition.location %>)</li>
+<% end %>
+</ul>
+
+<h2>Qualification Times</h2>
 
 <% @qts_by_qualification.each do |qualification, times| %>
 <h3><%= link_to qualification.name, qualification_times_path(:qualification_id => qualification, :discipline_id => @discipline) %></h3>
@@ -48,8 +34,10 @@
 <% end %>
 
 <hr />
-<% if session[:edit] %>
+<% if can? :update, @discipline %>
 <%= link_to 'Edit', edit_discipline_path(@discipline) %> |
+<% end %>
+<% if can? :destroy, @discipline %>
 <%= link_to 'Destroy', @discipline, :confirm => 'Are you sure?', :method => :delete %> |
 <% end %>
 <%= link_to 'Back', disciplines_path %>

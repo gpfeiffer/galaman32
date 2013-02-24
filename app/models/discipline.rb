@@ -2,6 +2,7 @@ class Discipline < ActiveRecord::Base
   has_many :events
   has_many :competitions, :through => :events
   has_many :qualification_times
+  has_many :qualifications, :through=> :qualification_times
 
   # FIXME: make sure no event or qualification_time is refering before delete
 
@@ -55,10 +56,7 @@ class Discipline < ActiveRecord::Base
   end
 
   def sample_result
-    Result.all.select{ |x| x.discipline == self }.sample
-  end
-
-  def qts_for_qualification(qualification)
-    qualification_times.select { |x| x.qualification == qualification }
+    event = events.sample
+    event.results.sample if event
   end
 end
