@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Galaman</title>
+  <title>GalaMan</title>
   <%= favicon_link_tag %>
   <%= stylesheet_link_tag "scaffold", :media => "all" %>
   <%= stylesheet_link_tag "galaman", :media => "all" %>
@@ -12,25 +12,37 @@
 </head>
 <body id="manager">
 <div id="banner">
-  <%= @page_title || "Gala Manager" %>
-  <div id="admin">
-  </div>
+<div id="logo">
+  <%= link_to "GalaManager", root_path %> 
+</div>
+<div id="admin">
+  <% if user_signed_in? %>
+  <% user = current_user %>
+  <%= link_to 'Sign out', destroy_user_session_path, :method => :delete, :confirm => "Sign out?" %> 
+  (logged in as <%= link_to user, user %>)<br/>
+	<% else %>
+	<%= link_to "Sign in", new_user_session_path %><br/>
+	  <% end %>
+</div>
 </div>
 <div id="columns">
   <div id="side">
-    <%= link_to "Home", root_path %><br/>
     <%= link_to "Clubs", clubs_path %><br/>
     <%= link_to "Competitions", competitions_path %><br/>
     <%= link_to "Disciplines", disciplines_path %><br/>
     <%= link_to "Qualifications", qualifications_path %><br/>
     <br/>
-    <% if user_signed_in? %>
-      <% user = current_user %>
-        <%= link_to 'Sign out', destroy_user_session_path, :method => :delete, :confirm => "Sign out?" %> 
-	  (logged in as <%= link_to user.name, user %>)<br/>
-    <% else %>
-    <%= link_to "Sign in", new_user_session_path %><br/>
-    <% end %>
+  <% if user_signed_in? %>
+<% if user.role? :admin %>
+<div id="editview">
+<% if user_session[:edit] %>
+ <%= button_to 'View', root_path(:edit => false), :remote => true %>
+<% else %>
+ <%= button_to 'Edit', root_path(:edit => true), :remote => true %>
+ <% end %>
+</div>
+<% end %>
+<% end %>
   </div>
   <div id="main">
     <%= yield %>
