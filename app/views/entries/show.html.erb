@@ -20,7 +20,7 @@
   <%= time_to_msc(@entry.time) %>
 </p>
 
-<% if session[:edit] %>
+<% if user_session[:edit] %>
 <%= link_to 'Edit', edit_entry_path(@entry) %> |
 <%= link_to 'Destroy', @entry, :confirm => 'Are you sure?', :method => :delete %> |
 <% end %>

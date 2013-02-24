@@ -73,6 +73,6 @@ results in a particular stroke.
 
 <hr />
 
-<% if session[:edit] %>
+<% if user_session[:edit] %>
 <%= link_to 'Edit', edit_swimmer_path(@swimmer) %>
 <% end %>

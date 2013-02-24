@@ -24,7 +24,7 @@
 	<% if entry %>
           <%= link_to entry, entry %>
 	<% elsif event.permits_relay? relay %>
-          <% if session[:edit] %>
+          <% if user_session[:edit] %>
 	    <%= link_to (raw "&square;"), new_entry_path(:event_id => event.id, :relay_id => relay.id) %> 
           <% end %>
         <% end %>
@@ -37,6 +37,6 @@
 <br />
 <% end %>
 
-<% if session[:edit] %>
+<% if user_session[:edit] %>
 <%= link_to 'Add Relay Team', new_relay_path(:invitation_id => @invitation) %>
 <% end %>

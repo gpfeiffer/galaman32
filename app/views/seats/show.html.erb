@@ -16,7 +16,7 @@
 </p>
 
 
-<% if session[:edit] %>
+<% if user_session[:edit] %>
 <%= link_to 'Edit', edit_seat_path(@seat) %> |
 <%= link_to 'Destroy', @seat, :confirm => 'Are you sure?', :method => :delete %> |
 <% end %>

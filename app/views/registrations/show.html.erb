@@ -45,7 +45,7 @@
   <% end %>
 </table>
 <hr>
-<% if session[:edit] %>
+<% if user_session[:edit] %>
 <%= link_to 'Edit', edit_registration_path(@registration) %> |
 <% end %>
 <%= link_to 'Back', @registration.invitation %>

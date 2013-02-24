@@ -25,7 +25,7 @@
 </p>
 
 
-<% if session[:edit] %>
+<% if user_session[:edit] %>
 <%= link_to 'Edit', edit_result_path(@result) %> |
 <%= link_to 'Destroy', @result, :confirm => 'Are you sure?', :method => :delete %> |
 <% end %>

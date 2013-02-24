@@ -23,7 +23,7 @@
 
 <hr />
 
-<% if session[:edit] %>
+<% if user_session[:edit] %>
 <%= link_to 'Edit', edit_qualification_time_path(@qualification_time) %> |
 <%= link_to 'Destroy', @qualification_time, :confirm => 'Are you sure?', :method => :delete %> |
 <% end %>
