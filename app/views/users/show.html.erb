@@ -1,4 +1,6 @@
-<h1>User <%= @user.name %></h1>
+<h2>Users</h2>
+
+<h1><%= @user %></h1>
 
 <p>
   <b>Email:</b>
@@ -40,6 +42,20 @@
 </li>
 <% end %>
 </ul>
+
+<% if  @user.supports.any? %>
+<hr />
+<h3>Supports:</h3>
+<ul>
+<% @user.swimmers.each do |swimmer| %>
+<li>
+<%= link_to swimmer.first_last, swimmer %>
+(<%= link_to swimmer.club.symbol, swimmer.club %>)
+</li>
+<% end %>
+</ul>
+<% end %>
+
 
 <hr />
 <%= link_to 'Edit', edit_user_path(@user) %> |
