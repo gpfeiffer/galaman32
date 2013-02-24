@@ -67,6 +67,7 @@
   margin-left: 17em;
   padding-top: 4ex;
   padding-left: 2em;
+  padding-right: 2em;
   background: yellow;
 }
 
@@ -88,6 +89,10 @@
 #side a:hover {
     background:yellow;
     color: blue;
+}
+
+#alert {
+  color: red;
 }
 
 img.icon {
