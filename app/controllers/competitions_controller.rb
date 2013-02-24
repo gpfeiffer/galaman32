@@ -5,6 +5,7 @@ class CompetitionsController < ApplicationController
   # GET /competitions.xml
   def index
     @competitions = Competition.all
+    @competitions_by_season = @competitions.group_by(&:season)
     
     respond_to do |format|
       format.html # index.html.erb

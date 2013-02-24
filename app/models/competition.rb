@@ -17,4 +17,9 @@ class Competition < ActiveRecord::Base
   def relay_events
     events.select { |x| x.is_relay? }
   end
+
+  def season
+    year = date.year + (date.month > 8 ? 1 : 0)
+    return "%d/%02d" % [year-1, year % 100]
+  end
 end

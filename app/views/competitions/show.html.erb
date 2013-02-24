@@ -21,7 +21,7 @@ and
 <%= render 'events' %>
 <hr/>
 
-<% if session[:edit] %>
+<% if user_session[:edit] %>
 <%= link_to 'Edit', edit_competition_path(@competition) %> |
 <%= link_to 'Destroy', @competition, :confirm => 'Are you sure?', :method => :delete  %> |
 <%= link_to 'Programme (pdf)', competition_path(@competition, :format => :tex), :target => "_blank" %> |

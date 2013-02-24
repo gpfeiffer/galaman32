@@ -4,7 +4,7 @@
 <% @competition.standards.each do |standard| %>
   <tr>
     <td><%= link_to standard.qualification.name, standard.qualification %></td>
-<% if session[:edit] %>
+<% if user_session[:edit] %>
     <td><%= link_to image_tag('delete.png', :class => "icon"), standard, :confirm => 'Are you sure?', :method => :delete %></td>
 <% end %>
   <tr>
@@ -13,6 +13,6 @@
 
 <br />
 
-<% if session[:edit] %>
+<% if user_session[:edit] %>
 <%= link_to 'Select Qualification Standards', new_standard_path(:competition_id => @competition) %>
 <% end %>

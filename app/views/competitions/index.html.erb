@@ -1,8 +1,12 @@
 <h1>Competitions</h1>
 
-<table>
-<% @competitions.reverse_each do |competition| %>
-  <tr>
+<% @competitions_by_season.reverse_each do |season, competitions| %>
+
+<h2><%= season %></h2>
+
+<table class="fact-sheet">
+<% competitions.reverse_each do |competition| %>
+  <tr class="fact-major">
     <td><%= competition.date %></td>
     <td><%= link_to competition.name, competition %>
     (<%= competition.location %>)</td>
@@ -11,8 +15,10 @@
 </table>
 
 <br />
+
+<% end %>
 <hr />
 
-<% if session[:edit] %>
+<% if user_session[:edit] %>
 <%= link_to 'New Competition', new_competition_path %>
 <% end %>
