@@ -1,6 +1,22 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
+  before_filter :authenticate_user!
+
+  rescue_from CanCan::AccessDenied do |exception|
+    flash[:alert] = "Access denied."
+    redirect_to root_url
+  end
+
+  #  test.  redirect after login.
+  def after_sign_in_path_for(user)
+    if user
+      user_path(user)
+    else
+      root_path
+    end
+  end
+
   # how to convert a hash with components mins, secs, centis into time
   def time_from_msc(opts)
     m = opts[:mins].to_i

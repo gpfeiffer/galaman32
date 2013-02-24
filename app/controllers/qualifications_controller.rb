@@ -1,5 +1,5 @@
 class QualificationsController < ApplicationController
-  skip_before_filter :authorize, :only => [:index, :show]
+  skip_before_filter :authenticate_user!, :only => [:index, :show]
 
   # GET /qualifications
   # GET /qualifications.xml
