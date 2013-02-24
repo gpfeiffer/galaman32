@@ -9,8 +9,6 @@
     <th>Gender</th>
     <th>Registration</th>
     <th></th>
-    <th></th>
-    <th></th>
   </tr>
 
 <% @swimmers.each do |swimmer| %>
@@ -22,8 +20,6 @@
     <td><%= swimmer.gender %></td>
     <td><%= swimmer.registration %></td>
     <td><%= link_to 'Show', swimmer %></td>
-    <td><%= link_to 'Edit', edit_swimmer_path(swimmer) %></td>
-    <td><%= link_to 'Destroy', swimmer, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>
 </table>

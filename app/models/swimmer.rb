@@ -31,7 +31,7 @@ class Swimmer < ActiveRecord::Base
   end
 
   def results
-    entries.map { |entry| entry.result }.compact
+    entries.map(&:result).compact
   end
 
   def personal_best(discipline)

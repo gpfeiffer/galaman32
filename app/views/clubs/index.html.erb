@@ -6,9 +6,6 @@
     <td><%= link_to club.name, club %></td>
     <td>:</td>
     <td align="right"><%= club.swimmers.count %> swimmers</td>
-<% if user_session[:edit] %>
-    <td><%= link_to image_tag('delete.png', :class => "icon"), club, :confirm => 'Are you sure?', :method => :delete %></td>
-<% end %>
   </tr>
 <% end %>
 </table>
@@ -16,6 +13,6 @@
 <br />
 <hr />
 
-<% if user_session[:edit] %>
-<%= link_to 'New Club', new_club_path %>
+<% if can? :create, Club %>
+  <%= link_to 'New Club', new_club_path %>
 <% end %>

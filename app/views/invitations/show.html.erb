@@ -6,7 +6,7 @@
   (<%= @competition.location %>, <%= @competition.date %>)
 </h3>
 
-<h2><%= link_to @club.name, @club %></h2>
+<h1><%= link_to @club.name, @club %></h1>
 
 <p>
 <% nr_relays = @invitation.relays.map { |x| x.entries.count }.sum %>

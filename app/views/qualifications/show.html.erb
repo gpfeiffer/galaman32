@@ -1,8 +1,10 @@
 <p id="notice"><%= notice %></p>
 
-<h2>
+<h3><%= link_to 'Qualifications', qualifications_path %></h3>
+
+<h1>
   <%= @qualification.name %> Times
-</h2>
+</h1>
 
 <hr />
 <%= render 'qualification_times' %>
@@ -46,7 +48,10 @@
 <br />
 <hr />
 
-<% if user_session[:edit] %>
-<%= link_to 'Edit', edit_qualification_path(@qualification) %> |
+<% if can? :update, @qualification %>
+  <%= link_to 'Edit', edit_qualification_path(@qualification) %> |
+<% end %>
+<% if can? :destroy, @qualification %>
+  <%= link_to 'Destroy', @qualification, :confirm => 'Are you sure?', :method => :delete  %> |
 <% end %>
 <%= link_to 'Back', qualifications_path %>

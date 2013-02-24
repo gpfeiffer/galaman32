@@ -135,6 +135,7 @@ th.discipline {
 table.fact-sheet {
     border-collapse: collapse;
     display: inline;
+    vertical-align: top;
 }
 
 table.fact-sheet tbody {

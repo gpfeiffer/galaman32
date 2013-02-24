@@ -1,5 +1,7 @@
 <p id="notice"><%= notice %></p>
 
+<h3><%= link_to 'Disciplines', disciplines_path %></h3>
+
 <h1><%= @discipline %></h1>
 
 <% r = @discipline.sample_result %>
@@ -22,7 +24,7 @@
 <h2>Qualification Times</h2>
 
 <% @qts_by_qualification.each do |qualification, times| %>
-<h3><%= link_to qualification.name, qualification_times_path(:qualification_id => qualification, :discipline_id => @discipline) %></h3>
+<h3><%= link_to qualification.name, qualification %></h3>
 <table class="fact-sheet">
   <% times.sort_by(&:age_min).each do |time| %>
 <tr class="times-major">

@@ -19,6 +19,6 @@
 <% end %>
 <hr />
 
-<% if user_session[:edit] %>
-<%= link_to 'New Competition', new_competition_path %>
+<% if can? :create, Competition %>
+  <%= link_to 'New Competition', new_competition_path %>
 <% end %>

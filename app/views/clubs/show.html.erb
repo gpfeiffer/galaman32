@@ -1,9 +1,11 @@
 <p id="notice"><%= notice %></p>
 
-<h2>
+<h3><%= link_to 'Clubs', clubs_path %></h3>
+
+<h1>
   <%= @club.full_name %>
   (<%= @club.symbol %>)
-</h2>
+</h1>
 
 <p>
   <b>Contact:</b>
@@ -24,23 +26,20 @@
 <br />
 <br />
 
-<% Swimmer::GENDERS.each do |sex| %>
+<% @club.swimmers.group_by(&:gender).each do |gender, swimmers| %>
 <table class="fact-sheet">
 <th>ID</th>
-<th>Swimmer (<%= sex.upcase %>)</th>
+<th>Swimmer (<%= gender.upcase %>)</th>
 <th>Birthdate</th>
-<% if user_session[:edit] %>
-<th></th>
-<% end %>
-<%= render @club.swimmers.where(:gender => sex) %>
+<%= render swimmers %>
 </table>
-<% end %>
 <br />
+<% end %>
 <hr />
 
-<% if user_session[:edit] %>
-<%= link_to 'New Swimmer', new_swimmer_path(:club_id => @club) %>
-<hr/>
+<% if can? :update, @club %>
+  <%= link_to 'New Swimmer', new_swimmer_path(:club_id => @club) %>
+  <hr/>
 <% end %>
 
 <h3>Recent Invitations.</h3>
@@ -48,10 +47,14 @@
 <%= render @club.invitations.select { |x| x.competition.date.to_datetime > 1.year.ago }.sort_by { |x| x.competition.date }.reverse %>
 </ul>
 ... see <%= link_to "all invitations", invitations_path(:club_id => @club) %>.
+
 <hr/>
 
-<% if user_session[:edit] %>
-<%= link_to 'Edit', edit_club_path(@club) %> |
+<% if can? :update, @club %>
+  <%= link_to 'Edit', edit_club_path(@club) %> |
+<% end %>
+<% if can? :destroy, @club %>
+  <%= link_to 'Destroy', @club, :confirm => 'Are you sure?', :method => :delete  %> |
 <% end %>
 <%= link_to 'Back', clubs_path %>
 <br />

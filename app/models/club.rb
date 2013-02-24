@@ -11,4 +11,8 @@ class Club < ActiveRecord::Base
   def name
     "#{self.full_name} (#{self.symbol})"
   end
+
+  def to_s
+    full_name
+  end
 end

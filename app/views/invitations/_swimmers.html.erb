@@ -27,7 +27,7 @@
 	  <% if entry %>
             <%= link_to entry, entry %>
 	  <% elsif event.permits? registration %>
-            <% if user_session[:edit] %>
+            <% if can? :update, registration %>
               <%= link_to (raw "&square;"), new_entry_path(:event_id => event.id, :registration_id => registration.id) %> 
             <% end %>
           <% end %>
@@ -50,6 +50,6 @@
   <br />
 <% end %>
 
-<% if user_session[:edit] %>
-<%= link_to 'Register Swimmers', registrations_path(:invitation_id => @invitation) %>
+<% if can? :update, @invitation %>
+  <%= link_to 'Register Swimmers', registrations_path(:invitation_id => @invitation) %>
 <% end %>

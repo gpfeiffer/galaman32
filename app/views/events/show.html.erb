@@ -46,8 +46,8 @@
 <br />
 <hr />
 
-<% if user_session[:edit] %>
-<%= link_to 'Edit', edit_event_path(@event) %> |
-<%= link_to 'Seed', new_heat_path(:event_id => @event) %>  |
+<% if can? :update, @event %>
+  <%= link_to 'Edit', edit_event_path(@event) %> |
+  <%= link_to 'Seed', new_heat_path(:event_id => @event) %>  |
 <% end %>
 <%= link_to 'Back', @event.competition %>

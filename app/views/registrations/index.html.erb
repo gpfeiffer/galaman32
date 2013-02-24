@@ -1,12 +1,15 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Registrations.</h1>
+<h3><%= @competition.name %>
+(<%= @competition.location %>, <%= @competition.date %>)</h3>
 
-<h2><%= @competition.name %></h2>
-<%= @competition.location %>,
-<%= @competition.date %> 
+<h1><%= @club.name %></h1>
 
-<h2><%= @club.name %>.</h2>
+<p>The following swimmers are registered to swim for
+<%= @club.full_name %> at the
+<%= @competition.name %>.
+Click or unclick to change their status, then press
+the button to submit changes.</p>
 
 <%= form_for @invitation do |f| %>
   <%= hidden_field_tag :club_id, @club.id %>

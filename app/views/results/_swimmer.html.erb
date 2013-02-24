@@ -25,16 +25,14 @@
       <td align="right"><%= result %></td>
     </tr>
   <% end %>
-  <% if current_user.admin? || session[:senior] %>
     <tr>
       <td colspan="3">
         <div id="svg"></div>
       </td>
     </tr>
-  <% end %>
-  <% if current_user.admin? || @swimmer.user_ids.include?(session[:user_id]) %>
-    <% @swimmer.aims.each do |aim| %>
-      <% qt = aim.qualification.qualification_times.select { |x| x.discipline == discipline and x.age_range.include?(@swimmer.age(aim.date)) }.first %>
+  <% @swimmer.aims.each do |aim| %>
+    <% if can? :view, aim %>
+      <% qt = aim.qualification.qualification_times.find_all_by_discipline_id(discipline.id).select { |x| x.age_range.include?(@swimmer.age(aim.date)) }.first %>
       <% if qt %>
         <tr class="fact-minor" x="0" y="0">
           <td><%= aim.date %></td>

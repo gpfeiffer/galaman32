@@ -18,11 +18,11 @@
 <div id="admin">
   <% if user_signed_in? %>
   <% user = current_user %>
-  <%= link_to 'Sign out', destroy_user_session_path, :method => :delete, :confirm => "Sign out?" %> 
-  (logged in as <%= link_to user, user %>)<br/>
-	<% else %>
-	<%= link_to "Sign in", new_user_session_path %><br/>
-	  <% end %>
+    <%= link_to 'Sign out', destroy_user_session_path, :method => :delete, :confirm => "Sign out?" %> 
+    (logged in as <%= link_to user, user %>)
+  <% else %>
+    <%= link_to "Sign in", new_user_session_path %>
+  <% end %>
 </div>
 </div>
 <div id="columns">

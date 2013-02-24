@@ -6,10 +6,10 @@
     <th>Discipline</th>
     <th>Age</th>
     <th></th>
-<% if user_session[:edit] %>
-    <th></th>
-    <th></th>
-<% end %>
+    <% if can? :update, @competition %>
+      <th></th>
+      <th></th>
+    <% end %>
   </tr>
 
 <% @competition.events.each do |event| %>
@@ -18,17 +18,16 @@
     <td><%= link_to event.discipline.to_words, event %></td>
     <td><%= ages_to_words(event.age_range) %></td>
     <td align="right"><%= pluralize(event.entries.count, 'entry') %></td>
-<% if user_session[:edit] %>
-    <td><%= link_to 'Seed', new_heat_path(:event_id => event) %>
-    </td>
-    <td><%= link_to image_tag('delete.png', :class => "icon"), event, :confirm => 'Are you sure?', :method => :delete %></td>
-<% end %>
+    <% if can? :update, @competition %>
+      <td><%= link_to 'Seed', new_heat_path(:event_id => event) %></td>
+      <td><%= link_to image_tag('delete.png', :class => "icon"), event, :confirm => 'Are you sure?', :method => :delete %></td>
+    <% end %>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<% if user_session[:edit] %>
-<%= link_to 'New Event', new_event_path(:competition_id => @competition) %>
+<% if can? :update, @competition %>
+  <%= link_to 'New Event', new_event_path(:competition_id => @competition) %>
 <% end %>

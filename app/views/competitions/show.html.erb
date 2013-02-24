@@ -1,6 +1,8 @@
 <p id="notice"><%= notice %></p>
 
-<h2><%= @competition.name %></h2>
+<h3><%= link_to 'Competitions', competitions_path %></h3>
+
+<h1><%= @competition.name %></h1>
 
 <p>
   <%= @competition.location %>
@@ -21,9 +23,13 @@ and
 <%= render 'events' %>
 <hr/>
 
-<% if user_session[:edit] %>
-<%= link_to 'Edit', edit_competition_path(@competition) %> |
+<% if can? :update, @competition %>
+  <%= link_to 'Edit', edit_competition_path(@competition) %> |
+<% end %>
+<% if can? :destroy, @competition %>
 <%= link_to 'Destroy', @competition, :confirm => 'Are you sure?', :method => :delete  %> |
+<% end %>
+<% if can? :update, @competition %>
 <%= link_to 'Programme (pdf)', competition_path(@competition, :format => :tex), :target => "_blank" %> |
 <%= link_to 'Heats (pdf)', heats_path(:competition_id => @competition.id, :format => :tex), :target => "_blank" %> |
 <%= link_to 'Lanes (pdf)', lanes_path(:competition_id => @competition.id, :format => :tex), :target => "_blank" %> |
