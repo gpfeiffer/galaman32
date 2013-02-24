@@ -1,10 +1,10 @@
 <h1>Qualifications</h1>
 
-<table>
+<table class="fact-sheet">
 <% @qualifications.each do |qualification| %>
-  <tr>
+  <tr class="fact-major">
     <td><%= link_to qualification.name, qualification %></td>
-<% if session[:edit] %>
+<% if user_session[:edit] %>
     <td><%= link_to image_tag('delete.png', :class => "icon"), qualification, :confirm => 'Are you sure?', :method => :delete %></td>
 <% end %>
   </tr>
@@ -14,6 +14,6 @@
 <br />
 <hr />
 
-<% if session[:edit] %>
+<% if user_session[:edit] %>
 <%= link_to 'New Qualification', new_qualification_path %>
 <% end %>

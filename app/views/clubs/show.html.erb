@@ -29,7 +29,7 @@
 <th>ID</th>
 <th>Swimmer (<%= sex.upcase %>)</th>
 <th>Birthdate</th>
-<% if session[:edit] %>
+<% if user_session[:edit] %>
 <th></th>
 <% end %>
 <%= render @club.swimmers.where(:gender => sex) %>
@@ -38,7 +38,7 @@
 <br />
 <hr />
 
-<% if session[:edit] %>
+<% if user_session[:edit] %>
 <%= link_to 'New Swimmer', new_swimmer_path(:club_id => @club) %>
 <hr/>
 <% end %>
@@ -50,7 +50,7 @@
 ... see <%= link_to "all invitations", invitations_path(:club_id => @club) %>.
 <hr/>
 
-<% if session[:edit] %>
+<% if user_session[:edit] %>
 <%= link_to 'Edit', edit_club_path(@club) %> |
 <% end %>
 <%= link_to 'Back', clubs_path %>
