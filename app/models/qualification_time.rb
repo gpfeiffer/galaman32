@@ -53,7 +53,7 @@ class QualificationTime < ActiveRecord::Base
   # convert into FINA points
   def fina_points
     qualification = Qualification.find_by_name("FINA Base")
-    base_time = QualificationTime.find_by_qualification_id_and_discipline_id(qualification.id, discipline.id).time
-    ((10 * base_time / time.to_f)**3).to_i
+    qt = QualificationTime.find_by_qualification_id_and_discipline_id(qualification.id, discipline.id)
+    qt ? ((10 * qt.time / time.to_f)**3).to_i : nil
   end
 end
