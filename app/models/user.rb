@@ -5,16 +5,22 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :name
 
   has_many :assignments, :dependent => :destroy
   has_many :roles, :through => :assignments
+  has_many :supports, :dependent => :destroy
+  has_many :swimmers, :through => :supports
 
-  def name
-    email.split("@")[0]
+  def role? symbol
+    roles.map(&:name).include? symbol.to_s.camelcase
+  end
+  
+  def admin?
+    role? :admin
   end
 
   def to_s
-    name
+    name || email.split("@")[0]
   end
 end
