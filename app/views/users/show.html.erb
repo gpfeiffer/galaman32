@@ -1,3 +1,6 @@
+<p id="notice"><%= notice %></p>
+<p id="alert"><%= alert %></p>
+
 <h3>My account</h3>
 
 <h1><%= @user %></h1>
@@ -63,6 +66,7 @@
 <hr />
 <% if can? :update, @user%>
   <%= link_to 'Edit', edit_user_path(@user) %> |
+  <%= link_to 'Support', new_support_path(:user_id => @user) %> |
 <% end %>
 <%= link_to 'Edit account details', edit_user_registration_path %> |
 <%= link_to 'Back', :back %>

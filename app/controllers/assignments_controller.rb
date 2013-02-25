@@ -68,7 +68,7 @@ class AssignmentsController < ApplicationController
     @assignment.destroy
 
     respond_to do |format|
-      format.html { redirect_to(assignments_url) }
+      format.html { redirect_to @assignment.user, :notice => 'Assignment was successfully deleted.' }
       format.xml  { head :ok }
     end
   end
