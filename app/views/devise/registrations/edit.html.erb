@@ -1,6 +1,6 @@
-<h2>Edit my account</h2>
+<h3>Edit my account details</h3>
 
-<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
+<%= form_for(resource, :as => resource_name, :url => user_registration_path, :html => { :method => :put }) do |f| %>
   <h1><code><%= resource.email %></code></h1>
 
   <%= devise_error_messages! %>
@@ -12,7 +12,7 @@
     <table>
       <tr>
 	<td><%= f.text_field :name %></td>
-	<td><%= f.label :name, "New username" %></td>
+	<td><%= f.label :name, "Username" %></td>
       </tr>
       <tr>
 	<td><%= f.password_field :password %></td>
@@ -37,7 +37,7 @@
 
 <h3>Cancel my account</h3>
 
-<p>Finished? <%= link_to "Cancel my account", registration_path(resource_name), :confirm => "Are you sure?", :method => :delete %>.</p>
+<p>I want to leave GalaMan for good. <%= link_to "Cancel my account", registration_path(resource_name), :confirm => "Are you sure?", :method => :delete %>.</p>
 
 <hr />
 

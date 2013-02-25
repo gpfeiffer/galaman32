@@ -23,5 +23,6 @@
 </table>
 
 <br />
-
+<hr />
+<%= mail_to @users.map(&:email).join(','), "Mail users", :cc => "goetz.pfeiffer@nuigalway.ie" %> |
 <%= link_to 'New User', new_user_path %>

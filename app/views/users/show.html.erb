@@ -1,12 +1,14 @@
-<h2>Users</h2>
+<h3>My account</h3>
 
 <h1><%= @user %></h1>
 
 <p>
-  <b>Email:</b>
-  <%= @user.email %>
+  &lt;
+  <code><%= @user.email %></code>
+  &gt;
 </p>
 
+<% if can? :destroy, @user %>
 <table>
   <tr>
     <td>Sign in count:</td>
@@ -42,6 +44,7 @@
 </li>
 <% end %>
 </ul>
+<% end %>
 
 <% if  @user.supports.any? %>
 <hr />
@@ -58,5 +61,8 @@
 
 
 <hr />
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+<% if can? :update, @user%>
+  <%= link_to 'Edit', edit_user_path(@user) %> |
+<% end %>
+<%= link_to 'Edit account details', edit_user_registration_path %> |
+<%= link_to 'Back', :back %>
