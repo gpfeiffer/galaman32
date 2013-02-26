@@ -54,7 +54,7 @@ results in a particular stroke.
 
 <hr />
 
-<% if session[:admin] || @swimmer.user_ids.include?(session[:user_id]) %>
+<% if session[:admin] || @swimmer.users.include?(current_user) %>
 <%= render 'qualifications' %>
 <% end %>
 

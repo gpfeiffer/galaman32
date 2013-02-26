@@ -10,6 +10,9 @@ class Ability
       can :show, User do |u|
         u == user
       end
+      can :manage, Aim do |aim|
+        aim.swimmer.users.include? user
+      end
     end
         
 
