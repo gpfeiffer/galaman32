@@ -46,4 +46,20 @@ Galaman::Application.configure do
 
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
+
+  # set default url options for devise
+  config.action_mailer.default_url_options = { :host => 'galaman.heroku.com' }
+
+  # mailer settings
+  config.action_mailer.delivery_method = :smtp
+
+  config.action_mailer.smtp_settings = {
+    :address => "smtp.gmail.com",
+    :port => 587,
+    :domain => "heroku.com",
+    :authentication => "plain",
+    :enable_starttls_auto =>  true,
+    :user_name => ENV["GMAIL_USERNAME"],
+    :password => ENV["GMAIL_PASSWORD"]
+  }
 end
