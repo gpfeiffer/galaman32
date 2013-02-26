@@ -30,7 +30,7 @@
   <tr class="times-major">
     <th></th>
     <th>Event</th>
-    <th>Place</th>
+    <th>Plc</th>
     <th>Result</th>
     <th>Seed</th>
   </tr>
@@ -39,8 +39,8 @@
       <th><%= link_to entry.event.pos, entry.event %>.</th>
       <th><%= entry.event.discipline.nickname %></th>
       <td><%= "#{entry.result.place}." if entry.result %></td>
-      <td><%= entry.result or "" %></td>
-      <td>(<%= entry %>)</td>
+      <td style="text-align: right;"><%= entry.result or "" %></td>
+      <td style="text-align: right;">(<%= entry %>)</td>
     </tr>
   <% end %>
 </table>

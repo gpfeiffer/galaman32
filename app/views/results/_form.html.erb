@@ -14,7 +14,10 @@
   <%= f.hidden_field :entry_id %>
 
   <h2><%= @result.entry.event.competition.name %></h2>
-  <h3><%= @result.entry.event.discipline.name %></h3>
+  <h3>
+    <%= @result.entry.event.position %>.
+    <%= @result.entry.event.discipline.name %>
+  </h3>
 
   <h1><%= @result.entry.name %> (<%= @result.entry.club.symbol %>)</h1>
 
