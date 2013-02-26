@@ -5,8 +5,8 @@
 <h1><%= @swimmer.first_last %></h1>
 
 <p>
-  <b>Age:</b>
-  <%= "#{@swimmer.age}#{@swimmer.gender}" %>
+  <b>Age (F/M):</b>
+  <%= "#{@swimmer.age} (#{@swimmer.gender.upcase})" %>
   [<%= @swimmer.birthday %>].
   <b>Swim Ireland ID:</b>
   <%= @swimmer.registration %>.

@@ -1,40 +1,46 @@
 <p id="notice"><%= notice %></p>
 
-<%= swimmer.name %>
-(<%= swimmer.club.symbol %>)
-
-<h2>Individual Results.</h2>
 <% r = @results %>
 <% discipline = @discipline %>
-<table class="fact-sheet">
-  <tr class="fact-major">
-    <td colspan="2">
-      <b>
-        <%= discipline.stroke %>
-        <%= discipline.distance %>m 
-        <%= discipline.course %>
-      </b>
-    </td>
-    <td align="right"><%= best_result(r[discipline]) %></td>
-  </tr>
 
+<h3><%= link_to swimmer.name, swimmer %>
+(<%= link_to swimmer.club.symbol, swimmer.club %>)</h3>
+
+<!-- FIXME: provide controller method for this version of discipline name -->
+<h1>
+  <%= discipline.stroke %>
+  <%= discipline.distance %>m 
+  <%= discipline.course %>
+</h1>
+
+<div>
+<b>PB: <%= best_result(r[discipline]) %></b>
+</div>
+
+<br />
+
+<div id="svg"></div>
+
+<br />
+
+<h2>Individiual Results</h2>
+
+<table class="fact-sheet">
   <% r[discipline].sort_by { |x| x.entry.event.competition.date }.each do |result| %>
-    <tr class="fact-minor" x="<%= result.x %>" y="<%= result.y %>">
+    <tr class="fact-major" x="<%= result.x %>" y="<%= result.y %>">
       <td><%= result.entry.event.competition.date %></td>
-      <td><%= result.entry.event.competition.name %></td>
+      <td><%= link_to result.entry.event.competition.name, result.entry.registration %></td>
       <td align="right"><%= result %></td>
     </tr>
   <% end %>
-    <tr>
-      <td colspan="3">
-        <div id="svg"></div>
-      </td>
-    </tr>
+
+  <% if swimmer.aims.any? and can? :show, swimmer.aims.first %>
+<tr><th colspan="3">Aims</th></tr>
   <% @swimmer.aims.each do |aim| %>
     <% if can? :view, aim %>
       <% qt = aim.qualification.qualification_times.find_all_by_discipline_id(discipline.id).select { |x| x.age_range.include?(@swimmer.age(aim.date)) }.first %>
       <% if qt %>
-        <tr class="fact-minor" x="0" y="0">
+        <tr class="fact-major" x="0" y="0">
           <td><%= aim.date %></td>
           <td align="right">
             <%= aim.qualification.name %>
@@ -47,6 +53,7 @@
         </tr>
       <% end %>
     <% end %>
+  <% end %>
   <% end %>
 
 </table>
@@ -116,7 +123,7 @@ text {
 var timeFormat = d3.time.format("%M:%S");
 var dateFormat = d3.time.format("%d/%m/%Y")
 
-var data = d3.selectAll("tr.fact-minor")[0]
+var data = d3.selectAll("tr.fact-major")[0]
     .map(function(x) {return [dateFormat.parse(d3.select(x).attr("x")), +(d3.select(x).attr("y"))];})
     .select(function(x) { return x[1] > 0; } )
 
@@ -166,6 +173,7 @@ var qualification = d3.select("#qualification").selectAll("tr.time")[0]
 var svg = d3.select("#svg").append("svg")
     .attr("width", w)
     .attr("height", h)
+    .style("border", "1px solid black")
     .style("background-color", "snow");
 
 svg.selectAll("rect")
@@ -257,3 +265,5 @@ svg.append("g")
 </script>
 <br />
 <hr />
+
+<%= link_to 'Back', :back %>

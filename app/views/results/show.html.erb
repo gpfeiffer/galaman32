@@ -1,29 +1,37 @@
 <p id="notice"><%= notice %></p>
 
-  <h2><%= @result.entry.event.competition.name %></h2>
-  <h3><%= @result.entry.event.discipline.name %></h3>
+<h3><%= link_to @result.competition.name, @result.competition %> (<%= @result.competition.location %>, <%= @result.competition.date %>)</h3>
+<h1><%= link_to @result.swimmer.name, @result.entry.registration %> (<%= link_to @result.swimmer.club.symbol, @result.entry.invitation %>)</h1>
 
-  <h1><%= @result.entry.name %> (<%= @result.entry.club.symbol %>)</h1>
+<div>
+  <b>Age (F/M):</b>
+  <%= @result.entry.registration.age %> (<%= @result.swimmer.gender.upcase %>),
+  <b>ID:</b>
+  <%= @result.swimmer.registration %>.
+<div>
+<br>
+<br>
 
-  <p>Seed Time: <%= @result.entry %></p>
-
-<hr />
-
-<p>
-  <b>Time:</b>
-  <%= @result %>
-</p>
-
-<p>
-  <b>Comment:</b>
-  <%= @result.comment %>
-</p>
-
-<p>
-  <b>Place:</b>
-  <%= @result.place %>
-</p>
-
+<table class="fact-sheet">
+  <tr class="times-major">
+    <th></th>
+    <th>Event</th>
+    <th>Plc</th>
+    <th>Result</th>
+    <th>(Seed)</th>
+  </tr>
+  <% entry = @result.entry %>
+  <tr class="times-major">
+    <th><%= link_to entry.event.pos, entry.event %>.</th>
+    <th><%= entry.discipline.nickname %></th>
+    <td style="text-align: right;"><%= "#{entry.result.place}." if entry.result.place %></td>
+    <td style="text-align: right;">
+      <%= link_to(entry.result, results_path(:discipline_id => entry.discipline.id, :swimmer_id => @result.swimmer.id)) if entry.result %>
+    </td>
+    <td style="text-align: right;">(<%= entry %>)</td>
+  </tr>
+</table>
+<hr>
 
 <% if user_session[:edit] %>
 <%= link_to 'Edit', edit_result_path(@result) %> |

@@ -1,45 +1,34 @@
 <p id="notice"><%= notice %></p>
 
 
-<h4><%= @registration.competition.name %> (<%= @registration.competition.date %>)</h4>
-<h2>Registered Swimmer</h2>
-<hr>
+<h3><%= link_to @registration.competition.name, @registration.competition %> (<%= @registration.competition.location %>, <%= @registration.competition.date %>)</h3>
+<h1><%= link_to @registration.swimmer.name, @registration.swimmer %> (<%= link_to @registration.club.symbol, @registration.invitation %>)</h1>
 
-<table class="fact-sheet">
-<tr class="times-major">
-  <th>Name:</th>
-  <td><%= link_to @registration.swimmer.name, @registration.swimmer %></td>
-</tr>
-<tr class="times-major">
-  <th>ID:</th>
-  <td><%= @registration.swimmer.registration %></td>
-</tr>
-<tr class="times-major">
-  <th>Age (F/M):</th>
-  <td><%= @registration.age %> (<%= @registration.swimmer.gender.upcase %>)</td>
-</tr>
-<tr class="times-major">
-  <th>Club:</th>
-  <td><%= link_to @registration.club.symbol, @registration.club %></td>
-</tr>
-</table>
+<div>
+  <b>Age (F/M):</b>
+  <%= @registration.age %> (<%= @registration.swimmer.gender.upcase %>),
+  <b>ID:</b>
+  <%= @registration.swimmer.registration %>.
+<div>
+<br>
 <br>
 
-<h3>Events</h3>
 <table class="fact-sheet">
   <tr class="times-major">
     <th></th>
     <th>Event</th>
     <th>Plc</th>
     <th>Result</th>
-    <th>Seed</th>
+    <th>(Seed)</th>
   </tr>
   <% @registration.entries.each do |entry| %>
     <tr class="times-major">
       <th><%= link_to entry.event.pos, entry.event %>.</th>
-      <th><%= entry.event.discipline.nickname %></th>
-      <td><%= "#{entry.result.place}." if entry.result %></td>
-      <td style="text-align: right;"><%= entry.result or "" %></td>
+      <th><%= entry.discipline.nickname %></th>
+      <td style="text-align: right;"><%= "#{entry.result.place}." if entry.result.place %></td>
+      <td style="text-align: right;">
+        <%= link_to(entry.result, results_path(:discipline_id => entry.discipline.id, :swimmer_id => @registration.swimmer.id)) if entry.result %>
+      </td>
       <td style="text-align: right;">(<%= entry %>)</td>
     </tr>
   <% end %>
