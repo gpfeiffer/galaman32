@@ -5,28 +5,35 @@
     <%= link_to aim.qualification.name, aim %>
     <%= aim.date %>
 
-    <% table = aim.qualification.to_table(@swimmer.gender, @swimmer.age(aim.date)) %>
-    <% if table %>
+    <% age = @swimmer.age(aim.date) %>
+    <% gender = @swimmer.gender %>
+    <% times = aim.qualification.qualification_times.select { |x| x.gender == gender and x.age_range.include? age } %>
+    <% if times.any? %>
     <h3>
-      <%= table[:title] %> (<%= @swimmer.age(aim.date) %>)
+      <%= { 'f' => "Girls", 'm' => "Boys" }[gender] %> (<%= age %>)
     </h3>
 
     <table class="fact-sheet">
       <tr class="times-major">
         <th></th>
-        <% table[:heads].each do |head| %>
+        <% Discipline::STROKES.each do |stroke| %>
           <th style="width:80px">
-            <%= truncate(head, :length => 9) %>
+            <%= { 'Freestyle' => 'Free', 'Backstroke' => 'Back', 'Breaststroke' => 'Breast', 'Butterfly' => 'Fly', 'Ind Medley' => 'Medley' }[stroke] %>
           </th>
         <% end %>
       </tr>
-      <% table[:body].each do |row| %>
+      <% times.group_by(&:distance_course).sort_by  { |key, value| [key[0..-5].to_i, 100-key[-2].ord] }.each do |label, times_by_label| %>
         <tr class="times-major">
           <th>
-            <%= row[:label] %>
+            <%= label %>
           </th>
-          <% row[:list].each do |qt| %>
-            <td align="right"><%= qt %></td>
+          <% Discipline::STROKES.each do |stroke| %>
+            <% qt = times_by_label.select { |x| x.stroke == stroke }.first %>
+            <% if qt %>
+              <%= content_tag(:td, qt, :align => "right", :title => "#{qt.fina_points}") %>
+            <% else %>
+              <td></td>
+            <% end %>
           <% end %>
         <tr>
       <% end %>

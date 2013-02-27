@@ -2,7 +2,7 @@ class QualificationTime < ActiveRecord::Base
   belongs_to :qualification
   belongs_to :discipline
 
-  attr_writer :gender, :mode, :course, :stroke,:distance
+  attr_writer :gender, :mode, :course, :stroke, :distance
   delegate :gender, :distance, :course, :stroke, :mode, :is_relay?, :to => :discipline, :allow_nil => :true
 
   validates :age_min, :age_max, :presence => true, 
@@ -48,6 +48,10 @@ class QualificationTime < ActiveRecord::Base
     else
       sprintf('%d.%02d', self.secs, self.centis)
     end
+  end
+
+  def distance_course
+    "#{distance}m #{course}"
   end
 
   # convert into FINA points

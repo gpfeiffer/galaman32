@@ -1,28 +1,35 @@
-<% @qualification.courses.each do |course| %>
-<% @qualification.genders.each do |gender| %>
-<table class="qualification">
-<tr>
-<th><%= {'f' => "Female", 'm' => "Male"}[gender] %> (<%= course %>)</th>
-<% @qualification.age_ranges(gender).each do |ages| %>
-  <th><%= ages_to_s(ages) %></th>
-<% end %>
-</tr>
-<% @qualification.filter_disciplines(gender, course).each do |discipline| %>
-<tr>
-<th class="discipline"><%= discipline.stroke %> <%= discipline.distance %>m</th>
-<% @qualification.age_ranges(gender).each do |ages| %>
-  <td align="right"><%= t = @qualification.filter_time(discipline, ages) 
-                        t ? (link_to t, t, :title => t.fina_points) : nil %></td>
-<% end %>
-</tr>
-<% end %>
-</table>
-<% end %>
+<% @qualification.qualification_times.group_by(&:course).each do |course, times_by_course| %>
+  <% times_by_course.group_by(&:gender).each do |gender, times_by_gender| %>
+    <table class="qualification">
+      <tr>
+        <th><%= {'f' => "Female", 'm' => "Male"}[gender] %> (<%= course %>)</th>
+        <% age_ranges = times_by_gender.map(&:age_range).sort_by(&:first).uniq %>
+        <% age_ranges.each do |ages| %>
+          <th><%= ages_to_s(ages) %></th>
+        <% end %>
+      </tr>
+      <% times_by_gender.group_by(&:discipline).sort_by { |key, value| [Discipline::STROKES.index(key.stroke), key.distance] }.each do |discipline, times_by_discipline| %>
+        <tr>
+          <th class="discipline">
+            <%= discipline.stroke %> <%= discipline.distance %>m
+          </th>
+          <% age_ranges.each do |ages| %>
+            <td align="right">
+              <%= t = times_by_discipline.select { |x| x.age_range == ages }.first
+                  t ? (link_to t, t, :title => t.fina_points) : nil %>
+            </td>
+          <% end %>
+        </tr>
+      <% end %>
+    </table>
+  <% end %>
 <% end %>
 
 <br />
 
-<% if can? :update, @qualification %>
 <hr />
-<%= link_to 'New Qualification time', new_qualification_time_path(:qualification_id => @qualification) %>
+
+<% if can? :update, @qualification %>
+  <%= link_to 'New Qualification time', new_qualification_time_path(:qualification_id => @qualification) %> |
 <% end %>
+<%= link_to 'Back', :back %>
