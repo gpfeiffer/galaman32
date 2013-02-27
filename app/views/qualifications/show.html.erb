@@ -6,6 +6,18 @@
   <%= @qualification.name %> Times
 </h1>
 
+<% if @qualification.source.present? %>
+<p>
+<b>Source:</b> <%= @qualification.source.html_safe %>
+</p>
+<% end %>
+
+<% if @qualification.description.present? %>
+<p>
+ <%= @qualification.description %>
+</p>
+<% end %>
+
 <hr />
 <%= render 'qualification_times' %>
 <hr />
