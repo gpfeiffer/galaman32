@@ -5,7 +5,7 @@ class Qualification < ActiveRecord::Base
   has_many :competitions, :through => :standards
   has_many :aims
 
-  validates :name, :presence => true
+  validates :name, :presence => true, :uniqueness => true
 
   def age_ranges(gender)
     qualification_times.select { |x| x.gender == gender }.map(&:age_range).sort_by(&:first).uniq
