@@ -21,6 +21,6 @@ class User < ActiveRecord::Base
   end
 
   def to_s
-    name.present ? name : email.split("@")[0]
+    name.present? ? name : email.split("@")[0]
   end
 end
