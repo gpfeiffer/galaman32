@@ -6,7 +6,6 @@ class ResultsController < ApplicationController
       @event = Event.find(params[:event_id])
     elsif params[:invitation_id]
       @invitation = Invitation.find(params[:invitation_id])
-      @competition = @invitation.competition
     elsif params[:competition_id]
       @competition = Competition.find(params[:competition_id])
     elsif params[:swimmer_id] and params[:discipline_id]

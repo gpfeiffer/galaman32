@@ -1,33 +1,34 @@
 \thispagestyle{empty}
-\section*{<%= @competition.name %>}
-<%= @competition.location %>, <%= @competition.date %>
+\section*{<%= invitation.competition.name %>}
+<%= invitation.competition.location %>, <%= invitation.competition.date %>
 \section*{Results (<%= @invitation.club.symbol %>)}
 
-<% Swimmer::GENDERS.each do |sex| %>
-  <% events = @competition.individual_events.select { |x| x.gender == sex } %>
-
+<% invitation.registrations.group_by(&:gender).each do |gender, registrations| %>
+  <% events = registrations.map(&:events).reduce(:|).sort_by(&:pos) %>
 \begin{tabular}{p{4cm}<%= 'r' * events.count %>}
-    \toprule
-    Swimmer, Age
-    <% events.each do |event| %>
-      & \hbox to 18mm{}\llap{<%= event.discipline.nickname %>}
-    <% end %>
-    \\ \midrule
-<% @invitation.registrations.select { |x| x.gender == sex }.sort_by { |x| x.swimmer.name }.each do |registration| %>
-  <% swimmer = registration.swimmer %>
-      <%= raw swimmer.first_last %>, <%= registration.age %>
+  \toprule
+  Swimmer (<%= gender.upcase %>), Age
+  <% events.each do |event| %>
+    & \hbox to 18mm{}\llap{<%= event.discipline.nickname %>}
+  <% end %>
+  \\ \midrule
+    <% registrations.sort_by { |x| x.swimmer.name }.each do |registration| %>
+      <% swimmer = registration.swimmer %>
+      <% entries = registration.entries.group_by(&:event) %>
+  <%= raw swimmer.first_last %>, <%= registration.age %>
       <% events.each do |event| %>
-	<% entry = Entry.find_by_event_id_and_registration_id(event, registration) %>
-        & 
-<% if entry %>
-<%= entry.result -%>
-<% qu = entry.result.qualify %>\rlap{%
- <%= '*' if entry.result.time > 0 and (entry.time == 0 or entry.time > entry.result.time) -%>
- <%= qu and qu[:qualification].name -%>}
-<% end %>
-      <% end %>
-      \\
+  & 
+  	<% entry = entries[event].first if entries[event].present? %>
+        <% if entry and entry.result %>
+  <%= entry.result -%>
+  <% qu = entry.result.qualify %>\rlap{%
+  <%= '*' if entry.result.time > 0 and (entry.time == 0 or entry.time > entry.result.time) -%>
+  <%= qu and qu[:qualification].name -%>}
+        <% end %>
+    <% end %>
+  \\
 <% end %>
 \bottomrule
 \end{tabular}
+\par
 <% end %>

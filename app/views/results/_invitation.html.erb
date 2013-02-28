@@ -1,37 +1,43 @@
-<h2><%= @competition.name %></h2>
-<%= @competition.location %>, <%= @competition.date %>
-<hr/>
-<h3>Results (<%= invitation.club.symbol %>)</h3>
+<p id="notice"><%= notice %></p>
 
-<% Swimmer::GENDERS.each do |sex| %>
-  <% events = @competition.individual_events.select { |x| x.gender == sex } %>
+<h3>
+  <%= link_to invitation.competition.name, invitation.competition %>
+  (<%= invitation.competition.location %>, <%= invitation.competition.date %>)
+</h3>
 
-<table class="fact-sheet">
-  <tr class="times-major">
-    <th>Swimmer</th>
-    <th>Age</th>
-    <% events.each do |event| %>
-      <th><%= event.discipline.nickname %></th>
-    <% end %>
-  </tr>
-<% @invitation.registrations.select { |x| x.gender == sex }.sort_by { |x| x.swimmer.name }.each do |registration| %>
-  <% swimmer = registration.swimmer %>
-  <tr class="times-major">
-      <td><%= link_to swimmer.name, swimmer %></td>
-      <td align="right"><%= registration.age %></td>
+<h1><%= link_to invitation.club.name, invitation %></h1>
+
+<h3>Results </h3>
+
+<% invitation.registrations.group_by(&:gender).each do |gender, registrations| %>
+  <% events = registrations.map(&:events).reduce(:|).sort_by(&:pos) %>
+  <table class="fact-sheet">
+    <tr class="times-major">
+      <th>Swimmer (<%= gender.upcase %>)</th>
+      <th>Age</th>
       <% events.each do |event| %>
-        <td align="center">
-	<% entry = Entry.find_by_event_id_and_registration_id(event, registration) %>
-	<% if entry and entry.result %>
-          <%= link_to entry.result, entry.result %>
-        <% end %>
-        </td>
+        <th><%= event.discipline.nickname %></th>
       <% end %>
-  </tr>
-<% end %>
-</table>
-<br />
-<br />
+    </tr>
+    <% registrations.sort_by { |x| x.swimmer.name }.each do |registration| %>
+      <% swimmer = registration.swimmer %>
+      <% entries = registration.entries.group_by(&:event) %>
+      <tr class="times-major">
+        <td><%= link_to swimmer.name, registration %></td>
+        <td align="right"><%= registration.age %></td>
+        <% events.each do |event| %>
+          <td align="center">
+  	    <% entry = entries[event].first if entries[event].present? %>
+            <% if entry and entry.result %>
+              <%= link_to entry.result, entry.result %>
+            <% end %>
+          </td>
+        <% end %>
+      </tr>
+    <% end %>
+  </table>
+  <br />
+  <br />
 <% end %>
 
 <hr/>
