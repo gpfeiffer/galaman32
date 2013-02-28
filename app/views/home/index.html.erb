@@ -14,6 +14,28 @@
   </p>
 <% end %>
 
+<% future = Competition.future %>
+<% if future.any? %>
+<h3>Upcoming Events</h3>
+<ul>
+<% future.each do |competition| %>
+<li>
+<%= competition.date %>: <%= link_to competition.name, competition %>, <%= competition.location %>
+</li>
+<% end %>
+</ul>
+<% end %>
+
+<h3>Recent Events</h3>
+<ul>
+<% Competition.recent.each do |competition| %>
+<li>
+<%= competition.date %>: <%= link_to competition.name, competition %>, <%= competition.location %>
+</li>
+<% end %>
+</ul>
+
+<br />
 <p>
 From here you can access:
 <ul>

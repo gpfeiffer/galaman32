@@ -22,4 +22,13 @@ class Competition < ActiveRecord::Base
     year = date.year + (date.month > 8 ? 1 : 0)
     return "%d/%02d" % [year-1, year % 100]
   end
+
+  # which competitions lie ahead of us?
+  def self.future
+    Competition.where("date >= ?", Time.now)
+  end
+
+  def self.recent(count = 3)
+    Competition.where("date < ?", Time.now).reverse.first count
+  end
 end
