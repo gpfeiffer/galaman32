@@ -161,7 +161,7 @@ var dateFormat = d3.time.format("%d/%m/%Y")
 
 var data = d3.selectAll("tr.fact-major")[0]
     .map(function(x) {return [dateFormat.parse(d3.select(x).attr("x")), +(d3.select(x).attr("y"))];})
-    .select(function(x) { return x[1] > 0; } )
+    .filter(function(x) { return x[1] > 0; } )
 
 var w = 600,
     h = 300,
@@ -306,7 +306,7 @@ var dateFormat = d3.time.format("%d/%m/%Y")
 
 var data = d3.selectAll("tr.fact-major")[0]
     .map(function(x) {return [dateFormat.parse(d3.select(x).attr("x")), +(d3.select(x).attr("y"))];})
-    .select(function(x) { return x[1] > 0; } )
+    .filter(function(x) { return x[1] > 0; } )
 
 var w = 600,
     h = 300,
