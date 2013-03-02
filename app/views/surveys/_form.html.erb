@@ -1,0 +1,169 @@
+<%= form_for(@survey) do |f| %>
+  <% if @survey.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@survey.errors.count, "error") %> prohibited this survey from being saved:</h2>
+
+      <ul>
+      <% @survey.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<table>
+  <tr>
+   <th></th>
+   <% (0..10).each do |i| %>
+     <th><%= i %></th>
+   <% end %>
+  </tr>
+  <tr style="background: lightgreen" title="willingness  to learn and share the coaching process.">
+    <td style="text-align: right;"><%= f.label :coach_ability %></td>
+    <% (0..10).each do |scale| %>
+      <td><%= f.radio_button :coach_ability, scale %></td>
+    <% end %>
+  </tr>
+  <tr style="background: lightblue" title="Ability to understand sports specific Information">
+    <td style="text-align: right;"><%= f.label :athletes_knowledge %></td>
+    <% (0..10).each do |scale| %>
+      <td><%= f.radio_button :athletes_knowledge, scale %></td>
+    <% end %>
+  </tr>
+  <tr style="background: lightgreen">
+    <td style="text-align: right;"><%= f.label :technical_competency %></td>
+    <% (0..10).each do |scale| %>
+      <td><%= f.radio_button :technical_competency, scale %></td>
+    <% end %>
+  </tr>
+  <tr style="background: lightblue">
+    <td style="text-align: right;"><%= f.label :physical_conditioning %></td>
+    <% (0..10).each do |scale| %>
+      <td><%= f.radio_button :physical_conditioning, scale %></td>
+    <% end %>
+  </tr>
+  <tr style="background: lightgreen">
+    <td style="text-align: right;"><%= f.label :strength %></td>
+    <% (0..10).each do |scale| %>
+      <td><%= f.radio_button :strength, scale %></td>
+    <% end %>
+  </tr>
+  <tr style="background: lightblue">
+    <td style="text-align: right;"><%= f.label :power %></td>
+    <% (0..10).each do |scale| %>
+      <td><%= f.radio_button :power, scale %>
+    <% end %>
+  </tr>
+  <tr style="background: lightgreen">
+    <td style="text-align: right;"><%= f.label :agility %></td>
+    <% (0..10).each do |scale| %>
+      <td><%= f.radio_button :agility, scale %>
+    <% end %>
+  </tr>
+  <tr style="background: lightblue">
+    <td style="text-align: right;"><%= f.label :balance %></td>
+    <% (0..10).each do |scale| %>
+      <td><%= f.radio_button :balance, scale %>
+    <% end %>
+  </tr>
+  <tr style="background: lightgreen">
+    <td style="text-align: right;"><%= f.label :team_work %></td>
+    <% (0..10).each do |scale| %>
+      <td><%= f.radio_button :team_work, scale %>
+    <% end %>
+  </tr>
+  <tr style="background: lightblue">
+    <td style="text-align: right;"><%= f.label :sustainable_power %></td>
+    <% (0..10).each do |scale| %>
+      <td><%= f.radio_button :sustainable_power, scale %>
+    <% end %>
+  </tr>
+  <tr style="background: lightgreen">
+    <td style="text-align: right;"><%= f.label :confidence %></td>
+    <% (0..10).each do |scale| %>
+      <td><%= f.radio_button :confidence, scale %>
+    <% end %>
+  </tr>
+  <tr style="background: lightblue">
+    <td style="text-align: right;"><%= f.label :time_management %></td>
+    <% (0..10).each do |scale| %>
+      <td><%= f.radio_button :time_management, scale %>
+    <% end %>
+  </tr>
+  <tr style="background: lightgreen">
+    <td style="text-align: right;"><%= f.label :communication %></td>
+    <% (0..10).each do |scale| %>
+      <td><%= f.radio_button :communication, scale %>
+    <% end %>
+  </tr>
+  <tr style="background: lightblue">
+    <td style="text-align: right;"><%= f.label :motivation %></td>
+    <% (0..10).each do |scale| %>
+      <td><%= f.radio_button :motivation, scale %>
+    <% end %>
+  </tr>
+  <tr style="background: lightgreen">
+    <td style="text-align: right;"><%= f.label :health_managment %></td>
+    <% (0..10).each do |scale| %>
+      <td><%= f.radio_button :health_managment, scale %>
+    <% end %>
+  </tr>
+  <tr style="background: lightblue">
+    <td style="text-align: right;"><%= f.label :nutrition %></td>
+    <% (0..10).each do |scale| %>
+      <td><%= f.radio_button :nutrition, scale %>
+    <% end %>
+  </tr>
+  <tr style="background: lightgreen">
+    <td style="text-align: right;"><%= f.label :recovery %></td>
+    <% (0..10).each do |scale| %>
+      <td><%= f.radio_button :recovery, scale %>
+    <% end %>
+  </tr>
+  <tr style="background: lightblue">
+    <td style="text-align: right;"><%= f.label :flexibility %></td>
+    <% (0..10).each do |scale| %>
+      <td><%= f.radio_button :flexibility, scale %>
+    <% end %>
+  </tr>
+  <tr style="background: lightgreen">
+    <td style="text-align: right;"><%= f.label :local_muscle_endurance %></td>
+    <% (0..10).each do |scale| %>
+      <td><%= f.radio_button :local_muscle_endurance, scale %>
+    <% end %>
+  </tr>
+  <tr style="background: lightblue">
+    <td style="text-align: right;"><%= f.label :cardiovascular_endurance %></td>
+    <% (0..10).each do |scale| %>
+      <td><%= f.radio_button :cardiovascular_endurance, scale %>
+    <% end %>
+  </tr>
+  <tr style="background: lightgreen">
+    <td style="text-align: right;"><%= f.label :strength_endurance %></td>
+    <% (0..10).each do |scale| %>
+      <td><%= f.radio_button :strength_endurance, scale %>
+    <% end %>
+  </tr>
+  <tr style="background: lightblue">
+    <td style="text-align: right;"><%= f.label :coordination %></td>
+    <% (0..10).each do |scale| %>
+      <td><%= f.radio_button :coordination, scale %>
+    <% end %>
+  </tr>
+  <tr style="background: lightgreen">
+    <td style="text-align: right;"><%= f.label :psychological_skills %></td>
+    <% (0..10).each do |scale| %>
+      <td><%= f.radio_button :psychological_skills, scale %>
+    <% end %>
+  </tr>
+  <tr>
+   <th></th>
+   <% (0..10).each do |i| %>
+     <th><%= i %></th>
+   <% end %>
+  </tr>
+</table>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

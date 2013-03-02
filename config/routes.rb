@@ -1,4 +1,6 @@
 Galaman::Application.routes.draw do
+  resources :surveys
+
   resources :assignments
 
   resources :roles
