@@ -33,5 +33,7 @@ gem 'gchartrb', :require => 'google_chart'
 
 gem 'yaml_db'
 
+gem 'jquery-rails', '~> 2.1'
+
 gem 'devise'
 gem 'cancan'
