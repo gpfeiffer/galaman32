@@ -23,12 +23,20 @@ class Competition < ActiveRecord::Base
     return "%d/%02d" % [year-1, year % 100]
   end
 
-  # which competitions lie ahead of us?
-  def self.future
-    Competition.where("date >= ?", Time.now)
+  def relative_date
+    [:recent, :current, :future][(date <=> Date.today) + 1]
   end
 
+  # which competitions lie ahead of us?
+  def self.future
+    Competition.where("date > ?", Date.today)
+  end
+
+  def self.current
+    Competition.where("date = ?", Date.today)
+  end
+  
   def self.recent(count = 3)
-    Competition.where("date < ?", Time.now).reverse.first count
+    Competition.where("date < ?", Date.today).reverse.first count
   end
 end
