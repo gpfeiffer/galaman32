@@ -1,5 +1,7 @@
 class Result < ActiveRecord::Base
   belongs_to :entry
+  has_one :registration, :through => :entry
+
   delegate :discipline, :swimmer, :competition, :to => :entry
 
   attr_accessor :mins, :secs, :centis
