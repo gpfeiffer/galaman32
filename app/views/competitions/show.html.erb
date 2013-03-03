@@ -9,20 +9,22 @@
 (<%= @competition.date %>)
 </p>
 
+<% relay_count = @competition.invitations.map { |x| x.relays.count }.sum %>
+<% relay_text = (relay_count > 0 ? " and #{pluralize(relay_count, 'relay entry')}" : "") %>
 <%= pluralize(@competition.invitations.count, 'club has', 'clubs have') %> registered
 <%= pluralize(@competition.registrations.count, 'swimmer') %> for
-<%= pluralize(@competition.registrations.map { |x| x.entries.count }.sum, 'individual entry') %> 
-and 
-<%= @competition.invitations.map { |x| x.relays.count }.sum %> relay entries.
+<%= pluralize(@competition.registrations.map { |x| x.entries.count }.sum, 'individual entry') + relay_text + "." %> 
 
-<hr/>
+<br />
+<br />
 <%= render 'qualifications' %>
-<hr/>
+<br />
+<br />
 <%= render 'invitations' %>
-<hr/>
+<br />
 <%= render 'events' %>
-<hr/>
 
+<hr/>
 <% if can? :update, @competition %>
   <%= link_to 'Edit', edit_competition_path(@competition) %> |
 <% end %>

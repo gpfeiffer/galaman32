@@ -1,5 +1,11 @@
-<h3>Events</h3>
-
+<h3 class="edit-head">Events</h3>
+<% if can? :update, @competition %>
+  <div class="edit">
+    <%= link_to '[+]', new_event_path(:competition_id => @competition) %>
+  </div>
+<% end %>
+<br />
+<br />
 <table class="fact-sheet">
   <tr class="fact-major">
     <th>No.</th>
@@ -25,9 +31,3 @@
   </tr>
 <% end %>
 </table>
-
-<br />
-
-<% if can? :update, @competition %>
-  <%= link_to 'New Event', new_event_path(:competition_id => @competition) %>
-<% end %>

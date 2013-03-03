@@ -1,7 +1,12 @@
-<h3>Participating Clubs</h3>
-
+<h3 class="edit-head">Participating Clubs</h3>
+<% if can? :update, @competition %>
+  <div class="edit">
+    <%= link_to '[+]', new_invitation_path(:competition_id => @competition) %>
+  </div>
+<% end %>
+<br />
+<br />
 <table class="fact-sheet">
-
 <% @competition.invitations.sort { |x, y| x.club.full_name <=> y.club.full_name }.each do |invitation| %>
   <tr class="fact-major">
     <td><%= link_to invitation.club.name, invitation %></td>
@@ -13,9 +18,3 @@
   </tr>
 <% end %>
 </table>
-
-<br />
-
-<% if can? :update, @competition %>
-  <%= link_to 'Invite Club', new_invitation_path(:competition_id => @competition) %>
-<% end %>

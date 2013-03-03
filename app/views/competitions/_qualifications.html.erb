@@ -1,18 +1,18 @@
-<h3>Qualification Standards</h3>
-
-<table>
-<% @competition.standards.each do |standard| %>
-  <tr>
-    <td><%= link_to standard.qualification.name, standard.qualification %></td>
-    <% if can? :update, @competition %>
-      <td><%= link_to image_tag('delete.png', :class => "icon"), standard, :confirm => 'Are you sure?', :method => :delete %></td>
-    <% end %>
-  <tr>
-<% end %>
-</table>
-
-<br />
-
+<h3 class="edit-head">Qualification Standards:</h3>
 <% if can? :update, @competition %>
-  <%= link_to 'Select Qualification Standards', new_standard_path(:competition_id => @competition) %>
+  <div class="edit">
+    <%= link_to '[+]', new_standard_path(:competition_id => @competition) %>
+  </div>
 <% end %>
+
+<ul style="padding: 0; margin: 0; display: inline;">
+<% @competition.standards.each do |standard| %>
+  <li style="list-style:none; display:inline; border: 1px solid blue; background: lightyellow; padding:2px 4px; margin: 4px; border-radius: 4px;">
+    <%= link_to standard.qualification.name, standard.qualification %>
+    <% if can? :update, @competition %>
+      <%= link_to image_tag('delete.png', :class => "icon"), standard, :confirm => 'Are you sure?', :method => :delete %>
+    <% end %>
+  </li>
+<% end %>
+</ul>
+
