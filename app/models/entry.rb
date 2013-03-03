@@ -35,7 +35,7 @@ class Entry < ActiveRecord::Base
   end
 
   def subject
-    relay ? relay : registration.swimmer
+    relay ? relay : registration
   end
 
   def centis
