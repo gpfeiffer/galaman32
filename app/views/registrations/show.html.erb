@@ -1,6 +1,3 @@
-<p id="notice"><%= notice %></p>
-
-
 <h3><%= link_to @registration.competition.name, @registration.competition %> (<%= @registration.competition.location %>, <%= @registration.competition.date %>)</h3>
 <h1><%= link_to @registration.swimmer.name, @registration.swimmer %> (<%= link_to @registration.club.symbol, @registration.invitation %>)</h1>
 
@@ -10,8 +7,8 @@
   <b>ID:</b>
   <%= @registration.swimmer.registration %>.
 <div>
-<br>
-<br>
+<br />
+<br />
 
 <table class="fact-sheet">
   <tr class="times-major">
@@ -27,7 +24,11 @@
       <th><%= entry.discipline.nickname %></th>
       <td style="text-align: right;"><%= "#{entry.result.place}." if entry.result and entry.result.place %></td>
       <td style="text-align: right;">
-        <%= link_to(entry.result, results_path(:discipline_id => entry.discipline.id, :swimmer_id => @registration.swimmer.id)) if entry.result %>
+        <% if entry.result %>
+          <%= link_to entry.result, results_path(:discipline_id => entry.discipline.id, :swimmer_id => @registration.swimmer.id) %>
+        <% else %>
+          <%= link_to '__:__.__', new_result_path(:entry_id => entry.id) %>
+        <% end %>
       </td>
       <td style="text-align: right;">(<%= entry %>)</td>
     </tr>
