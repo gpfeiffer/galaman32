@@ -13,6 +13,10 @@ class Registration < ActiveRecord::Base
   
   before_create :assign_age_and_club
   
+  def date
+    competition.date
+  end
+
   private
   
   def assign_age_and_club

@@ -50,6 +50,15 @@ class Entry < ActiveRecord::Base
     time / 6000 if time
   end
 
+  # combine distance and course into a number for sorting.
+  def distance_course_code
+    100 * discipline.distance - discipline.course[0].ord
+  end
+
+  def stroke
+    discipline.stroke
+  end
+
   def qualify
     if time == 0
       return nil
