@@ -10,6 +10,12 @@
   <%= @swimmer.registration %>.
 </p>
 
+<% if @swimmer.user and can? :destroy, @swimmer %>
+  <p>
+    <code><%= @swimmer.user.email %></code>
+  </p>
+<% end %>
+
 <hr/>
 
 <h2>Personal Best</h2>
@@ -27,18 +33,18 @@ results in a particular stroke.
   <th style="width:96px"><%= truncate(stroke, :length => 12) %></th>
 <% end %>
 </tr>
-<% @rows.each do |row| %>
+
+<% @swimmer.entries.group_by(&:distance_course_code).sort.each do |row, entries_row| %>
   <tr class="times-major" align="right">
-    <th><%= row[:distance] %>m <%= row[:course] %></th>
+    <th><%= distance_course(row) %></th>
+    <% entries = entries_row.group_by(&:stroke) %>
     <% Discipline::STROKES.each do |stroke| %>
-      <% discipline = @results.keys.select { |discipline| discipline.stroke == stroke and discipline.distance == row[:distance] and discipline.course == row[:course] }.first %>
       <td>
-        <% if discipline %>
-          <% @results[discipline] = @results[discipline].sort_by { |x| x.entry.event.competition.date } %>
-          <% best = best_result(@results[discipline]) %>
+        <% if entries[stroke] %>
+          <% best = best_result(entries[stroke].map(&:result).compact) %>
 	  <% if best %>
             <span title="<%= best.fina_points %>">
-              <%= link_to best, results_path(:swimmer_id => @swimmer, :discipline_id => discipline), 'data-popup' => true %><br/>
+              <%= link_to best, results_path(:swimmer_id => @swimmer, :discipline_id => best.discipline), 'data-popup' => true %><br/>
               (<%= best.entry.event.competition.date.strftime("%d-%m-%y") %>)
             </span>
           <% end %>
@@ -59,9 +65,13 @@ results in a particular stroke.
 <h2>Competitions.</h2>
 
 <ul>
-<% @swimmer.registrations.sort_by { |x| x.competition.date }.reverse_each do |registration| %>
-<%   competition = registration.competition %>
-<li><%= competition.date %>: <%= link_to competition.name, registration %> (<%= competition.location %>)</li>
+<% @swimmer.registrations.sort_by(&:date).reverse_each do |registration| %>
+  <% competition = registration.competition %>
+  <li>
+    <%= competition.date %>: 
+    <%= link_to competition.name, registration %> 
+    (<%= competition.location %>)
+  </li>
 <% end %>
 </ul>
 
