@@ -9,6 +9,7 @@ class Swimmer < ActiveRecord::Base
   has_many :qualifications, :through => :aims
   has_many :supports, :dependent => :destroy
   has_many :users, :through => :supports
+  belongs_to :user
 
   GENDERS = ["f", "m"]
 
@@ -21,6 +22,10 @@ class Swimmer < ActiveRecord::Base
 
   def first_last
     "#{first} #{last}"
+  end
+
+  def email
+    user.email
   end
 
   def age(date = DateTime.now)

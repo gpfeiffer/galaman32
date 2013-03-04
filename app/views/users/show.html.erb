@@ -50,7 +50,7 @@
 <hr />
 <h3>Supports:</h3>
 <ul>
-<% @user.swimmers.each do |swimmer| %>
+<% @user.beneficiaries.each do |swimmer| %>
 <li>
 <%= link_to swimmer.first_last, swimmer %>
 (<%= link_to swimmer.club.symbol, swimmer.club %>)
