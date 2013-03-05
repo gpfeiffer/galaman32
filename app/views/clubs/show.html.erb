@@ -54,6 +54,7 @@
 <% if can? :destroy, @club %>
   <%= link_to 'Destroy', @club, :confirm => 'Are you sure?', :method => :delete  %> |
 <% end %>
+<%= link_to 'Records', entries_path(:club_id => @club) %> |
 <%= link_to 'Back', clubs_path %>
 <br />
 <br />

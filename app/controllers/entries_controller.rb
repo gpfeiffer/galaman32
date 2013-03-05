@@ -2,7 +2,7 @@ class EntriesController < ApplicationController
   # GET /entries
   # GET /entries.xml
   def index
-    @entries = Entry.all
+    @entries = Club.find(params[:club_id]).entries
 
     respond_to do |format|
       format.html # index.html.erb

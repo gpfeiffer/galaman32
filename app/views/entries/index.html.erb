@@ -1,27 +1,98 @@
-<h1>Listing entries</h1>
 
-<table>
-  <tr>
-    <th>Event</th>
-    <th>Registration</th>
-    <th>Seed time</th>
-    <th></th>
-    <th></th>
-    <th></th>
+<h2>Club records by gender.</h2>
+
+<% @entries.group_by { |x| x.swimmer.gender }.each do |gender, entries_gender| %>
+
+<h3><%= gender %></h3>
+
+<table class="fact-sheet">
+<tr class="times-major">
+<th></th>
+<% Discipline::STROKES.each do |stroke| %>
+  <th style="width:106px"><%= truncate(stroke, :length => 12) %></th>
+<% end %>
+</tr>
+<% entries_gender.group_by(&:distance_course_code).sort.each do |row, entries_row| %>
+  <% entries = entries_row.group_by(&:stroke) %>
+  <tr class="pb-hi" align="right">
+    <th rowspan="2"><%= distance_course(row) %></th>
+    <% Discipline::STROKES.each do |stroke| %>
+      <td>
+        <% if entries[stroke] %>
+          <% best = best_result(entries[stroke].map(&:result).compact) %>
+	  <% if best %>
+             <%= link_to best, best %>
+          <% end %>
+        <% end %>
+      </td>
+    <% end %>
   </tr>
-
-<% @entries.each do |entry| %>
-  <tr>
-    <td><%= entry.event_id %></td>
-    <td><%= entry.registration_id %></td>
-    <td><%= entry.time %></td>
-    <td><%= link_to 'Show', entry %></td>
-    <td><%= link_to 'Edit', edit_entry_path(entry) %></td>
-    <td><%= link_to 'Destroy', entry, :confirm => 'Are you sure?', :method => :delete %></td>
+  <tr class="pb-lo" align="right">
+    <% Discipline::STROKES.each do |stroke| %>
+      <td>
+        <% if entries[stroke] %>
+          <% best = best_result(entries[stroke].map(&:result).compact) %>
+	  <% if best %>
+	<%= content_tag :span, :title => "#{best.competition.date}: #{best.competition.name}" do %>
+              <%= best.swimmer.first_last %>
+            <% end %>
+          <% end %>
+        <% end %>
+      </td>
+    <% end %>
   </tr>
 <% end %>
 </table>
+<br/>
+<br/>
+<% end %>
 
-<br />
+<h2>Club records by age.</h2>
 
-<%= link_to 'New Entry', new_entry_path %>
+<% @entries.group_by(&:age).sort.each do |age, entries_age| %>
+
+<% entries_age.group_by { |x| x.swimmer.gender }.each do |gender, entries_gender| %>
+
+<h3><%= "#{age} #{gender}" %></h3>
+
+<table class="fact-sheet">
+<tr class="times-major">
+<th></th>
+<% Discipline::STROKES.each do |stroke| %>
+  <th style="width:106px"><%= truncate(stroke, :length => 12) %></th>
+<% end %>
+</tr>
+<% entries_gender.group_by(&:distance_course_code).sort.each do |row, entries_row| %>
+  <% entries = entries_row.group_by(&:stroke) %>
+  <tr class="pb-hi" align="right">
+    <th rowspan="2"><%= distance_course(row) %></th>
+    <% Discipline::STROKES.each do |stroke| %>
+      <td>
+        <% if entries[stroke] %>
+          <% best = best_result(entries[stroke].map(&:result).compact) %>
+	  <% if best %>
+             <%= link_to best, best %>
+          <% end %>
+        <% end %>
+      </td>
+    <% end %>
+  </tr>
+  <tr class="pb-lo" align="right">
+    <% Discipline::STROKES.each do |stroke| %>
+      <td>
+        <% if entries[stroke] %>
+          <% best = best_result(entries[stroke].map(&:result).compact) %>
+	  <% if best %>
+              <%= best.swimmer.first_last %>
+            </span>
+          <% end %>
+        <% end %>
+      </td>
+    <% end %>
+  </tr>
+<% end %>
+</table>
+<br/>
+
+<% end %>
+<% end %>
