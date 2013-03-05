@@ -1,6 +1,9 @@
 class ResultsController < ApplicationController
+  load_and_authorize_resource
+
   # GET /results
   # GET /results.xml
+  ##  FIXME: load and authorize @results
   def index
     if params[:event_id]
       @event = Event.find(params[:event_id])
@@ -37,8 +40,6 @@ class ResultsController < ApplicationController
   # GET /results/1
   # GET /results/1.xml
   def show
-    @result = Result.find(params[:id])
-
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @result }
@@ -48,7 +49,6 @@ class ResultsController < ApplicationController
   # GET /results/new
   # GET /results/new.xml
   def new
-    @result = Result.new
     @result[:entry_id] = params[:entry_id]
 
     respond_to do |format|
@@ -59,13 +59,11 @@ class ResultsController < ApplicationController
 
   # GET /results/1/edit
   def edit
-    @result = Result.find(params[:id])
   end
 
   # POST /results
   # POST /results.xml
   def create
-    @result = Result.new(params[:result])
     @result[:time] = time_from_msc(params[:result])
 
     respond_to do |format|
@@ -82,7 +80,6 @@ class ResultsController < ApplicationController
   # PUT /results/1
   # PUT /results/1.xml
   def update
-    @result = Result.find(params[:id])
     @result[:time] = time_from_msc(params[:result])
 
     respond_to do |format|
@@ -101,7 +98,6 @@ class ResultsController < ApplicationController
   # DELETE /results/1
   # DELETE /results/1.xml
   def destroy
-    @result = Result.find(params[:id])
     @result.destroy
 
     respond_to do |format|

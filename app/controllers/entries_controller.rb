@@ -1,6 +1,9 @@
 class EntriesController < ApplicationController
+  load_and_authorize_resource
+
   # GET /entries
   # GET /entries.xml
+  ##  FIXME: load and authorize @entries
   def index
     @entries = Club.find(params[:club_id]).entries
 
@@ -13,8 +16,6 @@ class EntriesController < ApplicationController
   # GET /entries/1
   # GET /entries/1.xml
   def show
-    @entry = Entry.find(params[:id])
-
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @entry }
@@ -24,7 +25,6 @@ class EntriesController < ApplicationController
   # GET /entries/new
   # GET /entries/new.xml
   def new
-    @entry = Entry.new
     @entry[:event_id] = params[:event_id]
     @entry[:registration_id] = params[:registration_id]
     @entry[:relay_id] = params[:relay_id]
@@ -47,13 +47,11 @@ class EntriesController < ApplicationController
 
   # GET /entries/1/edit
   def edit
-    @entry = Entry.find(params[:id])
   end
 
   # POST /entries
   # POST /entries.xml
   def create
-    @entry = Entry.new(params[:entry])
     @entry[:time] = time_from_msc(params[:entry])
 
     respond_to do |format|
@@ -70,7 +68,6 @@ class EntriesController < ApplicationController
   # PUT /entries/1
   # PUT /entries/1.xml
   def update
-    @entry = Entry.find(params[:id])
     @entry[:time] = time_from_msc(params[:entry])
 
     respond_to do |format|
@@ -87,7 +84,6 @@ class EntriesController < ApplicationController
   # DELETE /entries/1
   # DELETE /entries/1.xml
   def destroy
-    @entry = Entry.find(params[:id])
     @entry.destroy
 
     respond_to do |format|

@@ -1,9 +1,9 @@
 class SwimmersController < ApplicationController
+  load_and_authorize_resource
+
   # GET /swimmers
   # GET /swimmers.xml
   def index
-    @swimmers = Swimmer.all
-
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @swimmers }
@@ -13,8 +13,6 @@ class SwimmersController < ApplicationController
   # GET /swimmers/1
   # GET /swimmers/1.xml
   def show
-    @swimmer = Swimmer.find(params[:id])
-
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @swimmer }
@@ -34,7 +32,6 @@ class SwimmersController < ApplicationController
   # GET /swimmers/new
   # GET /swimmers/new.xml
   def new
-    @swimmer = Swimmer.new
     @swimmer[:club_id] = params[:club_id]
 
     respond_to do |format|
@@ -45,14 +42,11 @@ class SwimmersController < ApplicationController
 
   # GET /swimmers/1/edit
   def edit
-    @swimmer = Swimmer.find(params[:id])
   end
 
   # POST /swimmers
   # POST /swimmers.xml
   def create
-    @swimmer = Swimmer.new(params[:swimmer])
-
     respond_to do |format|
       if @swimmer.save
         format.html { redirect_to(@swimmer.club, :notice => 'Swimmer was successfully created.') }
@@ -67,8 +61,6 @@ class SwimmersController < ApplicationController
   # PUT /swimmers/1
   # PUT /swimmers/1.xml
   def update
-    @swimmer = Swimmer.find(params[:id])
-
     respond_to do |format|
       if @swimmer.update_attributes(params[:swimmer])
         format.html { redirect_to(@swimmer.club, :notice => 'Swimmer was successfully updated.') }
@@ -83,7 +75,6 @@ class SwimmersController < ApplicationController
   # DELETE /swimmers/1
   # DELETE /swimmers/1.xml
   def destroy
-    @swimmer = Swimmer.find(params[:id])
     @swimmer.destroy
 
     respond_to do |format|

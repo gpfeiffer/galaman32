@@ -1,6 +1,9 @@
 class HeatsController < ApplicationController
+  load_and_authorize_resource
+
   # GET /heats
   # GET /heats.xml
+  ##  FIXME: load and authorize
   def index
     if params[:event_id]
       @event = Event.find(params[:event_id])
@@ -31,8 +34,6 @@ class HeatsController < ApplicationController
   # GET /heats/1
   # GET /heats/1.xml
   def show
-    @heat = Heat.find(params[:id])
-
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @heat }
@@ -42,8 +43,6 @@ class HeatsController < ApplicationController
   # GET /heats/new
   # GET /heats/new.xml
   def new
-    @event = Event.find(params[:event_id])
-
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @heat }
@@ -52,11 +51,11 @@ class HeatsController < ApplicationController
 
   # GET /heats/1/edit
   def edit
-    @heat = Heat.find(params[:id])
   end
 
   # POST /heats
   # POST /heats.xml
+  ##  FIXME: load and authorize
   def create
     @event = Event.find(params[:event_id])
 
@@ -77,8 +76,6 @@ class HeatsController < ApplicationController
   # PUT /heats/1
   # PUT /heats/1.xml
   def update
-    @heat = Heat.find(params[:id])
-
     respond_to do |format|
       if @heat.update_attributes(params[:heat])
         format.html { redirect_to(@heat, :notice => 'Heat was successfully updated.') }
@@ -93,7 +90,6 @@ class HeatsController < ApplicationController
   # DELETE /heats/1
   # DELETE /heats/1.xml
   def destroy
-    @heat = Heat.find(params[:id])
     @heat.destroy
 
     respond_to do |format|

@@ -1,8 +1,11 @@
 class InvitationsController < ApplicationController
+  load_and_authorize_resource
+
   # GET /invitations
   # GET /invitations.xml
+
+  ##  FIXME: load and authorize @club instead of @invitation
   def index
-    @invitations = Invitation.all
     @club = Club.find(params[:club_id])
 
     respond_to do |format|
@@ -14,10 +17,6 @@ class InvitationsController < ApplicationController
   # GET /invitations/1
   # GET /invitations/1.xml
   def show
-    @invitation = Invitation.find(params[:id])
-    @club = @invitation.club
-    @competition = @invitation.competition
-
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @invitation }
@@ -36,7 +35,6 @@ class InvitationsController < ApplicationController
   # GET /invitations/new
   # GET /invitations/new.xml
   def new
-    @invitation = Invitation.new
     @invitation[:competition_id] = params[:competition_id]
 
     respond_to do |format|
@@ -47,14 +45,11 @@ class InvitationsController < ApplicationController
 
   # GET /invitations/1/edit
   def edit
-    @invitation = Invitation.find(params[:id])
   end
 
   # POST /invitations
   # POST /invitations.xml
   def create
-    @invitation = Invitation.new(params[:invitation])
-
     respond_to do |format|
       if @invitation.save
         format.html { redirect_to(@invitation.competition, :notice => 'Invitation was successfully created.') }
@@ -69,9 +64,8 @@ class InvitationsController < ApplicationController
   # PUT /invitations/1
   # PUT /invitations/1.xml
   def update
-    @invitation = Invitation.find(params[:id])
     if params[:invitation]
-      swimmer_ids = params[:invitation][:swimmer_ids].map { |x| x.to_i }
+      swimmer_ids = params[:invitation][:swimmer_ids].map(&:to_i)
     else
       swimmer_ids = []
     end
@@ -96,7 +90,6 @@ class InvitationsController < ApplicationController
   # DELETE /invitations/1
   # DELETE /invitations/1.xml
   def destroy
-    @invitation = Invitation.find(params[:id])
     @invitation.destroy
 
     respond_to do |format|

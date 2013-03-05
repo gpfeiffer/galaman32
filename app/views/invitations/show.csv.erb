@@ -1,5 +1,5 @@
 <% Swimmer::GENDERS.each do |sex| %>
-<% events = @competition.individual_events.select { |x| x.gender == sex } %>
+<% events = @invitation.competition.individual_events.select { |x| x.gender == sex } %>
 <%= "Swimmer, DOB" -%>
 <% events.each do |event| %>
 , <%= ordinal_number (event.pos) -%>

@@ -1,12 +1,14 @@
+<% competition = @invitation.competition %>
+
 \onecolumn
 \thispagestyle{empty}
 \begin{minipage}[t]{.5\textwidth}
-\section*{<%= @competition.name %>}
-<%= @competition.location %>, <%= @competition.date %>
+\section*{<%= competition.name %>}
+<%= competition.location %>, <%= competition.date %>
 
 \section*{Gala Entries}
 
-\subsection*{<%= @club.name %>}
+\subsection*{<%= @invitation.club.name %>}
 
 <%= @invitation.registrations.count %> registered swimmers
 for a total of \\ 
@@ -23,7 +25,7 @@ events.
 \subsection*{Events.}
 
 \begin{enumerate}
-<% @competition.events.each do |event| %>
+<% competition.events.each do |event| %>
 \item[<%= event.pos %>.] 
 <%= event.discipline.to_words %>: <%= ages_to_words(event.age_range) %>
 <% end %>
@@ -32,7 +34,7 @@ events.
 
 \subsection*{Registered Swimmers.}
 <% Swimmer::GENDERS.each do |sex| %>
-  <% events = @competition.individual_events.select { |x| x.gender == sex } %>
+  <% events = competition.individual_events.select { |x| x.gender == sex } %>
 \begin{tabular}[t]{p{3.1cm}c<%= 'c' * events.count %>}
 \toprule
 \textbf{Swimmer (<%= sex.upcase %>)} & \textbf{DOB} 
@@ -57,7 +59,7 @@ events.
 
 <% if relay_count > 0 %>
 \subsection*{Relay Teams.}
-<% events = @competition.relay_events %>
+<% events = competition.relay_events %>
 \begin{tabular}[t]{p{3cm}cc<%= 'c' * events.count %>}
 \toprule
 \textbf{Name} & \textbf{F/M} & \textbf{Ages}

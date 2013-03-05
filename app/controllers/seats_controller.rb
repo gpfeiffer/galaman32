@@ -1,9 +1,9 @@
 class SeatsController < ApplicationController
+  load_and_authorize_resource
+
   # GET /seats
   # GET /seats.xml
   def index
-    @seats = Seat.all
-
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @seats }
@@ -13,8 +13,6 @@ class SeatsController < ApplicationController
   # GET /seats/1
   # GET /seats/1.xml
   def show
-    @seat = Seat.find(params[:id])
-
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @seat }
@@ -24,7 +22,6 @@ class SeatsController < ApplicationController
   # GET /seats/new
   # GET /seats/new.xml
   def new
-    @seat = Seat.new
     @seat[:relay_id] = params[:relay_id]
     @seat[:registration_id] = params[:registration_id]
 
@@ -36,14 +33,11 @@ class SeatsController < ApplicationController
 
   # GET /seats/1/edit
   def edit
-    @seat = Seat.find(params[:id])
   end
 
   # POST /seats
   # POST /seats.xml
   def create
-    @seat = Seat.new(params[:seat])
-
     respond_to do |format|
       if @seat.save
         format.html { redirect_to(@seat.relay.invitation, :notice => 'Seat was successfully created.') }
@@ -58,8 +52,6 @@ class SeatsController < ApplicationController
   # PUT /seats/1
   # PUT /seats/1.xml
   def update
-    @seat = Seat.find(params[:id])
-
     respond_to do |format|
       if @seat.update_attributes(params[:seat])
         format.html { redirect_to(@seat.relay.invitation, :notice => 'Seat was successfully updated.') }
@@ -74,7 +66,6 @@ class SeatsController < ApplicationController
   # DELETE /seats/1
   # DELETE /seats/1.xml
   def destroy
-    @seat = Seat.find(params[:id])
     @seat.destroy
 
     respond_to do |format|

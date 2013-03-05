@@ -1,9 +1,9 @@
 class SupportsController < ApplicationController
+  load_and_authorize_resource
+
   # GET /supports
   # GET /supports.xml
   def index
-    @supports = Support.all
-
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @supports }
@@ -13,8 +13,6 @@ class SupportsController < ApplicationController
   # GET /supports/1
   # GET /supports/1.xml
   def show
-    @support = Support.find(params[:id])
-
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @support }
@@ -24,7 +22,6 @@ class SupportsController < ApplicationController
   # GET /supports/new
   # GET /supports/new.xml
   def new
-    @support = Support.new
     @support[:user_id] = params[:user_id]
 
     respond_to do |format|
@@ -35,14 +32,11 @@ class SupportsController < ApplicationController
 
   # GET /supports/1/edit
   def edit
-    @support = Support.find(params[:id])
   end
 
   # POST /supports
   # POST /supports.xml
   def create
-    @support = Support.new(params[:support])
-
     respond_to do |format|
       if @support.save
         format.html { redirect_to(@support.user, :notice => 'Support was successfully created.') }
@@ -57,8 +51,6 @@ class SupportsController < ApplicationController
   # PUT /supports/1
   # PUT /supports/1.xml
   def update
-    @support = Support.find(params[:id])
-
     respond_to do |format|
       if @support.update_attributes(params[:support])
         format.html { redirect_to(@support.user, :notice => 'Support was successfully updated.') }
@@ -73,7 +65,6 @@ class SupportsController < ApplicationController
   # DELETE /supports/1
   # DELETE /supports/1.xml
   def destroy
-    @support = Support.find(params[:id])
     @support.destroy
 
     respond_to do |format|

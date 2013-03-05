@@ -1,9 +1,9 @@
 class StandardsController < ApplicationController
+  load_and_authorize_resource
+
   # GET /standards
   # GET /standards.xml
   def index
-    @standards = Standard.all
-
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @standards }
@@ -13,8 +13,6 @@ class StandardsController < ApplicationController
   # GET /standards/1
   # GET /standards/1.xml
   def show
-    @standard = Standard.find(params[:id])
-
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @standard }
@@ -24,7 +22,6 @@ class StandardsController < ApplicationController
   # GET /standards/new
   # GET /standards/new.xml
   def new
-    @standard = Standard.new
     @standard[:competition_id] = params[:competition_id]
 
     respond_to do |format|
@@ -35,14 +32,11 @@ class StandardsController < ApplicationController
 
   # GET /standards/1/edit
   def edit
-    @standard = Standard.find(params[:id])
   end
 
   # POST /standards
   # POST /standards.xml
   def create
-    @standard = Standard.new(params[:standard])
-
     respond_to do |format|
       if @standard.save
         format.html { redirect_to(@standard.competition, :notice => 'Standard was successfully created.') }
@@ -57,8 +51,6 @@ class StandardsController < ApplicationController
   # PUT /standards/1
   # PUT /standards/1.xml
   def update
-    @standard = Standard.find(params[:id])
-
     respond_to do |format|
       if @standard.update_attributes(params[:standard])
         format.html { redirect_to(@standard, :notice => 'Standard was successfully updated.') }
@@ -73,7 +65,6 @@ class StandardsController < ApplicationController
   # DELETE /standards/1
   # DELETE /standards/1.xml
   def destroy
-    @standard = Standard.find(params[:id])
     @standard.destroy
 
     respond_to do |format|

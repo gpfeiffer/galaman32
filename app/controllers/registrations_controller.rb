@@ -1,6 +1,9 @@
 class RegistrationsController < ApplicationController
+  load_and_authorize_resource
+
   # GET /registrations
   # GET /registrations.xml
+  ##  FIXME: load andauthorize @invitation instead of @registration
   def index
     @invitation = Invitation.find(params[:invitation_id])
     @club = @invitation.club
@@ -19,8 +22,6 @@ class RegistrationsController < ApplicationController
   # GET /registrations/1
   # GET /registrations/1.xml
   def show
-    @registration = Registration.find(params[:id])
-
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @registration }
@@ -30,8 +31,6 @@ class RegistrationsController < ApplicationController
   # GET /registrations/new
   # GET /registrations/new.xml
   def new
-    @registration = Registration.new
-
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @registration }
@@ -40,14 +39,11 @@ class RegistrationsController < ApplicationController
 
   # GET /registrations/1/edit
   def edit
-    @registration = Registration.find(params[:id])
   end
 
   # POST /registrations
   # POST /registrations.xml
   def create
-    @registration = Registration.new(params[:registration])
-
     respond_to do |format|
       if @registration.save
         format.html { redirect_to(@registration, :notice => 'Registration was successfully created.') }
@@ -62,8 +58,6 @@ class RegistrationsController < ApplicationController
   # PUT /registrations/1
   # PUT /registrations/1.xml
   def update
-    @registration = Registration.find(params[:id])
-
     respond_to do |format|
       if @registration.update_attributes(params[:registration])
         format.html { redirect_to(@registration, :notice => 'Registration was successfully updated.') }
@@ -78,7 +72,6 @@ class RegistrationsController < ApplicationController
   # DELETE /registrations/1
   # DELETE /registrations/1.xml
   def destroy
-    @registration = Registration.find(params[:id])
     @registration.destroy
 
     respond_to do |format|

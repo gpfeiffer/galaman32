@@ -1,9 +1,9 @@
 class EventsController < ApplicationController
+  load_and_authorize_resource
+
   # GET /events
   # GET /events.xml
   def index
-    @events = Event.all
-
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @events }
@@ -13,8 +13,6 @@ class EventsController < ApplicationController
   # GET /events/1
   # GET /events/1.xml
   def show
-    @event = Event.find(params[:id])
-
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @event }
@@ -31,7 +29,6 @@ class EventsController < ApplicationController
   # GET /events/new
   # GET /events/new.xml
   def new
-    @event = Event.new
     @event[:competition_id] = params[:competition_id]
     @event[:age_min] =  0
     @event[:age_max] =  99
@@ -44,13 +41,11 @@ class EventsController < ApplicationController
 
   # GET /events/1/edit
   def edit
-    @event = Event.find(params[:id])
   end
 
   # POST /events
   # POST /events.xml
   def create
-    @event = Event.new(params[:event])
     @event[:discipline_id] = find_discipline_id(params[:event])
 
     respond_to do |format|
@@ -67,7 +62,6 @@ class EventsController < ApplicationController
   # PUT /events/1
   # PUT /events/1.xml
   def update
-    @event = Event.find(params[:id])
     @event[:discipline_id] = find_discipline_id(params[:event])
 
     respond_to do |format|
@@ -84,7 +78,6 @@ class EventsController < ApplicationController
   # DELETE /events/1
   # DELETE /events/1.xml
   def destroy
-    @event = Event.find(params[:id])
     @event.destroy
 
     respond_to do |format|
@@ -94,6 +87,7 @@ class EventsController < ApplicationController
   end
 
   # GET /events/1/list
+  ##  FIXME: load and authorize
   def list
     @event = Event.find(params[:id])
     @event.list!

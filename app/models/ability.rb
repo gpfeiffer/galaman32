@@ -3,15 +3,32 @@ class Ability
 
   def initialize(user)
     user ||= User.new # guest user (not logged in)
+
     if user.admin?
       can :manage, :all
     else
-      can :read, [Club, Competition, Discipline, Qualification]
+      can :index, Club
+      can :read, [Competition, Discipline, Qualification]
       can :show, User do |u|
         u == user
       end
-      can :manage, Aim do |aim|
-        aim.swimmer.users.include? user
+    end
+
+    if user.role? :parent
+       can :manage, Aim do |aim|
+        aim.swimmer.supporters.include? user
+      end
+    end
+        
+    if user.role? :swimmer
+       can :manage, Aim do |aim|
+        aim.swimmer.user == user
+      end
+    end
+
+    if user.role? :coach
+       can :manage, Aim do |aim|
+        aim.swimmer.supporters.include? user
       end
     end
         

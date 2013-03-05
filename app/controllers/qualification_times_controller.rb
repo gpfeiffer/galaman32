@@ -1,15 +1,9 @@
 class QualificationTimesController < ApplicationController
+  load_and_authorize_resource
+
   # GET /qualification_times
   # GET /qualification_times.xml
   def index
-    if params[:discipline_id] and params[:qualification_id]
-      @discipline = Discipline.find(params[:discipline_id])
-      @qualification = Qualification.find(params[:qualification_id])
-      @qualification_times = QualificationTime.find_all_by_discipline_id_and_qualification_id(@discipline.id, @qualification.id)
-    else
-      @qualification_times = QualificationTime.all
-    end
-
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @qualification_times }
@@ -19,8 +13,6 @@ class QualificationTimesController < ApplicationController
   # GET /qualification_times/1
   # GET /qualification_times/1.xml
   def show
-    @qualification_time = QualificationTime.find(params[:id])
-
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @qualification_time }
@@ -30,7 +22,6 @@ class QualificationTimesController < ApplicationController
   # GET /qualification_times/new
   # GET /qualification_times/new.xml
   def new
-    @qualification_time = QualificationTime.new
     @qualification_time[:qualification_id] = params[:qualification_id]
 
     respond_to do |format|
@@ -41,13 +32,11 @@ class QualificationTimesController < ApplicationController
 
   # GET /qualification_times/1/edit
   def edit
-    @qualification_time = QualificationTime.find(params[:id])
   end
 
   # POST /qualification_times
   # POST /qualification_times.xml
   def create
-    @qualification_time = QualificationTime.new(params[:qualification_time])
     @qualification_time[:time] = time_from_msc(params[:qualification_time])
     @qualification_time[:discipline_id] = find_discipline_id(params[:qualification_time])
 
@@ -65,7 +54,6 @@ class QualificationTimesController < ApplicationController
   # PUT /qualification_times/1
   # PUT /qualification_times/1.xml
   def update
-    @qualification_time = QualificationTime.find(params[:id])
     @qualification_time[:time] = time_from_msc(params[:qualification_time])
     @qualification_time[:discipline_id] = find_discipline_id(params[:qualification_time])
 
@@ -83,7 +71,6 @@ class QualificationTimesController < ApplicationController
   # DELETE /qualification_times/1
   # DELETE /qualification_times/1.xml
   def destroy
-    @qualification_time = QualificationTime.find(params[:id])
     @qualification_time.destroy
 
     respond_to do |format|

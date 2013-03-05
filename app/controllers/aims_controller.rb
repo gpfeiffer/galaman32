@@ -1,9 +1,9 @@
 class AimsController < ApplicationController
+  load_and_authorize_resource
+
   # GET /aims
   # GET /aims.xml
   def index
-    @aims = Aim.all
-
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @aims }
@@ -13,8 +13,6 @@ class AimsController < ApplicationController
   # GET /aims/1
   # GET /aims/1.xml
   def show
-    @aim = Aim.find(params[:id])
-
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @aim }
@@ -24,9 +22,7 @@ class AimsController < ApplicationController
   # GET /aims/new
   # GET /aims/new.xml
   def new
-    @aim = Aim.new
     @aim[:swimmer_id] = params[:swimmer_id]
-
 
     respond_to do |format|
       format.html # new.html.erb
@@ -36,14 +32,11 @@ class AimsController < ApplicationController
 
   # GET /aims/1/edit
   def edit
-    @aim = Aim.find(params[:id])
   end
 
   # POST /aims
   # POST /aims.xml
   def create
-    @aim = Aim.new(params[:aim])
-
     respond_to do |format|
       if @aim.save
         format.html { redirect_to(@aim.swimmer, :notice => 'Aim was successfully created.') }
@@ -58,8 +51,6 @@ class AimsController < ApplicationController
   # PUT /aims/1
   # PUT /aims/1.xml
   def update
-    @aim = Aim.find(params[:id])
-
     respond_to do |format|
       if @aim.update_attributes(params[:aim])
         format.html { redirect_to(@aim.swimmer, :notice => 'Aim was successfully updated.') }
@@ -74,7 +65,6 @@ class AimsController < ApplicationController
   # DELETE /aims/1
   # DELETE /aims/1.xml
   def destroy
-    @aim = Aim.find(params[:id])
     @aim.destroy
 
     respond_to do |format|

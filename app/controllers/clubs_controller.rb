@@ -1,11 +1,10 @@
 class ClubsController < ApplicationController
   skip_before_filter :authenticate_user!, :only => :index
+  load_and_authorize_resource
 
   # GET /clubs
   # GET /clubs.xml
   def index
-    @clubs = Club.all
-
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @clubs }
@@ -15,8 +14,6 @@ class ClubsController < ApplicationController
   # GET /clubs/1
   # GET /clubs/1.xml
   def show
-    @club = Club.find(params[:id])
-
     respond_to do |format|
       format.html # show.html.erb
       format.csv
@@ -27,8 +24,6 @@ class ClubsController < ApplicationController
   # GET /clubs/new
   # GET /clubs/new.xml
   def new
-    @club = Club.new
-
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @club }
@@ -37,14 +32,11 @@ class ClubsController < ApplicationController
 
   # GET /clubs/1/edit
   def edit
-    @club = Club.find(params[:id])
   end
 
   # POST /clubs
   # POST /clubs.xml
   def create
-    @club = Club.new(params[:club])
-
     respond_to do |format|
       if @club.save
         format.html { redirect_to(@club, :notice => 'Club was successfully created.') }
@@ -59,8 +51,6 @@ class ClubsController < ApplicationController
   # PUT /clubs/1
   # PUT /clubs/1.xml
   def update
-    @club = Club.find(params[:id])
-
     respond_to do |format|
       if @club.update_attributes(params[:club])
         format.html { redirect_to(@club, :notice => 'Club was successfully updated.') }
@@ -75,7 +65,6 @@ class ClubsController < ApplicationController
   # DELETE /clubs/1
   # DELETE /clubs/1.xml
   def destroy
-    @club = Club.find(params[:id])
     @club.destroy
 
     respond_to do |format|
