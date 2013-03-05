@@ -1,5 +1,5 @@
 <h3 class="edit-head">Qualification Standards:</h3>
-<% if can? :update, @competition %>
+<% if can? :update, @competition and user_session[:edit] %>
   <div class="edit">
     <%= link_to '[+]', new_standard_path(:competition_id => @competition) %>
   </div>
@@ -7,9 +7,9 @@
 
 <ul style="padding: 0; margin: 0; display: inline;">
 <% @competition.standards.each do |standard| %>
-  <li style="list-style:none; display:inline; border: 1px solid blue; background: lightyellow; padding:2px 4px; margin: 4px; border-radius: 4px;">
-    <%= link_to standard.qualification.name, standard.qualification %>
-    <% if can? :update, @competition %>
+  <li style="list-style:none; display:inline; border: 1px solid blue; background: lightyellow; padding: 2px 4px; margin: 4px; border-radius: 4px;">
+    <%= link_to standard.qualification.name, standard.qualification -%>
+    <% if can? :update, @competition and user_session[:edit] %>
       <%= link_to image_tag('delete.png', :class => "icon"), standard, :confirm => 'Are you sure?', :method => :delete %>
     <% end %>
   </li>
