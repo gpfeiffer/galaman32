@@ -1,7 +1,7 @@
 <h3>Entries</h3>
 
 <% Swimmer::GENDERS.each do |sex| %>
-  <% events = @competition.individual_events.select { |x| x.gender == sex } %>
+  <% events = @invitation.competition.individual_events.select { |x| x.gender == sex } %>
   <% relays = @invitation.relays.select { |x| x.gender == sex } %>
   <table class="fact-sheet">
     <tr class="times-major">
