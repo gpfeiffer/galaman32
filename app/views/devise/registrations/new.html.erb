@@ -1,9 +1,8 @@
-<h2>Sign up</h2>
-
 <%= form_for(resource, :as => resource_name, :url => user_registration_path) do |f| %>
   <%= devise_error_messages! %>
 
   <fieldset>
+    <legend>Sign Me Up</legend>
     <table>
       <tr>
 	<td align="right"><%= f.label :email %></td>

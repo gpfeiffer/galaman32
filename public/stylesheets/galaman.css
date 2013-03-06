@@ -250,6 +250,11 @@ hr {
     border: 0;
 }
 
+legend {
+    font-size: larger;
+    font-weight: bold;    
+}
+
 .edit-head {
   display: inline;
 }
@@ -262,3 +267,4 @@ hr {
     text-decoration: none;
   }
 }
+
