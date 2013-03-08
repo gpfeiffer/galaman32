@@ -15,7 +15,8 @@ class Ability
     end
 
     if user.role? :parent
-       can :manage, Aim do |aim|
+      can :read, [Swimmer, Registration, Entry, Result, Event, Invitation]
+      can :manage, Aim do |aim|
         aim.swimmer.supporters.include? user
       end
     end
