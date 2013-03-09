@@ -22,7 +22,8 @@ class Ability
     end
         
     if user.role? :swimmer
-       can :manage, Aim do |aim|
+      can :read, [Swimmer, Club, Registration, Entry, Result, Event, Invitation]
+      can :manage, Aim do |aim|
         aim.swimmer.user == user
       end
     end
