@@ -13,6 +13,8 @@ class User < ActiveRecord::Base
   has_many :beneficiaries, :through => :supports, :source => :swimmer
   has_one :swimmer
 
+  has_many :profiles, :dependent => :destroy
+
   def role? symbol
     roles.map(&:name).include? symbol.to_s.camelcase
   end

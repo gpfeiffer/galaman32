@@ -1,0 +1,67 @@
+<h1>Listing ratings</h1>
+
+<table>
+  <tr>
+    <th>Coach ability</th>
+    <th>Athletes knowledge</th>
+    <th>Technical competency</th>
+    <th>Physical conditioning</th>
+    <th>Strength</th>
+    <th>Power</th>
+    <th>Agility</th>
+    <th>Balance</th>
+    <th>Team work</th>
+    <th>Sustainable power</th>
+    <th>Confidence</th>
+    <th>Time management</th>
+    <th>Communication</th>
+    <th>Motivation</th>
+    <th>Health managment</th>
+    <th>Nutrition</th>
+    <th>Recovery</th>
+    <th>Flexibility</th>
+    <th>Local muscle endurance</th>
+    <th>Cardiovascular endurance</th>
+    <th>Strength endurance</th>
+    <th>Coordination</th>
+    <th>Psychological skills</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @ratings.each do |rating| %>
+  <tr>
+    <td><%= rating.coach_ability %></td>
+    <td><%= rating.athletes_knowledge %></td>
+    <td><%= rating.technical_competency %></td>
+    <td><%= rating.physical_conditioning %></td>
+    <td><%= rating.strength %></td>
+    <td><%= rating.power %></td>
+    <td><%= rating.agility %></td>
+    <td><%= rating.balance %></td>
+    <td><%= rating.team_work %></td>
+    <td><%= rating.sustainable_power %></td>
+    <td><%= rating.confidence %></td>
+    <td><%= rating.time_management %></td>
+    <td><%= rating.communication %></td>
+    <td><%= rating.motivation %></td>
+    <td><%= rating.health_managment %></td>
+    <td><%= rating.nutrition %></td>
+    <td><%= rating.recovery %></td>
+    <td><%= rating.flexibility %></td>
+    <td><%= rating.local_muscle_endurance %></td>
+    <td><%= rating.cardiovascular_endurance %></td>
+    <td><%= rating.strength_endurance %></td>
+    <td><%= rating.coordination %></td>
+    <td><%= rating.psychological_skills %></td>
+    <td><%= link_to 'Show', rating %></td>
+    <td><%= link_to 'Edit', edit_rating_path(rating) %></td>
+    <td><%= link_to 'Destroy', rating, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Rating', new_rating_path %>

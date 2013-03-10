@@ -11,6 +11,8 @@ class Swimmer < ActiveRecord::Base
   has_many :supporters, :through => :supports, :source => :user
   belongs_to :user
 
+  has_many :profiles, :dependent => :destroy
+
   GENDERS = ["f", "m"]
 
   validates :first, :last, :birthday, :gender, :club_id, :presence => true

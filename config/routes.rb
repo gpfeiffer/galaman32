@@ -1,5 +1,7 @@
 Galaman::Application.routes.draw do
-  resources :surveys
+  resources :profiles
+
+  resources :ratings
 
   resources :assignments
 

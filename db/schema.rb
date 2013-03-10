@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130305144739) do
+ActiveRecord::Schema.define(:version => 20130310105136) do
 
   create_table "aims", :force => true do |t|
     t.integer   "swimmer_id"
@@ -101,6 +101,14 @@ ActiveRecord::Schema.define(:version => 20130305144739) do
     t.timestamp "updated_at"
   end
 
+  create_table "profiles", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "club_id"
+    t.integer  "swimmer_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "qualification_times", :force => true do |t|
     t.integer   "qualification_id"
     t.integer   "discipline_id"
@@ -117,6 +125,34 @@ ActiveRecord::Schema.define(:version => 20130305144739) do
     t.timestamp "updated_at"
     t.string    "source"
     t.text      "description"
+  end
+
+  create_table "ratings", :force => true do |t|
+    t.integer   "coach_ability"
+    t.integer   "athletes_knowledge"
+    t.integer   "technical_competency"
+    t.integer   "physical_conditioning"
+    t.integer   "strength"
+    t.integer   "power"
+    t.integer   "agility"
+    t.integer   "balance"
+    t.integer   "team_work"
+    t.integer   "sustainable_power"
+    t.integer   "confidence"
+    t.integer   "time_management"
+    t.integer   "communication"
+    t.integer   "motivation"
+    t.integer   "health_managment"
+    t.integer   "nutrition"
+    t.integer   "recovery"
+    t.integer   "flexibility"
+    t.integer   "local_muscle_endurance"
+    t.integer   "cardiovascular_endurance"
+    t.integer   "strength_endurance"
+    t.integer   "coordination"
+    t.integer   "psychological_skills"
+    t.timestamp "created_at"
+    t.timestamp "updated_at"
   end
 
   create_table "registrations", :force => true do |t|
@@ -172,34 +208,6 @@ ActiveRecord::Schema.define(:version => 20130305144739) do
   create_table "supports", :force => true do |t|
     t.integer   "user_id"
     t.integer   "swimmer_id"
-    t.timestamp "created_at"
-    t.timestamp "updated_at"
-  end
-
-  create_table "surveys", :force => true do |t|
-    t.integer   "coach_ability"
-    t.integer   "athletes_knowledge"
-    t.integer   "technical_competency"
-    t.integer   "physical_conditioning"
-    t.integer   "strength"
-    t.integer   "power"
-    t.integer   "agility"
-    t.integer   "balance"
-    t.integer   "team_work"
-    t.integer   "sustainable_power"
-    t.integer   "confidence"
-    t.integer   "time_management"
-    t.integer   "communication"
-    t.integer   "motivation"
-    t.integer   "health_managment"
-    t.integer   "nutrition"
-    t.integer   "recovery"
-    t.integer   "flexibility"
-    t.integer   "local_muscle_endurance"
-    t.integer   "cardiovascular_endurance"
-    t.integer   "strength_endurance"
-    t.integer   "coordination"
-    t.integer   "psychological_skills"
     t.timestamp "created_at"
     t.timestamp "updated_at"
   end

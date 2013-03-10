@@ -1,10 +1,10 @@
-<%= form_for(@survey) do |f| %>
-  <% if @survey.errors.any? %>
+<%= form_for(@rating) do |f| %>
+  <% if @rating.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@survey.errors.count, "error") %> prohibited this survey from being saved:</h2>
+      <h2><%= pluralize(@rating.errors.count, "error") %> prohibited this rating from being saved:</h2>
 
       <ul>
-      <% @survey.errors.full_messages.each do |msg| %>
+      <% @rating.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
       <% end %>
       </ul>
@@ -19,7 +19,7 @@
     <% end %>
   </tr>
   <% colors = ["lightgreen", "lightblue"] %>
-  <% Survey::COMPONENTS.each_with_index do |component, index| %>
+  <% Rating::COMPONENTS.each_with_index do |component, index| %>
     <%= content_tag :tr, :style => "background: #{colors[index % 2]}", :title => component[:description] do %>
       <td style="text-align: right;"><%= f.label component[:name] %></td>
       <% (0..10).each do |scale| %>

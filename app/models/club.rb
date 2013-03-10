@@ -7,6 +7,8 @@ class Club < ActiveRecord::Base
   has_many :registrations
   has_many :entries, :through => :registrations
 
+  has_many :profiles, :dependent => :destroy
+
   validates :full_name, :symbol, :presence => true
 
   def name

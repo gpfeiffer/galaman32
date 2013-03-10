@@ -1,4 +1,4 @@
-class Survey < ActiveRecord::Base
+class Rating < ActiveRecord::Base
   COMPONENTS = [
     { :name => :coach_ability, :description => "willingness  to learn and share the coaching process." },
     { :name => :athletes_knowledge, :description => "Ability to understand sports specific Information" },

@@ -1,0 +1,26 @@
+<h3>Profile</h3>
+<h1><%= @profile.user.name %></h1>
+
+
+<p>
+(<%= @profile.target %>)
+</p>
+
+<h3 class="edit-head"><%= pluralize(@profile.ratings.count, 'Rating') %></h3>
+<div class="edit">
+<%= link_to '[+]', new_rating_path(:profile_id => @profile) %>
+</div>
+<ul>
+<% @profile.ratings.each do |rating| %>
+<li>
+<%= link_to rating.target, rating %>
+<div class="edit">
+<%= link_to '[-]', rating, :confirm => 'Are you sure?', :method => :delete %>
+</div>
+</li>
+<% end %>
+</ul>
+
+
+<%= link_to 'Edit', edit_profile_path(@profile) %> |
+<%= link_to 'Back', profiles_path %>

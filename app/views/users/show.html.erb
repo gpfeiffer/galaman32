@@ -27,9 +27,10 @@
     <td><%= @user.last_sign_in_ip %></td>
   </tr>
 </table>
-
 <br />
+<% end %>
 
+<% if can? :destroy, @user %>
 <h3 class="edit-head"><%= pluralize(@user.roles.count, 'Role') %></h3>
 <div class="edit">
 <%= link_to '[+]', new_assignment_path(:user_id => @user) %>
@@ -46,14 +47,37 @@
 </ul>
 <% end %>
 
-<% if  @user.supports.any? %>
-<hr />
-<h3>Supports:</h3>
+<% if @user.supports.any? %>
+<h3 class="edit-head">Supports:</h3>
+<div class="edit">
+<%= link_to '[+]', new_support_path(:user_id => @user) %>
+</div>
 <ul>
-<% @user.beneficiaries.each do |swimmer| %>
+<% @user.supports.each do |support| %>
+<% swimmer = support.swimmer %>
 <li>
 <%= link_to swimmer.first_last, swimmer %>
 (<%= link_to swimmer.club.symbol, swimmer.club %>)
+<div class="edit">
+<%= link_to '[-]', support, :confirm => 'Are you sure?', :method => :delete %>
+</div>
+</li>
+<% end %>
+</ul>
+<% end %>
+
+<% if can? :manage, Profile %>
+<h3 class="edit-head"><%= pluralize(@user.profiles.count, 'Profile') %></h3>
+<div class="edit">
+<%= link_to '[+]', new_profile_path(:user_id => @user) %>
+</div>
+<ul>
+<% @user.profiles.each do |profile| %>
+<li>
+<%= link_to profile.target, profile %>
+<div class="edit">
+<%= link_to '[-]', profile, :confirm => 'Are you sure?', :method => :delete %>
+</div>
 </li>
 <% end %>
 </ul>
