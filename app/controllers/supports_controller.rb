@@ -68,7 +68,7 @@ class SupportsController < ApplicationController
     @support.destroy
 
     respond_to do |format|
-      format.html { redirect_to(supports_url) }
+      format.html { redirect_to(@support.user, :notice => 'Support was successfully destroyed.') }
       format.xml  { head :ok }
     end
   end

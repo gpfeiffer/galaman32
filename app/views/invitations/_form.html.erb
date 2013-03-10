@@ -17,7 +17,7 @@
 
    <div class="field">
     <%= f.label :club_id %><br />
-    <%= f.select :club_id, (Club.all - @invitation.competition.invitations.map { |x| x.club }).map{ |x| [x.name, x.id] } %>
+    <%= f.select :club_id, (Club.all - @invitation.competition.clubs).map{ |x| [x.name, x.id] } %>
    </div>
    <div class="actions">
     <%= f.submit %>

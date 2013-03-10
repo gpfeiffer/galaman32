@@ -22,7 +22,7 @@ class AssignmentsController < ApplicationController
   # GET /assignments/new
   # GET /assignments/new.xml
   def new
-    @assignment.user = User.find(params[:user_id])
+    @assignment.user_id = params[:user_id]
 
     respond_to do |format|
       format.html # new.html.erb
