@@ -15,7 +15,7 @@
 
   <div class="field">
     <%= f.label :club_id %><br />
-    <%= f.select :club_id, (Club.all).map { |x| [x.name, x.id] } %>
+    <%= f.select :club_id, (Club.all).map { |x| [x.name, x.id] }, :include_blank => true %>
   </div>
   <div class="field">
     <%= f.label :swimmer_id %><br />
