@@ -12,6 +12,10 @@ class Ability
       can :show, User do |u|
         u == user
       end
+      can :manage, Profile do |profile|
+        profile.user == user
+      end
+      
     end
 
     if user.role? :parent
@@ -23,6 +27,8 @@ class Ability
         
     if user.role? :swimmer
       can :read, [Swimmer, Club, Registration, Entry, Result, Event, Invitation]
+      can :manage, Profile
+      can :create, Rating
       can :manage, Aim do |aim|
         aim.swimmer.user == user
       end
@@ -30,6 +36,8 @@ class Ability
 
     if user.role? :coach
       can :read, [Swimmer, Club, Registration, Entry, Result, Event, Invitation]
+      can :manage, Profile
+      can :manage, Rating
       can :manage, Aim do |aim|
         aim.swimmer.supporters.include? user
       end
