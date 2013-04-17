@@ -1,118 +1,18 @@
-<p>
-  <b>Coach ability:</b>
-  <%= @rating.coach_ability %>
-</p>
+<h3><%= link_to @rating.profile.name, @rating.profile %></h3>
+<h1>Rating</h1>
 
-<p>
-  <b>Athletes knowledge:</b>
-  <%= @rating.athletes_knowledge %>
-</p>
-
-<p>
-  <b>Technical competency:</b>
-  <%= @rating.technical_competency %>
-</p>
-
-<p>
-  <b>Physical conditioning:</b>
-  <%= @rating.physical_conditioning %>
-</p>
-
-<p>
-  <b>Strength:</b>
-  <%= @rating.strength %>
-</p>
-
-<p>
-  <b>Power:</b>
-  <%= @rating.power %>
-</p>
-
-<p>
-  <b>Agility:</b>
-  <%= @rating.agility %>
-</p>
-
-<p>
-  <b>Balance:</b>
-  <%= @rating.balance %>
-</p>
-
-<p>
-  <b>Team work:</b>
-  <%= @rating.team_work %>
-</p>
-
-<p>
-  <b>Sustainable power:</b>
-  <%= @rating.sustainable_power %>
-</p>
-
-<p>
-  <b>Confidence:</b>
-  <%= @rating.confidence %>
-</p>
-
-<p>
-  <b>Time management:</b>
-  <%= @rating.time_management %>
-</p>
-
-<p>
-  <b>Communication:</b>
-  <%= @rating.communication %>
-</p>
-
-<p>
-  <b>Motivation:</b>
-  <%= @rating.motivation %>
-</p>
-
-<p>
-  <b>Health managment:</b>
-  <%= @rating.health_managment %>
-</p>
-
-<p>
-  <b>Nutrition:</b>
-  <%= @rating.nutrition %>
-</p>
-
-<p>
-  <b>Recovery:</b>
-  <%= @rating.recovery %>
-</p>
-
-<p>
-  <b>Flexibility:</b>
-  <%= @rating.flexibility %>
-</p>
-
-<p>
-  <b>Local muscle endurance:</b>
-  <%= @rating.local_muscle_endurance %>
-</p>
-
-<p>
-  <b>Cardiovascular endurance:</b>
-  <%= @rating.cardiovascular_endurance %>
-</p>
-
-<p>
-  <b>Strength endurance:</b>
-  <%= @rating.strength_endurance %>
-</p>
-
-<p>
-  <b>Coordination:</b>
-  <%= @rating.coordination %>
-</p>
-
-<p>
-  <b>Psychological skills:</b>
-  <%= @rating.psychological_skills %>
-</p>
-
-
+  <table>
+    <% Rating::COMPONENTS.each do |component| %>
+    <tr>
+      <td>
+	<%= content_tag :span, :title => component[:description] do %>
+	<b><%= component[:name].to_s.humanize %></b>
+	<% end %>
+      </td>
+      <td><%= @rating[component[:name]] %></td>
+    </tr>
+    <% end %>
+  </table>
+  
 <%= link_to 'Edit', edit_rating_path(@rating) %> |
-<%= link_to 'Back', ratings_path %>
+<%= link_to 'Back', @rating.profile %>

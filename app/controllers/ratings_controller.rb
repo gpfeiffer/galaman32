@@ -22,6 +22,7 @@ class RatingsController < ApplicationController
   # GET /ratings/new
   # GET /ratings/new.xml
   def new
+    @rating.profile_id = params[:profile_id]
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @rating }
