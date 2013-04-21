@@ -1,13 +1,75 @@
-<h3><%= @aim.swimmer.first_last %>'s Aims</h3>
+<h3><%= link_to @aim.swimmer.first_last, @aim.swimmer %></h3>
 
 <h1>
-  <%= @aim.qualification.name %>
+  Aim: <%= link_to @aim.qualification.name, @aim.qualification %>
 </h1>
 
 <p>
   <b>By Date:</b>
   <%= @aim.date %>
 </p>
+
+
+<% aim = @aim %>
+<% swimmer = @aim.swimmer %>
+    <% age = swimmer.age(aim.date) %>
+    <% gender = swimmer.gender %>
+
+    <% times = aim.qualification.qualification_times.select { |x| x.gender == gender and x.age_range.include? age } %>
+    <% if times.any? %>
+    <h3>
+      <%= { 'f' => "Girls", 'm' => "Boys" }[gender] %> (<%= age %>)
+    </h3>
+
+    <table class="fact-sheet">
+      <tr class="times-major">
+        <th></th>
+        <% Discipline::STROKES.each do |stroke| %>
+          <th style="width:80px">
+            <%= { 'Freestyle' => 'Free', 'Backstroke' => 'Back', 'Breaststroke' => 'Breast', 'Butterfly' => 'Fly', 'Ind Medley' => 'Medley' }[stroke] %>
+          </th>
+        <% end %>
+      </tr>
+      <% times.group_by(&:distance_course).sort_by  { |key, value| [key[0..-5].to_i, 100-key[-2].ord] }.each do |label, times_by_label| %>
+        <tr class="times-major">
+          <th><%= label %></th>
+          <% times_by_stroke = times_by_label.group_by(&:stroke) %>
+          <% Discipline::STROKES.each do |stroke| %>
+            <% qt = times_by_stroke[stroke] && times_by_stroke[stroke].first %>
+            <% qt = times_by_stroke[stroke] %>
+            <% if qt %>
+              <% qt = qt.first %>
+              <% pb = swimmer.personal_best(qt.discipline) %>
+              <% if pb %>
+                <% time = qt.time - pb.time %>
+                <% if time < 0 %>
+                  <%= content_tag(:td, time_to_msc(time), :align => "right", :style => "background-color: #FF9999") %>
+                <% else %>
+                  <%= content_tag(:td, time_to_msc(time), :align => "right", :style => "background-color: #99CC99") %>
+                <% end %>
+              <% else %>
+                <%= content_tag(:td, qt, :align => "right", :style => "color: lightgray") %>
+              <% end %>
+            <% else %>
+              <%= content_tag :td %>
+            <% end %>
+          <% end %>
+        <tr>
+      <% end %>
+    </table>
+    <% end%>
+    <br />
+    <br />
+
+
+<p>
+The table shows the <b>difference</b> between the <b>swimmer's PB</b> and the 
+<b>qualification time</b> required for the swimmer's age at the above date.
+<%= content_tag :span, "Green fields", :style => "background-color: #99CC99" %> indicate disciplines where the qualification standard has been achieved,
+<%= content_tag :span, "Red fields", :style => "background-color: #FF9999" %> indicate disciplines where it hasn't yet.
+
+</p>
+<hr />
 
 <% if can? :update, @aim %>
   <%= link_to 'Edit', edit_aim_path(@aim) %> |
