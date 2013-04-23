@@ -21,11 +21,11 @@
   <% @registration.entries.each do |entry| %>
     <tr class="times-major">
       <th><%= link_to entry.event.pos, entry.event %>.</th>
-      <th><%= entry.discipline.nickname %></th>
+      <th><%= link_to entry.discipline.nickname, results_path(:discipline_id => entry.discipline.id, :swimmer_id => @registration.swimmer.id) %></th>
       <td style="text-align: right;"><%= "#{entry.result.place}." if entry.result and entry.result.place %></td>
       <td style="text-align: right;">
         <% if entry.result %>
-          <%= link_to entry.result, results_path(:discipline_id => entry.discipline.id, :swimmer_id => @registration.swimmer.id) %>
+          <%= link_to entry.result, entry.result %>
         <% else %>
           <%= link_to '__:__.__', new_result_path(:entry_id => entry.id) %>
         <% end %>

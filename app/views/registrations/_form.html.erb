@@ -11,9 +11,10 @@
     </div>
   <% end %>
 
-<h2><%= @registration.swimmer.name %></h2>
 
 <h3><%= @registration.competition.name %> (<%= @registration.competition.date %>)</h3>
+
+<h1><%= @registration.swimmer.name %></h1>
 
   <%= f.hidden_field :invitation_id %>
   <%= f.hidden_field :swimmer_id %>
