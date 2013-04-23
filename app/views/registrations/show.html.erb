@@ -18,7 +18,7 @@
     <th>Result</th>
     <th>(Seed)</th>
   </tr>
-  <% @registration.entries.each do |entry| %>
+  <% @registration.entries.sort_by { |x| x.event.pos }.each do |entry| %>
     <tr class="times-major">
       <th><%= link_to entry.event.pos, entry.event %>.</th>
       <th><%= link_to entry.discipline.nickname, results_path(:discipline_id => entry.discipline.id, :swimmer_id => @registration.swimmer.id) %></th>
