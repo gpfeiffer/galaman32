@@ -66,9 +66,7 @@ results in a particular stroke.
 </table>
 <br/>
 
-<% if session[:admin] || @swimmer.supporters.include?(current_user) %>
-<%= render 'qualifications' %>
-<% end %>
+<%= render 'qualifications' if can? :read, @swimmer.aims.first %>
 
 <h2>Competitions.</h2>
 

@@ -45,7 +45,7 @@
 
 <% end %>
 
-<% if user_session[:edit] %>
+<% if can? :create, Aim %>
  <%= link_to 'Select Aims', new_aim_path(:swimmer_id => @swimmer) %>
 <% end %>
 
