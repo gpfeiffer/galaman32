@@ -39,4 +39,8 @@ class Competition < ActiveRecord::Base
   def self.recent(count = 3)
     Competition.where("date < ?", Date.today).reverse.first count
   end
+
+  def to_s
+    "%s: %s, %s" % [date, name, location] 
+  end
 end

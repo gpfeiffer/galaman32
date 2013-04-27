@@ -1,3 +1,8 @@
+<% content_for :level do %>
+  <h3>Clubs</h3>
+  <ul><%= render Club.all %></ul>
+<% end %>
+
 <h3><%= link_to 'Clubs', clubs_path %></h3>
 
 <h1>
@@ -29,7 +34,7 @@
 <th>ID</th>
 <th>Swimmer (<%= gender.upcase %>)</th>
 <th>Birthdate</th>
-<%= render swimmers %>
+<%= render :partial => "club_swimmer", :collection => swimmers %>
 </table>
 <% end %>
 <br />

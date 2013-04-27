@@ -35,17 +35,20 @@
     <%= link_to "Disciplines", disciplines_path %><br/>
     <%= link_to "Qualifications", qualifications_path %><br/>
     <br/>
-  <% if user_signed_in? %>
-<% if user.role? :admin %>
-<div id="editview">
-<% if user_session[:edit] %>
- <%= button_to 'View', root_path(:edit => false), :remote => true %>
-<% else %>
- <%= button_to 'Edit', root_path(:edit => true), :remote => true %>
- <% end %>
-</div>
-<% end %>
-<% end %>
+    <% if user_signed_in? %>
+      <% if user.role? :admin %>
+        <div id="editview">
+          <% if user_session[:edit] %>
+            <%= button_to 'View', root_path(:edit => false), :remote => true %>
+          <% else %>
+          <%= button_to 'Edit', root_path(:edit => true), :remote => true %>
+          <% end %>
+        </div>
+      <% end %>
+    <% end %>
+    <div id="level">
+      <%= yield :level %>
+    </div>
   </div>
   <div id="main">
     <p id="notice"><%= notice %></p>

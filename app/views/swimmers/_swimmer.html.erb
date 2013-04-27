@@ -1,5 +1,2 @@
-<tr class="fact-major">
-  <td align="right"><%= swimmer.registration %></td>
-  <td><%= link_to swimmer.name, swimmer %>, <%= swimmer.age %></td>
-  <td><%= swimmer.birthday %></td>
-</tr>
+ <li><%= link_to_unless_current swimmer.name, swimmer %>, <%= swimmer.age %></li>
+

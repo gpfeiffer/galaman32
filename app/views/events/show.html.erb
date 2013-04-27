@@ -1,3 +1,9 @@
+<% content_for :level do %>
+  <h3><%= @event.competition.name %></h3>
+  <ul><%= render :partial => "level_event", :collection => @event.competition.events %></ul>
+<% end %>
+
+
 <%= render 'navigation' %>
 
 <%# FIXME: prepare this table in controller/model ...%>

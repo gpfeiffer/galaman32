@@ -59,6 +59,20 @@
   background: blue;
 }
 
+#level a {
+  text-decoration: none;
+}
+#level h3 {
+ color: #461326;
+}
+#level ul {
+  list-style-type: none;
+  padding: 0pt;
+  margin: 0pt;
+  font-size: 12px;
+  line-height: 15px;
+}
+
 #manager, #manager body, #manager p, #manager ul {
   font-family: Verdana,Arial,'Helvetica Neue',Helvetica,sans-serif;
 }

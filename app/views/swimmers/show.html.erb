@@ -1,3 +1,11 @@
+<% content_for :level do %>
+  <h3><%= @swimmer.club %></h3>
+  <% @swimmer.club.swimmers.group_by(&:gender).each do |gender, swimmers| %>
+    <h4><%= { 'f' => 'Girls', 'm' => 'Boys' }[gender] %></h4>
+    <ul><%= render swimmers %></ul>
+  <% end %>
+<% end %>
+
 <h3><%= link_to @swimmer.club, @swimmer.club %></h3>
 
 <h1><%= @swimmer.first_last %></h1>
