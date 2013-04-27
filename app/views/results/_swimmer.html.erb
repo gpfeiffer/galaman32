@@ -177,8 +177,9 @@ var w = 600,
 
 var yScale = d3.time.scale()
     .domain([ 
-      d3.min(data, function(d) { return d[1]; })*0.75,
-      d3.max(data, function(d) { return d[1]; })*1.05
+      d3.min(data, function(d) { return d[1]; })*0.95,
+      d3.min(data, function(d) { return d[1]; })*1.20,
+//      d3.max(data, function(d) { return d[1]; })*1.05
     ])
     .range([0, h-padding]);
 
