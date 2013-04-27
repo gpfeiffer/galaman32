@@ -48,11 +48,13 @@
 
 <hr/>
 
-<% if can? :update, @club %>
-  <%= link_to 'Edit', edit_club_path(@club) %> |
-<% end %>
-<% if can? :destroy, @club %>
-  <%= link_to 'Destroy', @club, :confirm => 'Are you sure?', :method => :delete  %> |
+<% if user_session[:edit] %>
+  <% if can? :update, @club %>
+    <%= link_to 'Edit', edit_club_path(@club) %> |
+  <% end %>
+  <% if can? :destroy, @club %>
+    <%= link_to 'Destroy', @club, :confirm => 'Are you sure?', :method => :delete  %> |
+  <% end %>
 <% end %>
 <%= link_to 'Records', entries_path(:club_id => @club) %> |
 <%= link_to 'Back', clubs_path %>
