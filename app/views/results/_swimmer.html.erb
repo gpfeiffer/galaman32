@@ -89,9 +89,8 @@
             <%= aim.qualification.name %>
           </td>
           <td align="right">
-            <span title="<%= time_to_msc(qt.time-best_result(r[discipline]).time) %>">
-              <%= qt %>
-            </span>
+            <% best = best_result(r[discipline]) %>
+            <%= content_tag(:span, :title => time_to_msc(qt.time-best.time)) { qt.to_s } if best %>
           </td>
         </tr>
       <% end %>
