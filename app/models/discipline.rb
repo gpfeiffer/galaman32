@@ -75,4 +75,15 @@ class Discipline < ActiveRecord::Base
     event = events.sample
     event.results.sample if event
   end
+
+  def to_hash
+    keys = %w(gender distance course stroke mode)
+    attributes.select { |k, v| keys.include? k }
+  end
+
+  def opposite
+    hash = to_hash
+    hash['course'] = { 'SC' => 'LC', 'LC' => 'SC' }[hash['course']]
+    Discipline.where(hash).first
+  end
 end
