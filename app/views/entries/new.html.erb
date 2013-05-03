@@ -1,10 +1,10 @@
 <h1>New entry</h1>
 
 <p>
-PB: <%= @best %>(<%= @best.competition %>)
+PB: <%= @best %>(<%= @best.competition if @best %>)
 </p>
 <p>
-co-PB: <%= @cobest %>(<%= @cobest.competition %>)
+co-PB: <%= @cobest %>(<%= @cobest.competition if @cobest %>)
 </p>
 <%= render 'form' %>
 
