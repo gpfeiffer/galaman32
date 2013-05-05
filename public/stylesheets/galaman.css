@@ -242,6 +242,8 @@ tr.pb-lo th {
 tr.pb-hi td {
     padding-left: 12px;
     padding-right: 12px;
+    padding-top: 0px;
+    padding-bottom: 0px;
     font-family: Verdana,Courier,"Courier New",monospace;
     background: #fffddd;
     border-right: 1px solid blue;
@@ -251,9 +253,21 @@ tr.pb-hi td {
 tr.pb-lo td {
     padding-left: 12px;
     padding-right: 12px;
+    padding-top: 0px;
+    padding-bottom: 0px;
     font-family: Verdana,Courier,"Courier New",monospace;
     background: #fffddd;
     border-bottom: 1px solid blue;
+    border-right: 1px solid blue;
+}
+
+tr.pb-mi td {
+    padding-left: 12px;
+    padding-right: 12px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    font-family: Verdana,Courier,"Courier New",monospace;
+    background: #fffddd;
     border-right: 1px solid blue;
 }
 
