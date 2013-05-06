@@ -63,6 +63,10 @@
     <%= f.label :age_max, "to" %>
     <%= f.text_field :age_max, :size => 2 %>
   </div>
+  <div class="field">
+    <%= f.label :date %><br />
+    <%= f.date_select :date, :order => [:day, :month, :year] %>
+  </div>
   <div class="actions">
     <%= f.submit %>
   </div>

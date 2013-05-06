@@ -33,7 +33,7 @@
         <% if entries[stroke] %>
           <% best = best_result(entries[stroke].map(&:result).compact) %>
 	  <% if best %>
-	<%= content_tag :span, :title => "#{best.competition.date}: #{best.competition.name}" do %>
+	<%= content_tag :span, :title => "#{best.date}: #{best.competition.name}" do %>
               <%= best.swimmer.first_last %>
             <% end %>
           <% end %>
@@ -95,7 +95,7 @@
         <% if entries[stroke] %>
           <% best = best_result(entries[stroke].map(&:result).compact) %>
 	  <% if best %>
-              (<%= best.registration.date %>)
+              (<%= best.date %>)
           <% end %>
         <% end %>
       </td>

@@ -18,10 +18,10 @@
       <% discipline = @results.keys.select { |discipline| discipline.stroke == stroke and discipline.distance == row[:distance] and discipline.course == row[:course] }.first %>
 &
         <% if discipline %>
-          <% @results[discipline] = @results[discipline].sort_by { |x| x.entry.event.competition.date } %>
+          <% @results[discipline] = @results[discipline].sort_by { |x| x.date } %>
           <% best = best_result(@results[discipline]) %>
 	  <% if best %>
-            {\hfill <%= best %>\newline\mbox{}\hfill{\footnotesize <%= best.entry.event.competition.date.strftime("%d/%m/%y") %>}}
+            {\hfill <%= best %>\newline\mbox{}\hfill{\footnotesize <%= best.date.strftime("%d/%m/%y") %>}}
           <% end %>
         <% end %>
     <% end %>

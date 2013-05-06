@@ -13,13 +13,14 @@ module ResultsHelper
     return best
   end
 
+  # FIXME: obsolete!
   # how to graph a list of results (of the same swimmer)
   def graph_results(results)
     swimmer = results.first.entry.swimmer
     graph = []
     results.each do |result|
       if result.time and result.time > 0
-        graph << [(result.entry.event.competition.date - (swimmer.birthday+8.years)).to_i, result.time]
+        graph << [(result.date - (swimmer.birthday+8.years)).to_i, result.time]
       end
     end
     # HACK: a single point doesn't seem to get an x-value

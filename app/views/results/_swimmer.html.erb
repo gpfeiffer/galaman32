@@ -69,9 +69,9 @@
 <h2>Individual Results</h2>
 
 <table class="fact-sheet">
-  <% r[discipline].sort_by { |x| x.entry.event.competition.date }.each do |result| %>
+  <% r[discipline].sort_by { |x| x.date }.each do |result| %>
     <tr class="fact-major" x="<%= result.x %>" y="<%= result.y %>">
-      <td><%= result.entry.event.competition.date %></td>
+      <td><%= result.date %></td>
       <td><%= link_to result.entry.event.competition.name, result.entry.registration %></td>
       <td align="right"><%= result %></td>
     </tr>

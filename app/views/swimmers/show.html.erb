@@ -63,7 +63,7 @@ results in a particular stroke.
         <% if entries[stroke] %>
           <% best = best_result(entries[stroke].map(&:result).compact) %>
 	  <% if best %>
-              (<%= best.entry.event.competition.date.strftime("%d/%m/%y") %>)
+              (<%= best.date.strftime("%d/%m/%y") %>)
             </span>
           <% end %>
         <% end %>

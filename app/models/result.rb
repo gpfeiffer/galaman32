@@ -1,6 +1,7 @@
 class Result < ActiveRecord::Base
   belongs_to :entry
   has_one :registration, :through => :entry
+  has_one :event, :through => :entry
 
   delegate :discipline, :swimmer, :competition, :to => :entry
 
@@ -61,9 +62,13 @@ class Result < ActiveRecord::Base
     end
   end
 
+  def date
+    event.date
+  end
+
   # coordinates: x = date of competition, y = time in milliseconds
   def x
-    competition.date
+    date
   end
 
   def y

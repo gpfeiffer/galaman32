@@ -21,7 +21,11 @@
   </div>
   <div class="field">
     <%= f.label :date %><br />
-    <%= f.date_select :date %>
+    <%= f.date_select :date, :order => [:day, :month, :year] %>
+  </div>
+  <div class="field">
+    <%= f.label :length %><br />
+    <%= f.text_field :length %>
   </div>
   <div class="actions">
     <%= f.submit %>
