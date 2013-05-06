@@ -68,7 +68,7 @@ class Result < ActiveRecord::Base
 
   # coordinates: x = date of competition, y = time in milliseconds
   def x
-    competition.date
+    event.date
   end
 
   def y

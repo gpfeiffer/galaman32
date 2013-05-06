@@ -71,7 +71,7 @@
 <table class="fact-sheet">
   <% r[discipline].sort_by { |x| x.date }.each do |result| %>
     <%= content_tag :tr, :class => "fact-major", :x => result.x, :y => result.y do %>
-      <td><%= result.date %> (C)</td>
+      <td><%= result.date %></td>
       <td><%= link_to result.entry.event.competition.name, result.entry.registration %></td>
       <td align="right"><%= result %></td>
     <% end %>
