@@ -30,8 +30,8 @@ class EventsController < ApplicationController
   # GET /events/new.xml
   def new
     @event[:competition_id] = params[:competition_id]
-    @event[:age_min] =  0
-    @event[:age_max] =  99
+    @event.age_min, @event.age_max = 0, 99
+    @event.date = @event.competition.date
 
     respond_to do |format|
       format.html # new.html.erb
