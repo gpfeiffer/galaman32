@@ -68,7 +68,7 @@ class Result < ActiveRecord::Base
 
   # coordinates: x = date of competition, y = time in milliseconds
   def x
-    event.date
+    date
   end
 
   def y
@@ -84,6 +84,14 @@ class Result < ActiveRecord::Base
     qualification = Qualification.find_by_name("FINA Base")
     base_time = QualificationTime.find_by_qualification_id_and_discipline_id(qualification.id, discipline.id).time
     ((10 * base_time / time.to_f)**3).to_i
+  end
+
+  # is this result a swimmer's best result up to now?
+  def personal_best?
+    return false if time == 0 
+    old = swimmer.results.group_by(&:discipline)[discipline]
+    old = old.select { |x| x.date < date }
+    old.any? ? time < old.map(&:time).min : true
   end
 end
 
