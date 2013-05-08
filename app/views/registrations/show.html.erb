@@ -55,7 +55,10 @@
   <% end %>
 </table>
 <% if nr_swims > 0 %>
-<p><%= nr_swims %> Results (<%= "%.2f" % [100.0 * nr_pbs/nr_swims] %>% PB) </p>
+<p>
+  <%= pluralize(nr_swims, "Result") %> 
+  (<%= "%.2f" % [100.0 * nr_pbs/nr_swims] %>% PB)
+</p>
 <% end %>
 <hr>
 <% if user_session[:edit] %>
