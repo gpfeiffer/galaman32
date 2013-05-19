@@ -42,11 +42,12 @@
           <%= link_to '__:__.__', new_result_path(:entry_id => entry.id) %>
         <% end %>
       </td>
-      <td>
+      <td style="text-align: right;">
         <% if entry.result %>
-	  <% if entry.result.personal_best? %>
+	  <% pb = entry.result.personal_best %>
+	  <% if pb %>
             <% nr_pbs += 1%>
-	    <%= '*' %>
+	    <%= pb %>
           <% end %>
 	<% end %>
       </td>

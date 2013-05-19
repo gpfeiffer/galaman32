@@ -90,8 +90,21 @@ class Result < ActiveRecord::Base
   def personal_best?
     return false if time == 0 
     old = swimmer.results.group_by(&:discipline)[discipline]
-    old = old.select { |x| x.date < date }
+    old = old.select { |x| x.time > 0 and x.date < date }
     old.any? ? time < old.map(&:time).min : true
+  end
+
+  # return '*' for first time, centiseconds if PB, and nil otherwise.
+  def personal_best
+    return nil if time == 0 
+    old = swimmer.results.group_by(&:discipline)[discipline]
+    old = old.select { |x| x.time > 0 and x.date < date }
+    if old.any?
+      diff = old.map(&:time).min - time
+      diff > 0 ? ("%.2f" % (diff*0.01)) : nil
+    else
+      '*'
+    end
   end
 end
 
