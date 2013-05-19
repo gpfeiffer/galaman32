@@ -101,9 +101,9 @@ class Result < ActiveRecord::Base
     old = old.select { |x| x.time > 0 and x.date < date }
     if old.any?
       diff = old.map(&:time).min - time
-      diff > 0 ? ("%.2f" % (diff*0.01)) : nil
+      diff > 0 ? diff : nil
     else
-      '*'
+      0
     end
   end
 end

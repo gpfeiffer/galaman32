@@ -28,7 +28,7 @@
     <th>PB</th>
     <th>(Seed)</th>
   </tr>
-  <% nr_swims, nr_pbs = 0, 0 %>
+  <% nr_swims, nr_pbs, pb_total = 0, 0, 0 %>
   <% @registration.entries.sort_by { |x| x.event.pos }.each do |entry| %>
     <tr class="times-major">
       <th><%= link_to entry.event.pos, entry.event %>.</th>
@@ -46,8 +46,9 @@
         <% if entry.result %>
 	  <% pb = entry.result.personal_best %>
 	  <% if pb %>
-            <% nr_pbs += 1%>
-	    <%= pb %>
+            <% nr_pbs += 1 %>
+            <% pb_total += pb %>
+	    <%= pb == 0 ? '*' : time_to_msc(pb) %>
           <% end %>
 	<% end %>
       </td>
@@ -57,8 +58,8 @@
 </table>
 <% if nr_swims > 0 %>
 <p>
-  <%= pluralize(nr_swims, "Result") %> 
-  (<%= "%.2f" % [100.0 * nr_pbs/nr_swims] %>% PB)
+  <%= pluralize(nr_swims, "Result") %>, 
+  PB total: <%= time_to_msc(pb_total) %>.
 </p>
 <% end %>
 <hr>
