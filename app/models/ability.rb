@@ -34,9 +34,10 @@ class Ability
       can :read, [Swimmer, Club, Registration, Entry, Result, Event, Invitation]
       can :manage, Profile
       can :manage, Rating
-      can :manage, Aim do |aim|
-        aim.swimmer.supporters.include? user
-      end
+#      can :manage, Aim do |aim|
+#        aim.swimmer.supporters.include? user
+#      end
+      can :manage, Aim 
     end
         
 
