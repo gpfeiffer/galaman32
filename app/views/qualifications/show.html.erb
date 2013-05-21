@@ -31,23 +31,23 @@
     </h3>
 
     <table class="fact-sheet">
-      <tr class="times-major">
-        <th></th>
+      <tr class="pb-hi">
+        <th class="pb-tl" style="width:84px"></th>
         <% Discipline::STROKES.each do |stroke| %>
-          <th style="width:80px">
+          <th style="width:84px">
             <%= { 'Freestyle' => 'Free', 'Backstroke' => 'Back', 'Breaststroke' => 'Breast', 'Butterfly' => 'Fly', 'Ind Medley' => 'Medley' }[stroke] %>
           </th>
         <% end %>
       </tr>
       <% times_by_ages.group_by(&:distance_course).sort_by  { |key, value| [key[0..-5].to_i, 100-key[-2].ord] }.each do |label, times_by_label| %>
-        <tr class="times-major">
+        <tr class="pb-lo" align="right">
           <th>
             <%= label %>
           </th>
           <% Discipline::STROKES.each do |stroke| %>
             <% qt = times_by_label.select { |x| x.stroke == stroke }.first %>
             <% if qt %>
-              <%= content_tag(:td, qt, :align => "right", :title => "#{qt.fina_points}") %>
+              <%= content_tag(:td, qt, :title => "#{qt.fina_points}") %>
             <% else %>
               <td></td>
             <% end %>

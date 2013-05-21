@@ -22,16 +22,16 @@
     </h3>
 
     <table class="fact-sheet">
-      <tr class="times-major">
-        <th></th>
+      <tr class="pb-hi">
+        <th class="pb-tl" style="width:84px"></th>
         <% Discipline::STROKES.each do |stroke| %>
-          <th style="width:80px">
-            <%= { 'Freestyle' => 'Free', 'Backstroke' => 'Back', 'Breaststroke' => 'Breast', 'Butterfly' => 'Fly', 'Ind Medley' => 'Medley' }[stroke] %>
+          <th style="width:84px">
+            <%= short_stroke_name(stroke) %>
           </th>
         <% end %>
       </tr>
       <% times.group_by(&:distance_course).sort_by  { |key, value| [key[0..-5].to_i, 100-key[-2].ord] }.each do |label, times_by_label| %>
-        <tr class="times-major">
+        <tr class="pb-lo" align="right">
           <th><%= label %></th>
           <% times_by_stroke = times_by_label.group_by(&:stroke) %>
           <% Discipline::STROKES.each do |stroke| %>
@@ -43,12 +43,12 @@
               <% if pb %>
                 <% time = qt.time - pb.time %>
                 <% if time < 0 %>
-                  <%= content_tag(:td, time_to_msc(time), :align => "right", :style => "background-color: #FF9999") %>
+                  <%= content_tag(:td, time_to_msc(time), :style => "background-color:#FF9999") %>
                 <% else %>
-                  <%= content_tag(:td, time_to_msc(time), :align => "right", :style => "background-color: #99CC99") %>
+                  <%= content_tag(:td, time_to_msc(time), :style => "background-color:#99CC99") %>
                 <% end %>
               <% else %>
-                <%= content_tag(:td, qt, :align => "right", :style => "color: lightgray") %>
+                <%= content_tag(:td, qt, :style => "color:lightgray") %>
               <% end %>
             <% else %>
               <%= content_tag :td %>

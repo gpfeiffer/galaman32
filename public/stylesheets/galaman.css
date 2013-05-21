@@ -162,7 +162,6 @@ table.fact-sheet tbody {
 }
 
 table.fact-sheet tr th {
-    border-top: 1px solid blue;
     border-bottom: 1px solid blue;
 }
 
@@ -229,14 +228,25 @@ tr.pb-hi th {
     padding-left: 6px;
     padding-right: 6px;
     background: #fff959;
-    border: 1px solid blue;
+    border-top: 1px solid blue;
+    border-right: 1px solid blue;
 }
 
 tr.pb-lo th {
     padding-left: 6px;
     padding-right: 6px;
     background: #fff959;
-    border: 1px solid blue;
+    border-bottom: 1px solid blue;
+    border-left: 1px solid blue;
+    border-right: 1px solid blue;
+}
+
+th.pb-tl {
+    padding-left: 6px;
+    padding-right: 6px;
+    background: #fff959;
+    border-right: 1px solid blue;
+    border-left: 1px solid blue;
 }
 
 tr.pb-hi td {

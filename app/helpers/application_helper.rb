@@ -74,5 +74,22 @@ module ApplicationHelper
   def distance_course(code)
     "#{1 + code / 100}m #{(100 - code % 100).chr}C"
   end
+
+  def short_stroke_name(stroke)
+    { 
+      'Freestyle' => 'Free', 
+      'Backstroke' => 'Back', 
+      'Breaststroke' => 'Breast', 
+      'Butterfly' => 'Fly', 
+      'Ind Medley' => 'Medley' 
+    }[stroke]
+  end
+
+  def girls_or_boys(gender)
+    { 
+      'f' => "Girls", 
+      'm' => "Boys" 
+    }[gender]
+  end
 end
 
