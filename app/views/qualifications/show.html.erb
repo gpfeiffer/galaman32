@@ -27,7 +27,7 @@
   <% times_by_gender.group_by(&:age_range).sort_by { |key, value| key.first }.each do |ages, times_by_ages| %>
     <% if times_by_ages.any? %>
     <h3>
-      <%= { 'f' => "Girls", 'm' => "Boys" }[gender] %> (<%= ages_to_words(ages) %>)
+      <%= girls_or_boys(gender) %> (<%= ages_to_words(ages) %>)
     </h3>
 
     <table class="fact-sheet">
@@ -35,7 +35,7 @@
         <th class="pb-tl" style="width:84px"></th>
         <% Discipline::STROKES.each do |stroke| %>
           <th style="width:84px">
-            <%= { 'Freestyle' => 'Free', 'Backstroke' => 'Back', 'Breaststroke' => 'Breast', 'Butterfly' => 'Fly', 'Ind Medley' => 'Medley' }[stroke] %>
+            <%= short_stroke_name(stroke) %>
           </th>
         <% end %>
       </tr>
@@ -45,12 +45,10 @@
             <%= label %>
           </th>
           <% Discipline::STROKES.each do |stroke| %>
-            <% qt = times_by_label.select { |x| x.stroke == stroke }.first %>
-            <% if qt %>
-              <%= content_tag(:td, qt, :title => "#{qt.fina_points}") %>
-            <% else %>
-              <td></td>
-            <% end %>
+            <td>
+              <% qt = times_by_label.select { |x| x.stroke == stroke }.first %>
+              <%= content_tag(:span, qt, :title => "#{qt.fina_points}") if qt %>
+            </td>
           <% end %>
         <tr>
       <% end %>

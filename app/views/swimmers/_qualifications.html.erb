@@ -28,9 +28,7 @@
           <% Discipline::STROKES.each do |stroke| %>
             <td>
               <% qt = times_by_label.select { |x| x.stroke == stroke }.first %>
-              <% if qt %>
-                <%= content_tag(:span, qt, :title => "#{qt.fina_points}") %>
-              <% end %>
+              <%= content_tag(:span, qt, :title => "#{qt.fina_points}") if qt %>
             </td>
           <% end %>
         <tr>
@@ -44,6 +42,6 @@
 <% end %>
 
 <% if can? :create, Aim %>
- <%= link_to 'Select Aims', new_aim_path(:swimmer_id => @swimmer) %>
+  <%= link_to 'Select Aims', new_aim_path(:swimmer_id => @swimmer) %>
 <% end %>
 
