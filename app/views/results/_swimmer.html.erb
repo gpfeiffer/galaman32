@@ -14,8 +14,7 @@
 <h3><%= link_to swimmer.name, swimmer %>
 (<%= link_to swimmer.club.symbol, swimmer.club %>)</h3>
 
-<%= content_tag :div, :id => "dob", :dob => swimmer.birthday, :distance => discipline.distance do -%> 
-<% end %>
+<%= content_tag :div, nil, :id => "dob", :dob => swimmer.birthday, :distance => discipline.distance %> 
 
 <!-- FIXME: provide controller method for this version of discipline name -->
 <h1>
@@ -25,7 +24,7 @@
 </h1>
 
 <div>
-<b>PB: <%= best_result(r[discipline]) %></b>
+<b>PB: <%= best_result(r[discipline]) if r[discipline] %></b>
 </div>
 
 <br />
@@ -66,6 +65,7 @@
 <div id="svg-2"></div>
 <br />
 
+<% if r[discipline] %>
 <h2>Individual Results</h2>
 
 <table class="fact-sheet">
@@ -100,7 +100,7 @@
 
 </table>
 <br />
-
+<% end %>
 
 <div id="qualification">
 <% names = ["B", "A", "Division 2", "Division 1", "Connacht Squad", "British Gas", "FINA Base"] %>

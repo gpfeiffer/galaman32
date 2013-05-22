@@ -153,12 +153,12 @@ th.discipline {
 
 table.fact-sheet {
     border-collapse: collapse;
-    display: inline;
     vertical-align: top;
+    border: 1px solid blue;
+    margin-right: 2px;
 }
 
 table.fact-sheet tbody {
-    border: 1px solid blue;
 }
 
 table.fact-sheet tr th {
@@ -236,7 +236,7 @@ tr.pb-lo th {
     padding-left: 6px;
     padding-right: 6px;
     background: #fff959;
-    border-bottom: 1px solid blue;
+    border-bottom: 1px solid lightblue;
     border-left: 1px solid blue;
     border-right: 1px solid blue;
 }
@@ -267,8 +267,8 @@ tr.pb-lo td {
     padding-bottom: 0px;
     font-family: Verdana,Courier,"Courier New",monospace;
     background: #fffddd;
-    border-bottom: 1px solid blue;
-    border-right: 1px solid blue;
+    border-bottom: 1px solid lightgray;
+    border-right: 1px solid lightgray;
 }
 
 tr.pb-mi td {
@@ -291,6 +291,19 @@ hr {
 legend {
     font-size: larger;
     font-weight: bold;    
+}
+
+fieldset.white {
+    background: #fffddd;
+    border: 1px solid blue;
+}
+
+legend.white {
+    font-size: small;
+    background: #fffddd;
+    border-top: 1px solid blue;
+    border-left: 1px solid blue;
+    border-right: 1px solid blue;
 }
 
 .edit-head {

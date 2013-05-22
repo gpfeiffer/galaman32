@@ -1,3 +1,9 @@
+<h1><%= link_to @event.competition.name, @event.competition %></h1>
+<p>
+  <%= @event.competition.location %>
+  (<%= @event.competition.date %>)
+</p>
+
 <%= form_for(@event) do |f| %>
   <% if @event.errors.any? %>
     <div id="error_explanation">
@@ -13,43 +19,51 @@
 
   <%= f.hidden_field :competition_id %>
 
-  <h3><%= @event.competition.name %></h3>
-
-  <div class="field">
-    <%= f.label :pos, "Event No." %>
-    <%= f.select :pos, available_poss(@event.competition, @event) %>
-  </div>
-  <div class="field">
-    <%= f.label :discipline_id %><br />
-    <table style="display: inline">
+  <fieldset class="white">
+    <legend class="white"><%= f.label :pos, "Event" %></legend>
+    number <%= f.select :pos, available_poss(@event.competition, @event) %>
+  </fieldset>
+  <br />
+  <fieldset class="white">
+    <legend class="white"><%= f.label :discipline_id %></legend>
+  <div style="float:left">
+    <table style="vertical-align:top">
     <tr><th colspan="2">Gender</th><tr>
     <% Swimmer::GENDERS.each do |gender| %>
       <tr><td align="right"><%= f.label :gender, gender.upcase %></td>
       <td><%= f.radio_button :gender, gender %></td></tr>
     <% end %>
     </table>
-    <table style="display: inline">
+  </div>
+  <div style="float:left">
+    <table style="vertical-align:top">
     <tr><th colspan="2">Distance</th><tr>
     <% Discipline::DISTANCES.each do |distance| %>
       <tr><td align="right"><%= f.label :distance, distance %></td>
       <td><%= f.radio_button :distance, distance %></td></tr>
     <% end %>
     </table>
-    <table style="display: inline">
+  </div>
+  <div style="float:left">
+    <table style="vertical-align:top">
     <tr><th colspan="2">Course</th><tr>
     <% Discipline::COURSES.each do |course| %>
       <tr><td align="right"><%= f.label :course, course %></td>
       <td><%= f.radio_button :course, course %></td></tr>
     <% end %>
     </table>
-    <table style="display: inline">
+  </div>
+  <div style="float:left">
+    <table style="vertical-align:top">
     <tr><th colspan="2">Stroke</th><tr>
     <% Discipline::STROKES.each do |stroke| %>
       <tr><td align="right"><%= f.label :stroke, stroke %></td>
       <td><%= f.radio_button :stroke, stroke %></td></tr>
     <% end %>
     </table>
-    <table style="display: inline">
+  </div>
+  <div style="float:left">
+    <table style="vertical-align:top">
     <tr><th colspan="2">Mode</th><tr>
     <% Discipline::MODES.each do |mode| %>
       <tr><td align="right"><%= f.label :mode, mode %></td>
@@ -57,16 +71,22 @@
     <% end %>
     </table>
   </div>
-  <div class="field">
-    <%= f.label :age_min, "Age from" %>
+  <br style="clear:left" />
+  </fieldset>
+  <br />  
+  <fieldset class="white">
+    <legend class="white">Age Range</legend>
+    <%= f.label :age_min, "from" %>
     <%= f.text_field :age_min, :size => 2 %>
     <%= f.label :age_max, "to" %>
     <%= f.text_field :age_max, :size => 2 %>
-  </div>
-  <div class="field">
-    <%= f.label :date %><br />
+  </fieldset>
+  <br />
+  <fieldset class="white">
+    <legend class="white"><%= f.label :date %></legend>
     <%= f.date_select :date, :order => [:day, :month, :year] %>
-  </div>
+  </fieldset>
+  <br />
   <div class="actions">
     <%= f.submit %>
   </div>
