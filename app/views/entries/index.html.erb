@@ -9,33 +9,21 @@
 <tr class="times-major">
 <th></th>
 <% Discipline::STROKES.each do |stroke| %>
-  <th style="width:106px"><%= truncate(stroke, :length => 12) %></th>
+  <th style="width:130px"><%= short_stroke_name stroke %></th>
 <% end %>
 </tr>
 <% entries_gender.group_by(&:distance_course_code).sort.each do |row, entries_row| %>
   <% entries = entries_row.group_by(&:stroke) %>
-  <tr class="pb-hi" align="right">
-    <th rowspan="2"><%= distance_course(row) %></th>
+  <tr class="pb-lo <%= distance_course(row)[-2,2] %>" align="right">
+    <th><%= distance_course(row) %></th>
     <% Discipline::STROKES.each do |stroke| %>
       <td>
         <% if entries[stroke] %>
           <% best = best_result(entries[stroke].map(&:result).compact) %>
 	  <% if best %>
-             <%= link_to best, best %>
-          <% end %>
-        <% end %>
-      </td>
-    <% end %>
-  </tr>
-  <tr class="pb-lo" align="right">
-    <% Discipline::STROKES.each do |stroke| %>
-      <td>
-        <% if entries[stroke] %>
-          <% best = best_result(entries[stroke].map(&:result).compact) %>
-	  <% if best %>
-	<%= content_tag :span, :title => "#{best.date}: #{best.competition.name}" do %>
-              <%= best.swimmer.first_last %>
-            <% end %>
+            <%= link_to best, best %><br/>
+            <%= best.swimmer.first_last %><br/>
+            (<%= best.date %>)
           <% end %>
         <% end %>
       </td>
@@ -59,43 +47,21 @@
 <tr class="times-major">
 <th></th>
 <% Discipline::STROKES.each do |stroke| %>
-  <th style="width:130px"><%= truncate(stroke, :length => 12) %></th>
+  <th style="width:130px"><%= short_stroke_name stroke %></th>
 <% end %>
 </tr>
 <% entries_gender.group_by(&:distance_course_code).sort.each do |row, entries_row| %>
   <% entries = entries_row.group_by(&:stroke) %>
-  <tr class="pb-hi" align="right">
-    <th rowspan="3"><%= distance_course(row) %></th>
+  <tr class="pb-lo <%= distance_course(row)[-2,2] %>" align="right">
+    <th><%= distance_course(row) %></th>
     <% Discipline::STROKES.each do |stroke| %>
       <td>
         <% if entries[stroke] %>
           <% best = best_result(entries[stroke].map(&:result).compact) %>
 	  <% if best %>
-             <%= link_to best, best %>
-          <% end %>
-        <% end %>
-      </td>
-    <% end %>
-  </tr>
-  <tr class="pb-mi" align="right">
-    <% Discipline::STROKES.each do |stroke| %>
-      <td>
-        <% if entries[stroke] %>
-          <% best = best_result(entries[stroke].map(&:result).compact) %>
-	  <% if best %>
-              <%= best.swimmer.first_last %>
-          <% end %>
-        <% end %>
-      </td>
-    <% end %>
-  </tr>
-  <tr class="pb-lo" align="right">
-    <% Discipline::STROKES.each do |stroke| %>
-      <td>
-        <% if entries[stroke] %>
-          <% best = best_result(entries[stroke].map(&:result).compact) %>
-	  <% if best %>
-              (<%= best.date %>)
+            <%= link_to best, best %><br/>
+            <%= best.swimmer.first_last %><br/>
+            (<%= best.date %>)
           <% end %>
         <% end %>
       </td>
