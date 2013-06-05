@@ -15,6 +15,8 @@ class User < ActiveRecord::Base
 
   has_many :profiles, :dependent => :destroy
 
+  default_scope :order => :email
+
   def role? symbol
     roles.map(&:name).include? symbol.to_s.camelcase
   end
