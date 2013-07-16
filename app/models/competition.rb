@@ -8,7 +8,7 @@ class Competition < ActiveRecord::Base
   has_many :registrations, :through => :invitations
   has_many :clubs, :through => :invitations
 
-  validates :name, :date, :presence => true
+  validates :name, :date, :length, :presence => true
 
   def individual_events
     events.select { |x| not x.is_relay? }
@@ -21,6 +21,22 @@ class Competition < ActiveRecord::Base
   def season
     year = date.year + (date.month > 8 ? 1 : 0)
     return "%d/%02d" % [year-1, year % 100]
+  end
+
+  def days
+    1..length
+  end
+
+  def first_day
+    date
+  end
+
+  def last_day
+    date + (length - 1)
+  end
+
+  def dates
+    "#{first_day}" + (length > 1 ? " - #{last_day}" : "")
   end
 
   def relative_date
@@ -41,6 +57,6 @@ class Competition < ActiveRecord::Base
   end
 
   def to_s
-    "%s: %s, %s" % [date, name, location] 
+    "%s: %s, %s" % [dates, name, location] 
   end
 end

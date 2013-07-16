@@ -5,7 +5,13 @@
   </div>
 <% end %>
 <br />
-<br />
+
+<% events = @competition.events.group_by(&:day) %>
+<% @competition.days.each do |day| %>
+<% if events.include?(day) %>
+<% if @competition.length > 1 %>
+<h4>Day <%= day %> (<%= @competition.date + (day - 1).days %>)</h4>
+<% end %>
 <table class="fact-sheet">
   <tr class="fact-major">
     <th>No.</th>
@@ -18,7 +24,7 @@
     <% end %>
   </tr>
 
-<% @competition.events.each do |event| %>
+<% events[day].each do |event| %>
   <tr class="fact-major">
     <td align="right"><%= ordinal_number(event.pos) %></td>
     <td><%= link_to event.discipline.to_words, event %></td>
@@ -31,3 +37,5 @@
   </tr>
 <% end %>
 </table>
+<% end %>
+<% end %>

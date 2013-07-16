@@ -16,7 +16,8 @@
 <h3>
   <%= link_to @event.competition.name, @event.competition %>
 (<%= @event.competition.location %>,
-<%= @event.competition.date %>)
+<%= @event.date -%>
+<%= ", Day #{@event.day}" if @event.competition.length > 1 %>)
 </h3>
 
 <h1>

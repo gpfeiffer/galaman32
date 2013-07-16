@@ -14,6 +14,9 @@ class Event < ActiveRecord::Base
   validates :age_min, :age_max, :presence => true, 
     :numericality => { :only_integer => true, :greater_than_or_equal_to => 0 }
   validates :competition_id, :discipline_id, :presence => true
+  validates :day, :presence => true,
+    :numericality => { :only_integer => true, :greater_than => 0,
+      :less_than_or_equal_to => Proc.new { |event| event.competition.length } }
 
   validate :age_max_must_not_be_less_than_age_min
 
@@ -25,6 +28,10 @@ class Event < ActiveRecord::Base
 
   def age_range
     age_min..age_max
+  end
+
+  def date
+    competition.date + (day - 1)
   end
 
   def permits_relay?(relay)

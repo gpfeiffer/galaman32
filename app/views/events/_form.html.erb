@@ -21,7 +21,17 @@
 
   <fieldset class="white">
     <legend class="white"><%= f.label :pos, "Event" %></legend>
-    number <%= f.select :pos, available_poss(@event.competition, @event) %>
+    <b>Number</b>
+    <%= f.select :pos, available_poss(@event.competition, @event) %>
+    <% if @event.competition.length > 1 %>
+      <div style="float:right">
+        <b>Day</b>
+        <% @event.competition.days.each do |day| %>
+          <%= f.label :day, day %>
+          <%= f.radio_button :day, day %>
+        <% end %>
+      </div>
+    <% end %>
   </fieldset>
   <br />
   <fieldset class="white">
@@ -80,11 +90,6 @@
     <%= f.text_field :age_min, :size => 2 %>
     <%= f.label :age_max, "to" %>
     <%= f.text_field :age_max, :size => 2 %>
-  </fieldset>
-  <br />
-  <fieldset class="white">
-    <legend class="white"><%= f.label :date %></legend>
-    <%= f.date_select :date, :order => [:day, :month, :year] %>
   </fieldset>
   <br />
   <div class="actions">
