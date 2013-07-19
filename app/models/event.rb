@@ -30,9 +30,9 @@ class Event < ActiveRecord::Base
     age_min..age_max
   end
 
-  # def date
-  #   competition.date + (day - 1)
-  # end
+  def date
+    competition.date + (day - 1)
+  end
 
   def permits_relay?(relay)
     relay.gender == gender and age_range.include? relay.age_range
