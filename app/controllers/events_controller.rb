@@ -31,7 +31,7 @@ class EventsController < ApplicationController
   def new
     @event[:competition_id] = params[:competition_id]
     @event.age_min, @event.age_max = 0, 99
-    @event.date = @event.competition.date
+    @event.day = 1
     @event.discipline = Discipline.where(:mode => 'I', :course => 'SC', :stroke => 'Freestyle').first
 
     respond_to do |format|
