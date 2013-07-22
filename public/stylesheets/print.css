@@ -6,6 +6,11 @@
   margin-left: 0em;
 }
 
+body, td, th, tr, table {
+  font-family: "Helvetica Neue", Helvetica, sans-serif;
+  font-size: xx-small;
+}
+
 table.fact-sheet {
     display: table;
 }

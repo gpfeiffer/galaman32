@@ -1,6 +1,8 @@
+<% competition = invitation.competition %>
+
 <h3>
-  <%= link_to invitation.competition.name, invitation.competition %>
-  (<%= invitation.competition.location %>, <%= invitation.competition.date %>)
+  <%= link_to competition.name, competition %>
+  (<%= competition.location %>, <%= competition.dates %>)
 </h3>
 
 <h1><%= link_to invitation.club.name, invitation %></h1>
@@ -9,12 +11,12 @@
 
 <% nr_swims, nr_pbs = 0, 0 %>
 
-<% invitation.competition.days.each do |day| %>
-<% if invitation.competition.length > 1 %>
-<h4>Day <%= day %> (<%= invitation.competition.date + (day - 1).days %>)</h4>
+<% competition.days.each do |day| %>
+<% if competition.length > 1 %>
+<h4>Day <%= day %> (<%= competition.date + (day - 1).days %>)</h4>
 <% end %>
 
-<% invitation.registrations.group_by(&:gender).each do |gender, registrations| %>
+<% invitation.registrations_for_day(day).group_by(&:gender).each do |gender, registrations| %>
   <% events = registrations.map(&:events).reduce(:|).select { |x| x.day == day }.sort_by(&:pos) %>
 <% if events.any? %>
   <table class="fact-sheet">
@@ -39,6 +41,7 @@
               </td>
               <td>
               <% if entry.result.time > 0 %>
+                <%= "(#{entry.result.place}.)" if entry.result.place %>
                 <% nr_swims += 1%>
                 <% if entry.result.personal_best? %>
                   * <% nr_pbs += 1 %>
