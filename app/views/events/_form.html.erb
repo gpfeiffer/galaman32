@@ -31,6 +31,8 @@
           <%= f.radio_button :day, day %>
         <% end %>
       </div>
+    <% else %>
+      <% f.hidden_field :day %>
     <% end %>
   </fieldset>
   <br />
