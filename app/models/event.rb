@@ -11,12 +11,16 @@ class Event < ActiveRecord::Base
   attr_writer :gender, :distance, :course, :stroke, :mode
   delegate :gender, :distance, :course, :stroke, :mode, :is_relay?, :to => :discipline, :allow_nil => true
 
+  GENDERS = ["f", "m", "x"]
+  STAGES = ["P", "S", "F"]
+
   validates :age_min, :age_max, :presence => true, 
     :numericality => { :only_integer => true, :greater_than_or_equal_to => 0 }
   validates :competition_id, :discipline_id, :presence => true
   validates :day, :presence => true,
     :numericality => { :only_integer => true, :greater_than => 0,
       :less_than_or_equal_to => Proc.new { |event| event.competition.length } }
+  validates :stage, :presence => true, :inclusion => STAGES
 
   validate :age_max_must_not_be_less_than_age_min
 

@@ -21,8 +21,22 @@
 
   <fieldset class="white">
     <legend class="white"><%= f.label :pos, "Event" %></legend>
-    <b>Number</b>
-    <%= f.select :pos, available_poss(@event.competition, @event) %>
+    <div style="float:left">
+      <b>Number</b>
+      <%= f.select :pos, available_poss(@event.competition, @event) %>
+    </div>
+    <div style="float:left">
+      &nbsp;
+      &nbsp;
+      &nbsp;
+    </div>
+    <div style="float:left">
+      <b>Stage</b>
+      <% Event::STAGES.each do |stage| %>
+      <%= f.label :stage, stage %>
+      <%= f.radio_button :stage, stage %>
+      <% end %>
+    </div>
     <% if @event.competition.length > 1 %>
       <div style="float:right">
         <b>Day</b>
