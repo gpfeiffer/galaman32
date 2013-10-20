@@ -10,7 +10,7 @@ class QualificationTime < ActiveRecord::Base
 
   validates :qualification_id, :discipline_id, :time, :presence => true
 
-  attr_accessor :mins, :secs, :centis
+  attr_accessor :mins, :secs, :cens
 
   validate :age_max_must_not_be_less_than_age_min
 
@@ -20,33 +20,27 @@ class QualificationTime < ActiveRecord::Base
     end
   end
 
-  def centis
-    if self.time
-      return self.time % 100
-    end
+  def cens
+    time % 100 if time
   end
 
   def secs
-    if self.time
-      return (self.time / 100) % 60
-    end
+    (time / 100) % 60 if time
   end
 
   def mins
-    if self.time
-      return self.time / 6000
-    end
+    time / 6000 if time
   end
 
   def age_range
-    self.age_min..self.age_max
+    age_min..age_max
   end
 
   def to_s
-    if self.mins > 0
-      sprintf('%d:%02d.%02d', self.mins, self.secs, self.centis)
+    if mins > 0
+      sprintf('%d:%02d.%02d', mins, secs, cens)
     else
-      sprintf('%d.%02d', self.secs, self.centis)
+      sprintf('%d.%02d', secs, cens)
     end
   end
 

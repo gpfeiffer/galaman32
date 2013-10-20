@@ -8,7 +8,7 @@ class Entry < ActiveRecord::Base
   belongs_to :heat
   belongs_to :relay
 
-  attr_accessor :mins, :secs, :centis
+  attr_accessor :mins, :secs, :cens
 
   validates :event_id, :presence => true
 
@@ -38,7 +38,7 @@ class Entry < ActiveRecord::Base
     relay ? relay : registration
   end
 
-  def centis
+  def cens
     time % 100 if time
   end
 
@@ -77,9 +77,9 @@ class Entry < ActiveRecord::Base
     if time == 0
       'NT'
     elsif mins > 0
-      sprintf('%d:%02d.%02d', mins, secs, centis)
+      sprintf('%d:%02d.%02d', mins, secs, cens)
     else
-      sprintf('%d.%02d', secs, centis)
+      sprintf('%d.%02d', secs, cens)
     end
   end
 end

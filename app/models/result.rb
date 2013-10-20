@@ -5,26 +5,20 @@ class Result < ActiveRecord::Base
 
   delegate :discipline, :swimmer, :competition, :to => :entry
 
-  attr_accessor :mins, :secs, :centis
+  attr_accessor :mins, :secs, :cens
 
   validates :entry_id, :presence => true
 
-  def centis
-    if self.time
-      return self.time % 100
-    end
+  def cens
+    time % 100 if time
   end
 
   def secs
-    if self.time
-      return (self.time / 100) % 60
-    end
+    (time / 100) % 60 if time
   end
 
   def mins
-    if self.time
-      return self.time / 6000
-    end
+    time / 6000 if time
   end
 
   def qualify
@@ -47,18 +41,14 @@ class Result < ActiveRecord::Base
   end
 
   def to_s
-    if self.time.blank? 
+    if time.blank? 
       '-'
-    elsif self.time == 0
-      if self.comment.present?
-        self.comment
-      else
-        '0'
-      end        
-    elsif self.mins > 0
-      sprintf('%d:%02d.%02d', self.mins, self.secs, self.centis)
+    elsif time == 0
+      comment.present? ? comment : '0'
+    elsif mins > 0
+      sprintf('%d:%02d.%02d', mins, secs, cens)
     else
-      sprintf('%d.%02d', self.secs, self.centis)
+      sprintf('%d.%02d', secs, cens)
     end
   end
 

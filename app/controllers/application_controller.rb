@@ -19,20 +19,11 @@ class ApplicationController < ActionController::Base
     session[:previous_url] || root_path
   end
 
-  #  test.  redirect after login.
-  # def after_sign_in_path_for(user)
-  #   if user
-  #     user_path(user)
-  #   else
-  #     root_path
-  #   end
-  # end
-
-  # how to convert a hash with components mins, secs, centis into time
+  # how to convert a hash with components mins, secs, cens into time
   def time_from_msc(opts)
     m = opts[:mins].to_i
     s = opts[:secs].to_i
-    c = opts[:centis].to_i
+    c = opts[:cens].to_i
     100 * (60 * m + s) + c
   end
 

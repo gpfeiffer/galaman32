@@ -38,6 +38,7 @@
 
 <% @entries.group_by(&:age).sort.each do |age, entries_age| %>
 <% entries_gender = entries_age.group_by { |x| x.swimmer.gender }[gender] %>
+<% if entries_gender %>
 
 \begin{tabular}{|c|<%= "p{1.45cm}|" * Discipline::STROKES.length %>}
 \toprule
@@ -65,5 +66,6 @@
 <% end %>
 \bottomrule
 \end{tabular}
+<% end %>
 <% end %>
 <% end %>
