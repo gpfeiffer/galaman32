@@ -1,16 +1,13 @@
 module ApplicationHelper
+
   def time_to_msc(time)
-    if time < 0
-      return "-" + time_to_msc(-time)
-    end
-    centis = time % 100
-    time /= 100
-    secs = time % 60
-    mins = time / 60
+    return "-" + time_to_msc(-time) if time < 0
+    time, cens = time.divmod 100
+    mins, secs = time.divmod 60
     if mins > 0
-      sprintf('%d:%02d.%02d', mins, secs, centis)
+      sprintf('%d:%02d.%02d', mins, secs, cens)
     else
-      sprintf('%d.%02d', secs, centis)
+      sprintf('%d.%02d', secs, cens)
     end
   end
 
