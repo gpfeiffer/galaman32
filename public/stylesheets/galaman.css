@@ -3,8 +3,9 @@
   padding-top: 10px;
   padding-bottom: 10px;
   padding-left: 19em;
+  padding-right: 3em;
   border-bottom: 2px solid;
-  color: yellow;
+  color: black;
 }
 
 #banner #logo {
@@ -14,8 +15,9 @@
 }
 
 #banner img {
-  float: left;
-  width: 3em;
+  border: 1px solid black;
+  float: right;
+  height: 8em;
 }
 
 #admin {
@@ -28,21 +30,21 @@
 
 #admin a {
     text-decoration:none;
-    color: yellow;
+    color: white;
 }
 
 #banner a {
     text-decoration:none;
-    color: yellow;
+    color: white;
 }
 
 #admin a:hover {
-    background:yellow;
+    background: white;
     color: blue;
 }
 
 #banner a:hover {
-    background:yellow;
+    background: white;
     color: blue;
 }
 
@@ -56,6 +58,7 @@
   padding-left: 1em;
   padding-bottom: 1em;
   width: 16em;
+  height: 60em;
   background: blue;
 }
 
@@ -82,7 +85,7 @@
   padding-top: 4ex;
   padding-left: 2em;
   padding-right: 2em;
-  background: yellow;
+  background: white;
 }
 
 #main a {
@@ -92,16 +95,16 @@
 
 #main a:hover {
     background:blue;
-    color: yellow;
+    color: white;
 }
 
 #side a {
     text-decoration:none;
-    color: yellow;
+    color: white;
 }
 
 #side a:hover {
-    background:yellow;
+    background: white;
     color: blue;
 }
 
