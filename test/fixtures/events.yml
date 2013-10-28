@@ -6,6 +6,8 @@ one:
   pos: 1
   age_min: 1
   age_max: 1
+  day: 1
+  stage: F
 
 two:
   competition: two
@@ -13,3 +15,5 @@ two:
   pos: 2
   age_min: 1
   age_max: 1
+  day: 1
+  stage: F

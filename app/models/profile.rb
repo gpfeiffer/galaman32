@@ -10,4 +10,8 @@ class Profile < ActiveRecord::Base
   def target
     swimmer or club
   end
+
+  def name
+    target.name
+  end
 end

@@ -4,8 +4,10 @@ one:
   name: MyString
   location: MyString
   date: 2011-10-16
+  length: 1
 
 two:
   name: MyString
   location: MyString
   date: 2011-10-16
+  length: 2

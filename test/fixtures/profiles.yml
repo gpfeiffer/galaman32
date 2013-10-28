@@ -1,11 +1,11 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:
-  user_id: 1
-  club_id: 1
-  swimmer_id: 1
+  user: one
+  club: one
+  swimmer: one
 
 two:
-  user_id: 1
-  club_id: 1
-  swimmer_id: 1
+  user: two
+  club: two
+  swimmer: two

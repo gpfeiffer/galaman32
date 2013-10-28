@@ -1,8 +1,12 @@
 require 'test_helper'
 
 class ProfilesControllerTest < ActionController::TestCase
+  include Devise::TestHelpers
+
   setup do
     @profile = profiles(:one)
+    @user = users(:one)
+    sign_in @user
   end
 
   test "should get index" do
@@ -21,7 +25,7 @@ class ProfilesControllerTest < ActionController::TestCase
       post :create, :profile => @profile.attributes
     end
 
-    assert_redirected_to profile_path(assigns(:profile))
+    assert_redirected_to user_path(assigns(:profile).user)
   end
 
   test "should show profile" do
@@ -36,7 +40,7 @@ class ProfilesControllerTest < ActionController::TestCase
 
   test "should update profile" do
     put :update, :id => @profile.to_param, :profile => @profile.attributes
-    assert_redirected_to profile_path(assigns(:profile))
+    assert_redirected_to user_path(assigns(:profile).user)
   end
 
   test "should destroy profile" do
@@ -44,6 +48,6 @@ class ProfilesControllerTest < ActionController::TestCase
       delete :destroy, :id => @profile.to_param
     end
 
-    assert_redirected_to profiles_path
+    assert_redirected_to user_path(assigns(:profile).user)
   end
 end

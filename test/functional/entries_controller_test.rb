@@ -1,12 +1,16 @@
 require 'test_helper'
 
 class EntriesControllerTest < ActionController::TestCase
+  include Devise::TestHelpers
+
   setup do
     @entry = entries(:one)
+    @user = users(:one)
+    sign_in @user
   end
 
   test "should get index" do
-    get :index
+    get :index, :club_id => clubs(:one).to_param
     assert_response :success
     assert_not_nil assigns(:entries)
   end

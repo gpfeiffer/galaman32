@@ -1,8 +1,12 @@
 require 'test_helper'
 
 class DisciplinesControllerTest < ActionController::TestCase
+  include Devise::TestHelpers
+
   setup do
     @discipline = disciplines(:one)
+    @user = users(:one)
+    sign_in @user
   end
 
   test "should get index" do

@@ -1,8 +1,12 @@
 require 'test_helper'
 
 class QualificationsControllerTest < ActionController::TestCase
+  include Devise::TestHelpers
+
   setup do
     @qualification = qualifications(:one)
+    @user = users(:one)
+    sign_in @user
   end
 
   test "should get index" do
@@ -18,7 +22,7 @@ class QualificationsControllerTest < ActionController::TestCase
 
   test "should create qualification" do
     assert_difference('Qualification.count') do
-      post :create, :qualification => @qualification.attributes
+      post :create, :qualification => { :name => "new" }
     end
 
     assert_redirected_to qualification_path(assigns(:qualification))

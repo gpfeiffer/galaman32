@@ -25,8 +25,7 @@ Galaman::Application.routes.draw do
 
   get "admin" => 'admin#index'
 
-  match 'lanes/:id' => 'lanes#show', :via => :get
-  match 'lanes' => 'lanes#index', :via => :get
+  get "lanes" => 'lanes#index'
 
   resources :invitations
 

@@ -1,8 +1,12 @@
 require 'test_helper'
 
 class CompetitionsControllerTest < ActionController::TestCase
+  include Devise::TestHelpers
+
   setup do
     @competition = competitions(:one)
+    @user = users(:one)
+    sign_in @user
   end
 
   test "should get index" do

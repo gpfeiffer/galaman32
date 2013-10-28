@@ -1,8 +1,12 @@
 require 'test_helper'
 
 class SupportsControllerTest < ActionController::TestCase
+  include Devise::TestHelpers
+
   setup do
     @support = supports(:one)
+    @user = users(:one)
+    sign_in @user
   end
 
   test "should get index" do
@@ -44,6 +48,6 @@ class SupportsControllerTest < ActionController::TestCase
       delete :destroy, :id => @support.to_param
     end
 
-    assert_redirected_to supports_path
+    assert_redirected_to user_path(assigns(:support).user)
   end
 end

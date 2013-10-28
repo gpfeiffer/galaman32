@@ -1,8 +1,12 @@
 require 'test_helper'
 
 class SeatsControllerTest < ActionController::TestCase
+  include Devise::TestHelpers
+
   setup do
     @seat = seats(:one)
+    @user = users(:one)
+    sign_in @user
   end
 
   test "should get index" do

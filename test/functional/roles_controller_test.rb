@@ -1,8 +1,12 @@
 require 'test_helper'
 
 class RolesControllerTest < ActionController::TestCase
+  include Devise::TestHelpers
+
   setup do
     @role = roles(:one)
+    @user = users(:one)
+    sign_in @user
   end
 
   test "should get index" do

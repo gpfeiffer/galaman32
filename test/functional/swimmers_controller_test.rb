@@ -1,8 +1,12 @@
 require 'test_helper'
 
 class SwimmersControllerTest < ActionController::TestCase
+  include Devise::TestHelpers
+
   setup do
     @swimmer = swimmers(:one)
+    @user = users(:one)
+    sign_in @user
   end
 
   test "should get index" do
@@ -44,6 +48,6 @@ class SwimmersControllerTest < ActionController::TestCase
       delete :destroy, :id => @swimmer.to_param
     end
 
-    assert_redirected_to swimmers_path
+    assert_redirected_to club_path(assigns(:swimmer).club)
   end
 end

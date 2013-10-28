@@ -1,8 +1,12 @@
 require 'test_helper'
 
 class ClubsControllerTest < ActionController::TestCase
+  include Devise::TestHelpers
+
   setup do
     @club = clubs(:one)
+    @user = users(:one)
+    sign_in @user
   end
 
   test "should get index" do

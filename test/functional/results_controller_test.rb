@@ -1,8 +1,12 @@
 require 'test_helper'
 
 class ResultsControllerTest < ActionController::TestCase
+  include Devise::TestHelpers
+
   setup do
     @result = results(:one)
+    @user = users(:one)
+    sign_in @user
   end
 
   test "should get index" do
@@ -44,6 +48,6 @@ class ResultsControllerTest < ActionController::TestCase
       delete :destroy, :id => @result.to_param
     end
 
-    assert_redirected_to results_path
+    assert_redirected_to event_path(assigns(:result).entry.event)
   end
 end

@@ -1,13 +1,15 @@
 require 'test_helper'
 
 class LanesControllerTest < ActionController::TestCase
-  test "should get index" do
-    get :index
-    assert_response :success
+  include Devise::TestHelpers
+
+  setup do
+    @user = users(:one)
+    sign_in @user
   end
 
-  test "should get show" do
-    get :show
+  test "should get index" do
+    get :index, :event_id => events(:one).to_param
     assert_response :success
   end
 

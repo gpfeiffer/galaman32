@@ -1,8 +1,12 @@
 require 'test_helper'
 
 class QualificationTimesControllerTest < ActionController::TestCase
+  include Devise::TestHelpers
+
   setup do
     @qualification_time = qualification_times(:one)
+    @user = users(:one)
+    sign_in @user
   end
 
   test "should get index" do

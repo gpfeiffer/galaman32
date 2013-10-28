@@ -1,8 +1,12 @@
 require 'test_helper'
 
 class RelaysControllerTest < ActionController::TestCase
+  include Devise::TestHelpers
+
   setup do
     @relay = relays(:one)
+    @user = users(:one)
+    sign_in @user
   end
 
   test "should get index" do

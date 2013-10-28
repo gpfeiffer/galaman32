@@ -1,8 +1,12 @@
 require 'test_helper'
 
 class AssignmentsControllerTest < ActionController::TestCase
+  include Devise::TestHelpers
+
   setup do
     @assignment = assignments(:one)
+    @user = users(:one)
+    sign_in @user
   end
 
   test "should get index" do
@@ -12,7 +16,7 @@ class AssignmentsControllerTest < ActionController::TestCase
   end
 
   test "should get new" do
-    get :new
+    get :new, :user_id => users(:two).to_param
     assert_response :success
   end
 
@@ -21,7 +25,7 @@ class AssignmentsControllerTest < ActionController::TestCase
       post :create, :assignment => @assignment.attributes
     end
 
-    assert_redirected_to assignment_path(assigns(:assignment))
+    assert_redirected_to user_path(assigns(:assignment).user)
   end
 
   test "should show assignment" do
@@ -36,7 +40,7 @@ class AssignmentsControllerTest < ActionController::TestCase
 
   test "should update assignment" do
     put :update, :id => @assignment.to_param, :assignment => @assignment.attributes
-    assert_redirected_to assignment_path(assigns(:assignment))
+    assert_redirected_to user_path(assigns(:assignment).user)
   end
 
   test "should destroy assignment" do
@@ -44,6 +48,6 @@ class AssignmentsControllerTest < ActionController::TestCase
       delete :destroy, :id => @assignment.to_param
     end
 
-    assert_redirected_to assignments_path
+    assert_redirected_to user_path(assigns(:assignment).user)
   end
 end

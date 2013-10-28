@@ -1,14 +1,18 @@
 require 'test_helper'
 
 class HeatsControllerTest < ActionController::TestCase
+  include Devise::TestHelpers
+
   setup do
     @heat = heats(:one)
     @event = @heat.event
     @event.entries << entries(:one)
+    @user = users(:one)
+    sign_in @user
   end
 
   test "should get index" do
-    get :index
+    get :index, :event_id => @event.to_param
     assert_response :success
     assert_not_nil assigns(:heats)
   end
