@@ -13,7 +13,7 @@
 <ul>
 <% @profile.ratings.each do |rating| %>
 <li>
-<%= link_to rating.target, rating %>
+<%= link_to @profile.target, rating %>
 <div class="edit">
 <%= link_to '[-]', rating, :confirm => 'Are you sure?', :method => :delete %>
 </div>
