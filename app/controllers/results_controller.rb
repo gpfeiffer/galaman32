@@ -64,7 +64,12 @@ class ResultsController < ApplicationController
   # POST /results
   # POST /results.xml
   def create
-    @result[:time] = time_from_msc(params[:result])
+    if params[:result][:comment].blank?
+      @result[:time] = time_from_msc(params[:result])
+    else
+      @result[:time] = 0
+      @result[:place] = ""
+    end
 
     respond_to do |format|
       if @result.save
@@ -80,7 +85,12 @@ class ResultsController < ApplicationController
   # PUT /results/1
   # PUT /results/1.xml
   def update
-    @result[:time] = time_from_msc(params[:result])
+    if params[:result][:comment].blank?
+      @result[:time] = time_from_msc(params[:result])
+    else
+      @result[:time] = 0
+      params[:result][:place] = ""
+    end
 
     respond_to do |format|
       if @result.update_attributes(params[:result])

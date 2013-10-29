@@ -9,6 +9,8 @@ class Result < ActiveRecord::Base
 
   validates :entry_id, :presence => true
 
+  ## FIXME: validate to ensure that either comment or time is set, not both.
+
   def cens
     time % 100 if time
   end
