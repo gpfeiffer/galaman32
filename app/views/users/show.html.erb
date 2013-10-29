@@ -66,24 +66,6 @@
 </ul>
 <% end %>
 
-<% if can? :manage, Profile %>
-<h3 class="edit-head"><%= pluralize(@user.profiles.count, 'Profile') %></h3>
-<div class="edit">
-<%= link_to '[+]', new_profile_path(:user_id => @user) %>
-</div>
-<ul>
-<% @user.profiles.each do |profile| %>
-<li>
-<%= link_to profile.target, profile %>
-<div class="edit">
-<%= link_to '[-]', profile, :confirm => 'Are you sure?', :method => :delete %>
-</div>
-</li>
-<% end %>
-</ul>
-<% end %>
-
-
 <hr />
 <% if can? :update, @user%>
   <%= link_to 'Edit', edit_user_path(@user) %> |

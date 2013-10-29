@@ -13,8 +13,6 @@ class User < ActiveRecord::Base
   has_many :beneficiaries, :through => :supports, :source => :swimmer
   has_one :swimmer
 
-  has_many :profiles, :dependent => :destroy
-
   default_scope :order => :email
 
   def role? symbol
