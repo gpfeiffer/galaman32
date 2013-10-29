@@ -1,5 +1,5 @@
 #banner {
-  background: blue;
+  background: #0066FF;
   padding-top: 10px;
   padding-bottom: 10px;
   padding-left: 19em;
@@ -23,7 +23,7 @@
 #admin {
   display: inline;
   text-align: right;
-  background: blue;
+  background: #0066FF;
   padding-right: 1em;
   color: black;
 }
@@ -59,7 +59,7 @@
   padding-bottom: 1em;
   width: 16em;
   height: 60em;
-  background: blue;
+  background: #0066FF;
 }
 
 #level a {
