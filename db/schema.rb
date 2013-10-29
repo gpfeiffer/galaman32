@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131010135721) do
+ActiveRecord::Schema.define(:version => 20131029183728) do
 
   create_table "aims", :force => true do |t|
     t.integer   "swimmer_id"
@@ -93,6 +93,17 @@ ActiveRecord::Schema.define(:version => 20131010135721) do
     t.timestamp "updated_at"
   end
 
+  create_table "performances", :force => true do |t|
+    t.integer   "user_id"
+    t.integer   "time"
+    t.integer   "discipline_id"
+    t.string    "name"
+    t.string    "competition"
+    t.date      "date"
+    t.timestamp "created_at"
+    t.timestamp "updated_at"
+  end
+
   create_table "profiles", :force => true do |t|
     t.integer   "user_id"
     t.integer   "club_id"
@@ -118,35 +129,6 @@ ActiveRecord::Schema.define(:version => 20131010135721) do
     t.string    "source"
     t.text      "description"
     t.string    "short"
-  end
-
-  create_table "ratings", :force => true do |t|
-    t.integer   "coach_ability"
-    t.integer   "athletes_knowledge"
-    t.integer   "technical_competency"
-    t.integer   "physical_conditioning"
-    t.integer   "strength"
-    t.integer   "power"
-    t.integer   "agility"
-    t.integer   "balance"
-    t.integer   "team_work"
-    t.integer   "sustainable_power"
-    t.integer   "confidence"
-    t.integer   "time_management"
-    t.integer   "communication"
-    t.integer   "motivation"
-    t.integer   "health_managment"
-    t.integer   "nutrition"
-    t.integer   "recovery"
-    t.integer   "flexibility"
-    t.integer   "local_muscle_endurance"
-    t.integer   "cardiovascular_endurance"
-    t.integer   "strength_endurance"
-    t.integer   "coordination"
-    t.integer   "psychological_skills"
-    t.timestamp "created_at"
-    t.timestamp "updated_at"
-    t.integer   "profile_id"
   end
 
   create_table "registrations", :force => true do |t|
