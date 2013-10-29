@@ -13,7 +13,7 @@
 <% disciplines_mode.sort_by { |x| Discipline::STROKES.index(x.stroke) }.group_by(&:stroke).each do |stroke, disciplines| %>
 
 <li><b><%= disciplines.first.stroke_in_words %>:</b>
-<%= raw disciplines.sort_by(&:distance).map { |discipline| link_to discipline.distance_in_words, discipline }.to_sentence %> .
+<%= raw disciplines.sort_by(&:distance).map { |discipline| link_to discipline.distance_in_words, discipline }.to_sentence %>.
 </li>
 
 <% end %>
