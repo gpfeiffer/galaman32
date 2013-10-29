@@ -9,7 +9,7 @@
       <th>Birthday</th>
       <th>Age</th>
       <% events.each do |event| %>
-        <th><span title="<%= event.pos %>. <%= event.discipline.name %>"><%= sprintf("%02d", event.pos) %></span></th>
+        <th><span title="<%= event.pos %>. <%= event.discipline.name %>"><%= event.pos %>. <%= event.discipline.distance %>m<br /><%= short_stroke_name(event.discipline.stroke) %></span></th>
       <% end %>
       <% relays.each do |relay| %>
         <th><span title="<%= relay.name %>">R<%= @invitation.relays.index(relay) + 1 %></span> </th>
