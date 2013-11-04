@@ -11,7 +11,14 @@
     </div>
   <% end %>
 
-  <%= f.hidden_field :club_id %>
+  <% if f.object.new_record? %>
+    <%= f.hidden_field :club_id %>
+  <% else %>
+  <div class="field">
+    <%= f.label :club_id, "Club" %><br />
+    <%= f.select :club_id, Club.all.map{ |x| [x.name, x.id] }, :include_blank => true %>
+  </div>
+  <% end %>
 
   <div class="field">
     <%= f.label :first %><br />
