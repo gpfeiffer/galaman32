@@ -37,11 +37,6 @@ class EntriesController < ApplicationController
   def new
     @entry.event = Event.find(params[:event_id])
     @entry.subject = params[:subject_type].constantize.find(params[:subject_id])
-    if params[:registration_id]
-      @entry.registration = Registration.find(params[:registration_id])
-    elsif params[:relay_id]
-      @entry.relay = Relay.find(params[:relay_id])
-    end
   
     if @entry.registration
       # find personal best a use as default seed time

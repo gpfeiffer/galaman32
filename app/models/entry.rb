@@ -1,12 +1,9 @@
 class Entry < ActiveRecord::Base
-  belongs_to :registration
-  has_one :swimmer, :through => :registration
   belongs_to :event
   has_one :competition, :through => :event
   has_one :discipline, :through => :event
   has_one :result, :dependent => :destroy
   belongs_to :heat
-  belongs_to :relay
   belongs_to :subject, :polymorphic => true
 
   attr_accessor :mins, :secs, :cens
