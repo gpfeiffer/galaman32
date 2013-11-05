@@ -1,8 +1,6 @@
 class Registration < ActiveRecord::Base
   belongs_to :swimmer
-  delegate :gender, :to => :swimmer
   belongs_to :invitation
-  belongs_to :club
   has_one :competition, :through => :invitation
   has_many :entries, :dependent => :destroy
   has_many :events, :through => :entries
@@ -11,16 +9,14 @@ class Registration < ActiveRecord::Base
 
   validates :invitation_id, :swimmer_id, :presence => true
   
-  before_create :assign_age_and_club
-  
-  def date
-    competition.date
-  end
+  delegate :gender, :name, :to => :swimmer
+  delegate :date, :to => :competition
 
+  before_create :assign_age
+  
   private
   
-  def assign_age_and_club
-    self.age = swimmer.age(invitation.competition.date)
-    self.club = swimmer.club
+  def assign_age
+    age = swimmer.age(invitation.competition.date)
   end
 end

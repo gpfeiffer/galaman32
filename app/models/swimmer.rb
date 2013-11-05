@@ -25,7 +25,7 @@ class Swimmer < ActiveRecord::Base
   end
 
   def name
-    first_last
+    last_first
   end
 
   def email

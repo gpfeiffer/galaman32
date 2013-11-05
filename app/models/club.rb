@@ -4,8 +4,8 @@ class Club < ActiveRecord::Base
   has_many :swimmers, :dependent => :destroy
   has_many :invitations, :dependent => :destroy
   has_many :competitions, :through => :invitations
-  has_many :registrations
-  has_many :entries, :through => :registrations
+  has_many :registrations, :through => :invitations
+#  has_many :entries, :through => :registrations
 
   validates :full_name, :symbol, :presence => true
 
