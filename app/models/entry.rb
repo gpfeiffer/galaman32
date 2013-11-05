@@ -1,4 +1,6 @@
 class Entry < ActiveRecord::Base
+  belongs_to :relay
+  belongs_to :registration
   belongs_to :event
   has_one :competition, :through => :event
   has_one :discipline, :through => :event
