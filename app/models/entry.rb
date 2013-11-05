@@ -31,6 +31,10 @@ class Entry < ActiveRecord::Base
     subject.club
   end
 
+  def gender
+    subject.gender
+  end
+
   def cens
     time % 100 if time
   end
