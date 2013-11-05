@@ -1,5 +1,5 @@
 <% if @invitation.relays.any? %>
-<% events = @competition.relay_events %>
+<% events = @invitation.competition.relay_events %>
 <h3>Relay Teams</h3>
 
 <table class="fact-sheet">
