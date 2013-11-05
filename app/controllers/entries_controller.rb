@@ -35,14 +35,13 @@ class EntriesController < ApplicationController
   # GET /entries/new
   # GET /entries/new.xml
   def new
-    @entry[:event_id] = params[:event_id]
-    @entry[:registration_id] = params[:registration_id]
-    @entry[:relay_id] = params[:relay_id]
-
-    if params[:registration_id]
+    @entry.event = Event.find(params[:event_id])
+    @entry.subject = params[:subject_type].constantize.find(params[:subject_id])
+  
+    if @entry.registration
       # find personal best a use as default seed time
-      swimmer = Registration.find(params[:registration_id]).swimmer
-      discipline = Event.find(params[:event_id]).discipline
+      swimmer = @entry.registration.swimmer
+      discipline = @entry.event.discipline
       @best = swimmer.personal_best(discipline)
       @cobest = swimmer.personal_best(discipline.opposite)
       if @best

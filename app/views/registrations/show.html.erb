@@ -8,13 +8,13 @@
 
 
 <h3><%= link_to @registration.competition.name, @registration.competition %> (<%= @registration.competition.location %>, <%= @registration.competition.date %>)</h3>
-<h1><%= link_to @registration.swimmer.name, @registration.swimmer %> (<%= link_to @registration.club.symbol, @registration.invitation %>)</h1>
+<h1><%= link_to @registration.swimmer.name, @registration.swimmer %> (<%= link_to @registration.invitation.club.symbol, @registration.invitation %>)</h1>
 
 <div>
   <b>Age (F/M):</b>
   <%= @registration.age %> (<%= @registration.swimmer.gender.upcase %>),
   <b>ID:</b>
-  <%= @registration.swimmer.registration %>.
+  <%= @registration.swimmer.number %>.
 <div>
 <br />
 <br />

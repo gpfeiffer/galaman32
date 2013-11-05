@@ -22,7 +22,7 @@ class RelaysController < ApplicationController
   # GET /relays/new
   # GET /relays/new.xml
   def new
-    @relay[:invitation_id] = params[:invitation_id]
+    @relay.invitation = Invitation.find(params[:invitation_id])
 
     respond_to do |format|
       format.html # new.html.erb

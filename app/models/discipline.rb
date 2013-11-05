@@ -34,13 +34,13 @@ class Discipline < ActiveRecord::Base
 
   def nickname
     dict = {
-    "Freestyle" => 'Free', 
-    "Backstroke" => 'Back', 
-    "Breaststroke" => 'Breast', 
-    "Butterfly" => 'Fly', 
+    "Freestyle" => 'Free',
+    "Backstroke" => 'Back',
+    "Breaststroke" => 'Breast',
+    "Butterfly" => 'Fly',
     "Ind Medley" => 'IM'
     }
-    sprintf("%dm %s", distance, dict[stroke])
+    sprintf("%s%dm %s", is_relay? ? "4x" : "", distance, dict[stroke])
   end
 
   def to_words

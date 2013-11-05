@@ -1,22 +1,36 @@
-<p>
-  <b>Event:</b>
-  <%= @entry.event.discipline.name %>
-</p>
+<h3><%= link_to @entry.competition.name, @entry.competition %> (<%= @entry.competition.location %>, <%= @entry.competition.date %>)</h3>
+<h1><%= link_to @entry.name, @entry.subject %> (<%= link_to @entry.club.symbol, @entry.invitation %>)</h1>
 
-<p>
-<% if @entry.relay %>
-  <b>Relay Team:</b>
-  <%= @entry.relay.name %>
-<% else %>
-  <b>Swimmer:</b>
-  <%= @entry.swimmer.name %>
-<% end %>
-</p>
+<div>
+  <b>Age (F/M):</b>
+  <%= @entry.age %> (<%= @entry.gender.upcase %>),
+  <b>ID:</b>
+  <%= @entry.number %>.
+<div>
+<br>
+<br>
 
-<p>
-  <b>Seed time:</b>
-  <%= time_to_msc(@entry.time) %>
-</p>
+<table class="fact-sheet">
+  <tr class="times-major">
+    <th></th>
+    <th>Event</th>
+    <th>(Seed)</th>
+    <th>Plc</th>
+    <th>Result</th>
+  </tr>
+  <tr class="times-major">
+    <th><%= link_to @entry.event.pos, @entry.event %>.</th>
+    <th>
+      <%= link_to_if @entry.swimmer, @entry.discipline.nickname, results_path(:discipline_id => @entry.discipline, :swimmer_id => @entry.swimmer) %>
+    </th>
+    <td style="text-align: right;">(<%= link_to @entry, edit_entry_path(@entry) %>)</td>
+    <td style="text-align: right;"><%= "#{@entry.result.place}." if @entry.result and @entry.result.place %></td>
+    <td style="text-align: right;">
+      <%= link_to(@entry.result, edit_result_path(@entry.result)) if @entry.result %>
+    </td>
+  </tr>
+</table>
+<hr>
 
 <% if user_session[:edit] %>
 <%= link_to 'Edit', edit_entry_path(@entry) %> |

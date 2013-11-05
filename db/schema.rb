@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131029210424) do
+ActiveRecord::Schema.define(:version => 20131105191258) do
 
   create_table "aims", :force => true do |t|
     t.integer   "swimmer_id"
@@ -57,14 +57,14 @@ ActiveRecord::Schema.define(:version => 20131029210424) do
   end
 
   create_table "entries", :force => true do |t|
-    t.integer   "event_id"
-    t.integer   "time"
-    t.timestamp "created_at"
-    t.timestamp "updated_at"
-    t.integer   "registration_id"
-    t.integer   "heat_id"
-    t.integer   "lane"
-    t.integer   "relay_id"
+    t.integer  "event_id"
+    t.integer  "time"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "heat_id"
+    t.integer  "lane"
+    t.integer  "subject_id"
+    t.string   "subject_type"
   end
 
   create_table "events", :force => true do |t|
@@ -123,13 +123,41 @@ ActiveRecord::Schema.define(:version => 20131029210424) do
     t.string    "short"
   end
 
-  create_table "registrations", :force => true do |t|
-    t.integer   "swimmer_id"
+  create_table "ratings", :force => true do |t|
+    t.integer   "coach_ability"
+    t.integer   "athletes_knowledge"
+    t.integer   "technical_competency"
+    t.integer   "physical_conditioning"
+    t.integer   "strength"
+    t.integer   "power"
+    t.integer   "agility"
+    t.integer   "balance"
+    t.integer   "team_work"
+    t.integer   "sustainable_power"
+    t.integer   "confidence"
+    t.integer   "time_management"
+    t.integer   "communication"
+    t.integer   "motivation"
+    t.integer   "health_managment"
+    t.integer   "nutrition"
+    t.integer   "recovery"
+    t.integer   "flexibility"
+    t.integer   "local_muscle_endurance"
+    t.integer   "cardiovascular_endurance"
+    t.integer   "strength_endurance"
+    t.integer   "coordination"
+    t.integer   "psychological_skills"
     t.timestamp "created_at"
     t.timestamp "updated_at"
-    t.integer   "age"
-    t.integer   "invitation_id"
-    t.integer   "club_id"
+    t.integer   "profile_id"
+  end
+
+  create_table "registrations", :force => true do |t|
+    t.integer  "swimmer_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "age"
+    t.integer  "invitation_id"
   end
 
   create_table "relays", :force => true do |t|
@@ -181,15 +209,15 @@ ActiveRecord::Schema.define(:version => 20131029210424) do
   end
 
   create_table "swimmers", :force => true do |t|
-    t.string    "first"
-    t.string    "last"
-    t.integer   "club_id"
-    t.date      "birthday"
-    t.string    "gender"
-    t.string    "registration"
-    t.timestamp "created_at"
-    t.timestamp "updated_at"
-    t.integer   "user_id"
+    t.string   "first"
+    t.string   "last"
+    t.integer  "club_id"
+    t.date     "birthday"
+    t.string   "gender"
+    t.string   "number"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "user_id"
   end
 
   create_table "users", :force => true do |t|

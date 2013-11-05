@@ -15,7 +15,7 @@
   <%= "#{@swimmer.age} (#{@swimmer.gender.upcase})" %>
   [<%= @swimmer.birthday %>].
   <b>Swim Ireland ID:</b>
-  <%= @swimmer.registration %>.
+  <%= @swimmer.number %>.
 </p>
 
 <% if @swimmer.user and can? :destroy, @swimmer %>

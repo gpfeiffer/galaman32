@@ -1,41 +1,43 @@
 class Entry < ActiveRecord::Base
-  belongs_to :registration
-  has_one :swimmer, :through => :registration
   belongs_to :event
   has_one :competition, :through => :event
   has_one :discipline, :through => :event
   has_one :result, :dependent => :destroy
   belongs_to :heat
-  belongs_to :relay
+  belongs_to :subject, :polymorphic => true
 
   attr_accessor :mins, :secs, :cens
 
   validates :event_id, :presence => true
 
-  # FIXME: validate either registration_id or relay_id is present but not both
+  # FIXME: delegate to subject.
 
   def invitation
-    if relay then
-      relay.invitation
-    else
-      registration.invitation
-    end
+    subject.invitation
   end
 
   def name
-    relay ? relay.name : registration.swimmer.first_last
+    subject.name
   end
 
   def age
-    relay ? relay.age_max : registration.age
+    subject.age
   end
 
   def club
-    relay ? relay.club : registration.club
+    subject.club
   end
 
-  def subject
-    relay ? relay : registration
+  def gender
+    subject.gender
+  end
+
+  def number
+    subject.number
+  end
+
+  def swimmer
+    subject.swimmer
   end
 
   def cens
