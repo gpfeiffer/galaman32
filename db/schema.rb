@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131105081215) do
+ActiveRecord::Schema.define(:version => 20131105191258) do
 
   create_table "aims", :force => true do |t|
     t.integer   "swimmer_id"
@@ -61,10 +61,8 @@ ActiveRecord::Schema.define(:version => 20131105081215) do
     t.integer  "time"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "registration_id"
     t.integer  "heat_id"
     t.integer  "lane"
-    t.integer  "relay_id"
     t.integer  "subject_id"
     t.string   "subject_type"
   end
@@ -211,15 +209,15 @@ ActiveRecord::Schema.define(:version => 20131105081215) do
   end
 
   create_table "swimmers", :force => true do |t|
-    t.string    "first"
-    t.string    "last"
-    t.integer   "club_id"
-    t.date      "birthday"
-    t.string    "gender"
-    t.string    "registration"
-    t.timestamp "created_at"
-    t.timestamp "updated_at"
-    t.integer   "user_id"
+    t.string   "first"
+    t.string   "last"
+    t.integer  "club_id"
+    t.date     "birthday"
+    t.string   "gender"
+    t.string   "number"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "user_id"
   end
 
   create_table "users", :force => true do |t|
