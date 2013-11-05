@@ -1,34 +1,50 @@
 <h3>Entries</h3>
 
+<% events_by_gender = @invitation.competition.individual_events.group_by(&:gender) %>
+<% registrations_by_gender = @invitation.registrations.group_by(&:gender) %>
+<% relays_by_gender = @invitation.relays.group_by(&:gender) %>
+
 <% Swimmer::GENDERS.each do |sex| %>
-  <% events = @invitation.competition.individual_events.select { |x| x.gender == sex } %>
-  <% relays = @invitation.relays.select { |x| x.gender == sex } %>
+  <% events = events_by_gender[sex] %>
+  <% registrations = registrations_by_gender[sex] %>
+  <% relays = relays_by_gender[sex] || [] %>
   <table class="fact-sheet">
     <tr class="times-major">
       <th>Swimmer (<%= sex.upcase %>)</th>
       <th>Birthday</th>
       <th>Age</th>
       <% events.each do |event| %>
-        <th><span title="<%= event.pos %>. <%= event.discipline.name %>"><%= event.pos %>. <%= event.discipline.distance %>m<br /><%= short_stroke_name(event.discipline.stroke) %></span></th>
+        <th>
+          <span title="<%= event.pos %>. <%= event.discipline.name %>">
+            <%= event.pos %>. <%= event.discipline.distance %>m
+            <br />
+            <%= short_stroke_name(event.discipline.stroke) %>
+          </span>
+        </th>
       <% end %>
       <% relays.each do |relay| %>
-        <th><span title="<%= relay.name %>">R<%= @invitation.relays.index(relay) + 1 %></span> </th>
+        <th>
+          <%= content_tag :span, :title => relay.name do %>
+            R<%= @invitation.relays.index(relay) + 1 %>
+          <% end %> 
+        </th>
       <% end %>
     </tr>
-    <% @invitation.registrations.select { |x| x.gender == sex }.sort_by { |x| x.swimmer.name }.each do |registration| %>
+    <% registrations.sort_by(&:name).each do |registration| %>
       <% swimmer = registration.swimmer %>
+      <% entries_by_event = registration.entries.index_by(&:event) %>
       <tr class="times-major">
         <td><%= link_to swimmer.name, registration %></td>
         <td><%= swimmer.birthday %></td>
         <td align="right"><%= registration.age %></td>
         <% events.each do |event| %>
+          <% entry = entries_by_event[event] %>
           <td align="center">
-	  <% entry = Entry.find_by_event_id_and_registration_id(event, registration) %>
 	  <% if entry %>
             <%= link_to entry, entry %>
-	  <% elsif event.permits? registration %>
-            <% if can? :update, registration %>
-              <%= link_to (raw "&square;"), new_entry_path(:event_id => event.id, :registration_id => registration.id) %> 
+	  <% else %>
+            <% if can?(:update, registration) and event.permits? registration %>
+              <%= link_to (raw "&square;"), new_entry_path(:event_id => event, :registration_id => registration, :subject_id => registration, :subject_type => "Registration") %> 
             <% end %>
           <% end %>
           </td>
