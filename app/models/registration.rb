@@ -9,7 +9,7 @@ class Registration < ActiveRecord::Base
 
   validates :invitation_id, :swimmer_id, :presence => true
   
-  delegate :gender, :name, :to => :swimmer
+  delegate :gender, :name, :number, :to => :swimmer
   delegate :date, :to => :competition
   delegate :club, :to => :invitation
 

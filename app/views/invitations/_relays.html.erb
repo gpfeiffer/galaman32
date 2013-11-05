@@ -14,18 +14,19 @@
   </tr>
   <% @invitation.relays.each_with_index do |relay, index| %>
   <tr class="times-major">
+      <% entries_by_event = relay.entries.index_by(&:event) %>
       <td>R<%= index + 1 %></td>
       <td><%= link_to relay.name, relay %></td>
       <td><%= relay.gender.upcase %></td>
       <td align="right"><%= ages_to_words(relay.age_range) %></td>
       <% events.each do |event| %>
+        <% entry = entries_by_event[event] %>
         <td align="center">
-	<% entry = Entry.find_by_event_id_and_relay_id(event, relay) %>
 	<% if entry %>
           <%= link_to entry, entry %>
-	<% elsif event.permits_relay? relay %>
-          <% if user_session[:edit] %>
-	    <%= link_to (raw "&square;"), new_entry_path(:event_id => event.id, :relay_id => relay.id) %> 
+	<% else %>
+          <% if user_session[:edit] and can?(:update, relay) and event.permits_relay? relay %>
+	    <%= link_to (raw "&square;"), new_entry_path(:event_id => event.id, :subject_id => relay, :subject_type => "Relay") %> 
           <% end %>
         <% end %>
         </td>
@@ -37,6 +38,6 @@
 <br />
 <% end %>
 
-<% if user_session[:edit] %>
-<%= link_to 'Add Relay Team', new_relay_path(:invitation_id => @invitation) %>
+<% if user_session[:edit] and can?(:update, @invitation) %>
+  <%= link_to 'Add Relay Team', new_relay_path(:invitation_id => @invitation) %>
 <% end %>

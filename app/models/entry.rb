@@ -32,6 +32,14 @@ class Entry < ActiveRecord::Base
     subject.gender
   end
 
+  def number
+    subject.number
+  end
+
+  def swimmer
+    subject.swimmer
+  end
+
   def cens
     time % 100 if time
   end

@@ -44,7 +44,7 @@
             <%= link_to entry, entry %>
 	  <% else %>
             <% if can?(:update, registration) and event.permits? registration %>
-              <%= link_to (raw "&square;"), new_entry_path(:event_id => event, :registration_id => registration, :subject_id => registration, :subject_type => "Registration") %> 
+              <%= link_to (raw "&square;"), new_entry_path(:event_id => event, :subject_id => registration, :subject_type => "Registration") %> 
             <% end %>
           <% end %>
           </td>
