@@ -5,7 +5,6 @@ class Club < ActiveRecord::Base
   has_many :invitations, :dependent => :destroy
   has_many :competitions, :through => :invitations
   has_many :registrations, :through => :invitations
-#  has_many :entries, :through => :registrations
 
   validates :full_name, :symbol, :presence => true
 
@@ -16,4 +15,9 @@ class Club < ActiveRecord::Base
   def to_s
     full_name
   end
+
+  def entries
+    registrations.map(&:entries).sum
+  end
+
 end

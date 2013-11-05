@@ -1,11 +1,11 @@
 <h3><%= link_to @entry.competition.name, @entry.competition %> (<%= @entry.competition.location %>, <%= @entry.competition.date %>)</h3>
-<h1><%= link_to @entry.swimmer.name, @entry.registration %> (<%= link_to @entry.registration.club.symbol, @entry.invitation %>)</h1>
+<h1><%= link_to @entry.name, @entry.subject %> (<%= link_to @entry.club.symbol, @entry.invitation %>)</h1>
 
 <div>
   <b>Age (F/M):</b>
-  <%= @entry.registration.age %> (<%= @entry.swimmer.gender.upcase %>),
+  <%= @entry.age %> (<%= @entry.gender.upcase %>),
   <b>ID:</b>
-  <%= @entry.swimmer.registration %>.
+  <%= @entry.registration %>.
 <div>
 <br>
 <br>
@@ -20,9 +20,11 @@
   </tr>
   <tr class="times-major">
     <th><%= link_to @entry.event.pos, @entry.event %>.</th>
-    <th><%= link_to @entry.discipline.nickname, results_path(:discipline_id => @entry.discipline.id, :swimmer_id => @entry.swimmer.id) %></th>
+    <th>
+      <%= link_to_if @entry.swimmer, @entry.discipline.nickname, results_path(:discipline_id => @entry.discipline, :swimmer_id => @entry.swimmer) %>
+    </th>
     <td style="text-align: right;">(<%= link_to @entry, edit_entry_path(@entry) %>)</td>
-    <td style="text-align: right;"><%= "#{@entry.result.place}." if @entry.result.place %></td>
+    <td style="text-align: right;"><%= "#{@entry.result.place}." if @entry.result and @entry.result.place %></td>
     <td style="text-align: right;">
       <%= link_to(@entry.result, edit_result_path(@entry.result)) if @entry.result %>
     </td>

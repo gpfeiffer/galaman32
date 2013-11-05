@@ -2,7 +2,7 @@ class Registration < ActiveRecord::Base
   belongs_to :swimmer
   belongs_to :invitation
   has_one :competition, :through => :invitation
-  has_many :entries, :dependent => :destroy
+  has_many :entries, :as => :subject, :dependent => :destroy
   has_many :events, :through => :entries
   has_many :seats, :dependent => :destroy
   has_many :relays, :through => :seats
@@ -11,6 +11,7 @@ class Registration < ActiveRecord::Base
   
   delegate :gender, :name, :to => :swimmer
   delegate :date, :to => :competition
+  delegate :club, :to => :invitation
 
   before_create :assign_age
   
