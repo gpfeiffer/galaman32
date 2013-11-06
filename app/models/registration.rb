@@ -22,6 +22,6 @@ class Registration < ActiveRecord::Base
   private
   
   def assign_age
-    age = swimmer.age(invitation.competition.date)
+    self.age = swimmer.age(invitation.competition.date)
   end
 end
