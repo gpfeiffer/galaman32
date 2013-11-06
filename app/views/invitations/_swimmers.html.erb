@@ -6,7 +6,7 @@
 
 <% Swimmer::GENDERS.each do |sex| %>
   <% events = events_by_gender[sex] %>
-  <% registrations = registrations_by_gender[sex] %>
+  <% registrations = registrations_by_gender[sex] || [] %>
   <% relays = relays_by_gender[sex] || [] %>
   <table class="fact-sheet">
     <tr class="times-major">
