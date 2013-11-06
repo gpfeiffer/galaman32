@@ -1,11 +1,11 @@
 <h3><%= link_to @result.competition.name, @result.competition %> (<%= @result.competition.location %>, <%= @result.competition.date %>)</h3>
-<h1><%= link_to @result.swimmer.name, @result.registration %> (<%= link_to @result.registration.club.symbol, @result.entry.invitation %>)</h1>
+<h1><%= link_to @result.entry.name, @result.entry.subject %> (<%= link_to @result.entry.club.symbol, @result.entry.invitation %>)</h1>
 
 <div>
   <b>Age (F/M):</b>
-  <%= @result.registration.age %> (<%= @result.swimmer.gender.upcase %>),
+  <%= @result.entry.age %> (<%= @result.entry.gender.upcase %>),
   <b>ID:</b>
-  <%= @result.swimmer.registration %>.
+  <%= @result.entry.number %>.
 <div>
 <br>
 <br>

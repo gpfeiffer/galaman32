@@ -10,30 +10,11 @@ class Entry < ActiveRecord::Base
 
   validates :event_id, :presence => true
 
+  delegate :invitation, :name, :age, :club, :gender, :number, :to => :subject
+
   # FIXME: delegate to subject.
-
-  def invitation
-    subject.invitation
-  end
-
-  def name
-    subject.name
-  end
-
-  def age
-    subject.age
-  end
-
-  def club
-    subject.club
-  end
-
-  def gender
-    subject.gender
-  end
-
-  def number
-    subject.number
+  def age_range
+    subject.age_range
   end
 
   def swimmer
@@ -67,7 +48,7 @@ class Entry < ActiveRecord::Base
     end
     best = nil
     self.competition.qualifications.each do |qualification|
-      qt = qualification.qualification_times.select { |x| x.discipline == discipline and x.age_range.include? self.registration.age }.first
+      qt = qualification.qualification_times.select { |x| x.discipline == discipline and x.age_range.include? self.age }.first
       if qt and qt.time > time and (not best or qt.time < best[:time])
         best = { :time => qt.time, :qualification => qualification }
       end

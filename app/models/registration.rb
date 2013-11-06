@@ -15,6 +15,10 @@ class Registration < ActiveRecord::Base
 
   before_create :assign_age
   
+  def age_range
+    age .. age
+  end
+
   private
   
   def assign_age

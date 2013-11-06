@@ -1,6 +1,5 @@
 class Result < ActiveRecord::Base
   belongs_to :entry
-  has_one :registration, :through => :entry
   has_one :event, :through => :entry
 
   delegate :discipline, :swimmer, :competition, :to => :entry
@@ -29,7 +28,7 @@ class Result < ActiveRecord::Base
     end
     best = nil
     entry.competition.qualifications.each do |qualification|
-      qt = qualification.qualification_times.select { |x| x.discipline == discipline and x.age_range.include? entry.registration.age }.first
+      qt = qualification.qualification_times.select { |x| x.discipline == discipline and x.age_range.include? entry.age }.first
       if qt and qt.time > time and (not best or qt.time < best[:time])
         best = { :time => qt.time, :qualification => qualification }
       end

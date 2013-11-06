@@ -18,13 +18,13 @@
 <% swimmer = entry.swimmer %>
 
 <h3><%= link_to competition.name, competition %> (<%= competition.location %>, <%= competition.date %>)</h3>
-<h1><%= link_to swimmer.name, swimmer %> (<%= link_to entry.registration.club.symbol, entry.registration.invitation %>)</h1>
+<h1><%= link_to swimmer.name, swimmer %> (<%= link_to entry.club.symbol, entry.invitation %>)</h1>
 
 <div>
   <b>Age (F/M):</b>
-  <%= entry.registration.age %> (<%= swimmer.gender.upcase %>),
+  <%= entry.age %> (<%= entry.gender.upcase %>),
   <b>ID:</b>
-  <%= swimmer.registration %>.
+  <%= entry.number %>.
 <div>
 <br />
 <br />
