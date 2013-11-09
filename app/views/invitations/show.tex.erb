@@ -4,19 +4,20 @@
 \thispagestyle{empty}
 \begin{minipage}[t]{.5\textwidth}
 \section*{<%= competition.name %>}
-<%= competition.location %>, <%= competition.date %>
+<%= competition.location %>, <%= competition.dates %>
 
 \section*{Gala Entries}
 
 \subsection*{<%= @invitation.club.name %>}
 
+<% relay_count = @invitation.relays.map { |x| x.entries.count }.sum %>
+<% regis_count = @invitation.registrations.map { |x| x.entries.count }.sum %>
 <%= @invitation.registrations.count %> registered swimmers
 for a total of \\ 
-<%= @invitation.registrations.map { |x| x.entries.count }.sum %> individual
-<% relay_count = @invitation.relays.map { |x| x.entries.count }.sum %>
+<%= regis_count %> individual
 <% if relay_count > 0 %>
 events and \\
-<%= @invitation.relays.map { |x| x.entries.count }.sum %> relay 
+<%= relay_count %> relay 
 <% end %>
 events.
 \end{minipage}
@@ -33,29 +34,8 @@ events.
 \end{minipage}
 
 \subsection*{Registered Swimmers.}
-<% Swimmer::GENDERS.each do |sex| %>
-  <% events = competition.individual_events.select { |x| x.gender == sex } %>
-\begin{tabular}[t]{p{3.1cm}c<%= 'c' * events.count %>}
-\toprule
-\textbf{Swimmer (<%= sex.upcase %>)} & \textbf{DOB} 
-    <% events.each do |event| %>
-      & <%= ordinal_number (event.pos) %>
-    <% end %> \\
-\midrule
-<% @invitation.registrations.select { |x| x.gender == sex }.sort_by { |x| x.swimmer.name }.each do |registration| %>
-  <% swimmer = registration.swimmer %>
-<%= raw swimmer.name %> &
-<%= swimmer.birthday %>
-      <% events.each do |event| %>
-&	<% entry = Entry.find_by_event_id_and_registration_id(event, registration) %>
-        <%= entry if entry %>
-      <% end %>
-\\
-<% end %>
-\bottomrule
-\end{tabular}
-\hfill\mbox{}
-<% end %>
+
+<%= render "swimmers" %>
 
 <% if relay_count > 0 %>
 \subsection*{Relay Teams.}
@@ -78,5 +58,5 @@ events.
 \\
 <% end %>
 \bottomrule
-<% end %>
 \end{tabular}
+<% end %>

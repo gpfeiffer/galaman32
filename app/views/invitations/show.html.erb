@@ -2,21 +2,23 @@
 <% club = @invitation.club %>
 <h3>
   <%= link_to competition.name, competition %>
-  (<%= competition.location %>, <%= competition.date %>)
+  (<%= competition.location %>, <%= competition.dates %>)
 </h3>
 
 <h1><%= link_to club.name, club %></h1>
 
 <p>
-<% nr_relays = @invitation.relays.map { |x| x.entries.count }.sum %>
-<%= @invitation.registrations.count %> swimmers registered
-for <%= @invitation.registrations.map { |x| x.entries.count }.sum %> individual events in 
-<% if nr_relays > 0 %>
-total and
-<%= nr_relays %> relay events.
+<% relay_count = @invitation.relays.map { |x| x.entries.count }.sum %>
+<% regis_count = @invitation.registrations.map { |x| x.entries.count }.sum %>
+<%= @invitation.registrations.count %> registered swimmers
+for a total of 
+<%= regis_count %> individual
+<% if relay_count > 0 %>
+events and
+<%= relay_count %> relay
 <% else %>
-total.
 <% end %>
+events.
 </p>
 
 
@@ -36,6 +38,8 @@ total.
 </table>
 
 <br />
+
+<h3>Entries</h3>
 
 <%= render :partial => 'swimmers', :locals => { :club => club } %>
 

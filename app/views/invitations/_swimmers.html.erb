@@ -1,5 +1,3 @@
-<h3>Entries</h3>
-
 <% events_by_gender = @invitation.competition.individual_events.group_by(&:gender) %>
 <% registrations_by_gender = @invitation.registrations.group_by(&:gender) %>
 <% relays_by_gender = @invitation.relays.group_by(&:gender) %>
