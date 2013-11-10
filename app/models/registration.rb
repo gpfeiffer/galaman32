@@ -19,6 +19,10 @@ class Registration < ActiveRecord::Base
     age .. age
   end
 
+  def name_and_ages
+    "#{swimmer.first_last}, #{age}"
+  end
+
   private
   
   def assign_age

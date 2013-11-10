@@ -17,6 +17,10 @@ class Entry < ActiveRecord::Base
     subject.age_range
   end
 
+  def name_and_ages
+    subject.name_and_ages
+  end
+
   def swimmer
     subject.swimmer
   end

@@ -49,7 +49,7 @@ Age Range
 }
 \begin{supertabular}{r@{ }p{35mm}p{8mm}rc}
 <% event.seeded_entries.each_with_index do |entry, index| %>
-  <%= render :partial => 'events/entry', :object => entry, :locals => { :index => index } %>
+  <%= render :partial => 'events/entry', :object => entry, :locals => { :index => index } -%>
 <% end %>
 \end{supertabular}
 \end{center}

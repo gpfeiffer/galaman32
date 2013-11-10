@@ -13,6 +13,10 @@ class Relay < ActiveRecord::Base
     age_max
   end
 
+  def name_and_ages
+    "#{name}, #{ages_to_s(age_range)}"
+  end
+
   def number
     "xxx"
   end
