@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131105191258) do
+ActiveRecord::Schema.define(:version => 20131117143608) do
 
   create_table "aims", :force => true do |t|
     t.integer   "swimmer_id"
@@ -57,14 +57,14 @@ ActiveRecord::Schema.define(:version => 20131105191258) do
   end
 
   create_table "entries", :force => true do |t|
-    t.integer  "event_id"
-    t.integer  "time"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "heat_id"
-    t.integer  "lane"
-    t.integer  "subject_id"
-    t.string   "subject_type"
+    t.integer   "event_id"
+    t.integer   "time"
+    t.timestamp "created_at"
+    t.timestamp "updated_at"
+    t.integer   "heat_id"
+    t.integer   "lane"
+    t.integer   "subject_id"
+    t.string    "subject_type"
   end
 
   create_table "events", :force => true do |t|
@@ -110,14 +110,16 @@ ActiveRecord::Schema.define(:version => 20131105191258) do
     t.string    "source"
     t.text      "description"
     t.string    "short"
+    t.string    "source_url"
+    t.date      "source_date"
   end
 
   create_table "registrations", :force => true do |t|
-    t.integer  "swimmer_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "age"
-    t.integer  "invitation_id"
+    t.integer   "swimmer_id"
+    t.timestamp "created_at"
+    t.timestamp "updated_at"
+    t.integer   "age"
+    t.integer   "invitation_id"
   end
 
   create_table "relays", :force => true do |t|
@@ -169,15 +171,15 @@ ActiveRecord::Schema.define(:version => 20131105191258) do
   end
 
   create_table "swimmers", :force => true do |t|
-    t.string   "first"
-    t.string   "last"
-    t.integer  "club_id"
-    t.date     "birthday"
-    t.string   "gender"
-    t.string   "number"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "user_id"
+    t.string    "first"
+    t.string    "last"
+    t.integer   "club_id"
+    t.date      "birthday"
+    t.string    "gender"
+    t.string    "number"
+    t.timestamp "created_at"
+    t.timestamp "updated_at"
+    t.integer   "user_id"
   end
 
   create_table "users", :force => true do |t|

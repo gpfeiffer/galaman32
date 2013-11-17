@@ -6,7 +6,9 @@
 
 <% if @qualification.source.present? %>
 <p>
-<b>Source:</b> <%= @qualification.source.html_safe %>
+<b>Source:</b> 
+<%= link_to @qualification.source, @qualification.source_url %>,
+<%= @qualification.source_date %>.
 </p>
 <% end %>
 
