@@ -92,18 +92,16 @@ class Event < ActiveRecord::Base
     return list
   end
 
-  def qualification_times
-    times = []
-    competition.qualifications.each do |qualification|
-      times += qualification.qualification_times.select { |x| x.discipline == discipline and age_range.include? x.age_range }
-    end
-    times.sort_by { |x| [x.age_min, x.time] }
+  def qtimes
+    competition.qualifications.map do |q|
+      q.qualification_times.where(:discipline_id => discipline).select do |x| 
+        age_range.include? x.age_range
+      end
+    end.sum
   end
 
-  def qualification_age_ranges
-    age_ranges = qualification_times.map { |x| x.age_range }.sort_by(&:first).uniq
-    age_ranges << age_range unless age_ranges.any?
-    age_ranges
+  def qtimes_by_range
+    qtimes.group_by(&:age_range)
   end
 
   def listed_results(ages)

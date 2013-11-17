@@ -3,31 +3,30 @@
   <ul><%= render :partial => "level_event", :collection => @event.competition.events %></ul>
 <% end %>
 
-
 <%= render 'navigation' %>
 
-<%# FIXME: prepare this table in controller/model ...%>
-<% times = @event.qualification_times %>
-<% if times.any? %>
-<% names = times.map { |x| x.qualification.name }.uniq %>
-<% ranges = times.map { |x| x.age_range }.uniq %>
+<% times_by_range = @event.qtimes_by_range %>
+<% if times_by_range.any? %>
+<% qualifications = @event.competition.qualifications %>
+<% ranges = times_by_range.keys.sort_by(&:last) %>
 <table class="fact-sheet">
 <tr class="fact-major">
 <th>Age Range</th>
-<% names.each do |name| %>
-<th><%= name %></th>
+<% qualifications.each do |qualification| %>
+<th><%= qualification.name %></th>
 <% end %>
 </tr>
 <% ranges.each do |range| %>
+<% times = times_by_range[range].index_by(&:qualification) %>
 <tr class="fact-major">
 <td><%= ages_to_words(range) %></td>
-<% names.each do |name| %>
-<td><%= times.select { |x| x.age_range == range and x.qualification.name == name }[0] %></td>
+<% qualifications.each do |qualification| %>
+<td><%= times[qualification] %></td>
 <% end %>
 </tr>
 <% end %>
 </table>
-<% end%>
+<% end %>
 
 
 <h2>Entries.</h2>

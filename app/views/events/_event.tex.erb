@@ -1,26 +1,26 @@
 \subsection*{Event <%= event.pos %>. <%= event.discipline.to_words %>}
 
-<%# FIXME: prepare this table in controller/model ...%>
-<% times = event.qualification_times %>
-<% if times.any? %>
+<% times_by_range = event.qtimes_by_range %>
+<% if times_by_range.any? %>
 \begin{center}
 \tablefirsthead{}
 \tablehead{}
 \tabletail{}
 \tablelasttail{}
-<% names = times.map { |x| x.qualification.name }.uniq %>
-<% ranges = times.map { |x| x.age_range }.uniq %>
-\begin{supertabular}{|l<%= 'r' * names.count %>|}
+<% qualifications = event.competition.qualifications %>
+<% ranges = times_by_range.keys.sort_by(&:last) %>
+\begin{supertabular}{|l<%= 'r' * qualifications.count %>|}
 \toprule
 Age Range 
-<% names.each do |name| %>
-& <%= name %>
+<% qualifications.each do |qualification| %>
+& <%= qualification.name %>
 <% end %> \\
 \midrule
 <% ranges.each do |range| %>
+<% times = times_by_range[range].index_by(&:qualification) %>
 <%= ages_to_words(range) %>
-<% names.each do |name| %>
-& <%= times.select { |x| x.age_range == range and x.qualification.name == name }[0] %>
+<% qualifications.each do |qualification| %>
+& <%= times[qualification] %>
 <% end %> \\
 <% end %>
 \bottomrule

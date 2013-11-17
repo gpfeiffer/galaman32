@@ -1,1 +1,1 @@
-<%= sprintf("%-25s %-6s %9s    __:__.__", entry.name + " [" + entry.age.to_s + "]", entry.club.symbol, entry.to_s) %>
+<%= raw sprintf("%-25s %-6s %9s    __:__.__", entry.name_and_ages, entry.club.symbol, entry) %>

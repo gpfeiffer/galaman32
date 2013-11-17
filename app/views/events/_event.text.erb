@@ -1,10 +1,26 @@
 <%= '=' * 54 %>
 Event <%= event.pos %>. <%= event.discipline.name %>
+<%= '=' * 54 %>
+<% times_by_range = @event.qtimes_by_range %>
+<% if times_by_range.any? %>
+<% qualifications = @event.competition.qualifications %>
+<% ranges = times_by_range.keys.sort_by(&:last) %>
+<%= sprintf("%25s", "Age Range") -%>
+<% qualifications.each do |qualification| %>
+<%= sprintf("%6s   ", qualification.short) -%>
+<% end %>
+
 <%= '-' * 54 %>
-<% event.qualification_times.each do |qt| %>
-    <%= raw sprintf("%8s", ages_to_s(qt.age_range)) %>  <%= qt.qualification.name %> <%= qt %>
+<% ranges.each do |range| %>
+<% times = times_by_range[range].index_by(&:qualification) %>
+<%= sprintf("%25s", ages_to_words(range)) -%>
+<% qualifications.each do |qualification| %>
+<%= sprintf("%9s", times[qualification]) -%>
+<% end %>
+
+<% end %>
 <% end %>
 <%= '=' * 54 %>
-<%= sprintf("%-25s %-6s %9s    Result", 'Name [Age]', 'Team', 'Seed Time') %>
+<%= sprintf("%-25s %-6s %9s    Result", 'Name, Age', 'Team', 'Seed Time') %>
 <%= '-' * 54 %>
 <%= render event.seeded_entries %>
