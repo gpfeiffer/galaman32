@@ -104,6 +104,10 @@ class Event < ActiveRecord::Base
     qtimes.group_by(&:age_range)
   end
 
+  def qualification_age_ranges
+    qtimes_by_range.keys
+  end
+
   def listed_results(ages)
     if is_relay? then
       list = results.select { |x| ages.include? x.entry.age_range }
