@@ -8,7 +8,6 @@ class HeatsController < ApplicationController
     if params[:event_id]
       @event = Event.find(params[:event_id])
       @heats = @event.heats
-      @lanes = @event.entries.map { |x| x.lane }.sort.uniq
     elsif params[:competition_id]
       @competition = Competition.find(params[:competition_id])
     end
@@ -43,6 +42,8 @@ class HeatsController < ApplicationController
   # GET /heats/new
   # GET /heats/new.xml
   def new
+    @event = Event.find(params[:event_id])
+
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @heat }

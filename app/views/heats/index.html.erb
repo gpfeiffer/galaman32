@@ -23,29 +23,5 @@
 </table>
 
 <br />
-
-<h2>Lanes.</h2>
-
-<table class="fact-sheet">
-<tr class="fact-major">
-<th>Heat</th>
-<th>Lane</th>
-<th>Name</th>
-<th>Age</th>
-<th>Team</th>
-<th>Seed Time</th>
-<th>Result</th>
-</tr>
-
-<% @lanes.each do |lane| %>
-  <tr class="fact-title">
-    <th colspan="7">Lane <%= lane %></th>
-  </tr>
-
-  <%= render @event.entries.where(:lane => lane).sort_by { |x| x.heat.pos } %>
-<% end %>
-</table>
-
-<br />
 <hr />
 

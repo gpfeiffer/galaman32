@@ -83,13 +83,7 @@ class Event < ActiveRecord::Base
   end
 
   def lanes
-    list = []
-    entries.each do |entry|
-      lane = entry.lane
-      list[lane] ||= []
-      list[lane] << entry
-    end
-    return list
+    entries.group_by(&:lane)
   end
 
   def qtimes

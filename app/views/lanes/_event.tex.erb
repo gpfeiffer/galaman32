@@ -1,5 +1,4 @@
-<% event.lanes.each_with_index do |lane, index| %>
-<% if not lane.blank? %>
+<% event.lanes.sort.each do |index, lane| %>
 \clearpage
 \subsection*{Event <%= event.pos %>. <%= event.discipline.to_words %>}
 \vbox{
@@ -15,6 +14,5 @@
 \vfill
 \hfill
 {\tiny Printed at <%= Time.now.strftime('%H:%M:%S (%Z) on %d/%m/%Y') %> by GalaManager.}
-<% end %>
 <% end %>
 
