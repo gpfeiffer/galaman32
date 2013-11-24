@@ -25,6 +25,11 @@ class Relay < ActiveRecord::Base
     nil
   end
 
+  # sorting attribute in the absence of time
+  def no_time
+    [x.age, x.id.hash % 97]  # first by age, then somewhat random
+  end
+
   def permits?(registration)
     seats.count < 4 and registration.swimmer.gender == gender and age_max >= registration.age
   end

@@ -25,6 +25,11 @@ class Entry < ActiveRecord::Base
     subject.swimmer
   end
 
+  # for sorting
+  def no_time
+    subject.no_time
+  end
+
   def cens
     time % 100 if time
   end
@@ -35,6 +40,10 @@ class Entry < ActiveRecord::Base
 
   def mins
     time / 6000 if time
+  end
+
+  def seeded?
+    time and time > 0
   end
 
   # combine distance and course into a number for sorting.

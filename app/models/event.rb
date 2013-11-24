@@ -56,6 +56,12 @@ class Event < ActiveRecord::Base
     end
   end
 
+  # new, to replace the above.
+  def entries_for_seeding
+    seeded = entries.group_by(&:seeded?)
+    seeded[true].sort_by(&:time) + seeded[false].sort_by(&:no_time)
+  end
+
   def lane_helper(width, index)
     if index % 2 == 0
       width / 2 - index / 2

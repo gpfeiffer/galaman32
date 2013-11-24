@@ -23,6 +23,11 @@ class Registration < ActiveRecord::Base
     "#{swimmer.first_last}, #{age}"
   end
 
+  # sorting attribute in the absence of time
+  def no_time
+    swimmer.age_in_days
+  end
+
   private
   
   def assign_age
