@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131117143608) do
+ActiveRecord::Schema.define(:version => 20131124164120) do
 
   create_table "aims", :force => true do |t|
     t.integer   "swimmer_id"
@@ -57,14 +57,14 @@ ActiveRecord::Schema.define(:version => 20131117143608) do
   end
 
   create_table "entries", :force => true do |t|
-    t.integer   "event_id"
-    t.integer   "time"
-    t.timestamp "created_at"
-    t.timestamp "updated_at"
-    t.integer   "heat_id"
-    t.integer   "lane"
-    t.integer   "subject_id"
-    t.string    "subject_type"
+    t.integer  "event_id"
+    t.integer  "time"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "lane"
+    t.integer  "subject_id"
+    t.string   "subject_type"
+    t.integer  "heat"
   end
 
   create_table "events", :force => true do |t|
