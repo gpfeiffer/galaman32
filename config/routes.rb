@@ -1,10 +1,5 @@
 Galaman::Application.routes.draw do
-  resources :profiles
-
-  resources :ratings
-
   resources :assignments
-
   resources :roles
 
   devise_for :users
@@ -13,26 +8,17 @@ Galaman::Application.routes.draw do
     resources :users
   end
 
-  resources :skills
-
   resources :supports
-
   resources :aims
-
   resources :seats
-
   resources :relays
 
   get "admin" => 'admin#index'
-
   get "lanes" => 'lanes#index'
 
   resources :invitations
-
   resources :heats
-
   resources :standards
-
   resources :results 
 
   get "home/index"
@@ -46,17 +32,11 @@ Galaman::Application.routes.draw do
   end
 
   resources :registrations
-
   resources :competitions
-
   resources :qualification_times
-
   resources :qualifications
-
   resources :disciplines
-
   resources :swimmers
-
   resources :clubs
 
   # The priority is based upon order of creation:
