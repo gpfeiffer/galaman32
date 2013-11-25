@@ -5,6 +5,15 @@ class SwimmersControllerTest < ActionController::TestCase
 
   setup do
     @swimmer = swimmers(:one)
+    @attrs = { 
+      :birthday => @swimmer.birthday, 
+      :club_id => @swimmer.club_id, 
+      :first => "First", 
+      :gender => "f", 
+      :last => "Last", 
+      :number => "12345678" 
+    }
+    @other = swimmers(:two)
     @user = users(:one)
     sign_in @user
   end
@@ -22,7 +31,7 @@ class SwimmersControllerTest < ActionController::TestCase
 
   test "should create swimmer" do
     assert_difference('Swimmer.count') do
-      post :create, :swimmer => @swimmer.attributes
+      post :create, :swimmer => @attrs
     end
 
     assert_redirected_to club_path(assigns(:swimmer).club)
@@ -39,7 +48,7 @@ class SwimmersControllerTest < ActionController::TestCase
   end
 
   test "should update swimmer" do
-    put :update, :id => @swimmer.to_param, :swimmer => @swimmer.attributes
+    put :update, :id => @swimmer.to_param, :swimmer => @attrs
     assert_redirected_to club_path(assigns(:swimmer).club)
   end
 

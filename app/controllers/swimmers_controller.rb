@@ -23,7 +23,7 @@ class SwimmersController < ApplicationController
   # GET /swimmers/new
   # GET /swimmers/new.xml
   def new
-    @swimmer[:club_id] = params[:club_id]
+    @swimmer.club = Club.find(params[:club_id])
 
     respond_to do |format|
       format.html # new.html.erb

@@ -73,8 +73,8 @@ class Result < ActiveRecord::Base
   # convert result into FINA points
   def fina_points
     qualification = Qualification.find_by_name("FINA Base")
-    base_time = QualificationTime.find_by_qualification_id_and_discipline_id(qualification.id, discipline.id).time
-    ((10 * base_time / time.to_f)**3).to_i
+    base_time = QualificationTime.find_by_qualification_id_and_discipline_id(qualification.id, discipline.id)
+  base_time ? ((10 * base_time.time.quo(time))**3).to_i : nil
   end
 
   # is this result a swimmer's best result up to now?

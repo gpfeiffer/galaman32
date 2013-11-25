@@ -15,7 +15,7 @@ class Swimmer < ActiveRecord::Base
 
   validates :first, :last, :birthday, :gender, :club_id, :presence => true
   validates :gender, :inclusion => GENDERS
-  validates :registration, :uniqueness => true, :allow_blank => true
+  validates :number, :uniqueness => true, :allow_blank => true
 
   def last_first
     "#{last}, #{first}"
