@@ -48,6 +48,7 @@ class Event < ActiveRecord::Base
   # list entries for seeding
   def entries_for_seeding
     seeded = entries.group_by(&:seeded?)
+    seeded.default = []  
     seeded[true].sort_by(&:time) + seeded[false].sort_by(&:no_time)
   end
 
