@@ -3,7 +3,6 @@ class Entry < ActiveRecord::Base
   has_one :competition, :through => :event
   has_one :discipline, :through => :event
   has_one :result, :dependent => :destroy
-#  belongs_to :heat
   belongs_to :subject, :polymorphic => true
 
   attr_accessor :mins, :secs, :cens
