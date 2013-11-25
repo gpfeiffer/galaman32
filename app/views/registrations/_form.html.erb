@@ -23,10 +23,6 @@
     <%= f.label :age %><br />
     <%= f.text_field :age %>
   </div>
-  <div class="field">
-    <%= f.label :club_id, "Club" %><br />
-    <%= f.select :club_id, Club.all.map{ |x| [x.name, x.id] } %>
-  </div>
   <div class="actions">
     <%= f.submit %>
   </div>

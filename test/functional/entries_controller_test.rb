@@ -16,7 +16,7 @@ class EntriesControllerTest < ActionController::TestCase
   end
 
   test "should get new" do
-    get :new, :event_id => @entry.event.to_param, :registration_id => @entry.registration.to_param
+    get :new, :event_id => @entry.event.to_param, :subject_id => @entry.subject.to_param, :subject_type => @entry.subject.class.name
     assert_response :success
   end
 

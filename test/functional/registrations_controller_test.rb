@@ -15,10 +15,11 @@ class RegistrationsControllerTest < ActionController::TestCase
     assert_not_nil assigns(:invitation)
   end
 
-  test "should get new" do
-    get :new
-    assert_response :success
-  end
+  # never used:
+  # test "should get new" do
+  #   get :new
+  #   assert_response :success
+  # end
 
   test "should create registration" do
     assert_difference('Registration.count') do
