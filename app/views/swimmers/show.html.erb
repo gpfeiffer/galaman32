@@ -68,11 +68,11 @@ results in a particular stroke.
 <h2>Competitions.</h2>
 
 <ul>
-<% @swimmer.registrations.sort_by(&:date).reverse_each do |registration| %>
-  <% competition = registration.competition %>
+<% @swimmer.dockets.sort_by(&:date).reverse_each do |docket| %>
+  <% competition = docket.competition %>
   <li>
     <%= competition.date %>: 
-    <%= link_to competition.name, registration %> 
+    <%= link_to competition.name, docket %> 
     (<%= competition.location %>)
   </li>
 <% end %>

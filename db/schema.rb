@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131125105049) do
+ActiveRecord::Schema.define(:version => 20131125215557) do
 
   create_table "aims", :force => true do |t|
     t.integer   "swimmer_id"
@@ -54,6 +54,14 @@ ActiveRecord::Schema.define(:version => 20131125105049) do
     t.timestamp "created_at"
     t.timestamp "updated_at"
     t.string    "mode"
+  end
+
+  create_table "dockets", :force => true do |t|
+    t.integer   "swimmer_id"
+    t.timestamp "created_at"
+    t.timestamp "updated_at"
+    t.integer   "age"
+    t.integer   "invitation_id"
   end
 
   create_table "entries", :force => true do |t|
@@ -107,14 +115,6 @@ ActiveRecord::Schema.define(:version => 20131125105049) do
     t.date      "source_date"
   end
 
-  create_table "registrations", :force => true do |t|
-    t.integer   "swimmer_id"
-    t.timestamp "created_at"
-    t.timestamp "updated_at"
-    t.integer   "age"
-    t.integer   "invitation_id"
-  end
-
   create_table "relays", :force => true do |t|
     t.string    "name"
     t.integer   "age_min"
@@ -142,11 +142,11 @@ ActiveRecord::Schema.define(:version => 20131125105049) do
   end
 
   create_table "seats", :force => true do |t|
-    t.integer   "relay_id"
-    t.integer   "registration_id"
-    t.integer   "pos"
-    t.timestamp "created_at"
-    t.timestamp "updated_at"
+    t.integer  "relay_id"
+    t.integer  "docket_id"
+    t.integer  "pos"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "standards", :force => true do |t|

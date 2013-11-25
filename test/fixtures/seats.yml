@@ -2,10 +2,10 @@
 
 one:
   relay: one
-  registration: one
+  docket: one
   pos: 1
 
 two:
   relay: two
-  registration: two
+  docket: two
   pos: 1

@@ -1,0 +1,29 @@
+<%= form_for(@docket) do |f| %>
+  <% if @docket.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@docket.errors.count, "error") %> prohibited this docket from being saved:</h2>
+
+      <ul>
+      <% @docket.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+<h3><%= @docket.competition.name %> (<%= @docket.competition.date %>)</h3>
+
+<h1><%= @docket.swimmer.name %></h1>
+
+  <%= f.hidden_field :invitation_id %>
+  <%= f.hidden_field :swimmer_id %>
+
+  <div class="field">
+    <%= f.label :age %><br />
+    <%= f.text_field :age %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

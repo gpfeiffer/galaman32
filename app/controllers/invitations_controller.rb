@@ -62,9 +62,9 @@ class InvitationsController < ApplicationController
       swimmer_ids = []
     end
     swimmer_ids = @invitation.swimmer_ids - swimmer_ids
-    @invitation.registrations.each do |registration|
-      if swimmer_ids.include? registration.swimmer_id
-        registration.destroy
+    @invitation.dockets.each do |docket|
+      if swimmer_ids.include? docket.swimmer_id
+        docket.destroy
       end
     end
 

@@ -5,11 +5,11 @@
 , <%= ordinal_number (event.pos) -%>
 <% end %>
 
-<% @invitation.registrations.select { |x| x.gender == sex }.sort_by { |x| x.swimmer.name }.each do |registration| %>
-<% swimmer = registration.swimmer %>
+<% @invitation.dockets.select { |x| x.gender == sex }.sort_by { |x| x.swimmer.name }.each do |docket| %>
+<% swimmer = docket.swimmer %>
 <%= swimmer.first_last %>, <%= swimmer.birthday -%>
 <% events.each do |event| %>
-<% entry = Entry.find_by_event_id_and_registration_id(event, registration) %>
+<% entry = Entry.find_by_event_id_and_docket_id(event, docket) %>
 , <%= entry if entry -%>
 <% end %>
 

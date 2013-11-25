@@ -2,12 +2,12 @@
 
 one:
   event: one
-  subject: one (Registration)
+  subject: one (Docket)
   time: 1
 
 two:
   event: two
-  subject: two (Registration)
+  subject: two (Docket)
   time: 1
 
 # add some relay entries ...

@@ -1,4 +1,4 @@
-class Registration < ActiveRecord::Base
+class Docket < ActiveRecord::Base
   belongs_to :swimmer
   belongs_to :invitation
   has_one :competition, :through => :invitation

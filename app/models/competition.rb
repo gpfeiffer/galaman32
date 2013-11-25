@@ -5,7 +5,7 @@ class Competition < ActiveRecord::Base
   has_many :standards
   has_many :qualifications, :through => :standards
   has_many :invitations, :dependent => :destroy
-  has_many :registrations, :through => :invitations
+  has_many :dockets, :through => :invitations
   has_many :clubs, :through => :invitations
 
   validates :name, :date, :length, :presence => true

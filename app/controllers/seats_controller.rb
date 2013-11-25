@@ -23,7 +23,7 @@ class SeatsController < ApplicationController
   # GET /seats/new.xml
   def new
     @seat[:relay_id] = params[:relay_id]
-    @seat[:registration_id] = params[:registration_id]
+    @seat[:docket_id] = params[:docket_id]
 
     respond_to do |format|
       format.html # new.html.erb

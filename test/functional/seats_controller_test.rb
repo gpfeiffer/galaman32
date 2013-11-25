@@ -16,7 +16,7 @@ class SeatsControllerTest < ActionController::TestCase
   end
 
   test "should get new" do
-    get :new, :relay_id => @seat.relay.to_param, :registration_id => @seat.registration.to_param
+    get :new, :relay_id => @seat.relay.to_param, :docket_id => @seat.docket.to_param
     assert_response :success
   end
 

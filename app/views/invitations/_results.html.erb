@@ -10,14 +10,14 @@
       <th><%= event.discipline.nickname %></th>
     <% end %>
   </tr>
-<% @invitation.registrations.select { |x| x.gender == sex }.sort_by { |x| x.swimmer.name }.each do |registration| %>
-  <% swimmer = registration.swimmer %>
+<% @invitation.dockets.select { |x| x.gender == sex }.sort_by { |x| x.swimmer.name }.each do |docket| %>
+  <% swimmer = docket.swimmer %>
   <tr class="times-major">
       <td><%= link_to swimmer.name, swimmer %></td>
-      <td align="right"><%= registration.age %></td>
+      <td align="right"><%= docket.age %></td>
       <% @competition.events.select { |x| x.gender == sex }.each do |event| %>
         <td align="center">
-	<% entry = Entry.find_by_event_id_and_registration_id(event, registration) %>
+	<% entry = Entry.find_by_event_id_and_docket_id(event, docket) %>
 	<% if entry and entry.result %>
           <%= link_to entry.result, entry.result %>
         <% end %>

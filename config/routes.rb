@@ -5,7 +5,7 @@ Galaman::Application.routes.draw do
     resources :users
   end
 
-  resources :competitions, :invitations, :registrations
+  resources :competitions, :invitations, :dockets
   resources :clubs, :swimmers, :disciplines, :entries, :results 
   resources :qualifications, :qualification_times, :standards
   resources :roles, :assignments, :supports, :aims

@@ -1,10 +1,10 @@
 <% events_by_gender = @invitation.competition.individual_events.group_by(&:gender) %>
-<% registrations_by_gender = @invitation.registrations.group_by(&:gender) %>
+<% dockets_by_gender = @invitation.dockets.group_by(&:gender) %>
 <% relays_by_gender = @invitation.relays.group_by(&:gender) %>
 
 <% Swimmer::GENDERS.each do |sex| %>
   <% events = events_by_gender[sex] || [] %>
-  <% registrations = registrations_by_gender[sex] || [] %>
+  <% dockets = dockets_by_gender[sex] || [] %>
   <% relays = relays_by_gender[sex] || [] %>
   <table class="fact-sheet">
     <tr class="times-major">
@@ -28,32 +28,32 @@
         </th>
       <% end %>
     </tr>
-    <% registrations.sort_by(&:name).each do |registration| %>
-      <% swimmer = registration.swimmer %>
-      <% entries_by_event = registration.entries.index_by(&:event) %>
+    <% dockets.sort_by(&:name).each do |docket| %>
+      <% swimmer = docket.swimmer %>
+      <% entries_by_event = docket.entries.index_by(&:event) %>
       <tr class="times-major">
-        <td><%= link_to swimmer.name, registration %></td>
+        <td><%= link_to swimmer.name, docket %></td>
         <td><%= swimmer.birthday %></td>
-        <td align="right"><%= registration.age %></td>
+        <td align="right"><%= docket.age %></td>
         <% events.each do |event| %>
           <% entry = entries_by_event[event] %>
           <td align="center">
 	  <% if entry %>
             <%= link_to entry, entry %>
 	  <% else %>
-            <% if can?(:update, registration) and event.permits? registration %>
-              <%= link_to (raw "&square;"), new_entry_path(:event_id => event, :subject_id => registration, :subject_type => "Registration") %> 
+            <% if can?(:update, docket) and event.permits? docket %>
+              <%= link_to (raw "&square;"), new_entry_path(:event_id => event, :subject_id => docket, :subject_type => "Docket") %> 
             <% end %>
           <% end %>
           </td>
         <% end %>
         <% relays.each do |relay| %>
           <td align="center">
-            <% seat = Seat.find_by_registration_id_and_relay_id(registration, relay) %>
+            <% seat = Seat.find_by_docket_id_and_relay_id(docket, relay) %>
 	    <% if seat %>
               <%= link_to 'X', seat %>
-	    <% elsif relay.permits? registration %>
-	      <%= link_to '_', new_seat_path(:relay_id => relay.id, :registration_id => registration.id) %> 
+	    <% elsif relay.permits? docket %>
+	      <%= link_to '_', new_seat_path(:relay_id => relay.id, :docket_id => docket.id) %> 
             <% end %>
           </td>
         <% end %>
@@ -65,5 +65,5 @@
 <% end %>
 
 <% if can? :update, @invitation %>
-  <%= link_to 'Register Swimmers', registrations_path(:invitation_id => @invitation) %>
+  <%= link_to 'Register Swimmers', dockets_path(:invitation_id => @invitation) %>
 <% end %>

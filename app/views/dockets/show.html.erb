@@ -1,20 +1,20 @@
 <% content_for :level do %>
-  <h3><%= @registration.invitation.club %></h3>
-  <% @registration.invitation.registrations.group_by(&:gender).each do |gender, registrations| %>
+  <h3><%= @docket.invitation.club %></h3>
+  <% @docket.invitation.dockets.group_by(&:gender).each do |gender, dockets| %>
     <h4><%= { 'f' => 'Girls', 'm' => 'Boys' }[gender] %></h4>
-    <ul><%= render registrations %></ul>
+    <ul><%= render dockets %></ul>
   <% end %>
 <% end %>
 
 
-<h3><%= link_to @registration.competition.name, @registration.competition %> (<%= @registration.competition.location %>, <%= @registration.competition.date %>)</h3>
-<h1><%= link_to @registration.swimmer.name, @registration.swimmer %> (<%= link_to @registration.invitation.club.symbol, @registration.invitation %>)</h1>
+<h3><%= link_to @docket.competition.name, @docket.competition %> (<%= @docket.competition.location %>, <%= @docket.competition.date %>)</h3>
+<h1><%= link_to @docket.swimmer.name, @docket.swimmer %> (<%= link_to @docket.invitation.club.symbol, @docket.invitation %>)</h1>
 
 <div>
   <b>Age (F/M):</b>
-  <%= @registration.age %> (<%= @registration.swimmer.gender.upcase %>),
+  <%= @docket.age %> (<%= @docket.swimmer.gender.upcase %>),
   <b>ID:</b>
-  <%= @registration.swimmer.number %>.
+  <%= @docket.swimmer.number %>.
 <div>
 <br />
 <br />
@@ -29,10 +29,10 @@
     <th>(Seed)</th>
   </tr>
   <% nr_swims, nr_pbs, pb_total = 0, 0, 0 %>
-  <% @registration.entries.sort_by { |x| x.event.pos }.each do |entry| %>
+  <% @docket.entries.sort_by { |x| x.event.pos }.each do |entry| %>
     <tr class="times-major">
       <th><%= link_to entry.event.pos, entry.event %>.</th>
-      <th><%= link_to entry.discipline.nickname, results_path(:discipline_id => entry.discipline.id, :swimmer_id => @registration.swimmer.id) %></th>
+      <th><%= link_to entry.discipline.nickname, results_path(:discipline_id => entry.discipline.id, :swimmer_id => @docket.swimmer.id) %></th>
       <td style="text-align: right;"><%= "#{entry.result.place}." if entry.result and entry.result.place %></td>
       <td style="text-align: right;">
         <% if entry.result %>
@@ -64,6 +64,6 @@
 <% end %>
 <hr>
 <% if user_session[:edit] %>
-<%= link_to 'Edit', edit_registration_path(@registration) %> |
+<%= link_to 'Edit', edit_docket_path(@docket) %> |
 <% end %>
-<%= link_to 'Back', @registration.invitation %>
+<%= link_to 'Back', @docket.invitation %>

@@ -11,8 +11,8 @@
 \subsection*{<%= @invitation.club.name %>}
 
 <% relay_count = @invitation.relays.map { |x| x.entries.count }.sum %>
-<% regis_count = @invitation.registrations.map { |x| x.entries.count }.sum %>
-<%= @invitation.registrations.count %> registered swimmers
+<% regis_count = @invitation.dockets.map { |x| x.entries.count }.sum %>
+<%= @invitation.dockets.count %> registered swimmers
 for a total of \\ 
 <%= regis_count %> individual
 <% if relay_count > 0 %>

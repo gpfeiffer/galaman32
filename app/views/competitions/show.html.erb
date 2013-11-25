@@ -10,8 +10,8 @@
 <% relay_count = @competition.invitations.map { |x| x.relays.count }.sum %>
 <% relay_text = (relay_count > 0 ? " and #{pluralize(relay_count, 'relay entry')}" : "") %>
 <%= pluralize(@competition.invitations.count, 'club has', 'clubs have') %> registered
-<%= pluralize(@competition.registrations.count, 'swimmer') %> for
-<%= pluralize(@competition.registrations.map { |x| x.entries.count }.sum, 'individual entry') + relay_text + "." %> 
+<%= pluralize(@competition.dockets.count, 'swimmer') %> for
+<%= pluralize(@competition.dockets.map { |x| x.entries.count }.sum, 'individual entry') + relay_text + "." %> 
 
 <br />
 <br />

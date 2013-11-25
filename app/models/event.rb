@@ -2,7 +2,7 @@ class Event < ActiveRecord::Base
   belongs_to :competition
   belongs_to :discipline
   has_many :entries, :dependent => :destroy
-  has_many :registrations, :through => :entries
+  has_many :dockets, :through => :entries
   has_many :results, :through => :entries
 
   default_scope :order => :pos
@@ -41,8 +41,8 @@ class Event < ActiveRecord::Base
     relay.gender == gender and age_range.include? relay.age_range
   end
 
-  def permits?(registration)
-    registration.swimmer.gender == gender and age_range.include? registration.age
+  def permits?(docket)
+    docket.swimmer.gender == gender and age_range.include? docket.age
   end
 
   # list entries for seeding
@@ -134,7 +134,7 @@ class Event < ActiveRecord::Base
       if is_relay? then
         list = results.select { |x| ages.include? x.entry.relay.age_range }
       else
-        list = results.select { |x| ages.include? x.entry.registration.age }
+        list = results.select { |x| ages.include? x.entry.docket.age }
       end
       list = list.select { |x| x.time and x.time > 0 }.sort_by(&:time)
       times = list.map { |x| x.time }

@@ -16,8 +16,8 @@
 <h4>Day <%= day %> (<%= competition.date + (day - 1).days %>)</h4>
 <% end %>
 
-<% invitation.registrations_for_day(day).group_by(&:gender).each do |gender, registrations| %>
-  <% events = registrations.map(&:events).reduce(:|).select { |x| x.day == day }.sort_by(&:pos) %>
+<% invitation.dockets_for_day(day).group_by(&:gender).each do |gender, dockets| %>
+  <% events = dockets.map(&:events).reduce(:|).select { |x| x.day == day }.sort_by(&:pos) %>
 <% if events.any? %>
   <table class="fact-sheet">
     <tr class="times-major">
@@ -27,12 +27,12 @@
         <th colspan="2"><%= event.discipline.nickname %></th>
       <% end %>
     </tr>
-    <% registrations.sort_by { |x| x.swimmer.name }.each do |registration| %>
-      <% swimmer = registration.swimmer %>
-      <% entries = registration.entries.group_by(&:event) %>
+    <% dockets.sort_by { |x| x.swimmer.name }.each do |docket| %>
+      <% swimmer = docket.swimmer %>
+      <% entries = docket.entries.group_by(&:event) %>
       <tr class="times-major">
-        <td><%= link_to swimmer.name, registration %></td>
-        <td align="right"><%= registration.age %></td>
+        <td><%= link_to swimmer.name, docket %></td>
+        <td align="right"><%= docket.age %></td>
         <% events.each do |event| %>
           <td align="right">
   	    <% entry = entries[event].first if entries[event].present? %>

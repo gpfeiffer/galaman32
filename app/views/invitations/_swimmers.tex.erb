@@ -1,10 +1,10 @@
 <% events_by_gender = @invitation.competition.individual_events.group_by(&:gender) %>
-<% registrations_by_gender = @invitation.registrations.group_by(&:gender) %>
+<% dockets_by_gender = @invitation.dockets.group_by(&:gender) %>
 <% relays_by_gender = @invitation.relays.group_by(&:gender) %>
 
 <% Swimmer::GENDERS.each do |sex| %>
   <% events = events_by_gender[sex] %>
-  <% registrations = registrations_by_gender[sex] || [] %>
+  <% dockets = dockets_by_gender[sex] || [] %>
   <% relays = relays_by_gender[sex] || [] %>
 
 \begin{tabular}[t]{p{3.1cm}cr<%= 'c' * events.count %>}
@@ -14,10 +14,10 @@
       & <%= ordinal_number (event.pos) -%>
     <% end %> \\
 \midrule
-<% registrations.sort_by(&:name).each do |registration| %>
-  <% swimmer = registration.swimmer %>
-  <% entries_by_event = registration.entries.index_by(&:event) %>
-<%= raw swimmer.name %> & <%= swimmer.birthday %> & <%= registration.age -%>
+<% dockets.sort_by(&:name).each do |docket| %>
+  <% swimmer = docket.swimmer %>
+  <% entries_by_event = docket.entries.index_by(&:event) %>
+<%= raw swimmer.name %> & <%= swimmer.birthday %> & <%= docket.age -%>
       <% events.each do |event| %>
 &       <% entry = entries_by_event[event] %>
         <%= entry if entry -%>

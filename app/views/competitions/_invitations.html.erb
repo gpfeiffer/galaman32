@@ -10,8 +10,8 @@
 <% @competition.invitations.sort { |x, y| x.club.full_name <=> y.club.full_name }.each do |invitation| %>
   <tr class="fact-major">
     <td><%= link_to invitation.club.name, invitation %></td>
-    <td align="right"><%= pluralize(invitation.registrations.count, 'swimmer') %> in</td>
-    <td align="right"><%= pluralize(invitation.registrations.map { |x| x.entries.count }.sum, 'event') %></td>
+    <td align="right"><%= pluralize(invitation.dockets.count, 'swimmer') %> in</td>
+    <td align="right"><%= pluralize(invitation.dockets.map { |x| x.entries.count }.sum, 'event') %></td>
     <% if can? :update, @competition %>
       <td><%= link_to image_tag('delete.png', :class => "icon"), invitation, :confirm => 'Are you sure?', :method => :delete %></td>
     <% end %>

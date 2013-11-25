@@ -16,17 +16,17 @@ class Ability
     end
 
     if user.role? :parent
-      can :read, [Swimmer, Club, Registration, Entry, Result, Event, Invitation]
+      can :read, [Swimmer, Club, Docket, Entry, Result, Event, Invitation]
       can :manage, Aim, { :swimmer => { :id => user.beneficiary_ids } }
     end
         
     if user.role? :swimmer
-      can :read, [Swimmer, Club, Registration, Entry, Result, Event, Invitation]
+      can :read, [Swimmer, Club, Docket, Entry, Result, Event, Invitation]
       can :manage, Aim, { :swimmer => user.swimmer }
     end
 
     if user.role? :coach
-      can :read, [Swimmer, Club, Registration, Entry, Result, Event, Invitation]
+      can :read, [Swimmer, Club, Docket, Entry, Result, Event, Invitation]
 #      can :manage, Aim do |aim|
 #        aim.swimmer.supporters.include? user
 #      end

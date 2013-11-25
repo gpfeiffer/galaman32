@@ -2,9 +2,9 @@ class Swimmer < ActiveRecord::Base
   default_scope :order => [:last, :first]
 
   belongs_to :club
-  has_many :registrations, :dependent => :destroy
-  has_many :competitions, :through => :registrations
-  has_many :entries, :through => :registrations
+  has_many :dockets, :dependent => :destroy
+  has_many :competitions, :through => :dockets
+  has_many :entries, :through => :dockets
   has_many :aims, :dependent => :destroy
   has_many :qualifications, :through => :aims
   has_many :supports, :dependent => :destroy
