@@ -1,4 +1,7 @@
 <%= '=' * 54 %>
 Event <%= event.pos %>. <%= event.discipline.name %>
 <%= '-' * 54 %>
-<%= render event.heats %>
+<% event.heats.sort.each do |index, heat| %>
+Heat <%= index %>
+<%= render :partial => 'entry', :collection => heat.entries.sort_by(&:lane) %>
+<% end %>

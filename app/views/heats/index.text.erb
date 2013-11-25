@@ -1,8 +1,5 @@
 <% if @event %>
-<%= '=' * 54 %>
-Event <%= @event.pos %>. <%= @event.discipline.name %>
-<%= '-' * 54 %>
-<%= render @event.heats %>
+<%= render :partial => 'event', :object => @event %>
 <% elsif @competition %>
 <%= @competition.name %>
 (<%= @competition.location %>, <%= @competition.date %>)
