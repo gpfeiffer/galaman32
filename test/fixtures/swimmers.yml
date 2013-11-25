@@ -6,7 +6,7 @@ one:
   club: one
   birthday: 2011-10-16
   gender: f
-  registration: MyString
+  number: MyString
 
 two:
   first: MyString
@@ -14,4 +14,4 @@ two:
   club: two
   birthday: 2011-10-16
   gender: m
-  registration: MyString
+  number: MyString
