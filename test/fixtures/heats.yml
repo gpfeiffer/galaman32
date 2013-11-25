@@ -1,9 +1,0 @@
-# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
-
-one:
-  pos: 1
-  event: one
-
-two:
-  pos: 2
-  event: two

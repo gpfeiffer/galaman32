@@ -13,13 +13,22 @@
 <%= link_to_unless_current 'Results', results_path(:event_id => @event) %> 
 <hr />
 
+<% if can? :update, @event %>
+  <div style="float:right">
+    <%= form_tag seed_event_path(@event) do %>
+      <%= submit_tag "Seed!", :confirm => "Are you sure?" %>
+      (<%= select_tag :width, options_for_select((1..10).to_a, "6") %> Lanes
+      from <%= select_tag :start, options_for_select((0..9).to_a, "1") %>)
+    <% end %>
+  </div>
+<% end %>
+
 <h3>
   <%= link_to @event.competition.name, @event.competition %>
 (<%= @event.competition.location %>,
 <%= @event.date -%>
 <%= ", Day #{@event.day}" if @event.competition.length > 1 %>)
 </h3>
-
 <h1>
   Event <%= @event.pos %>.
   <%= @event.discipline.to_words %>,

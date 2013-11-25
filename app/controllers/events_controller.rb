@@ -98,4 +98,16 @@ class EventsController < ApplicationController
       format.xml  { head :ok }
     end
   end
+
+  # GET /events/1/seed
+  ##  FIXME: load and authorize
+  def seed
+    @event = Event.find(params[:id])
+    @event.seed!(params[:width].to_i, params[:start].to_i)
+
+    respond_to do |format|
+      format.html { redirect_to heats_path(:event_id => @event) }
+      format.xml  { head :ok }
+    end
+  end
 end

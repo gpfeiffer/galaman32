@@ -14,10 +14,10 @@ Galaman::Application.routes.draw do
   resources :relays
 
   get "admin" => 'admin#index'
+  get "heats" => 'heats#index'
   get "lanes" => 'lanes#index'
 
   resources :invitations
-  resources :heats
   resources :standards
   resources :results 
 
@@ -28,6 +28,7 @@ Galaman::Application.routes.draw do
   resources :events do
     member do
       get 'list'
+      post 'seed'
     end
   end
 

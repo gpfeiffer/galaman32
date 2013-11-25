@@ -7,7 +7,7 @@
 \toprule
 {\footnotesize Heat} & {\footnotesize Name, Age} & {\footnotesize Team} & \hbox to 15mm{}\llap{\footnotesize Seed Time} \\
 \midrule
-<%= render :partial => 'entry', :collection => lane.sort_by { |x| x.heat.pos } %>
+<%= render :partial => 'entry', :collection => lane.sort_by(&:heat) %>
 \bottomrule
 \end{tabular}
 }

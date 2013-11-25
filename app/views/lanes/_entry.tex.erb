@@ -1,9 +1,6 @@
-<%= entry.heat.pos %> &
-<%= raw entry.name %>, <%= entry.age %> & 
-<%= entry.club.symbol %> & 
-<%= entry %> &
-\underline{\phantom{00:00.00}}
-\underline{\phantom{00:00.00}}
-\underline{\phantom{00:00.00}}
-\underline{\phantom{00:00.00}}
+<%= entry.heat -%>
+& <%= raw entry.name_and_ages -%>
+& <%= entry.club.symbol -%> 
+& <%= entry %> 
+& <%= '\underline{\phantom{00:00.00}}' * 4 -%>
 \\

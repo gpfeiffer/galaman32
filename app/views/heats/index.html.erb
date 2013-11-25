@@ -13,12 +13,11 @@
 <th>Result</th>
 </tr>
 
-<% @heats.each do |heat| %>
+<% @heats.sort.each do |index, heat| %>
   <tr class="fact-title">
-    <th colspan="7">Heat <%= heat.pos %></th>
+    <th colspan="7">Heat <%= index %></th>
   </tr>
-
-  <%= render heat.entries.sort_by(&:lane) %>
+  <%= render heat.sort_by(&:lane) %>
 <% end %>
 </table>
 

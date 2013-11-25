@@ -17,7 +17,7 @@
   <tr class="fact-title">
     <th colspan="7">Lane <%= index %></th>
   </tr>
-<%= render :partial => 'entry', :collection => lane.sort_by(&:heat) %>
+  <%= render lane.sort_by(&:heat) %>
 <% end %>
 </table>
 

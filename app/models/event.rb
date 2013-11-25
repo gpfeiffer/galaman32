@@ -46,46 +46,54 @@ class Event < ActiveRecord::Base
     registration.swimmer.gender == gender and age_range.include? registration.age
   end
 
-  def seeded_entries
-    if is_relay? then
-      entries.select { |x| x.time > 0 }.sort_by(&:time) +
-        entries.select { |x| x.time == 0 }.sort_by { |x| [x.age, x.id.hash % 97] }
-    else
-      entries.select { |x| x.time > 0 }.sort_by(&:time) +
-        entries.select { |x| x.time == 0 }.sort_by { |x| x.swimmer.birthday }.reverse
-    end
-  end
-
-  # new, to replace the above.
+  # list entries for seeding
   def entries_for_seeding
     seeded = entries.group_by(&:seeded?)
     seeded[true].sort_by(&:time) + seeded[false].sort_by(&:no_time)
   end
 
-  def lane_helper(width, index)
-    if index % 2 == 0
-      width / 2 - index / 2
-    else
-      width / 2 + (index + 1) / 2
-    end
+  # how to distribute swimmers over lanes, starting in the middle,
+  # e.g., [0, 1, 2, 3, 4, 5] -> [3, 2, 4, 1, 5, 0].
+  def self.lane_code(width, index)
+    (width + (-1)**(width + index) * index) / 2
   end
 
-  def to_heats(width = 6)
-#    list = (is_relay? ? entries : seeded_entries).in_groups_of(width, false)
-    list = seeded_entries.in_groups_of(width, false)
-    if list.count > 1 and (width - list[-1].count) > 1
-      list[-2, 2] = (list[-2] + list[-1]).in_groups(2, false)
-    end
-    list.reverse!
-    list.each do |entries|
-      entries.each_index do |index|
-        entries[index].lane = lane_helper(width, index)
+  # how to compute the heat and lane of entry 'index' out of 'total'
+  # with given 'width' lanes, the first one at position 'start'. 
+  # We alternate the slowest swimmer between lane 1 and lane 'width'.
+  # We arrange the surplus as heats with width - 1 lanes if possible.
+  def seed!(width, start)
+    total = entries.count                   # number of entries
+    heats = -(-total).div(width)            # number of heats
+    narrow, wides = total.divmod heats      # narrow width, number of wides
+    base = (narrow + 1) * wides             # number of entries in wides
+
+    entries_for_seeding.each_with_index do |entry, index|
+
+      # compute coordinates: basically, index = heat * width + lane
+      if index < base then 
+        heat, lane = index.divmod(narrow + 1)
+      else
+        heat, lane = (index - base).divmod narrow
+        heat = heat + wides
       end
+
+      # shuffle: fill lanes from the middle, heats in reverse
+      lane = Event.lane_code(width, lane)       # distribute
+      lane = width - 1 - lane if heat % 2 == 1  # alternate
+      heat, lane = heats - heat, lane + start   # shift and reverse heats.
+
+      # update entry
+      entry.update_attributes(:heat => heat, :lane => lane)
     end
   end
 
   def seeded?
     heats.any?
+  end
+
+  def heats
+    entries.group_by(&:heat)
   end
 
   def lanes
