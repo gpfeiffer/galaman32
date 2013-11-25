@@ -1,6 +1,4 @@
 class HeatsController < ApplicationController
-  load_and_authorize_resource
-
   # GET /heats
   # GET /heats.xml
   ##  FIXME: load and authorize
