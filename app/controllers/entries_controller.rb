@@ -11,15 +11,7 @@ class EntriesController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @entries }
-      format.tex {
-        code = render_to_string
-        dir = File.join(Rails.root, 'tmp', 'latex')
-        tex = File.join(dir, 'records.tex')
-        File.open(tex, 'w') { |io| io.write(code) }
-        system("pdflatex -interaction=batchmode -output-directory #{dir} #{tex}")
-        pdf = File.join(dir, 'records.pdf')
-        render :file => pdf, :layout => false, :content_type => "application/pdf"
-      }
+      format.tex 
     end
   end
 

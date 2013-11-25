@@ -12,10 +12,7 @@ class RegistrationsController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @registrations }
-      format.text { 
-        render :file => 'registrations/index.text.erb'
-      }
-#      format.pdf { render :layout => false }
+      format.text 
     end
   end
 

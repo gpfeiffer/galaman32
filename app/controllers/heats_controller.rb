@@ -13,19 +13,8 @@ class HeatsController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @heats }
-      format.text { 
-        render :file => 'heats/index.text.erb'
-      }
+      format.text 
       format.tex 
-      # {
-      #   code = render_to_string
-      #   dir = File.join(Rails.root, 'tmp', 'latex')
-      #   tex = File.join(dir, 'heats.tex')
-      #   File.open(tex, 'w') { |io| io.write(code) }
-      #   system("pdflatex -interaction=batchmode -output-directory #{dir} #{tex}")
-      #   pdf = File.join(dir, 'heats.pdf')
-      #   render :file => pdf, :layout => false, :content_type => "application/pdf"
-      # }
     end
   end
 
