@@ -36,6 +36,7 @@
 </ul>
 <% end %>
 
+<% if events[:recent].present? %>
 <h3>Recent Events</h3>
 <ul>
 <% events[:recent].last(3).reverse_each do |competition| %>
@@ -45,6 +46,7 @@
 </li>
 <% end %>
 </ul>
+<% end %>
 
 <br />
 <p>
