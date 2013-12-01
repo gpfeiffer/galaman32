@@ -32,7 +32,7 @@
   <% @docket.entries.sort_by { |x| x.event.pos }.each do |entry| %>
     <tr class="times-major">
       <th><%= link_to entry.event.pos, entry.event %>.</th>
-      <th><%= link_to entry.discipline.nickname, results_path(:discipline_id => entry.discipline.id, :swimmer_id => @docket.swimmer.id) %></th>
+      <th><%= link_to entry.event.nickname, results_path(:discipline_id => entry.discipline.id, :swimmer_id => @docket.swimmer.id) %></th>
       <td style="text-align: right;"><%= "#{entry.result.place}." if entry.result and entry.result.place %></td>
       <td style="text-align: right;">
         <% if entry.result %>

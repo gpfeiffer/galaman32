@@ -17,6 +17,7 @@
             <%= event.pos %>. <%= event.discipline.distance %>m
             <br />
             <%= short_stroke_name(event.discipline.stroke) %>
+            <%= { 'P' => 'Pre', 'F' => 'Fin' }[event.stage] %>
           </span>
         </th>
       <% end %>
