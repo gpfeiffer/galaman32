@@ -13,9 +13,10 @@
           <th class="discipline">
             <%= discipline.stroke %> <%= discipline.distance %>m
           </th>
+          <% times_by_age_range = times_by_discipline.index_by(&:age_range) %>
           <% age_ranges.each do |ages| %>
             <td align="right">
-              <%= t = times_by_discipline.select { |x| x.age_range == ages }.first
+              <%= t = times_by_age_range[ages]
                   t ? (link_to t, t, :title => t.fina_points) : nil %>
             </td>
           <% end %>
