@@ -55,7 +55,7 @@
   <div style="float:left">
     <table style="vertical-align:top">
     <tr><th colspan="2">Gender</th><tr>
-    <% Swimmer::GENDERS.each do |gender| %>
+    <% Event::GENDERS.each do |gender| %>
       <tr><td align="right"><%= f.label :gender, gender.upcase %></td>
       <td><%= f.radio_button :gender, gender %></td></tr>
     <% end %>
