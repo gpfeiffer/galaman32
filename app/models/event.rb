@@ -117,7 +117,7 @@ class Event < ActiveRecord::Base
   end
 
   def qualification_age_ranges
-    qtimes_by_range.keys
+    competition.qualifications.any? ? qtimes_by_range.keys : [0..99]
   end
 
   def listed_results(ages)

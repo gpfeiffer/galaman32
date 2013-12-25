@@ -1,0 +1,2 @@
+<% event = level_event %>
+<li><%= link_to_unless_current event, results_path(:event_id => event) %>: <%= ages_to_words(event.age_range) %></li>
