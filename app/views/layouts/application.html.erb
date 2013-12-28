@@ -3,13 +3,9 @@
 <head>
   <title>GalaMan</title>
   <%= favicon_link_tag %>
-  <%= stylesheet_link_tag "scaffold", :media => "all" %>
-  <%= stylesheet_link_tag "galaman", :media => "all" %>
-  <%= stylesheet_link_tag "print", :media => "print" %>
-  <%= javascript_include_tag "application" %>
-  <%= javascript_include_tag "jquery" %>
-  <%= javascript_include_tag "rails" %>
-  <%= javascript_include_tag "d3.v2" %>
+  <%= stylesheet_link_tag :application %>
+  <%= stylesheet_link_tag :print, :media => :print %>
+  <%= javascript_include_tag :application %>
   <%= csrf_meta_tag %>
 </head>
 <body id="manager">
