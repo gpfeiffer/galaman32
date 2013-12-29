@@ -1,0 +1,400 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the top of the
+ * compiled file, but it's generally better to create a new file per style scope.
+ *
+ */
+
+body { background-color: #fff; color: #333; }
+
+body, p, ol, ul, td {
+  font-family: verdana, arial, helvetica, sans-serif;
+  font-size:   13px;
+  line-height: 18px;
+}
+
+pre {
+  background-color: #eee;
+  padding: 10px;
+  font-size: 11px;
+}
+
+a { color: #000; }
+a:visited { color: #666; }
+a:hover { color: #fff; background-color:#000; }
+
+div.field, div.actions {
+  margin-bottom: 10px;
+}
+
+#notice {
+  color: green;
+}
+
+.field_with_errors {
+  padding: 2px;
+  background-color: red;
+  display: table;
+}
+
+#error_explanation {
+  width: 450px;
+  border: 2px solid red;
+  padding: 7px;
+  padding-bottom: 0;
+  margin-bottom: 20px;
+  background-color: #f0f0f0;
+}
+
+#error_explanation h2 {
+  text-align: left;
+  font-weight: bold;
+  padding: 5px 5px 5px 15px;
+  font-size: 12px;
+  margin: -7px;
+  margin-bottom: 0px;
+  background-color: #c00;
+  color: #fff;
+}
+
+#error_explanation ul li {
+  font-size: 12px;
+  list-style: square;
+}
+#banner {
+  background: #0066FF;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 19em;
+  padding-right: 3em;
+  border-bottom: 2px solid;
+  color: black;
+}
+
+#banner #logo {
+  display: inline;
+  font: small-caps 40px/40px Verdana,"Helvetica",sans-serif;
+  font-weight: bold;
+}
+
+#banner img {
+  border: 1px solid black;
+  float: right;
+  height: 8em;
+}
+
+#admin {
+  display: inline;
+  text-align: right;
+  background: #0066FF;
+  padding-right: 1em;
+  color: black;
+}
+
+#admin a {
+    text-decoration:none;
+    color: white;
+}
+
+#banner a {
+    text-decoration:none;
+    color: white;
+}
+
+#admin a:hover {
+    background: white;
+    color: blue;
+}
+
+#banner a:hover {
+    background: white;
+    color: blue;
+}
+
+#columns {
+  background: blue;
+}
+
+#side {
+  float: left;
+  padding-top: 1em;
+  padding-left: 1em;
+  padding-bottom: 1em;
+  width: 16em;
+  height: 60em;
+  background: #0066FF;
+}
+
+#level a {
+  text-decoration: none;
+}
+#level h3 {
+ color: #461326;
+}
+#level ul {
+  list-style-type: none;
+  padding: 0pt;
+  margin: 0pt;
+  font-size: 12px;
+  line-height: 15px;
+}
+
+#manager, #manager body, #manager p, #manager ul {
+  font-family: Verdana,Arial,'Helvetica Neue',Helvetica,sans-serif;
+}
+
+#main {
+  margin-left: 17em;
+  padding-top: 4ex;
+  padding-left: 2em;
+  padding-right: 2em;
+  background: white;
+}
+
+#main a {
+    text-decoration:none;
+    color: blue;
+}
+
+#main a:hover {
+    background:blue;
+    color: white;
+}
+
+#side a {
+    text-decoration:none;
+    color: white;
+}
+
+#side a:hover {
+    background: white;
+    color: blue;
+}
+
+#alert {
+  color: red;
+}
+
+img.icon {
+    height: 13px;
+    position: relative;
+    bottom: -2px;
+}
+
+table.qualification {
+    border-collapse: collapse;
+    display: inline;
+}
+
+table.qualification th {
+    border: 1px solid yellow;
+    padding:2px;
+    background: blue;
+    color: white;
+}
+
+table.qualification td {
+    border: 1px solid blue;
+    padding:2px;
+    background: yellow;
+}
+
+table.qualification a:link {
+    text-decoration:none;
+}
+
+table.qualification a:visited {
+    color: #000000;
+}
+
+table.qualification a:hover {
+    background-color: #000000;
+    color: #FFFFFF;
+}
+
+th.discipline {
+    text-align: left;
+    font-weight: normal;
+}
+
+table.fact-sheet {
+    border-collapse: collapse;
+    vertical-align: top;
+    border: 1px solid blue;
+    margin-right: 2px;
+}
+
+table.fact-sheet tbody {
+}
+
+table.fact-sheet tr th {
+    border-bottom: 1px solid blue;
+}
+
+tr.fact-main {
+    height: 32px;
+    padding: 2px;
+    background: #fffddd;
+    font-size: 21px;
+    font-weight: bold;
+}
+
+tr.fact-main td {
+    height: 24px;
+    padding: 2px;
+    font-size: 21px;
+    font-weight: bold;
+}
+
+tr.fact-minor {
+    background: #fff959;
+}
+
+tr.fact-minor td {
+    font-size: 10px;
+}
+
+tr.fact-major {
+    background: #fffddd;
+}
+
+tr.fact-major th {
+    background: #fff959;
+}
+
+tr.fact-major td {
+    padding-left: 12px;
+    padding-right: 12px;
+    font-family: Verdana,Courier,"Courier New",monospace;
+    background: #fffddd;
+}
+
+tr.times-major td {
+    padding-left: 12px;
+    padding-right: 12px;
+    font-family: Verdana,Courier,"Courier New",monospace;
+    background: #fffddd;
+    border: 1px solid blue;
+}
+
+tr.times-major th {
+    padding-left: 6px;
+    padding-right: 6px;
+    background: #fff959;
+    border: 1px solid blue;
+}
+
+tr.fact-title th {
+    text-align: left;
+    background: blue;
+    color: white;
+}
+
+tr.pb-hi th {
+    padding-left: 6px;
+    padding-right: 6px;
+    background: #fff959;
+    border-top: 1px solid blue;
+    border-right: 1px solid blue;
+}
+
+tr.pb-lo th {
+    padding-left: 6px;
+    padding-right: 6px;
+    background: #fff959;
+    border-bottom: 1px solid lightblue;
+    border-left: 1px solid blue;
+    border-right: 1px solid blue;
+}
+
+th.pb-tl {
+    padding-left: 6px;
+    padding-right: 6px;
+    background: #fff959;
+    border-right: 1px solid blue;
+    border-left: 1px solid blue;
+}
+
+tr.pb-hi td {
+    padding-left: 12px;
+    padding-right: 12px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    font-family: Verdana,Courier,"Courier New",monospace;
+    background: #fffddd;
+    border-right: 1px solid blue;
+}
+
+
+tr.pb-lo td {
+    padding-left: 12px;
+    padding-right: 12px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    font-family: Verdana,Courier,"Courier New",monospace;
+    background: #fffddd; 
+    border-bottom: 1px solid lightgray;
+    border-right: 1px solid lightgray;
+}
+
+tr.pb-mi td {
+    padding-left: 12px;
+    padding-right: 12px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    font-family: Verdana,Courier,"Courier New",monospace;
+    background: #fffddd;
+    border-right: 1px solid blue;
+}
+
+tr.SC td {
+  background: #ffe0e0;
+}
+
+tr.LC td {
+  background: #dbff94;
+}
+
+hr {
+    color: blue;
+    background-color: blue;
+    height: 1px;
+    border: 0;
+}
+
+legend {
+    font-size: larger;
+    font-weight: bold;    
+}
+
+fieldset.white {
+    background: #fffddd;
+    border: 1px solid blue;
+}
+
+legend.white {
+    font-size: small;
+    background: #fffddd;
+    border-top: 1px solid blue;
+    border-left: 1px solid blue;
+    border-right: 1px solid blue;
+}
+
+.edit-head {
+  display: inline;
+}
+
+.edit {
+  display: inline;
+  font-size: smaller;
+  vertical-align: super;
+  a {
+    text-decoration: none;
+  }
+}
+
