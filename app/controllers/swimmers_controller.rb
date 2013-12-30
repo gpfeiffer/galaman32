@@ -16,6 +16,7 @@ class SwimmersController < ApplicationController
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @swimmer }
+      format.json  { render :json => @swimmer }
       format.tex 
     end
   end
