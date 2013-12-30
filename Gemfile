@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-ruby "1.9.2"
+ruby "1.9.3"
 
 gem 'rails', '3.1.12'
 
@@ -50,3 +50,5 @@ gem 'jquery-rails'
 
 gem 'devise'
 gem 'cancan'
+
+gem 'rails_12factor'

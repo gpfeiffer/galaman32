@@ -79,6 +79,11 @@ GEM
       activesupport (= 3.1.12)
       bundler (~> 1.0)
       railties (= 3.1.12)
+    rails_12factor (0.0.2)
+      rails_serve_static_assets
+      rails_stdout_logging
+    rails_serve_static_assets (0.0.1)
+    rails_stdout_logging (0.0.2)
     railties (3.1.12)
       actionpack (= 3.1.12)
       activesupport (= 3.1.12)
@@ -123,6 +128,7 @@ DEPENDENCIES
   jquery-rails
   pg
   rails (= 3.1.12)
+  rails_12factor
   sass-rails (~> 3.1.7)
   sqlite3
   uglifier (>= 1.0.3)
