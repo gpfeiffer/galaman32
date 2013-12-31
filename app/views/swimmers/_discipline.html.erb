@@ -1,20 +1,18 @@
 <% content_for :level do %>
-  <h3><%= swimmer.name %></h3>
+  <h3><%= @swimmer.name %></h3>
   <ul>
     <% @swimmer.entries.map(&:discipline).uniq.each do |discipline| %>
-      <li><%= link_to_unless_current discipline, results_path(:swimmer_id => swimmer, :discipline_id => discipline) %></li>
+      <li><%= link_to_unless_current discipline, swimmer_path(@swimmer, :discipline_id => discipline) %></li>
     <% end %>
   </ul>
 <% end %>
 
-
 <% r = @results %>
-<% discipline = @discipline %>
 
-<h3><%= link_to swimmer.name, swimmer %>
-(<%= link_to swimmer.club.symbol, swimmer.club %>)</h3>
+<h3><%= link_to @swimmer.name, @swimmer %>
+(<%= link_to @swimmer.club.symbol, @swimmer.club %>)</h3>
 
-<%= content_tag :div, nil, :id => "dob", :dob => swimmer.birthday, :distance => discipline.distance %> 
+<%= content_tag :div, nil, :id => "dob", :dob => @swimmer.birthday, :distance => discipline.distance %> 
 
 <!-- FIXME: provide controller method for this version of discipline name -->
 <h1>
@@ -69,7 +67,7 @@
 <h2>Individual Results</h2>
 
 <table class="fact-sheet">
-  <% r[discipline].sort_by { |x| x.date }.each do |result| %>
+  <% r[discipline].sort_by(&:date).reverse_each do |result| %>
     <%= content_tag :tr, :class => "fact-major", :x => result.x, :y => result.y do %>
       <td><%= result.date %></td>
       <td><%= link_to result.entry.event.competition.name, result.entry.subject %></td>
@@ -77,7 +75,7 @@
     <% end %>
   <% end %>
 
-  <% if swimmer.aims.any? and can? :show, swimmer.aims.first %>
+  <% if @swimmer.aims.any? and can? :show, @swimmer.aims.first %>
 <tr><th colspan="3">Aims</th></tr>
   <% @swimmer.aims.each do |aim| %>
     <% if can? :view, aim %>
@@ -110,20 +108,8 @@
 <% qualification_times = QualificationTime.find_all_by_discipline_id_and_qualification_id(discipline.id, qualification.id) %>
 <% if qualification_times %>
 <table>
-<!--
-<tr>
-<th><%= name %></th>
-<th>from</th>
-<th>duration</th>
-</tr>
--->
 <% qualification_times.each do |qt| %>
-<tr class="time" name="<%= name %>" color="<%= index %>" time="<%= 10*qt.time %>" from="<%= swimmer.date_of_age(qt.age_min) %>" duration="<%= qt.age_max - qt.age_min + 1 %>">
-<!--
-<td><%= time_to_msc(qt.time) %></td>
-<td><%= swimmer.date_of_age(qt.age_min) %></td>
-<td><%= qt.age_max - qt.age_min + 1 %></td>
--->
+<tr class="time" name="<%= name %>" color="<%= index %>" time="<%= 10*qt.time %>" from="<%= @swimmer.date_of_age(qt.age_min) %>" duration="<%= qt.age_max - qt.age_min + 1 %>">
 </tr>
 <% end %>
 </table>

@@ -13,6 +13,10 @@ class SwimmersController < ApplicationController
   # GET /swimmers/1
   # GET /swimmers/1.xml
   def show
+    if params[:discipline_id]
+      @discipline = Discipline.find(params[:discipline_id])
+      @results = @swimmer.results.group_by(&:discipline)
+    end
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @swimmer }

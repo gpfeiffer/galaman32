@@ -21,7 +21,7 @@
   <% entry = @result.entry %>
   <tr class="times-major">
     <th><%= link_to entry.event.pos, entry.event %>.</th>
-    <th><%= link_to entry.discipline.nickname, results_path(:discipline_id => entry.discipline.id, :swimmer_id => @result.swimmer.id) %></th>
+    <th><%= link_to entry.discipline.nickname, swimmer_path(@result.swimmer, :discipline_id => entry.discipline) %></th>
     <td style="text-align: right;"><%= "#{entry.result.place}." if entry.result.place %></td>
     <td style="text-align: right;">
       <%= link_to(entry.result, edit_result_path(@result)) if entry.result %>

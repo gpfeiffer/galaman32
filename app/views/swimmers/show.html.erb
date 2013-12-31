@@ -1,3 +1,6 @@
+<% if @discipline %>
+<%= render :partial => 'discipline', :object => @discipline %>
+<% else %>
 <% content_for :level do %>
   <h3><%= @swimmer.club %></h3>
   <% @swimmer.club.swimmers.group_by(&:gender).each do |gender, swimmers| %>
@@ -50,7 +53,7 @@ results in a particular stroke.
           <% best = best_result(entries[stroke].map(&:result).compact) %>
 	  <% if best %>
             <%= content_tag(:span, :title => "#{best.fina_points}") do %>
-              <%= link_to best, results_path(:swimmer_id => @swimmer, :discipline_id => best.discipline) %>
+              <%= link_to best, swimmer_path(:discipline_id => best.discipline) %>
               <br />
               (<%= best.date.strftime("%d/%m/%y") %>)
             <% end %>
@@ -87,3 +90,4 @@ results in a particular stroke.
   <%= link_to 'Destroy', @swimmer, :confirm => 'Are you sure?', :method => :delete  %> |
 <% end %>
 <%= link_to 'Back', :back %>
+<% end %>

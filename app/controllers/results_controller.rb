@@ -11,10 +11,6 @@ class ResultsController < ApplicationController
       @invitation = Invitation.find(params[:invitation_id])
     elsif params[:competition_id]
       @competition = Competition.find(params[:competition_id])
-    elsif params[:swimmer_id] and params[:discipline_id]
-      @swimmer = Swimmer.find(params[:swimmer_id])
-      @discipline = Discipline.find(params[:discipline_id])
-      @results = @swimmer.results.group_by { |result| result.discipline }
     else
       @results = Result.all
     end
