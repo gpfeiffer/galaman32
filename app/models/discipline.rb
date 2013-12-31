@@ -59,6 +59,14 @@ class Discipline < ActiveRecord::Base
     end
   end
 
+  def distance_course_stroke
+    if is_relay? then
+      sprintf("4x%dm %s %s Relay", distance, course, stroke == "Ind Medley" ? "Medley" : stroke)
+    else
+      sprintf("%dm %s %s", distance, course, stroke)
+    end
+  end
+
   def distance_in_words
     ((is_relay? ? "4x" : "") + "%dm") % distance
   end
