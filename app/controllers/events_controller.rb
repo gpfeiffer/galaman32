@@ -33,6 +33,7 @@ class EventsController < ApplicationController
     @event.age_min, @event.age_max = 0, 99
     @event.day = 1
     @event.discipline = Discipline.where(:mode => 'I', :course => 'SC', :stroke => 'Freestyle').first
+    @event.stage = "F"
 
     respond_to do |format|
       format.html # new.html.erb

@@ -20,12 +20,12 @@
     <%= f.text_field :location %>
   </div>
   <div class="field">
-    <%= f.label :date %><br />
+    <%= f.label :date, 'Start Date' %><br />
     <%= f.date_select :date, :order => [:day, :month, :year] %>
   </div>
   <div class="field">
     <%= f.label :length %><br />
-    <%= f.text_field :length %>
+    <%= f.text_field :length, :size => 4 %> Days
   </div>
   <div class="actions">
     <%= f.submit %>

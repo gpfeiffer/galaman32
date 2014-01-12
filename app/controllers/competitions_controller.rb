@@ -30,6 +30,8 @@ class CompetitionsController < ApplicationController
   # GET /competitions/new
   # GET /competitions/new.xml
   def new
+    @competition.length = 1
+
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @competition }
