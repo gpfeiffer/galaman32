@@ -6,3 +6,4 @@
 #Mime::Type.register_alias "application/x-tex", :tex
 Mime::Type.register_alias "text/plain", :tex
 #Mime::Type.register_alias "text/plain", :csv
+Mime::Type.register "text/hyv", :hyv

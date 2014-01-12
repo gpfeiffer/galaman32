@@ -23,6 +23,7 @@ class CompetitionsController < ApplicationController
         render :file => 'competitions/show.text.erb'
       }
       format.tex 
+      format.hyv
     end
   end
 
