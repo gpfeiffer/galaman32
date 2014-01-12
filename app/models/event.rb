@@ -154,6 +154,6 @@ class Event < ActiveRecord::Base
   end
 
   def nickname
-    "%s %s" % [discipline.nickname, { 'P' => 'Pre', 'F' => 'Fin' }[stage]]
+    "%s %s" % [discipline.nickname, { 'P' => 'Pre', 'F' => '' }[stage]]
   end
 end

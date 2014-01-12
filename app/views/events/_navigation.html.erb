@@ -31,8 +31,8 @@
 </h3>
 <h1>
   Event <%= @event.pos %>.
-  <%= @event.discipline.to_words %>,
-  <%= { 'F' => "Finals", 'P' => "Prelims" }[@event.stage] %>
+  <%= @event.discipline.to_words %>
+  <%= { 'F' => "", 'P' => "Prelims" }[@event.stage] %>
 </h1>
 <h4>
   <%= ages_to_words(@event.age_range) %>
