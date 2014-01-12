@@ -1,0 +1,4 @@
+<%= @competition.name %><%= @competition.date.strftime(";%m/%d/%Y") * 3 %>;<%= @competition.events.first.course[0] %>;<%= @competition.location %>;;;;;
+<% @competition.events.each do |event| %>
+<%= event.hyv_line %>
+<% end %>

@@ -156,4 +156,17 @@ class Event < ActiveRecord::Base
   def nickname
     "%s %s" % [discipline.nickname, { 'P' => 'Pre', 'F' => '' }[stage]]
   end
+
+  def hyv_line
+    stroke_no = {
+      "Freestyle" => 1,
+      "Backstroke" => 2, 
+      "Breaststroke" => 3, 
+      "Butterfly" => 4, 
+      "Ind Medley" => 5,
+    }[stroke]
+    age_top = age_max == 99 ? 0 : age_max
+    "#{pos};#{stage};#{gender.upcase};#{mode};#{age_min};#{age_top};" + 
+      "#{distance};#{stroke_no};;;;4;;;;;;"
+  end
 end
