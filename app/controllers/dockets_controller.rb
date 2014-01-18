@@ -72,7 +72,7 @@ class DocketsController < ApplicationController
     @docket.destroy
 
     respond_to do |format|
-      format.html { redirect_to(dockets_url) }
+      format.html { redirect_to docket.invitation }
       format.xml  { head :ok }
     end
   end
