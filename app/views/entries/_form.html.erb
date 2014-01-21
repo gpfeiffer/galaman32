@@ -16,7 +16,7 @@
   <%= f.hidden_field :subject_type %>
  
   <h2><%= @entry.event.competition.name %></h2>
-  <h3><%= @entry.event.discipline.name %></h3>
+  <h3><%= @entry.event.pos %>. <%= @entry.event.discipline.name %></h3>
 
   <h1><%= @entry.name %> (<%= @entry.club.symbol %>)</h1>
 
