@@ -18,6 +18,17 @@ class EntriesController < ApplicationController
   # GET /entries/1
   # GET /entries/1.xml
   def show
+    if @entry.swimmer
+      # find personal best a use as default seed time
+      swimmer = @entry.swimmer
+      discipline = @entry.event.discipline
+      @best = swimmer.personal_best(discipline)
+      @cobest = swimmer.personal_best(discipline.opposite)
+      if @best
+        @entry[:time] = @best.time
+      end
+    end
+
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @entry }
