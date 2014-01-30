@@ -6,7 +6,7 @@ module ResultsHelper
   def best_result(results)
     best = nil
     results.each do |result|
-      if result.time and result.time > 0 and (best == nil or best.time > result.time)
+      if result and result.time and result.time > 0 and (best == nil or best.time > result.time)
         best = result
       end
     end

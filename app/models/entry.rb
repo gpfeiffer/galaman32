@@ -9,7 +9,7 @@ class Entry < ActiveRecord::Base
 
   validates :event_id, :presence => true
 
-  delegate :invitation, :name, :age, :club, :gender, :number, :to => :subject
+  delegate :invitation, :name, :first_last, :age, :club, :gender, :number, :to => :subject
 
   # FIXME: delegate to subject.
   def age_range

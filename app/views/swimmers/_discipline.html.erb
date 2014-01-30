@@ -68,7 +68,7 @@
 <th>Competition</th>
 <th>Time</th>
 </tr>
-  <% results.sort_by(&:date).reverse_each do |result| %>
+  <% results.compact.sort_by(&:date).reverse_each do |result| %>
     <%= content_tag :tr, :class => "fact-major", :x => result.x, :y => result.y do %>
       <td><%= result.date %></td>
       <td><%= link_to result.entry.event.competition.name, result.entry.subject %></td>
