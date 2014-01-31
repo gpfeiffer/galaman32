@@ -135,11 +135,7 @@ class Event < ActiveRecord::Base
   # how to put a place on each valid result
   def list!
     qualification_age_ranges.each do |ages|
-      if is_relay? then
-        list = results.select { |x| ages.include? x.entry.relay.age_range }
-      else
-        list = results.select { |x| ages.include? x.entry.docket.age }
-      end
+      list = results.select { |x| ages.include? x.entry.age }
       list = list.select { |x| x.time and x.time > 0 }.sort_by(&:time)
       times = list.map { |x| x.time }
       list.each do |result|

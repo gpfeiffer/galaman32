@@ -2,7 +2,7 @@ class Result < ActiveRecord::Base
   belongs_to :entry
   has_one :event, :through => :entry
 
-  delegate :discipline, :swimmer, :competition, :to => :entry
+  delegate :discipline, :swimmer, :competition, :name_and_ages, :club, :to => :entry
 
   attr_accessor :mins, :secs, :cens
 

@@ -40,7 +40,7 @@
               <%= link_to entry.result, entry.result %>
               </td>
               <td>
-              <% if entry.result.time > 0 %>
+              <% if entry.result.time and entry.result.time > 0 %>
                 <%= "(#{entry.result.place}.)" if entry.result.place %>
                 <% nr_swims += 1%>
                 <% if entry.result.personal_best? %>
