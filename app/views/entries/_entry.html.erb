@@ -12,10 +12,10 @@
       <% else %>
         <% entry.result = Result.new %>
         <%= form_for entry.result, :remote => true do |f| %>
-          <%= f.text_field :mins, :size => 2 %>:
-          <%= f.text_field :secs, :size => 2 %>.
-          <%= f.text_field :cens, :size => 2 %>
-          <%= f.text_field :comment, :size => 6 %>
+          <%= f.text_field :mins, :size => 2, :maxlength => 2, :onkeyup => "moveOn(this)" %>:
+          <%= f.text_field :secs, :size => 2, :maxlength => 2, :onkeyup => "moveOn(this)" %>.
+          <%= f.text_field :cens, :size => 2, :maxlength => 2 %>
+	  <%= f.select :comment, %w(DQ DNS DNF NS), :include_blank => true %>
           <%= f.submit '!' %>
         <% end %>
       <% end %>

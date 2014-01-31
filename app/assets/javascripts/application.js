@@ -12,4 +12,5 @@
 //
 //= require jquery
 //= require rails
+//= require galaman
 //= require d3

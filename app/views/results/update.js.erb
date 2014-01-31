@@ -1,1 +1,2 @@
-$("<%= "entry_#{@result.entry.id}" %>").update('<%= link_to(@result, @result) %>')
+$("#<%= "entry_#{@result.entry.id}" %>").html('<%= link_to(@result, @result) %>');
+
