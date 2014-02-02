@@ -24,9 +24,6 @@ class EntriesController < ApplicationController
       discipline = @entry.event.discipline
       @best = swimmer.personal_best(discipline)
       @cobest = swimmer.personal_best(discipline.opposite)
-      if @best
-        @entry[:time] = @best.time
-      end
     end
 
     respond_to do |format|
