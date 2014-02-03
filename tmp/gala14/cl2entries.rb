@@ -162,7 +162,8 @@ class Format
         end
       end
       if not object
-        object = Swimmer.where(swimmer.slice(:birthday, :first, :last, :gender)).first
+        object = Swimmer.where(swimmer.slice(:birthday, :gender)).select { |s|
+s.first.downcase == swimmer[:first].downcase and s.last.downcase == swimmer[:last].downcase }.first
         if object
           puts "Found swimmer by name: #{swimmer[:first]} #{swimmer[:last]} (#{swimmer[:birthday]})\n                    => #{object.first_last} (#{object.birthday})" 
           swimmer[:object] = object
