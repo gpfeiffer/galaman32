@@ -1,4 +1,4 @@
-A01V3      20Meet Entries                  Hy-Tek, Ltd               5.0JHy-Tek, Ltd         252-633-517701312014                                    TM41    N21
+A01V3      20Meet Entries                  Hy-Tek, Ltd               5.0JHy-Tek, Ltd         252-633-517702022014                                    TM41    N21
 B11        BlueFin Graded Gala 2014                                                  Kingfisher NUIG                     0208201402082014            S       N30
 C11          LASELaser S.C.                                                                                                                          R       N21
 D01        Connolly, Rachel            20023960        0302200013FF 1004  5 12OV             NT                                                              N86
@@ -11,6 +11,9 @@ D3                             X FFFFFFFFFFFFF                                  
 D01        Mc Phillips, Aoibhinn                       0605200013FF 1001  7 UNOV         1:32.96S                                                            N28
 D01        Ashton, Iona                20029562        0113200311FF 1001  7 UNOV         1:24.78S                                                            N85
 D320029562                     X FFFFFFFFFFFFF                                                                                                               N11
+D01        Hickey, Sara                                0309200211FF 2005  1 UNOV             NT                                                              N74
+D3                             X FFFFFFFFFFFFF                                                                                                               N50
+D01        Hickey, Sara                                0309200211FF  504  3 UN11         1:01.63S                                                            N74
 D01        Mac Coille, Cian                            1216199914MM 1004  6 12OV             NT                                                              N45
 D3                             X FFFFFFFFFFFFF                                                                                                               N50
 D01        Mac Coille, Cian                            1216199914MM 1001  8 UNOV         1:19.22S                                                            N26
@@ -80,4 +83,4 @@ D01        Dirrane, Ronan                              1128199914MM 1001  8 UNOV
 D01        O Neill, Aishling                           0903200211FF 2005  1 UNOV             NT                                                              N16
 D3                             X FFFFFFFFFFFFF                                                                                                               N50
 D01        O Neill, Aishling                           0903200211FF 1001  7 UNOV             NT                                                              N16
-Z01        02Successful Build on 01-31-2014  1  1   1   1    52    27    0     0     0                                                                       N46
+Z01        02Successful Build on 02-02-2014  1  1   1   1    54    28    0     0     0                                                                       N46
