@@ -7,11 +7,11 @@
   <% dockets = dockets_by_gender[sex] || [] %>
   <% relays = relays_by_gender[sex] || [] %>
 
-\begin{tabular}[t]{p{3.1cm}cr<%= 'c' * events.count %>}
+\begin{tabular}[t]{p{3.3cm}cr<%= 'r' * events.count %>}
 \toprule
 \textbf{Swimmer (<%= sex.upcase %>)} & \textbf{DOB} & \textbf{Age}
     <% events.each do |event| %>
-      & <%= ordinal_number (event.pos) -%>
+      & \hskip1.2cm\llap{\textbf{<%= ordinal_number (event.pos) %>}}
     <% end %> \\
 \midrule
 <% dockets.sort_by(&:name).each do |docket| %>
