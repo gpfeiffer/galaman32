@@ -86,10 +86,11 @@ class Event < ActiveRecord::Base
       # update entry
       entry.update_attributes(:heat => heat, :lane => lane)
     end
+    update_attribute(:seeded_at, Time.now)
   end
 
   def seeded?
-    heats.any?
+    seeded_at and (seeded_at > entries.map(&:updated_at).max)
   end
 
   def heats

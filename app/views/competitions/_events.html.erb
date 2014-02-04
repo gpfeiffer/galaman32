@@ -20,6 +20,7 @@
     <th></th>
     <% if can? :update, @competition %>
       <th></th>
+      <th></th>
     <% end %>
   </tr>
 
@@ -31,6 +32,7 @@
     <td align="right"><%= pluralize(event.entries.count, 'entry') %></td>
     <% if can? :update, @competition %>
       <td><%= link_to image_tag('delete.png', :class => "icon"), event, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= event.seeded? ? "x" : "o" %></td>
     <% end %>
   </tr>
 <% end %>
