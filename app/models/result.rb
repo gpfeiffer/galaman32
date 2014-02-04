@@ -6,7 +6,7 @@ class Result < ActiveRecord::Base
 
   attr_accessor :mins, :secs, :cens
 
-  validates :entry_id, :presence => true
+  validates :entry_id, :presence => true, :uniqueness => true
 
   ## FIXME: validate to ensure that either comment or time is set, not both.
 
