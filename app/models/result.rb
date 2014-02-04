@@ -63,7 +63,7 @@ class Result < ActiveRecord::Base
   end
 
   def y
-    10 * time
+    time.blank? ? 0 : 10 * time
   end
 
   def coordinates
