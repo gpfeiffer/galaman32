@@ -11,6 +11,10 @@ class Entry < ActiveRecord::Base
 
   delegate :invitation, :name, :first_last, :age, :club, :gender, :number, :to => :subject
 
+  after_destroy do
+    self.event.unseed
+  end
+
   # FIXME: delegate to subject.
   def age_range
     subject.age_range

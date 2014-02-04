@@ -93,6 +93,10 @@ class Event < ActiveRecord::Base
     seeded_at and (seeded_at > entries.map(&:updated_at).max)
   end
 
+  def unseed
+    update_attribute(:seeded_at, nil)
+  end
+
   def heats
     entries.group_by(&:heat)
   end
