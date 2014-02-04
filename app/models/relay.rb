@@ -25,6 +25,10 @@ class Relay < ActiveRecord::Base
     nil
   end
 
+  def first_last
+    name
+  end
+
   # sorting attribute in the absence of time
   def no_time
     [x.age, x.id.hash % 97]  # first by age, then somewhat random
