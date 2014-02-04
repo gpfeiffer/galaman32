@@ -43,7 +43,7 @@
         <% end %>
       </td>
       <td style="text-align: right;">
-        <% if entry.result %>
+        <% if entry.result and entry.result.time %>
 	  <% pb = entry.result.personal_best %>
 	  <% if pb %>
             <% nr_pbs += 1 %>
