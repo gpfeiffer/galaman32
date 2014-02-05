@@ -7,14 +7,14 @@
   <td align="right">
     <% qu = result.entry.qualify %>
     <% if qu %>
-      <%= qu[:qualification].name %>
+      <%= qu[:qualification].short %>
     <% end %>
   </td>
   <td align="right"><%= link_to result, result %></td>  
   <td align="right">
     <% qu = result.qualify %>
     <% if qu %>
-      <%= qu[:qualification].name %>
+      <%= qu[:qualification].short %>
     <% end %>
   </td>
 </tr>
