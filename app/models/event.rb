@@ -142,10 +142,9 @@ class Event < ActiveRecord::Base
     qualification_age_ranges.each do |ages|
       list = results.select { |x| ages.include? x.entry.age }
       list = list.select { |x| x.time and x.time > 0 }.sort_by(&:time)
-      times = list.map { |x| x.time }
+      times = list.map(&:time)
       list.each do |result|
-        result.place = times.index(result.time) + 1
-        result.save
+        result.update_attribute(:place, times.index(result.time) + 1)
       end
     end
   end

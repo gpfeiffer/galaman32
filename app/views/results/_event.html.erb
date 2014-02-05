@@ -5,6 +5,12 @@
 
 <%= render 'events/navigation' %> 
 
+<% if can? :update, @event %>
+  <div style="float:right">
+    <%= button_to 'Sort!', list_event_path(@event) %>
+  </div>
+<% end %>
+
 <h2>Results.</h2>
 
 <% @event.qualification_age_ranges.each do |ages| %>
@@ -34,8 +40,7 @@
 <br />
 <hr />
 
-<%= link_to 'Sort', list_event_path(@event), :confirm => 'Are you sure?' %> 
-| <%= link_to 'Print', results_path(:event_id => @event, :format => :tex), :target => "_blank" %> 
+<%= link_to 'Print', results_path(:event_id => @event, :format => :tex), :target => "_blank" %> 
 
 <br />
 <hr />
