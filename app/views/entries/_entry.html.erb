@@ -4,7 +4,7 @@
     <td><%= link_to entry.name, entry.subject %></td>
     <td align="right"><%= entry.age %></td>
     <td><%= entry.club.symbol %></td>
-    <td align="right"><%= entry %></td>
+    <td align="right">(<%= entry %>)</td>
     <td align="right">
       <div id="<%= "entry_#{entry.id}" %>">
       <% if entry.result and entry.result.time %>
