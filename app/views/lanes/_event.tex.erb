@@ -1,3 +1,4 @@
+<% heats = (1..event.heats.count) %>
 <% event.lanes.sort.each do |index, lane| %>
 \clearpage
 \subsection*{Event <%= event.pos %>. <%= event.discipline.to_words %>}
@@ -7,7 +8,20 @@
 \toprule
 {\footnotesize Heat} & {\footnotesize Name, Age} & {\footnotesize Team} & \hbox to 15mm{}\llap{\footnotesize Seed Time} \\
 \midrule
-<%= render :partial => 'entry', :collection => lane.sort_by(&:heat) %>
+<% lane_by_heat = lane.index_by(&:heat) %>
+<% heats.each do |heat| %>
+<% entry = lane_by_heat[heat] %>
+<%= heat -%>
+<% if entry %>
+& <%= raw entry.name_and_ages -%>
+& <%= entry.club.symbol -%> 
+& <%= entry %> 
+<% else %>
+& & & 
+<% end %>
+& <%= '\underline{\phantom{00:00.00}}\ \ ' * 4 -%>
+\\
+<% end %>
 \bottomrule
 \end{tabular}
 }
