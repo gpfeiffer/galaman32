@@ -4,22 +4,20 @@
 \thispagestyle{empty}
 \begin{minipage}[t]{.5\textwidth}
 \section*{<%= competition.name %>}
-<%= competition.location %>, <%= competition.dates %>
+<%= competition.location_dates %>
 
-\section*{Gala Entries}
+\subsection*{Gala Entries}
 
-\subsection*{<%= @invitation.club.name %>}
+\section*{<%= @invitation.club.name %>}
 
-<% relay_count = @invitation.relays.map { |x| x.entries.count }.sum %>
-<% regis_count = @invitation.dockets.map { |x| x.entries.count }.sum %>
-<%= @invitation.dockets.count %> registered swimmers
+<%= pluralize(@invitation.dockets.count, "registered swimmer") %>
 for a total of \\ 
-<%= regis_count %> individual
-<% if relay_count > 0 %>
-events and \\
-<%= relay_count %> relay 
+<%= pluralize(@invitation.i_entries_count, "individual event") -%>
+<% if @invitation.relays.present? %> 
+and \\
+<%= pluralize(@invitation.r_entries_count, "relay event") -%>
 <% end %>
-events.
+.
 \end{minipage}
 %
 \begin{minipage}[t]{.5\textwidth}

@@ -59,4 +59,8 @@ class Competition < ActiveRecord::Base
   def to_s
     "%s: %s, %s" % [dates, name, location] 
   end
+
+  def location_dates
+    "#{location}, #{dates}"
+  end
 end
