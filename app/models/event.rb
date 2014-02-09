@@ -169,4 +169,10 @@ class Event < ActiveRecord::Base
     "#{pos};#{stage};#{gender.upcase};#{mode};#{age_min};#{age_top};" + 
       "#{distance};#{stroke_no};;;;4;;;;;;"
   end
+
+  def cl2_ages
+    lo = age_min == 0 ? "UN" : ("%2d" % age_min)
+    hi = age_max == 99 ? "OV" : ("%2d" % age_max)
+    lo + hi
+  end
 end

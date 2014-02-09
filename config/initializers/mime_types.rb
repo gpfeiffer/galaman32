@@ -7,3 +7,4 @@
 Mime::Type.register_alias "text/plain", :tex
 #Mime::Type.register_alias "text/plain", :csv
 Mime::Type.register "text/hyv", :hyv
+Mime::Type.register "text/cl2", :cl2

@@ -81,4 +81,54 @@ class Entry < ActiveRecord::Base
       sprintf('%d.%02d', secs, cens)
     end
   end
+
+  # sdif
+  def to_d0
+    line = {
+      :mark => "D0",
+      :orgc => "8",
+      :gap0 => "%-8s" % "",
+      :name => "%-28s" % swimmer.last_first,
+      :siid => "%-12s" % swimmer.number,
+      :atch => "A",
+      :citz => "%-3s" % "",
+      :dofb => "%8s" % swimmer.birthday.strftime("%m%d%Y"),
+      :agen => "%2d" % subject.age,
+      :ssex => "%1s" % subject.gender.upcase,
+      :esex => "%1s" % event.gender.upcase,
+      :dist => "%4d" % event.distance,
+      :stro => "%d" % {
+        "Freestyle" => 1,
+        "Backstroke" => 2, 
+        "Breaststroke" => 3, 
+        "Butterfly" => 4, 
+        "Ind Medley" => 5,
+      }[stroke],
+      :evnt => "%3d%1s" % [event.pos, "ABCDE"[event.qualification_age_ranges.find_index{ |r| r.include? subject.age }]],
+      :ages => "%4s" % event.cl2_ages,
+      :date => "%8s" % event.date.strftime("%m%d%Y"),
+      :tim0 => "%8s" % (time > 0 ? self.to_s : ""),
+      :crs0 => "%1s" % (time > 0 ? event.course[0] : ""),
+      :tim1 => "%-8s" % "",
+      :crs1 => "%-1s" % "",
+      :tim2 => "%-8s" % "",
+      :crs2 => "%-1s" % "",
+      :tim3 => "%8s" % (result and result.time ? result : ""),
+      :crs3 => "%1s" % (result and result.time and result.time > 0 ? event.course[0] : ""),
+      :hea1 => "%-2s" % "",
+      :lan1 => "%-2s" % "",
+      :hea2 => "%2s" % (heat ? heat : ""),
+      :lan2 => "%2s" % (lane ? lane : ""),
+      :plc1 => "%-3s" % "",
+      :plc2 => "%3s" % (result and result.place),
+      :pnts => "%-4s" % "",
+      :strd => "%-2s" % "",
+      :flgh => "%-1s" % "",
+      :gap1 => "%-15s" % "",
+    }
+    line = SDIF[line[:mark]][:keys].map { |key| line[key] }.join
+    line[-4, 4] = Format.checksum(line)
+    line
+  end
+
 end

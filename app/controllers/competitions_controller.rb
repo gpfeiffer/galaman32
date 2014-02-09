@@ -24,6 +24,7 @@ class CompetitionsController < ApplicationController
       }
       format.tex 
       format.hyv
+      format.cl2
     end
   end
 

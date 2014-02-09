@@ -74,4 +74,80 @@ class Competition < ActiveRecord::Base
   def r_entries_count
     relays.map(&:entries).flatten.count
   end
+
+  # SDIF parts
+  def to_a0
+    line = {
+      :mark => "A0",
+      :orgc => "8",
+      :vers => "%-8s" % "V3",
+      :filc => "02",
+      :gap0 => "%-30s" % "Meet Results",
+      :snam => "%-20s" % "GalaMan",
+      :sver => "%-10s" % "v3.1",
+      :cnam => "%-20s" % "BlueFin S.C.",
+      :cpho => "%12s" % "",
+      :date => Time.now.strftime("%m%d%Y"),
+      :gap1 => "%42s" % "MM40  ",
+      :subm => "  ",
+      :gap2 => "   ",
+    }
+    line = SDIF[line[:mark]][:keys].map { |key| line[key] }.join
+    line[-4, 4] = Format.checksum(line)
+    line
+  end
+
+  def to_b1
+    line = {
+      :mark => "B1",
+      :orgc => "8",
+      :gap0 => "%8s" % "",
+      :name => "%-30s" % name,
+      :adr1 => "%-22s" % location,
+      :adr2 => "%-22s" % "",
+      :city => "%-20s" % "Galway",
+      :stat => "%2s" % "",
+      :zipc => "%10s" % "",
+      :ctry => "%3s" % "",
+      :meet => " ",
+      :dat0 => date.strftime("%m%d%Y"),
+      :dat1 => (date + (length - 1)).strftime("%m%d%Y"),
+      :alti => "%4d" % 0,
+      :gap1 => "%8s" % "",
+      :crse => "S",
+      :gap2 => "%-10s" % " 000",
+    }
+    line = SDIF[line[:mark]][:keys].map { |key| line[key] }.join
+    line[-4, 4] = Format.checksum(line)
+    line
+  end
+
+  def to_z0
+    line = {
+      :mark => "Z0",
+      :orgc => "8",
+      :gap0 => "Meet Res",
+      :filc => "02",
+      :note => "%-30s" % "Successful Build on #{Date.today}",
+      :nrbs => "%3s" % 1,
+      :nrms => "%3s" % 1,
+      :nrcs => "%4s" % invitations.count,
+      :nrts => "%4s" % invitations.count,
+      :nrds => "%6s" % i_entries_count,
+      :nrss => "%6s" % dockets.count,
+      :nres => "%5s" % r_entries_count,
+      :nrfs => "%6s" % 0,
+      :nrgs => "%6s" % 0,
+      :btch => "%-5s" % "",
+      :news => "%-3s" % "",
+      :rens => "%-3s" % "",
+      :chgs => "%-3s" % "",
+      :dels => "%-3s" % "",
+      :gap1 => "%-57s" % "",
+    }
+    line = SDIF[line[:mark]][:keys].map { |key| line[key] }.join
+    line[-4, 4] = Format.checksum(line)
+    line
+  end
+
 end

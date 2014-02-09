@@ -28,9 +28,33 @@ class Docket < ActiveRecord::Base
     swimmer.age_in_days
   end
 
+  # sdif
+  def to_d3
+    line = {
+      :mark => "D3",
+      :siid => "%-14s" % swimmer.number,
+      :frst => "%15s" % "",
+      :ethn => "%2s" % "",
+      :junr => "F",
+      :senr => "F",
+      :ymca => "F",
+      :coll => "F",
+      :summ => "F",
+      :mstr => "F",
+      :dabl => "F",
+      :polo => "F",
+      :none => "F",
+      :gap0 => "%118s" % "",
+    }
+    line = SDIF[line[:mark]][:keys].map { |key| line[key] }.join
+    line[-4, 4] = Format.checksum(line)
+    line
+  end
+
   private
   
   def assign_age
     self.age = swimmer.age(invitation.competition.date)
   end
+
 end
