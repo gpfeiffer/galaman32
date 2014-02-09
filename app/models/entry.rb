@@ -114,7 +114,7 @@ class Entry < ActiveRecord::Base
       :tim2 => "%-8s" % "",
       :crs2 => "%-1s" % "",
       :tim3 => "%8s" % (result and result.time ? result : ""),
-      :crs3 => "%1s" % (result and result.time and result.time > 0 ? event.course[0] : ""),
+      :crs3 => "%1s" % (result and result.time ? event.course[0] : ""),
       :hea1 => "%-2s" % "",
       :lan1 => "%-2s" % "",
       :hea2 => "%2s" % (heat ? heat : ""),
