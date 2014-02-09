@@ -6,6 +6,7 @@ class Competition < ActiveRecord::Base
   has_many :qualifications, :through => :standards
   has_many :invitations, :dependent => :destroy
   has_many :dockets, :through => :invitations
+  has_many :relays, :through => :invitations
   has_many :clubs, :through => :invitations
 
   validates :name, :date, :length, :presence => true
@@ -62,5 +63,15 @@ class Competition < ActiveRecord::Base
 
   def location_dates
     "#{location}, #{dates}"
+  end
+
+  # number of individual entries
+  def i_entries_count 
+    dockets.map(&:entries).flatten.count 
+  end
+
+  # number of relay entries
+  def r_entries_count
+    relays.map(&:entries).flatten.count
   end
 end
