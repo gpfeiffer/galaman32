@@ -8,7 +8,7 @@
 class Format
   def self.checksum line
     (line[0, 2] == 'D0' ? 'NN' : ' N') + 
-      ("%02d" % ((line[0, 156].bytes.inject(:+) + 211) / 19 % 100)).reverse
+      ("%02d" % ((line[0, 156].bytes.inject(:+) / 19 + 211) % 100)).reverse
   end
 end
 
