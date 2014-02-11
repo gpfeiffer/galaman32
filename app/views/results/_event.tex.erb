@@ -1,6 +1,6 @@
 \subsection*{Event <%= event.pos %>. <%= event.discipline.to_words %>}
 
-<% event.qualification_age_ranges.each do |ages| %>
+<% event.qualification_age_ranges.sort_by(&:min).each do |ages| %>
 <% results = event.listed_results(ages) %>
 <% if not results.empty? %>
 \begin{center}
