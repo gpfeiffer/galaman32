@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140213151547) do
+ActiveRecord::Schema.define(:version => 20140213162338) do
 
   create_table "aims", :force => true do |t|
     t.integer   "swimmer_id"
@@ -44,6 +44,9 @@ ActiveRecord::Schema.define(:version => 20140213151547) do
     t.timestamp "created_at"
     t.timestamp "updated_at"
     t.integer   "length"
+    t.string    "source"
+    t.string    "source_url"
+    t.date      "source_date"
   end
 
   create_table "disciplines", :force => true do |t|

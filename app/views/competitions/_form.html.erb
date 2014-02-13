@@ -27,6 +27,18 @@
     <%= f.label :length %><br />
     <%= f.text_field :length, :size => 4 %> Days
   </div>
+  <div class="field">
+    <%= f.label :source %><br />
+    <%= f.text_field :source %>
+  </div>
+  <div class="field">
+    <%= f.label :source_url %><br />
+    <%= f.text_field :source_url %>
+  </div>
+  <div class="field">
+    <%= f.label :source_date %><br />
+    <%= f.date_select :source_date, :order => [:day, :month, :year] %>
+  </div>
   <div class="actions">
     <%= f.submit %>
   </div>
