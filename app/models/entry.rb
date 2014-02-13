@@ -7,6 +7,8 @@ class Entry < ActiveRecord::Base
 
   attr_accessor :mins, :secs, :cens
 
+  STAGES = ["P", "S", "F"]
+
   validates :event_id, :presence => true
 
   delegate :invitation, :name, :first_last, :age, :club, :gender, :number, :to => :subject

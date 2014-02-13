@@ -25,6 +25,11 @@
     <%= f.text_field :mins, :size => 2 %>:<%= f.text_field :secs, :size => 2 %>.<%= f.text_field :cens, :size => 2 %>
   </div>
 
+  <div class="field">
+    <%= f.label :stage %>
+    <% f.select :stage, Entry::STAGES %>
+  </div>
+
   <div class="actions">
     <%= f.submit %>
   </div>
