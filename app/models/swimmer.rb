@@ -69,4 +69,34 @@ class Swimmer < ActiveRecord::Base
     x = (DateTime.now - (birthday + 8.years)).to_i
     return [[x, 0], [x, 120 * dist]]
   end
+
+  # when did we get our A time?
+  def sticking_achievement(qualification, discipline)
+    # loop over my results in discipline
+    qts = qualification.qualification_times.group_by(&:discipline)[discipline]
+    results_by_discipline = results.group_by(&:discipline)[discipline]
+    if results_by_discipline
+      results_by_discipline.each do |result|
+        swimmer_age = age(result.date)
+        qt = qts.select { |x| x.age_range.include? swimmer_age }.first
+        if qt and result.time and result.time > 0 and result.time < qt.time
+          return result
+        end
+      end
+    end
+    return nil
+  end
+
+  def a_times
+    times = Hash[Discipline::STROKES.map { |stroke|  [stroke, []] }]
+    q = Qualification.find_by_name("A")
+    q.disciplines.uniq.select { |x| x.gender == gender }.each do |discipline|
+      a_time = sticking_achievement(q, discipline)
+      times[discipline.stroke] << a_time if a_time
+    end
+    times.each_key do |stroke|
+      times[stroke] = times[stroke].sort_by(&:date).first
+    end
+    return times
+  end
 end

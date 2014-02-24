@@ -1,0 +1,5 @@
+<b>A Times:</b> |
+<% @swimmer.a_times.each do |stroke, result| %>
+<%= link_to_if result, stroke, result %> |
+<% end %>
+
