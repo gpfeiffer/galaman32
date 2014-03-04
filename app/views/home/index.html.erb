@@ -42,7 +42,7 @@
 <% events[:recent].last(3).reverse_each do |competition| %>
 <li>
 <%= link_to competition.name, competition %>, <%= competition.location %>
-: <%= time_ago_in_words(competition.date) %> ago ...
+: <%= time_ago_in_words(competition.date + competition.length) %> ago ...
 </li>
 <% end %>
 </ul>

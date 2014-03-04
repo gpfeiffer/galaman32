@@ -40,21 +40,9 @@ class Competition < ActiveRecord::Base
     "#{first_day}" + (length > 1 ? " - #{last_day}" : "")
   end
 
-  def relative_date
-    [:recent, :current, :future][(date <=> Date.today) + 1]
-  end
-
   # which competitions lie ahead of us?
-  def self.future
-    Competition.where("date > ?", Date.today)
-  end
-
-  def self.current
-    Competition.where("date = ?", Date.today)
-  end
-  
-  def self.recent(count = 3)
-    Competition.where("date < ?", Date.today).reverse.first count
+  def relative_date
+    [:current, :recent, :future][((Date.today - date)/length).floor <=> 0]
   end
 
   def to_s
