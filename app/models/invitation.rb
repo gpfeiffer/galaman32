@@ -19,7 +19,7 @@ class Invitation < ActiveRecord::Base
   end
 
   def dockets_for_day(day)
-    events = competition.events.group_by(&:day)[day]
+    events = competition.events.group_by(&:day)[day] || []
     dockets.select { |x| (x.events & events).any? }
   end
 
