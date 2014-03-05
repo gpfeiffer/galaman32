@@ -1,6 +1,6 @@
 \thispagestyle{empty}
 \section*{<%= invitation.competition.name %>}
-<%= invitation.competition.location %>, <%= invitation.competition.date %>
+<%= invitation.competition.location %>, <%= invitation.competition.dates %>
 \section*{Results (<%= @invitation.club.symbol %>)}
 
 <% invitation.dockets.group_by(&:gender).each do |gender, dockets| %>
