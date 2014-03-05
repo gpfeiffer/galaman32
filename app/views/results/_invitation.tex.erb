@@ -1,10 +1,16 @@
+<% competition = invitation.competition %>
 \thispagestyle{empty}
-\section*{<%= invitation.competition.name %>}
-<%= invitation.competition.location %>, <%= invitation.competition.dates %>
+\section*{<%= competition.name %>}
+<%= competition.location %>, <%= competition.dates %>
 \section*{Results (<%= @invitation.club.symbol %>)}
 
-<% invitation.dockets.group_by(&:gender).each do |gender, dockets| %>
-  <% events = dockets.map(&:events).reduce(:|).sort_by(&:pos) %>
+<% competition.days.each do |day| %>
+<% if competition.length > 1 %>
+\subsection*{Day <%= day %> (<%= competition.date + (day - 1).days %>)}
+<% end %>
+
+<% invitation.dockets_for_day(day).group_by(&:gender).each do |gender, dockets| %>
+  <% events = dockets.map(&:events).reduce(:|).select { |x| x.day == day }.sort_by(&:pos) %>
 \begin{tabular}{p{4cm}<%= 'r' * events.count %>}
   \toprule
   Swimmer (<%= gender.upcase %>), Age
@@ -31,4 +37,5 @@
 \bottomrule
 \end{tabular}
 \par
+<% end %>
 <% end %>

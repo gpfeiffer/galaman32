@@ -7,6 +7,14 @@
 (<%= @competition.dates %>)
 </p>
 
+<% if @competition.source.present? %>
+<p>
+<b>Reference:</b> 
+<%= link_to @competition.source, @competition.source_url %>,
+<%= @competition.source_date %>.
+</p>
+<% end %>
+
 <% relay_count = @competition.invitations.map { |x| x.relays.count }.sum %>
 <% relay_text = (relay_count > 0 ? " and #{pluralize(relay_count, 'relay entry')}" : "") %>
 <%= pluralize(@competition.invitations.count, 'club has', 'clubs have') %> registered

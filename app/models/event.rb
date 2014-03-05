@@ -86,10 +86,15 @@ class Event < ActiveRecord::Base
       # update entry
       entry.update_attributes(:heat => heat, :lane => lane)
     end
+    update_attribute(:seeded_at, Time.now)
   end
 
   def seeded?
-    heats.any?
+    seeded_at and (seeded_at > entries.map(&:updated_at).max)
+  end
+
+  def unseed
+    update_attribute(:seeded_at, nil)
   end
 
   def heats
@@ -137,10 +142,9 @@ class Event < ActiveRecord::Base
     qualification_age_ranges.each do |ages|
       list = results.select { |x| ages.include? x.entry.age }
       list = list.select { |x| x.time and x.time > 0 }.sort_by(&:time)
-      times = list.map { |x| x.time }
+      times = list.map(&:time)
       list.each do |result|
-        result.place = times.index(result.time) + 1
-        result.save
+        result.update_attribute(:place, times.index(result.time) + 1)
       end
     end
   end
@@ -164,5 +168,11 @@ class Event < ActiveRecord::Base
     age_top = age_max == 99 ? 0 : age_max
     "#{pos};#{stage};#{gender.upcase};#{mode};#{age_min};#{age_top};" + 
       "#{distance};#{stroke_no};;;;4;;;;;;"
+  end
+
+  def cl2_ages
+    lo = age_min == 0 ? "UN" : ("%2d" % age_min)
+    hi = age_max == 99 ? "OV" : ("%2d" % age_max)
+    lo + hi
   end
 end

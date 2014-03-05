@@ -2,23 +2,20 @@
 <% club = @invitation.club %>
 <h3>
   <%= link_to competition.name, competition %>
-  (<%= competition.location %>, <%= competition.dates %>)
+  (<%= competition.location_dates %>)
 </h3>
 
 <h1><%= link_to club.name, club %></h1>
 
 <p>
-<% relay_count = @invitation.relays.map { |x| x.entries.count }.sum %>
-<% regis_count = @invitation.dockets.map { |x| x.entries.count }.sum %>
-<%= @invitation.dockets.count %> registered swimmers
+<%= pluralize(@invitation.dockets.count, "registered swimmer") %> 
 for a total of 
-<%= regis_count %> individual
-<% if relay_count > 0 %>
-events and
-<%= relay_count %> relay
-<% else %>
+<%= pluralize(@invitation.i_entries_count, "individual event") -%>
+<% if @invitation.relays.present? %> 
+and
+<%= pluralize(@invitation.r_entries_count, "relay event") -%>
 <% end %>
-events.
+.
 </p>
 
 

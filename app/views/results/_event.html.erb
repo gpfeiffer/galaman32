@@ -5,9 +5,15 @@
 
 <%= render 'events/navigation' %> 
 
+<% if can? :update, @event %>
+  <div style="float:right">
+    <%= button_to 'Sort!', list_event_path(@event) %>
+  </div>
+<% end %>
+
 <h2>Results.</h2>
 
-<% @event.qualification_age_ranges.each do |ages| %>
+<% @event.qualification_age_ranges.sort_by(&:min).each do |ages| %>
   <% results = @event.listed_results(ages) %>
   <% if not results.empty? %>
 
@@ -20,7 +26,7 @@
         <th style="width:175px">Name</th>
         <th>Age</th>
         <th>Team</th>
-        <th style="width:75px">Seed</th>
+        <th style="width:75px">(Seed)</th>
         <th></th>
         <th style="width:75px">Result</th>
         <th></th>
@@ -34,8 +40,7 @@
 <br />
 <hr />
 
-<%= link_to 'Sort', list_event_path(@event), :confirm => 'Are you sure?' %> 
-| <%= link_to 'Print', results_path(:event_id => @event, :format => :tex), :target => "_blank" %> 
+<%= link_to 'Print', results_path(:event_id => @event, :format => :tex), :target => "_blank" %> 
 
 <br />
 <hr />

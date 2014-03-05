@@ -6,7 +6,7 @@ class Result < ActiveRecord::Base
 
   attr_accessor :mins, :secs, :cens
 
-  validates :entry_id, :presence => true
+  validates :entry_id, :presence => true, :uniqueness => true
 
   ## FIXME: validate to ensure that either comment or time is set, not both.
 
@@ -63,7 +63,7 @@ class Result < ActiveRecord::Base
   end
 
   def y
-    10 * time
+    time.blank? ? 0 : 10 * time
   end
 
   def coordinates
@@ -81,7 +81,7 @@ class Result < ActiveRecord::Base
   def personal_best?
     return false if time == 0 
     old = swimmer.results.group_by(&:discipline)[discipline]
-    old = old.select { |x| x.time > 0 and x.date < date }
+    old = old.select { |x| x.date < date and x.time > 0 }
     old.any? ? time < old.map(&:time).min : true
   end
 
@@ -89,7 +89,7 @@ class Result < ActiveRecord::Base
   def personal_best
     return nil if time == 0 
     old = swimmer.results.group_by(&:discipline)[discipline]
-    old = old.select { |x| x.time > 0 and x.date < date }
+    old = old.select { |x| x.date < date and x.time > 0 }
     if old.any?
       diff = old.map(&:time).min - time
       diff > 0 ? diff : nil

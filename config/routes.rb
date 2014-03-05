@@ -13,7 +13,7 @@ Galaman::Application.routes.draw do
 
   resources :events do
     member do
-      get 'list'
+      post 'list'
       post 'seed'
     end
   end

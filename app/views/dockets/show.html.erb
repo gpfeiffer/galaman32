@@ -23,16 +23,18 @@
   <tr class="times-major">
     <th></th>
     <th>Event</th>
+    <th>(Seed)</th>
     <th>Plc</th>
     <th>Result</th>
+    <th></th>
     <th>PB</th>
-    <th>(Seed)</th>
   </tr>
   <% nr_swims, nr_pbs, pb_total = 0, 0, 0 %>
   <% @docket.entries.sort_by { |x| x.event.pos }.each do |entry| %>
     <tr class="times-major">
       <th><%= link_to entry.event.pos, entry.event %>.</th>
       <th><%= link_to entry.event.nickname, swimmer_path(@docket.swimmer, :discipline_id => entry.discipline) %></th>
+      <td style="text-align: right;">(<%= link_to entry, entry %>)</td>
       <td style="text-align: right;"><%= "#{entry.result.place}." if entry.result and entry.result.place %></td>
       <td style="text-align: right;">
         <% if entry.result %>
@@ -42,8 +44,9 @@
           <%= link_to '__:__.__', new_result_path(:entry_id => entry.id) %>
         <% end %>
       </td>
+      <td><%= entry.stage %></td>
       <td style="text-align: right;">
-        <% if entry.result %>
+        <% if entry.result and entry.result.time %>
 	  <% pb = entry.result.personal_best %>
 	  <% if pb %>
             <% nr_pbs += 1 %>
@@ -52,7 +55,6 @@
           <% end %>
 	<% end %>
       </td>
-      <td style="text-align: right;">(<%= link_to entry, entry %>)</td>
     </tr>
   <% end %>
 </table>
