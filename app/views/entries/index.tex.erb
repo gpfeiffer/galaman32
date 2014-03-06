@@ -1,3 +1,4 @@
+\onecolumn
 \tiny
 \tabcolsep2pt
 \pagestyle{empty}
@@ -5,18 +6,16 @@
 
 \section*{Club Records: <%= @club.full_name %>.}
 
+<% entries_gender = @entries.group_by { |x| x.swimmer.gender } %>
 <% Swimmer::GENDERS.each do |gender| %>
-
-<% entries_gender = @entries.group_by { |x| x.swimmer.gender }[gender] %>
-
-\begin{tabular}{|c|<%= "p{1.45cm}|" * Discipline::STROKES.length %>}
+\begin{tabular}[t]{|c|<%= "p{1.45cm}|" * Discipline::STROKES.length %>}
 \toprule
 \textbf{<%= { 'f' => 'Girls', 'm' => 'Boys' }[gender] %>}
 <% Discipline::STROKES.each do |stroke| %>
   & {\hfil\textbf{<%= short_stroke_name stroke %>}\hfil}
 <% end %>
 \\
-<% entries_gender.group_by(&:distance_course_code).sort.each do |row, entries_row| %>
+<% entries_gender[gender].group_by(&:distance_course_code).sort.each do |row, entries_row| %>
 \midrule
 <% entries = entries_row.group_by(&:stroke) %>
 \textbf{<%= distance_course(row) %>}
@@ -35,19 +34,20 @@
 <% end %>
 \bottomrule
 \end{tabular}
+<% end %>
 
 <% @entries.group_by(&:age).sort.each do |age, entries_age| %>
-<% entries_gender = entries_age.group_by { |x| x.swimmer.gender }[gender] %>
-<% if entries_gender %>
-
-\begin{tabular}{|c|<%= "p{1.45cm}|" * Discipline::STROKES.length %>}
+<% entries_gender = entries_age.group_by { |x| x.swimmer.gender } %>
+<% Swimmer::GENDERS.each do |gender| %>
+<% if entries_gender[gender] %>
+\begin{tabular}[t]{|c|<%= "p{1.45cm}|" * Discipline::STROKES.length %>}
 \toprule
 \textbf{<%= { 'f' => 'Girls', 'm' => 'Boys' }[gender] %> (<%= age %>)}
 <% Discipline::STROKES.each do |stroke| %>
   & {\hfil\textbf{<%= short_stroke_name stroke %>}\hfil}
 <% end %>
 \\
-<% entries_gender.group_by(&:distance_course_code).sort.each do |row, entries_row| %>
+<% entries_gender[gender].group_by(&:distance_course_code).sort.each do |row, entries_row| %>
 \midrule
 <% entries = entries_row.group_by(&:stroke) %>
 \textbf{<%= distance_course(row) %>}
@@ -66,6 +66,8 @@
 <% end %>
 \bottomrule
 \end{tabular}
+\qquad
 <% end %>
 <% end %>
+
 <% end %>
