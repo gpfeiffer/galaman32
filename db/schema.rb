@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140213162338) do
+ActiveRecord::Schema.define(:version => 20140330073200) do
 
   create_table "aims", :force => true do |t|
     t.integer   "swimmer_id"
@@ -193,6 +193,7 @@ ActiveRecord::Schema.define(:version => 20140213162338) do
     t.timestamp "created_at"
     t.timestamp "updated_at"
     t.integer   "user_id"
+    t.text      "comment"
   end
 
   create_table "users", :force => true do |t|

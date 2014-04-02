@@ -68,6 +68,10 @@ results in a particular stroke.
 
 <%= render 'atimes' %>
 
+<p>
+<%= @swimmer.comment %>
+</p>
+
 <%= render 'qualifications' if can? :read, @swimmer.aims.first %>
 
 <h2>Competitions.</h2>
