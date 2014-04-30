@@ -17,6 +17,7 @@ class QualificationsController < ApplicationController
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @qualification }
+      format.tex
     end
   end
 
