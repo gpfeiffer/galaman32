@@ -14,7 +14,7 @@ class Relay < ActiveRecord::Base
   end
 
   def name_and_ages
-    "#{name}, #{ApplicationController.helpers.ages_to_s(age_range)}"
+    "#{name}"
   end
 
   def number
