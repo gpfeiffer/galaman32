@@ -31,7 +31,7 @@ class Relay < ActiveRecord::Base
 
   # sorting attribute in the absence of time
   def no_time
-    [x.age, x.id.hash % 97]  # first by age, then somewhat random
+    [age, id.hash % 97]  # first by age, then somewhat random
   end
 
   def permits?(docket)
