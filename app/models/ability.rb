@@ -26,7 +26,8 @@ class Ability
     end
 
     if user.role? :coach
-      can :read, [Swimmer, Club, Docket, Entry, Result, Event, Invitation]
+      can :read, [Swimmer, Club, Docket, Entry, Event, Invitation]
+      can :manage, Result
 #      can :manage, Aim do |aim|
 #        aim.swimmer.supporters.include? user
 #      end
