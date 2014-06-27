@@ -8,4 +8,13 @@
 
 \section*{Meet Programme}
 
-<%= render @competition.events %>
+<% events = @competition.events.group_by(&:day) %>
+<% @competition.days.each do |day| %>
+<% if events.include?(day) %>
+<% if @competition.length > 1 %>
+\subsubsection*{Day <%= day %>}
+<% end %>
+
+<%= render events[day] %>
+<% end %>
+<% end %>
