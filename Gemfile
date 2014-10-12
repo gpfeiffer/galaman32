@@ -2,10 +2,14 @@ source 'http://rubygems.org'
 
 ruby "1.9.3"
 
-gem 'rails', '3.1.12'
+gem 'rails', '3.2.19'
 
-# Bundle edge Rails instead:
-# gem 'rails', :git => 'git://github.com/rails/rails.git'
+group :assets do
+  gem 'sass-rails',   '~> 3.2.6'
+  gem 'coffee-rails', '~> 3.2.2'
+  gem 'uglifier',     '>= 1.0.3'
+end
+
 
 group :development, :test do
   gem 'sqlite3'
