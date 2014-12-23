@@ -27,7 +27,7 @@ class Result < ActiveRecord::Base
       return nil
     end
     best = nil
-    entry.competition.qualifications.each do |qualification|
+    entry.competition.qualifications.includes(:qualification_times).each do |qualification|
       qt = qualification.qualification_times.select { |x| x.discipline == discipline and x.age_range.include? entry.age }.first
       if qt and qt.time > time and (not best or qt.time < best[:time])
         best = { :time => qt.time, :qualification => qualification }
