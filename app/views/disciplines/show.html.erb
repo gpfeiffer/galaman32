@@ -1,3 +1,147 @@
+<style>
+  .axis {
+    font-family: arial;
+    font-size: 0.6em;
+  }
+
+  path {
+    fill: none;
+    stroke: black;
+    stroke-width: 2px;
+  }
+
+  .tick {
+    fill: none;
+    stroke: black;
+  }
+
+  circle {
+    opacity: 0.4;
+    stroke: none;
+    fill: blue;
+  }
+
+  div.buttons {
+    position: fixed;
+    top: 5px;
+//    left: 220px;
+    right: 20px;
+  }
+
+  div.buttons div {
+    background-color: rgb(251, 201, 127);
+    padding: 3px;
+    margin: 7px;
+  }
+</style>
+
+<script type="text/javascript">
+function draw(data) {
+
+  "use strict";
+  var margin = 75,
+      width = 1000 - margin,
+      height = 600 - margin;
+
+  data = data.results.filter(function(d) { return d.time > 0; })
+
+  debugger;
+
+  d3.select("div#chart")
+    .append("h2")
+    .text("Chart");
+
+  var svg = d3.select("div#chart")
+    .append("svg")
+      .attr("width", width + margin)
+      .attr("height", height + margin);
+
+  svg.append("g")
+      .attr("class", "chart");
+
+  svg.selectAll("circle")
+    .data(data, function(d) { return d.id; })
+    .enter()
+    .append("circle");
+
+  // x axis represents age
+  function get_age(d) { return d.age / 365.25; }
+  var age_extent = d3.extent(data, get_age);
+  var age_scale = d3.scale.linear()
+    .range([margin, width])
+    .domain(age_extent);
+  var age_axis = d3.svg.axis()
+    .scale(age_scale);
+  svg.append("g")
+    .attr("class", "x axis")
+    .attr("transform", "translate(0," + height + ")")
+    .call(age_axis);
+
+  // y axis represents time
+  function get_time(d) {
+    return new Date(10 * d.time);  // milliseconds
+  }
+  var time_extent = d3.extent(data, get_time);
+  var time_scale = d3.time.scale()
+    .range([margin, height])
+    .domain(time_extent);
+
+  var format = d3.time.format("%M:%S");
+  var time_axis = d3.svg.axis()
+    .scale(time_scale)
+    .tickFormat(format)
+    .orient("left");
+  svg.append("g")
+    .attr("class", "y axis")
+    .attr("transform", "translate(" + margin + ",0)")
+    .call(time_axis);
+
+  var radius = 5;
+
+  svg.selectAll("circle")
+    .attr("cx", function(d) { return age_scale(get_age(d)); })
+    .attr("cy", function(d) { return time_scale(get_time(d)); })
+    .attr("r", radius)
+    .transition().delay(500).duration(1500)
+    .style("fill", 'red');
+
+  var nested = d3.nest()
+    .key(function(d) { return d.club; })
+    .entries(data);
+
+  var buttons = d3.select("div#chart")
+    .append("div")
+      .attr("class", "buttons")
+    .selectAll("div")
+    .data(nested)
+    .enter()
+    .append("div")
+    .text(function(d) { return d.key; });
+
+  buttons.on("click", function(d) {
+    buttons.style("background", "rgb(255,156,156)")
+      .style("color", "black");
+    d3.select(this)
+      .transition()
+      .style("background", "lightBlue")
+      .style("color", "white");
+    update(d.values);
+  });
+
+  function update(vals) {
+    var circles = svg.selectAll("circle")
+      .data(vals, function(d) { return d.id; });
+
+debugger;
+
+    circles.style("fill", "blue")
+      .exit()
+      .style("fill", "red");
+  }
+}
+</script>
+
+
 <h3><%= link_to 'Disciplines', disciplines_path %></h3>
 
 <h1><%= @discipline %></h1>
@@ -9,6 +153,11 @@
   <%= r %> (<%= r.entry.name %>, <%= r.entry.club.symbol %>, <%= r.date %>)
 </p>
 <% end %>
+
+<div id="chart"></div>
+<script type="text/javascript">
+  d3.json("<%= discipline_path(@discipline, :json) %>", draw);
+</script>
 
 <h2>Competitions</h2>
 
