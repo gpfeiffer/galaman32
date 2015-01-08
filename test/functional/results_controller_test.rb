@@ -5,6 +5,7 @@ class ResultsControllerTest < ActionController::TestCase
 
   setup do
     @result = results(:one)
+    @result.entry = entries(:new)
     @user = users(:one)
     sign_in @user
   end

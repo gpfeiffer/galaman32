@@ -1,0 +1,31 @@
+\onecolumn
+\small
+
+\subsubsection*{Qualification Times}
+
+\section*{<%= @qualification.name %>}
+
+<% @qualification.qualification_times.group_by(&:gender).each do |gender, times_by_gender| %>
+\begin{minipage}{.49\textwidth}
+  <% times_by_gender.group_by(&:age_range).sort_by { |key, value| key.first }.each do |ages, times_by_ages| %>
+    <% if times_by_ages.any? %>
+    \begin{tabular}{r|<%= 'r' * Discipline::STROKES.count %>}
+    \multicolumn{6}{c}{\textbf{<%= girls_or_boys(gender) %> <%= ages_to_words(ages) %>}} \\
+    \toprule
+<% Discipline::STROKES.each do |stroke| %>
+& {\hfill <%= short_stroke_name(stroke) -%>\hfill} 
+<% end %> \\
+    \midrule
+      <% times_by_ages.group_by(&:distance_course).sort_by  { |key, value| [key[0..-5].to_i, 100-key[-2].ord] }.each do |label, times_by_label| %>
+          <%= label %>
+          <% Discipline::STROKES.each do |stroke| %>
+& <%= times_by_label.select { |x| x.stroke == stroke }.first -%>
+          <% end %> \\
+      <% end %>
+    <% end%>
+    \bottomrule
+    \end{tabular}
+
+  <% end %>
+\end{minipage}\hfill
+<% end %>

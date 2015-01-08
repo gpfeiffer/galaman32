@@ -49,6 +49,6 @@ class DocketsControllerTest < ActionController::TestCase
       delete :destroy, :id => @docket.to_param
     end
 
-    assert_redirected_to dockets_path
+    assert_redirected_to invitation_path(assigns(:docket).invitation)
   end
 end

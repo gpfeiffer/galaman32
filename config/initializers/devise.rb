@@ -202,4 +202,7 @@ Devise.setup do |config|
   #   manager.intercept_401 = false
   #   manager.default_strategies(:scope => :user).unshift :some_external_strategy
   # end
+
+  # secret key needed by Rails 3.2
+  config.secret_key = 'f108b59d4b39f403c4817a3804e41ccdf19c0873106ff24268d0eed8ce37ed3b3a9a382e1fa39ab4ca644054180860fa3ade24200552a1566fd83834a8307b84'
 end

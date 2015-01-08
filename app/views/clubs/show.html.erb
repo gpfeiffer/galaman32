@@ -42,7 +42,7 @@
 <br style="clear: left;"/>
 <hr />
 
-<% if can? :update, @club %>
+<% if can? :create, Swimmer %>
   <%= link_to 'New Swimmer', new_swimmer_path(:club_id => @club) %>
   <hr/>
 <% end %>

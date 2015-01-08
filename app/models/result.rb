@@ -10,6 +10,18 @@ class Result < ActiveRecord::Base
 
   ## FIXME: validate to ensure that either comment or time is set, not both.
 
+  def age
+    swimmer.age_in_days(date)
+  end
+
+  def club
+    entry.club.symbol
+  end
+
+  def as_json(options = {})
+    super(root: false, methods: [:age, :club])
+  end
+
   def cens
     time % 100 if time
   end
@@ -27,7 +39,7 @@ class Result < ActiveRecord::Base
       return nil
     end
     best = nil
-    entry.competition.qualifications.each do |qualification|
+    entry.competition.qualifications.includes(:qualification_times).each do |qualification|
       qt = qualification.qualification_times.select { |x| x.discipline == discipline and x.age_range.include? entry.age }.first
       if qt and qt.time > time and (not best or qt.time < best[:time])
         best = { :time => qt.time, :qualification => qualification }
