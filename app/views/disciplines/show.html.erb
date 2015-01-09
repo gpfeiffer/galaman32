@@ -109,6 +109,10 @@ function draw(data) {
     .append("circle")
     .attr("cx", function(d) { return age_scale(get_age(d)); })
     .attr("r", 5)
+    .append("title")
+    .text(function(d) { return d.name; });
+
+  svg.selectAll("circle")
     .transition().duration(1500)
     .attr("cy", function(d) { return time_scale(get_time(d)); })
     .style("fill", 'red');

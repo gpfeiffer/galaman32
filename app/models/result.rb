@@ -18,8 +18,12 @@ class Result < ActiveRecord::Base
     entry.club.symbol
   end
 
+  def name
+    swimmer.first_last
+  end
+
   def as_json(options = {})
-    super(root: false, methods: [:age, :club])
+    super(root: false, methods: [:age, :club, :name])
   end
 
   def cens
