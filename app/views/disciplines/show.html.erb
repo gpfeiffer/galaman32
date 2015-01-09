@@ -1,7 +1,7 @@
 <style>
-  .axis {
+  .axis, .label {
     font-family: arial;
-    font-size: 0.6em;
+    font-size: 0.8em;
   }
 
   path {
@@ -16,7 +16,7 @@
   }
 
   circle {
-    opacity: 0.4;
+    opacity: 0.6;
     stroke: none;
     fill: blue;
   }
@@ -24,12 +24,11 @@
   div.buttons {
     position: fixed;
     top: 5px;
-//    left: 220px;
     right: 20px;
   }
 
   div.buttons div {
-    background-color: rgb(251, 201, 127);
+    background-color: rgb(255,156,156);
     padding: 3px;
     margin: 7px;
   }
@@ -45,24 +44,16 @@ function draw(data) {
 
   data = data.results.filter(function(d) { return d.time > 0; })
 
-  debugger;
-
-  d3.select("div#chart")
-    .append("h2")
-    .text("Chart");
-
   var svg = d3.select("div#chart")
     .append("svg")
       .attr("width", width + margin)
-      .attr("height", height + margin);
-
-  svg.append("g")
+      .attr("height", height + margin)
+    .append("g")
       .attr("class", "chart");
 
-  svg.selectAll("circle")
-    .data(data, function(d) { return d.id; })
-    .enter()
-    .append("circle");
+  function get_id(d) { 
+    return d.id;
+  }
 
   // x axis represents age
   function get_age(d) { return d.age / 365.25; }
@@ -76,6 +67,13 @@ function draw(data) {
     .attr("class", "x axis")
     .attr("transform", "translate(0," + height + ")")
     .call(age_axis);
+
+  svg.append("text")
+    .attr("class", "x label")
+    .attr("text-anchor", "end")
+    .attr("x", width)
+    .attr("y", height - 6)
+    .text("Swimmer's age (years)");
 
   // y axis represents time
   function get_time(d) {
@@ -96,15 +94,26 @@ function draw(data) {
     .attr("transform", "translate(" + margin + ",0)")
     .call(time_axis);
 
-  var radius = 5;
+  svg.append("text")
+    .attr("class", "y label")
+    .attr("text-anchor", "end")
+    .attr("y", margin + 12)
+    .attr("x", -margin)
+    .attr("transform", "rotate(-90)")
+    .text("Time (mm:ss)");
 
+  // add circles
   svg.selectAll("circle")
+    .data(data, get_id)
+    .enter()
+    .append("circle")
     .attr("cx", function(d) { return age_scale(get_age(d)); })
     .attr("cy", function(d) { return time_scale(get_time(d)); })
-    .attr("r", radius)
-    .transition().delay(500).duration(1500)
+    .attr("r", 5)
+    .transition().duration(1500)
     .style("fill", 'red');
 
+  // group results by club
   var nested = d3.nest()
     .key(function(d) { return d.club; })
     .entries(data);
@@ -118,25 +127,21 @@ function draw(data) {
     .append("div")
     .text(function(d) { return d.key; });
 
-  buttons.on("click", function(d) {
+  buttons.on("mouseover", function(d) {
     buttons.style("background", "rgb(255,156,156)")
       .style("color", "black");
     d3.select(this)
-      .transition()
       .style("background", "lightBlue")
       .style("color", "white");
     update(d.values);
   });
 
   function update(vals) {
-    var circles = svg.selectAll("circle")
-      .data(vals, function(d) { return d.id; });
-
-debugger;
-
-    circles.style("fill", "blue")
+    svg.selectAll("circle")
+      .data(vals, get_id)
+      .style("fill", "blue")
       .exit()
-      .style("fill", "red");
+      .style("fill", "red")
   }
 }
 </script>
@@ -153,6 +158,8 @@ debugger;
   <%= r %> (<%= r.entry.name %>, <%= r.entry.club.symbol %>, <%= r.date %>)
 </p>
 <% end %>
+
+<h2>Chart</h2>
 
 <div id="chart"></div>
 <script type="text/javascript">
