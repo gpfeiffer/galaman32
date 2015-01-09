@@ -23,7 +23,7 @@
 
   div.buttons {
     position: fixed;
-    top: 5px;
+    top: 150px;
     right: 20px;
   }
 
@@ -108,9 +108,9 @@ function draw(data) {
     .enter()
     .append("circle")
     .attr("cx", function(d) { return age_scale(get_age(d)); })
-    .attr("cy", function(d) { return time_scale(get_time(d)); })
     .attr("r", 5)
     .transition().duration(1500)
+    .attr("cy", function(d) { return time_scale(get_time(d)); })
     .style("fill", 'red');
 
   // group results by club
