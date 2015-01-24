@@ -10,6 +10,7 @@ class Competition < ActiveRecord::Base
   has_many :clubs, :through => :invitations
 
   validates :name, :date, :length, :presence => true
+  validates :course, :inclusion => Discipline::COURSES
 
   def individual_events
     events.select { |x| not x.is_relay? }

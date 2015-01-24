@@ -29,10 +29,14 @@ class EventsController < ApplicationController
   # GET /events/new
   # GET /events/new.xml
   def new
-    @event[:competition_id] = params[:competition_id]
+    @event.competition = Competition.find(params[:competition_id])
     @event.age_min, @event.age_max = 0, 99
     @event.day = 1
-    @event.discipline = Discipline.where(:mode => 'I', :course => 'SC', :stroke => 'Freestyle').first
+    @event.discipline = Discipline.where({
+      mode: 'I', 
+      course: @event.competition.course, 
+      stroke: 'Freestyle'
+    }).first
     @event.stage = "F"
 
     respond_to do |format|

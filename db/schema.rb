@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140330073200) do
+ActiveRecord::Schema.define(:version => 20150124100625) do
 
   create_table "aims", :force => true do |t|
     t.integer   "swimmer_id"
@@ -47,6 +47,7 @@ ActiveRecord::Schema.define(:version => 20140330073200) do
     t.string    "source"
     t.string    "source_url"
     t.date      "source_date"
+    t.string    "course"
   end
 
   create_table "disciplines", :force => true do |t|

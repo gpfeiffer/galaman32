@@ -20,6 +20,10 @@
     <%= f.text_field :location %>
   </div>
   <div class="field">
+    <%= f.label :course %><br />
+    <%= f.select :course, Discipline::COURSES %>
+  </div>
+  <div class="field">
     <%= f.label :date, 'Start Date' %><br />
     <%= f.date_select :date, :order => [:day, :month, :year] %>
   </div>
