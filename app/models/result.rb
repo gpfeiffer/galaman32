@@ -2,7 +2,8 @@ class Result < ActiveRecord::Base
   belongs_to :entry
   has_one :event, :through => :entry
 
-  delegate :discipline, :swimmer, :competition, :name_and_ages, :club, :to => :entry
+  delegate :discipline, :swimmer, :competition, :name_and_ages, :club, 
+    :course, :date, :to => :entry
 
   attr_accessor :mins, :secs, :cens
 
@@ -24,6 +25,14 @@ class Result < ActiveRecord::Base
 
   def as_json(options = {})
     super(root: false, methods: [:age, :club, :name])
+  end
+
+  # def course
+  #   event.course
+  # end
+
+  def conversion
+    time + discipline.differential
   end
 
   def cens
@@ -69,9 +78,9 @@ class Result < ActiveRecord::Base
     end
   end
 
-  def date
-    event.date
-  end
+  # def date
+  #   event.date
+  # end
 
   # coordinates: x = date of competition, y = time in milliseconds
   def x

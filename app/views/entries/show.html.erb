@@ -9,14 +9,7 @@
 <div>
 <br>
 
-<p>
-PB: <%= @best %>(<%= @best.competition if @best %>)
-</p>
-<p>
-co-PB: <%= @cobest %>(<%= @cobest.competition if @cobest %>)
-</p>
-
-<br>
+<%= render 'best' %>
 
 <table class="fact-sheet">
   <tr class="times-major">

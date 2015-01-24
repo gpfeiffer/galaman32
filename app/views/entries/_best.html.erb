@@ -1,0 +1,17 @@
+<p>
+  <b><%= @best.course %> PB:</b> <%= @best %> 
+  <br />
+  (<%= @best.competition if @best %>)
+</p>
+
+<p>
+  <% conversion = @cobest.conversion %>
+  <b><%= @cobest.course %> PB:</b> <%= @cobest %> 
+  <% if conversion %>
+  (converts to <b><%= @best.course %></b> <%= time_to_msc @cobest.conversion %>)
+  <% end %>
+  <br />
+  (<%= @cobest.competition if @cobest %>)
+</p>
+
+<br />

@@ -13,6 +13,8 @@ class Entry < ActiveRecord::Base
 
   delegate :invitation, :name, :first_last, :age, :club, :gender, :number, :to => :subject
 
+  delegate :course, :date, :to => :event
+
   after_destroy do
     self.event.unseed
   end
