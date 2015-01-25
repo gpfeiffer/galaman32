@@ -13,7 +13,7 @@
 <h1><%= link_to @docket.swimmer.name, @docket.swimmer %> (<%= link_to @docket.invitation.club.symbol, @docket.invitation %>)</h1>
 
 <div>
-  <%= @docket.age %> (<%= @docket.swimmer.gender.upcase %>),
+  <%= @docket.age %> <%= @docket.swimmer.gender.upcase %>,
   <b>ID:</b>
   <%= @docket.swimmer.number %>.
 <div>
