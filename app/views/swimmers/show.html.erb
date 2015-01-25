@@ -48,15 +48,15 @@ results in a particular stroke.
   <tr class="pb-lo <%= distance_course(row)[-2,2] %>" align="right">
     <th><%= distance_course(row) %></th>
     <% Discipline::STROKES.each do |stroke| %>
-      <td>
+      <td style="line-height:14px; padding-top:4px;">
         <% if entries[stroke] %>
           <% best = best_result(entries[stroke].map(&:result).compact) %>
 	  <% if best %>
-            <%= content_tag(:span, :title => "#{best.fina_points}") do %>
-              <%= link_to best, swimmer_path(:discipline_id => best.discipline) %>
-              <br />
-              (<%= best.date.strftime("%d/%m/%y") %>)
-            <% end %>
+              <%= link_to best, swimmer_path(:discipline_id => best.discipline) %><br />
+              <span style="font-size:x-small;">
+              <%= best.date.strftime("%d/%m/%y") %><br />
+              <%= best.fina_points %> FINA pts
+	      </span>
           <% end %>
         <% end %>
       </td>
