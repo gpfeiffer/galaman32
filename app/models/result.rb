@@ -27,10 +27,6 @@ class Result < ActiveRecord::Base
     super(root: false, methods: [:age, :club, :name])
   end
 
-  # def course
-  #   event.course
-  # end
-
   def conversion
     time + discipline.differential
   end
@@ -77,10 +73,6 @@ class Result < ActiveRecord::Base
       sprintf('%d.%02d', secs, cens)
     end
   end
-
-  # def date
-  #   event.date
-  # end
 
   # coordinates: x = date of competition, y = time in milliseconds
   def x

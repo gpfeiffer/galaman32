@@ -1,9 +1,11 @@
+<% if @best %>
 <p>
   <b><%= @best.course %> PB:</b> <%= @best %> 
   <br />
   (<%= @best.competition if @best %>)
 </p>
-
+<% end %>
+<% if @cobest %>
 <p>
   <% conversion = @cobest.conversion %>
   <b><%= @cobest.course %> PB:</b> <%= @cobest %> 
@@ -13,5 +15,5 @@
   <br />
   (<%= @cobest.competition if @cobest %>)
 </p>
-
+<% end %>
 <br />
