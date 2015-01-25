@@ -2,7 +2,7 @@
 <p>
   <b><%= @best.course %> PB:</b> <%= @best %> 
   <br />
-  (<%= @best.competition if @best %>)
+  (<%= @best.competition %>)
 </p>
 <% end %>
 <% if @cobest %>
@@ -10,10 +10,11 @@
   <% conversion = @cobest.conversion %>
   <b><%= @cobest.course %> PB:</b> <%= @cobest %> 
   <% if conversion %>
-  (converts to <b><%= @best.course %></b> <%= time_to_msc @cobest.conversion %>)
+    (converts to <b><%= { 'SC' => 'LC', 'LC' => 'SC' }[@cobest.course] %></b> 
+    <%= time_to_msc @cobest.conversion %>)
   <% end %>
   <br />
-  (<%= @cobest.competition if @cobest %>)
+  (<%= @cobest.competition %>)
 </p>
 <% end %>
 <br />
