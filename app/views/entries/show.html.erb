@@ -1,8 +1,9 @@
-<h3><%= link_to @entry.competition.name, @entry.competition %> (<%= @entry.competition.location %>, <%= @entry.competition.date %>)</h3>
+<h3><%= link_to @entry.competition.name, @entry.competition %></h3>
+<%= @docket.competition.course %>:
+<%= @entry.competition.location_dates %>
 <h1><%= link_to @entry.name, @entry.subject %> (<%= link_to @entry.club.symbol, @entry.invitation %>)</h1>
 
 <div>
-  <b>Age (F/M):</b>
   <%= @entry.age %> (<%= @entry.gender.upcase %>),
   <b>ID:</b>
   <%= @entry.number %>.

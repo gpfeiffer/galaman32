@@ -33,19 +33,6 @@ class Discipline < ActiveRecord::Base
     super(root: false, only: [:id], methods: [:results])
   end
 
-  # def as_json(options = {})
-  #   {
-  #     id: self.id,
-  #     gender: self.gender,
-  #     distance: self.distance,
-  #     course: self.course,
-  #     stroke: self.stroke,
-  #     mode: self.mode,
-  #     created_at: self.created_at,
-  #     updated_at:self.updated_at
-  #   }
-  # end
-
   def is_relay?
     mode == "R"
   end

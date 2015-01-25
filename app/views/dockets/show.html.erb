@@ -7,11 +7,12 @@
 <% end %>
 
 
-<h3><%= link_to @docket.competition.name, @docket.competition %> (<%= @docket.competition.location %>, <%= @docket.competition.date %>)</h3>
+<h3><%= link_to @docket.competition.name, @docket.competition %></h3>
+<%= @docket.competition.course %>:
+<%= @docket.competition.location_dates %>
 <h1><%= link_to @docket.swimmer.name, @docket.swimmer %> (<%= link_to @docket.invitation.club.symbol, @docket.invitation %>)</h1>
 
 <div>
-  <b>Age (F/M):</b>
   <%= @docket.age %> (<%= @docket.swimmer.gender.upcase %>),
   <b>ID:</b>
   <%= @docket.swimmer.number %>.
