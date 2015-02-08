@@ -15,16 +15,16 @@ class Result < ActiveRecord::Base
     swimmer.age_in_days(date)
   end
 
-  def club
-    entry.club.symbol
-  end
-
   def name
     swimmer.first_last
   end
 
+  def symbol
+    club.symbol
+  end
+
   def as_json(options = {})
-    super(root: false, methods: [:age, :club, :name])
+    super(root: false, methods: [:age, :symbol, :name])
   end
 
   def conversion
