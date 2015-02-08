@@ -7,6 +7,7 @@ class Club < ActiveRecord::Base
   has_many :dockets, :through => :invitations
 
   validates :full_name, :symbol, :presence => true
+  validates :symbol, :uniqueness => true
 
   def name
     "#{self.full_name} (#{self.symbol})"
