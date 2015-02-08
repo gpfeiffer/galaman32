@@ -29,6 +29,10 @@ class Swimmer < ActiveRecord::Base
     last_first
   end
 
+  def to_s
+    "#{name} (#{club.symbol})"
+  end
+
   def email
     user.email
   end
