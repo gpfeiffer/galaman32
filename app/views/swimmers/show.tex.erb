@@ -1,29 +1,4 @@
-\small
+\footnotesize
 \thispagestyle{empty}
-\subsection*{<%= @swimmer.club.full_name %>}
-\section*{<%= raw @swimmer.name %>}
-<%= @swimmer.birthday %> (<%= @swimmer.gender.upcase %>). Swim Ireland ID: <%= @swimmer.number %>.
 
-\section*{PB Times}
-
-\begin{tabular}{|r|<%= 'p{1.5cm}|'*Discipline::STROKES.count %>}
-\toprule
-<% Discipline::STROKES.each do |stroke| %>
-&  \textbf{<%= { 'Freestyle' => 'Free', 'Backstroke' => 'Back', 'Breaststroke' => 'Breast', 'Butterfly' => 'Fly', 'Ind Medley' => 'Medley' }[stroke] %>}
-<% end %>
-<% @swimmer.entries.group_by(&:distance_course_code).sort.each do |row, entries_row| %>
-  <% entries = entries_row.group_by(&:stroke) %>
-\\\midrule
-    \textbf{<%= distance_course(row) %>}
-    <% Discipline::STROKES.each do |stroke| %>
-&
-        <% if entries[stroke] %>
-          <% best = best_result(entries[stroke].map(&:result).compact) %>
-	  <% if best %>
-            {\hfill <%= best %>\newline\mbox{}\hfill{\footnotesize <%= best.date.strftime("%d/%m/%y") %>}}
-          <% end %>
-        <% end %>
-    <% end %>
-<% end %>
-\\\bottomrule
-\end{tabular}
+<%= render @swimmer %>

@@ -18,6 +18,7 @@ class ClubsController < ApplicationController
       format.html # show.html.erb
       format.csv
       format.xml  { render :xml => @club }
+      format.tex 
     end
   end
 
