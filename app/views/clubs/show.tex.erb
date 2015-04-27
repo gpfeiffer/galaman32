@@ -1,5 +1,6 @@
+<%= Date.today %>
 \footnotesize
 \section*{PBs: <%= @club %>}
-<%= Date.today %>
+\mbox{}
 
-<%= render @club.swimmers %>
+<%= render @club.swimmers.select { |x| x.entries.any? } %>
