@@ -101,7 +101,7 @@
 <% end %>
 
 <div id="qualification">
-<% names = ["B", "A", "Division 2", "Division 1", "Connacht Squad", "British Gas", "FINA Base"] %>
+<% names = ["B", "A", "Division 2", "Division 1", "Connacht Squad", "FINA Base"] %>
 
 <% names.each_with_index do |name, index| %> 
 <% qualification = Qualification.find_by_name(name) %>
