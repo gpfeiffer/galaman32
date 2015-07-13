@@ -15,6 +15,6 @@
 \subsubsection*{Day <%= day %>}
 <% end %>
 
-<%= render events[day] %>
+<%= render events[day].select { |x| x.entries.count > 0 } %>
 <% end %>
 <% end %>
