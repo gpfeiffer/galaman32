@@ -1,9 +1,172 @@
+<style>
+  .axis, .label {
+    font-family: arial;
+    font-size: 0.8em;
+  }
+
+  path {
+    fill: none;
+    stroke: black;
+    stroke-width: 2px;
+  }
+
+  .tick {
+    fill: none;
+    stroke: black;
+  }
+
+  circle {
+    opacity: 0.6;
+    stroke: none;
+    fill: blue;
+  }
+
+  div.buttons {
+    position: fixed;
+    top: 150px;
+    right: 20px;
+  }
+
+  div.buttons div {
+    background-color: rgb(255,156,156);
+    padding: 3px;
+    margin: 7px;
+  }
+</style>
+
+<script type="text/javascript">
+function draw(data) {
+
+  "use strict";
+  var margin = 75,
+      width = 1000 - margin,
+      height = 600 - margin;
+
+  data = data.results.filter(function(d) { return d.time > 0; })
+
+  var svg = d3.select("div#chart")
+    .append("svg")
+//      .attr("xmlns", "http://www.w3.org/2000/svg")
+//      .attr("xmlns:xlink", "http://www.w3.org/1999/xlink")
+      .attr("width", width + margin)
+      .attr("height", height + margin)
+    .append("g")
+      .attr("class", "chart");
+
+  function get_id(d) { 
+    return d.id;
+  }
+
+  // x axis represents age
+  function get_age(d) { return d.age / 365.25; }
+  var age_extent = d3.extent(data, get_age);
+  var age_scale = d3.scale.linear()
+    .range([margin, width])
+    .domain(age_extent);
+  var age_axis = d3.svg.axis()
+    .scale(age_scale);
+  svg.append("g")
+    .attr("class", "x axis")
+    .attr("transform", "translate(0," + height + ")")
+    .call(age_axis);
+
+  svg.append("text")
+    .attr("class", "x label")
+    .attr("text-anchor", "end")
+    .attr("x", width)
+    .attr("y", height - 6)
+    .text("Swimmer's age (years)");
+
+  // y axis represents time
+  function get_time(d) {
+    return new Date(10 * d.time);  // milliseconds
+  }
+  var time_extent = d3.extent(data, get_time);
+  var time_scale = d3.time.scale()
+    .range([margin, height])
+    .domain(time_extent);
+
+  var format = d3.time.format("%M:%S");
+  var time_axis = d3.svg.axis()
+    .scale(time_scale)
+    .tickFormat(format)
+    .orient("left");
+  svg.append("g")
+    .attr("class", "y axis")
+    .attr("transform", "translate(" + margin + ",0)")
+    .call(time_axis);
+
+  svg.append("text")
+    .attr("class", "y label")
+    .attr("text-anchor", "end")
+    .attr("y", margin + 12)
+    .attr("x", -margin)
+    .attr("transform", "rotate(-90)")
+    .text("Time (mm:ss)");
+
+  // add circles
+  svg.selectAll("circle")
+    .data(data, get_id)
+    .enter()
+    .append("a")
+    .attr("xlink:href", function(d) { return "entries/" + d.entry_id; })
+    .append("circle")
+    .attr("cx", function(d) { return age_scale(get_age(d)); })
+    .attr("r", 5)
+    .append("title")
+    .text(function(d) { return d.name; });
+
+  svg.selectAll("circle")
+    .transition().duration(1500)
+    .attr("cy", function(d) { return time_scale(get_time(d)); })
+    .style("fill", 'red');
+
+  // group results by club
+  var nested = d3.nest()
+    .key(function(d) { return d.symbol; })
+    .entries(data);
+
+  var buttons = d3.select("div#chart")
+    .append("div")
+      .attr("class", "buttons")
+    .selectAll("div")
+    .data(nested)
+    .enter()
+    .append("div")
+    .text(function(d) { return d.key; });
+
+  buttons.on("mouseover", function(d) {
+    buttons.style("background", "rgb(255,156,156)")
+      .style("color", "black");
+    d3.select(this)
+      .style("background", "blue")
+      .style("color", "white");
+    update(d.values);
+  });
+
+  function update(vals) {
+    svg.selectAll("circle")
+      .data(vals, get_id)
+      .style("fill", "blue")
+      .exit()
+      .style("fill", "red")
+  }
+}
+</script>
+
 <% content_for :level do %>
   <h3><%= @event.competition.name %></h3>
   <ul><%= render :partial => "level_event", :collection => @event.competition.events %></ul>
 <% end %>
 
 <%= render 'events/navigation' %> 
+
+<h2>Chart</h2>
+
+<div id="chart"></div>
+<script type="text/javascript">
+  d3.json("<%= event_path(@event, :json) %>", draw);
+</script>
 
 <% if can? :update, @event %>
   <div style="float:right">

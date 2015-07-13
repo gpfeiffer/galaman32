@@ -45,6 +45,11 @@ class Event < ActiveRecord::Base
     docket.swimmer.gender == gender and age_range.include? docket.age
   end
 
+  # customize json representation
+  def as_json(options = {})
+    super(root: false, only: [:id], methods: [:results])
+  end
+
   # list entries for seeding
   def entries_for_seeding
     seeded = entries.group_by(&:seeded?)
