@@ -15,7 +15,7 @@ class SwimmersController < ApplicationController
   def show
     if params[:discipline_id]
       @discipline = Discipline.find(params[:discipline_id])
-      @entries = @swimmer.entries.group_by(&:discipline)
+      @results = @swimmer.results.group_by(&:discipline)
     end
     respond_to do |format|
       format.html # show.html.erb

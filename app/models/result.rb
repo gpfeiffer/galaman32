@@ -1,22 +1,26 @@
 class Result < ActiveRecord::Base
   belongs_to :entry
   has_one :event, :through => :entry
+  has_one :competition, :through => :event
 
-  delegate :discipline, :swimmer, :competition, :name_and_ages, :club, 
-    :course, :date, :to => :entry
+  delegate :discipline, :swimmer, :name, 
+    :name_and_ages, :club, :invitation, :age,
+    :course, :date, :distance_course_code, :stroke, :to => :entry
 
   attr_accessor :mins, :secs, :cens
 
-  validates :entry_id, :presence => true, :uniqueness => true
+  STAGES = ["P", "S", "F"]
+
+  # validates :entry_id, :presence => true, :uniqueness => true
 
   ## FIXME: validate to ensure that either comment or time is set, not both.
 
-  def age
+  def age_in_days
     swimmer.age_in_days(date)
   end
 
-  def name
-    swimmer.first_last
+  def gender
+    swimmer.gender
   end
 
   def symbol
@@ -24,7 +28,7 @@ class Result < ActiveRecord::Base
   end
 
   def as_json(options = {})
-    super(root: false, methods: [:age, :symbol, :name])
+    super(root: false, methods: [:age_in_days, :symbol, :name])
   end
 
   def conversion

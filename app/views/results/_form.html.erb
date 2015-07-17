@@ -33,6 +33,7 @@
   <tr class="times-major">
     <th></th>
     <th>Event</th>
+    <th></th>
     <th><%= f.label :place, 'Plc' %></th>
     <th><%= f.label :time, "Result" %></th>
     <th>(Seed)</th>
@@ -40,6 +41,12 @@
     <tr class="times-major">
       <th><%= link_to entry.event.pos, entry.event %>.</th>
       <th><%= entry.discipline.nickname %></th>
+      <td>
+	<% Result::STAGES.each do |stage| %>
+          <%= f.label :stage, stage %>
+          <%= f.radio_button :stage, stage %>
+        <% end %>
+      </td>
       <td style="text-align: right;">
         <%= f.text_field :place, :size => 4 %>
       </td>

@@ -4,12 +4,5 @@
     <td align="right"><%= entry.age %></td>
     <td><%= entry.club.symbol %></td>
     <td align="right">(<%= entry %>)</td>
-    <td align="right">
-      <% if entry.result %>
-        <%= link_to entry.result, entry.result %>
-      <% else %>
-        <%= link_to '__:__.__', new_result_path(:entry_id => entry.id) %>
-      <% end %>
-    </td>
 </tr>
 

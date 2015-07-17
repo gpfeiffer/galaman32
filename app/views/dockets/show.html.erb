@@ -24,47 +24,20 @@
   <tr class="times-major">
     <th></th>
     <th>Event</th>
-    <th>(Seed)</th>
-    <th>Plc</th>
     <th>Result</th>
-    <th></th>
+    <th>Plc</th>
     <th>PB</th>
   </tr>
   <% nr_swims, nr_pbs, pb_total = 0, 0, 0 %>
   <% @docket.entries.sort_by { |x| x.event.pos }.each do |entry| %>
-    <tr class="times-major">
-      <th><%= link_to entry.event.pos, entry.event %>.</th>
-      <th><%= link_to entry.event.nickname, swimmer_path(@docket.swimmer, :discipline_id => entry.discipline) %></th>
-      <td style="text-align: right;">(<%= link_to entry, entry %>)</td>
-      <td style="text-align: right;"><%= "#{entry.result.place}." if entry.result and entry.result.place %></td>
-      <td style="text-align: right;">
-        <% if entry.result %>
-          <% nr_swims += 1 %>
-          <%= link_to entry.result, entry.result %>
-        <% else %>
-          <%= link_to '__:__.__', new_result_path(:entry_id => entry.id) %>
-        <% end %>
-      </td>
-      <td><%= entry.stage %></td>
-      <td style="text-align: right;">
-        <% if entry.result and entry.result.time %>
-	  <% pb = entry.result.personal_best %>
-	  <% if pb %>
-            <% nr_pbs += 1 %>
-            <% pb_total += pb %>
-	    <%= pb == 0 ? '*' : time_to_msc(pb) %>
-          <% end %>
-	<% end %>
-      </td>
-    </tr>
+    <%= render partial: 'entries/one_entry', locals: { entry: entry } %>
   <% end %>
 </table>
-<% if nr_swims > 0 %>
 <p>
-  <%= pluralize(nr_swims, "Result") %>, 
-  PB total: <%= time_to_msc(pb_total) %>.
+  <%= pluralize(@docket.results.count, "Result") %> in 
+  <%= pluralize(@docket.entries.count, "Event") %>, 
+  PB total: <%= time_to_msc(@docket.personal_best) %>.
 </p>
-<% end %>
 <hr>
 <% if user_session[:edit] %>
 <%= link_to 'Edit', edit_docket_path(@docket) %> |

@@ -36,17 +36,18 @@
         <% events.each do |event| %>
           <td align="right">
   	    <% entry = entries[event].first if entries[event].present? %>
-            <% if entry and entry.result %>
-              <%= link_to entry.result, entry.result %>
+            <% if entry and entry.results.present? %>
+              <% result = best_result(entry.results) %>
+              <%= link_to result, result if result %>
               </td>
               <td>
-              <% if entry.result.time and entry.result.time > 0 %>
-                <%= "(#{entry.result.place}.)" if entry.result.place %>
+              <% if result and result.time and result.time > 0 %>
+                <%= "(#{result.place}.)" if result.place %>
                 <% nr_swims += 1%>
-                <% if entry.result.personal_best? %>
+                <% if result.personal_best? %>
                   * <% nr_pbs += 1 %>
                 <% end %>
-                <% qu = entry.result.qualify %>
+                <% qu = result.qualify %>
                 <%= qu and qu[:qualification].short %>
               <% end %>
             <% else %>

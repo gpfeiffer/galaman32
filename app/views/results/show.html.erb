@@ -1,11 +1,11 @@
 <h3><%= link_to @result.competition.name, @result.competition %> (<%= @result.competition.location %>, <%= @result.competition.date %>)</h3>
-<h1><%= link_to @result.entry.name, @result.entry.subject %> (<%= link_to @result.entry.club.symbol, @result.entry.invitation %>)</h1>
+<h1><%= link_to @result.name, @result.entry.subject %> (<%= link_to @result.symbol, @result.invitation %>)</h1>
 
 <div>
   <b>Age (F/M):</b>
-  <%= @result.entry.age %> (<%= @result.entry.gender.upcase %>),
+  <%= @result.entry.age %> (<%= @result.gender.upcase %>),
   <b>ID:</b>
-  <%= @result.entry.number %>.
+  <%= @result.swimmer.number %>.
 <div>
 <br>
 <br>
@@ -19,16 +19,15 @@
     <th>Result</th>
     <th></th>
   </tr>
-  <% entry = @result.entry %>
   <tr class="times-major">
-    <th><%= link_to entry.event.pos, entry.event %>.</th>
-    <th><%= link_to entry.discipline.nickname, swimmer_path(@result.swimmer, :discipline_id => entry.discipline) %></th>
-    <td style="text-align: right;">(<%= entry %>)</td>
-    <td style="text-align: right;"><%= "#{entry.result.place}." if entry.result.place %></td>
+    <th><%= link_to @result.event.pos, @result.event %>.</th>
+    <th><%= link_to @result.discipline.nickname, swimmer_path(@result.swimmer, :discipline_id => @result.discipline) %></th>
+    <td style="text-align: right;">(<%= @result.entry %>)</td>
+    <td style="text-align: right;"><%= "#{@result.place}." if @result.place %></td>
     <td style="text-align: right;">
-      <%= link_to(entry.result, edit_result_path(@result)) if entry.result %>
+      <%= link_to(@result, edit_result_path(@result)) if @result %>
     </td>
-    <td><%= entry.stage %></td>
+    <td><%= @result.stage %></td>
   </tr>
 </table>
 <hr>

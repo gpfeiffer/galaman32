@@ -2,7 +2,7 @@ class Entry < ActiveRecord::Base
   belongs_to :event
   has_one :competition, :through => :event
   has_one :discipline, :through => :event
-  has_one :result, :dependent => :destroy
+  has_many :results, :dependent => :destroy
   belongs_to :subject, :polymorphic => true
 
   attr_accessor :mins, :secs, :cens
@@ -60,6 +60,10 @@ class Entry < ActiveRecord::Base
 
   def stroke
     discipline.stroke
+  end
+
+  def personal_best
+    results.map(&:personal_best).map(&:to_i).max || 0
   end
 
   def qualify

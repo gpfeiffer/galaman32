@@ -4,6 +4,7 @@ class Docket < ActiveRecord::Base
   has_one :competition, :through => :invitation
   has_many :entries, :as => :subject, :dependent => :destroy
   has_many :events, :through => :entries
+  has_many :results, through: :entries
   has_many :seats, :dependent => :destroy
   has_many :relays, :through => :seats
 
@@ -21,6 +22,10 @@ class Docket < ActiveRecord::Base
 
   def name_and_ages
     "#{swimmer.first_last}, #{age}"
+  end
+
+  def personal_best
+    entries.map(&:personal_best).sum
   end
 
   # sorting attribute in the absence of time

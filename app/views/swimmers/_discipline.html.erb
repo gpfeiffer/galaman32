@@ -1,13 +1,13 @@
 <% content_for :level do %>
   <h3><%= @swimmer.name %></h3>
   <ul>
-    <% @entries.each_key do |discipline| %>
+    <% @results.each_key do |discipline| %>
       <li><%= link_to_unless_current discipline.distance_course_stroke, swimmer_path(@swimmer, :discipline_id => discipline) %></li>
     <% end %>
   </ul>
 <% end %>
 
-<% results = @entries[discipline].map(&:result) %>
+<% results = @results[discipline] %>
 <% best = best_result(results) %>
 
 <h3><%= link_to @swimmer.name, @swimmer %>

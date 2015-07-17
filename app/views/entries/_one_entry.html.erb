@@ -1,0 +1,34 @@
+<tr class="times-major">
+  <th><%= link_to entry.event.pos, entry.event %>.</th>
+  <th>
+    <%= link_to_if entry.swimmer, entry.discipline.nickname, swimmer_path(entry.swimmer, :discipline_id => entry.discipline) %>
+  </th>
+  <th style="text-align: right; font-size: smaller; font-weight: normal;">
+    (<%= link_to entry, edit_entry_path(entry) %>)
+  </th>
+  <th></th>
+  <th style="text-align: center; font-size: smaller; font-weight: normal;">
+    <% if can? :update, entry %>
+      <%= link_to '[+]', new_result_path(entry_id: entry) %>
+    <% end %>
+  </th>
+</tr>
+
+<% entry.results.each do |result| %>
+  <tr class="times-major">
+    <td></td>
+    <td><%= { "F" => "Finals", "S" => "Semif", "P" => "Prelim" }[result.stage] %></td>
+    <td style="text-align: right;">
+      <%= link_to(result, edit_result_path(result)) %>
+    </td>
+    <td style="text-align: right;"><%= "#{result.place}." %></td>
+    <td style="text-align: right;">
+      <% if result and result.time %>
+        <% pb = result.personal_best %>
+        <% if pb %>
+          <%= pb == 0 ? '*' : time_to_msc(pb) %>
+        <% end %>
+      <% end %>
+    </td>
+  </tr>
+<% end %>

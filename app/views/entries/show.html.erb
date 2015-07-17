@@ -16,21 +16,12 @@
   <tr class="times-major">
     <th></th>
     <th>Event</th>
-    <th>(Seed)</th>
-    <th>Plc</th>
     <th>Result</th>
+    <th>Plc</th>
+    <th>PB</th>
   </tr>
-  <tr class="times-major">
-    <th><%= link_to @entry.event.pos, @entry.event %>.</th>
-    <th>
-      <%= link_to_if @entry.swimmer, @entry.discipline.nickname, swimmer_path(@entry.swimmer, :discipline_id => @entry.discipline) %>
-    </th>
-    <td style="text-align: right;">(<%= link_to @entry, edit_entry_path(@entry) %>)</td>
-    <td style="text-align: right;"><%= "#{@entry.result.place}." if @entry.result and @entry.result.place %></td>
-    <td style="text-align: right;">
-      <%= link_to(@entry.result, edit_result_path(@entry.result)) if @entry.result %>
-    </td>
-  </tr>
+
+  <%= render partial: 'one_entry', locals: { entry: @entry } %>
 </table>
 <hr>
 

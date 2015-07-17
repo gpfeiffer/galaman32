@@ -56,7 +56,7 @@ function draw(data) {
   }
 
   // x axis represents age
-  function get_age(d) { return d.age / 365.25; }
+  function get_age(d) { return d.age_in_days / 365.25; }
   var age_extent = d3.extent(data, get_age);
   var age_scale = d3.scale.linear()
     .range([margin, width])

@@ -39,10 +39,9 @@
 <th>Age</th>
 <th>Team</th>
 <th>(Seed)</th>
-<th>Result</th>
 </tr>
 <% @event.entries_for_seeding.each_with_index do |entry, index| %>
-  <%= render :partial => 'events/entry', :object => entry, :locals => { :index => index } %>
+  <%= render partial: 'entry', object: entry, locals: { index: index } %>
 <% end %>
 </table>
 

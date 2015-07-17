@@ -5,6 +5,7 @@ class Swimmer < ActiveRecord::Base
   has_many :dockets, :dependent => :destroy
   has_many :competitions, :through => :dockets
   has_many :entries, :through => :dockets
+  has_many :results, :through => :entries
   has_many :aims, :dependent => :destroy
   has_many :qualifications, :through => :aims
   has_many :supports, :dependent => :destroy
@@ -42,10 +43,6 @@ class Swimmer < ActiveRecord::Base
     age = date.year - birthday.year
     return age unless birthday + age.years > date
     return age - 1
-  end
-
-  def results
-    entries.map(&:result).compact
   end
 
   def personal_best(discipline)

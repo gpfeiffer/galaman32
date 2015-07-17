@@ -6,7 +6,7 @@ class EntriesController < ApplicationController
   ##  FIXME: load and authorize @entries
   def index
     @club = Club.find(params[:club_id])
-    @entries = @club.entries
+    @results = @club.results
 
     respond_to do |format|
       format.html # index.html.erb
@@ -19,7 +19,7 @@ class EntriesController < ApplicationController
   # GET /entries/1.xml
   def show
     if @entry.swimmer
-      # find personal best a use as default seed time
+      # find personal best and use as default seed time
       swimmer = @entry.swimmer
       discipline = @entry.event.discipline
       @best = swimmer.personal_best(discipline)
