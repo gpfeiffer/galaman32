@@ -21,13 +21,13 @@
       <td>
         <% if results[stroke] %>
           <% best = best_result(results[stroke]) %>
-	  <% if best %>
+          <% if best %>
             <%= link_to best, best %><br/>
             <%= best.swimmer.first_last %><br/>
-              <span style="font-size:x-small;line-height:16px;vertical-align:top">
+            <span style="font-size:x-small;line-height:16px;vertical-align:top">
               <%= best.date %> :
               <%= best.fina_points %> pts
-	      </span>
+            </span>
           <% end %>
         <% end %>
       </td>
@@ -63,14 +63,13 @@
       <td>
         <% if results[stroke] %>
           <% best = best_result(results[stroke]) %>
-	  <% if best %>
+          <% if best %>
             <%= link_to best, best %><br/>
             <%= best.swimmer.first_last %><br/>
-              <span style="font-size:x-small;">
-              <%= best.date %> : 
+            <span style="font-size:x-small;line-height:16px;vertical-align:top">
+              <%= best.date %> :
               <%= best.fina_points %> pts
-	      </span>
-            (<%= best.date %>)
+            </span>
           <% end %>
         <% end %>
       </td>
