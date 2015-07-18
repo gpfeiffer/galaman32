@@ -5,9 +5,6 @@ class EntriesController < ApplicationController
   # GET /entries.xml
   ##  FIXME: load and authorize @entries
   def index
-    @club = Club.find(params[:club_id])
-    @results = @club.results
-
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @entries }

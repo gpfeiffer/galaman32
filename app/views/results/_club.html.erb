@@ -1,0 +1,84 @@
+
+<h2>Club records by gender.</h2>
+<h1><%= club.name %></h1>
+
+<% @results.group_by(&:gender).each do |gender, results_gender| %>
+
+<h3><%= { 'f' => 'Girls', 'm' => 'Boys' }[gender] %></h3>
+
+<table class="fact-sheet">
+<tr class="times-major">
+<th></th>
+<% Discipline::STROKES.each do |stroke| %>
+  <th style="width:130px"><%= short_stroke_name stroke %></th>
+<% end %>
+</tr>
+<% results_gender.group_by(&:distance_course_code).sort.each do |row, results_row| %>
+  <% results = results_row.group_by(&:stroke) %>
+  <tr class="pb-lo <%= distance_course(row)[-2,2] %>" align="right">
+    <th><%= distance_course(row) %></th>
+    <% Discipline::STROKES.each do |stroke| %>
+      <td>
+        <% if results[stroke] %>
+          <% best = best_result(results[stroke]) %>
+	  <% if best %>
+            <%= link_to best, best %><br/>
+            <%= best.swimmer.first_last %><br/>
+              <span style="font-size:x-small;line-height:16px;vertical-align:top">
+              <%= best.date %> :
+              <%= best.fina_points %> pts
+	      </span>
+          <% end %>
+        <% end %>
+      </td>
+    <% end %>
+  </tr>
+<% end %>
+</table>
+<br/>
+<br/>
+<% end %>
+
+<h2>Club records by age.</h2>
+<h1><%= club.name %></h1>
+
+<% @results.group_by(&:age).sort.each do |age, results_age| %>
+
+<% results_age.group_by(&:gender).each do |gender, results_gender| %>
+
+<h3><%= { 'f' => 'Girls', 'm' => 'Boys' }[gender] %> (<%= age %>)</h3>
+
+<table class="fact-sheet">
+<tr class="times-major">
+<th></th>
+<% Discipline::STROKES.each do |stroke| %>
+  <th style="width:130px"><%= short_stroke_name stroke %></th>
+<% end %>
+</tr>
+<% results_gender.group_by(&:distance_course_code).sort.each do |row, results_row| %>
+  <% results = results_row.group_by(&:stroke) %>
+  <tr class="pb-lo <%= distance_course(row)[-2,2] %>" align="right">
+    <th><%= distance_course(row) %></th>
+    <% Discipline::STROKES.each do |stroke| %>
+      <td>
+        <% if results[stroke] %>
+          <% best = best_result(results[stroke]) %>
+	  <% if best %>
+            <%= link_to best, best %><br/>
+            <%= best.swimmer.first_last %><br/>
+              <span style="font-size:x-small;">
+              <%= best.date %> : 
+              <%= best.fina_points %> pts
+	      </span>
+            (<%= best.date %>)
+          <% end %>
+        <% end %>
+      </td>
+    <% end %>
+  </tr>
+<% end %>
+</table>
+<br/>
+
+<% end %>
+<% end %>

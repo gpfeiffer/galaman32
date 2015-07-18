@@ -1,9 +1,11 @@
 <% if @event %>
-<%= render :partial => 'event', :object => @event %>
+  <%= render :partial => 'event', :object => @event %>
 <% elsif @invitation %>
-<%= render :partial => 'invitation', :object => @invitation %>
+  <%= render :partial => 'invitation', :object => @invitation %>
 <% elsif @competition %>
-<%= render :partial => 'competition', :object => @competition %>
+  <%= render :partial => 'competition', :object => @competition %>
+<% elsif @club %>
+  <%= render :partial => 'club', :object => @club %>
 <% else %>
-<%= render @results %>
+  <%= render @results %>
 <% end %>

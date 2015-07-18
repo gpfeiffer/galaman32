@@ -5,10 +5,7 @@
 
 <h3><%= link_to 'Clubs', clubs_path %></h3>
 
-<h1>
-  <%= @club.full_name %>
-  (<%= @club.symbol %>)
-</h1>
+<h1><%= @club.name %></h1>
 
 <p>
   <b>Contact:</b>
@@ -19,6 +16,8 @@
   <b>Email:</b>
   <%= @club.email %>
 </p>
+<hr/>
+*** <%= link_to 'Club Records', results_path(:club_id => @club) %> ***
 <hr/>
 
 <h3>Swimmers.</h3>
@@ -63,7 +62,6 @@
     <%= link_to 'Destroy', @club, :confirm => 'Are you sure?', :method => :delete  %> |
   <% end %>
 <% end %>
-<%= link_to 'Records', entries_path(:club_id => @club) %> |
 <%= link_to 'Back', clubs_path %>
 <br />
 <br />

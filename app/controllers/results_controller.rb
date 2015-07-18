@@ -11,6 +11,9 @@ class ResultsController < ApplicationController
       @invitation = Invitation.find(params[:invitation_id])
     elsif params[:competition_id]
       @competition = Competition.find(params[:competition_id])
+    elsif params[:club_id]
+      @club = Club.find(params[:club_id])
+      @results = @club.results
     else
       @results = Result.all
     end
