@@ -17,7 +17,11 @@
 <% entry.results.each do |result| %>
   <tr class="times-major">
     <td></td>
-    <td><%= { "F" => "Finals", "S" => "Semif", "P" => "Prelim" }[result.stage] %></td>
+    <td><%= { 
+        "P" => "Prelims",
+        "S" => "Semis",
+        "F" => "Finals",
+      }[result.stage] %></td>
     <td style="text-align: right;">
       <%= link_to(result, edit_result_path(result)) %>
     </td>
