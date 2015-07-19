@@ -13,9 +13,10 @@ class SwimmersController < ApplicationController
   # GET /swimmers/1
   # GET /swimmers/1.xml
   def show
+    @results = @swimmer.results.select { |x| x.time > 0 }
     if params[:discipline_id]
       @discipline = Discipline.find(params[:discipline_id])
-      @results = @swimmer.results.group_by(&:discipline)
+      @results = @results.group_by(&:discipline)
     end
     respond_to do |format|
       format.html # show.html.erb

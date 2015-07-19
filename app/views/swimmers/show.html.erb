@@ -14,6 +14,12 @@
 <h1><%= @swimmer.first_last %></h1>
 
 <p>
+  <b>Mileage:</b>
+  <%= @results.map(&:discipline).map(&:distance).sum %>m in 
+  <%= time_to_msc(@results.map(&:time).sum) %> mins.
+</p>
+
+<p>
   <b>Age (F/M):</b>
   <%= "#{@swimmer.age} (#{@swimmer.gender.upcase})" %>
   [<%= @swimmer.birthday %>].
@@ -43,7 +49,7 @@ results in a particular stroke.
   <% end %>
 </tr>
 
-<% @swimmer.results.group_by(&:distance_course_code).sort.each do |row, results_row| %>
+<% @results.group_by(&:distance_course_code).sort.each do |row, results_row| %>
   <% results = results_row.group_by(&:stroke) %>
   <tr class="pb-lo <%= distance_course(row)[-2,2] %>" align="right">
     <th><%= distance_course(row) %></th>
@@ -74,7 +80,7 @@ results in a particular stroke.
 
 <%= render 'qualifications' if can? :read, @swimmer.aims.first %>
 
-<h2>Competitions.</h2>
+<h2><%= @swimmer.dockets.count %> Competitions.</h2>
 
 <ul>
 <% @swimmer.dockets.sort_by(&:date).reverse_each do |docket| %>
