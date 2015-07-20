@@ -8,8 +8,12 @@ class Club < ActiveRecord::Base
       has_many :entries, through: :dockets
         has_many :results, through: :entries
 
-  validates :full_name, :symbol, presence: true
-  validates :symbol, uniqueness: true
+  validates :full_name, :code, presence: true
+  validates :code, uniqueness: true
+
+  def symbol
+    lsc.present? ? "#{code}-#{lsc}" : code
+  end
 
   def name
     "#{full_name} (#{symbol})"
