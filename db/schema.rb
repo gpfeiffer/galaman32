@@ -129,14 +129,6 @@ ActiveRecord::Schema.define(:version => 20150717204840) do
     t.date      "source_date"
   end
 
-  create_table "registrations", :force => true do |t|
-    t.integer   "swimmer_id"
-    t.timestamp "created_at"
-    t.timestamp "updated_at"
-    t.integer   "age"
-    t.integer   "invitation_id"
-  end
-
   create_table "relays", :force => true do |t|
     t.string    "name"
     t.integer   "age_min"
