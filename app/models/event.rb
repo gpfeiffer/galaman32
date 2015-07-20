@@ -1,14 +1,17 @@
 class Event < ActiveRecord::Base
+
+  default_scope order: :pos
+
   belongs_to :competition
   belongs_to :discipline
-  has_many :entries, :dependent => :destroy
-  has_many :dockets, :through => :entries
-  has_many :results, :through => :entries
 
-  default_scope :order => :pos
+  has_many :entries, :dependent => :destroy
+    has_many :dockets, :through => :entries
+    has_many :results, :through => :entries
+
+  delegate :gender, :distance, :course, :stroke, :mode, :is_relay?, :to => :discipline, :allow_nil => true
 
   attr_writer :gender, :distance, :course, :stroke, :mode
-  delegate :gender, :distance, :course, :stroke, :mode, :is_relay?, :to => :discipline, :allow_nil => true
 
   GENDERS = ["f", "m", "x"]
   STAGES = ["P", "S", "F"]

@@ -1,19 +1,20 @@
 class Entry < ActiveRecord::Base
+
   belongs_to :event
-  has_one :competition, :through => :event
-  has_one :discipline, :through => :event
-  has_many :results, :dependent => :destroy
-  belongs_to :subject, :polymorphic => true
+  belongs_to :subject, polymorphic: true
+
+  has_one :competition, through: :event
+  has_one :discipline, through: :event
+  has_many :results, dependent: :destroy
+
+  validates :event, presence: true
+
+  delegate :club, :name, :first_last, :age, :invitation, :gender, :number, to: :subject
+  delegate :course, :date, to: :event
 
   attr_accessor :mins, :secs, :cens
 
-  STAGES = ["P", "S", "F"]
-
-  validates :event_id, :presence => true
-
-  delegate :invitation, :name, :first_last, :age, :club, :gender, :number, :to => :subject
-
-  delegate :course, :date, :to => :event
+  STAGES = %w{ P S F }
 
   after_destroy do
     self.event.unseed
@@ -74,7 +75,7 @@ class Entry < ActiveRecord::Base
     self.competition.qualifications.each do |qualification|
       qt = qualification.qualification_times.select { |x| x.discipline == discipline and x.age_range.include? self.age }.first
       if qt and qt.time > time and (not best or qt.time < best[:time])
-        best = { :time => qt.time, :qualification => qualification }
+        best = { time: qt.time, qualification: qualification }
       end
     end
     return best

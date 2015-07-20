@@ -1,16 +1,20 @@
 class Competition < ActiveRecord::Base
-  default_scope :order => 'date'
-  has_many :events, :dependent => :destroy
-  has_many :disciplines, :through => :events
-  has_many :standards
-  has_many :qualifications, :through => :standards
-  has_many :invitations, :dependent => :destroy
-  has_many :dockets, :through => :invitations
-  has_many :relays, :through => :invitations
-  has_many :clubs, :through => :invitations
 
-  validates :name, :date, :length, :presence => true
-  validates :course, :inclusion => Discipline::COURSES
+  default_scope order: 'date'
+
+  has_many :events, dependent: :destroy
+    has_many :disciplines, through: :events
+    has_many :entries, through: :events
+    has_many :results, through: :events
+  has_many :standards, dependent: :destroy
+    has_many :qualifications, through: :standards
+  has_many :invitations, dependent: :destroy
+    has_many :dockets, through: :invitations
+    has_many :relays, through: :invitations
+    has_many :clubs, through: :invitations
+
+  validates :name, :date, :length, presence: true
+  validates :course, inclusion: Discipline::COURSES
 
   def individual_events
     events.select { |x| not x.is_relay? }
