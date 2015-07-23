@@ -1,0 +1,27 @@
+<h1>Listing splits</h1>
+
+<table>
+  <tr>
+    <th>Time</th>
+    <th>Length</th>
+    <th>Result</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @splits.each do |split| %>
+  <tr>
+    <td><%= split.time %></td>
+    <td><%= split.length %></td>
+    <td><%= split.result_id %></td>
+    <td><%= link_to 'Show', split %></td>
+    <td><%= link_to 'Edit', edit_split_path(split) %></td>
+    <td><%= link_to 'Destroy', split, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Split', new_split_path %>

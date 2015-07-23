@@ -30,6 +30,20 @@
     <td><%= @result.stage %></td>
   </tr>
 </table>
+
+<% if @result.splits.any? %>
+Splits
+  <table class="fact-sheet">
+    <% @result.laps.each do |split| %>
+      <tr class="times-major">
+	<td style="text-align: right;"><%= split.length %></td>
+	<td style="text-align: right;"><%= time_to_msc split.lap %></td>
+	<td style="text-align: right;"><%= time_to_msc split.time %></td>
+      </tr>
+    <% end %>
+  </table>
+<% end %>
+
 <hr>
 
 <% if user_session[:edit] %>

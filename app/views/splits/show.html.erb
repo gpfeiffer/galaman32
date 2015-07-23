@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Time:</b>
+  <%= @split.time %>
+</p>
+
+<p>
+  <b>Length:</b>
+  <%= @split.length %>
+</p>
+
+<p>
+  <b>Result:</b>
+  <%= @split.result_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_split_path(@split) %> |
+<%= link_to 'Back', splits_path %>

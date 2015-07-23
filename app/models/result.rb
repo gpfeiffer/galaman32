@@ -2,6 +2,7 @@ class Result < ActiveRecord::Base
   belongs_to :entry
   has_one :event, through: :entry
   has_one :competition, through: :event
+  has_many :splits, dependent: :destroy
 
   delegate :discipline, :swimmer, :name, 
     :name_and_ages, :club, :invitation, :age, :group,
@@ -55,6 +56,12 @@ class Result < ActiveRecord::Base
 
   def mins
     time / 6000 if time
+  end
+
+  def laps
+    splits.each_with_index do |split, i|
+      split.lap = (i == 0 ? split.time : split.time - splits[i-1].time)
+    end
   end
 
   def qualify

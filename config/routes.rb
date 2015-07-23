@@ -1,4 +1,7 @@
 Galaman::Application.routes.draw do
+  resources :splits
+
+
   devise_for :users
 
   scope "/admin" do
