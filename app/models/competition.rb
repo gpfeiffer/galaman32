@@ -12,6 +12,7 @@ class Competition < ActiveRecord::Base
     has_many :dockets, through: :invitations
     has_many :relays, through: :invitations
     has_many :clubs, through: :invitations
+      has_many :swimmers, through: :dockets
 
   validates :name, :date, :length, presence: true
   validates :course, inclusion: Discipline::COURSES
