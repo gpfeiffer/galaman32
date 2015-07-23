@@ -176,12 +176,14 @@ function draw(data) {
 
 <h2>Results.</h2>
 
-<% @event.qualification_age_ranges.sort_by(&:min).each do |ages| %>
-  <% results = @event.listed_results(ages) %>
-  <% if not results.empty? %>
+<% @results.group_by(&:group).sort.each do |group, results_by_group| %>
+  <hr />
+  <h3><%= ages_to_words Range.new(*(group.divmod 100)) %></h3>
+  <% results_by_group.group_by(&:stage).each do |stage, results| %>
+    <h3><%= { 'P' => 'Prelims', 'S' => 'Semis', 'F' => 'Finals' }[stage] %></h3>
 
-    <hr />
-    <h3><%= ages_to_words(ages) %></h3>
+    <%# FIXME: what about relays ??? %>
+    <%# FIXME: print version %>
 
     <table class="fact-sheet">
       <tr class="fact-major">
@@ -194,7 +196,7 @@ function draw(data) {
         <th style="width:75px">Result</th>
         <th></th>
       </tr>
-      <%= render results %>
+      <%= render results.sort %>
     </table>
 
   <% end %>

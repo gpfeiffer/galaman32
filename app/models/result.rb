@@ -1,11 +1,11 @@
 class Result < ActiveRecord::Base
   belongs_to :entry
-  has_one :event, :through => :entry
-  has_one :competition, :through => :event
+  has_one :event, through: :entry
+  has_one :competition, through: :event
 
   delegate :discipline, :swimmer, :name, 
-    :name_and_ages, :club, :invitation, :age,
-    :course, :date, :distance_course_code, :stroke, :to => :entry
+    :name_and_ages, :club, :invitation, :age, :group,
+    :course, :date, :distance_course_code, :stroke, to: :entry
 
   attr_accessor :mins, :secs, :cens
 
@@ -30,6 +30,16 @@ class Result < ActiveRecord::Base
   def as_json(options = {})
     super(root: false, methods: [:age_in_days, :symbol, :name])
   end
+
+  # revert natural order if one time is 0
+  def <=> other
+    if time == other.time
+      name <=> other.name
+    else
+      time * other.time == 0 ? other.time - time : time - other.time
+    end
+  end
+
 
   def conversion
     time + discipline.differential
