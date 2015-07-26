@@ -2,8 +2,8 @@ class QualificationTime < ActiveRecord::Base
   belongs_to :qualification
   belongs_to :discipline
 
-  attr_writer :gender, :mode, :course, :stroke, :distance
-  delegate :gender, :distance, :course, :stroke, :mode, :is_relay?, :to => :discipline, :allow_nil => :true
+  attr_writer :mode, :course, :stroke, :distance
+  delegate :distance, :course, :stroke, :mode, :is_relay?, :to => :discipline, :allow_nil => :true
 
   validates :age_min, :age_max, :presence => true, 
     :numericality => { :only_integer => true, :greater_than_or_equal_to => 0 }

@@ -17,8 +17,7 @@ class Discipline < ActiveRecord::Base
   ]
   MODES = [ "I", "R" ] # Individual or Relay
 
-  validates :gender, :distance, :course, :stroke, :mode, :presence => true
-  validates :gender, :inclusion => Swimmer::GENDERS
+  validates :distance, :course, :stroke, :mode, :presence => true
   validates :distance, :inclusion => DISTANCES
   validates :course, :inclusion => COURSES
   validates :stroke, :inclusion => STROKES

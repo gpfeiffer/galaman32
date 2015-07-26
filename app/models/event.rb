@@ -9,11 +9,11 @@ class Event < ActiveRecord::Base
     has_many :dockets, :through => :entries
     has_many :results, :through => :entries
 
-  delegate :gender, :distance, :course, :stroke, :mode, :is_relay?, :to => :discipline, :allow_nil => true
+  delegate :distance, :course, :stroke, :mode, :is_relay?, :to => :discipline, :allow_nil => true
 
-  attr_writer :gender, :distance, :course, :stroke, :mode
+  attr_writer :distance, :course, :stroke, :mode
 
-  GENDERS = ["f", "m", "x"]
+  GENDERS = %w{ F M X }
   STAGES = ["P", "S", "F"]
 
   validates :age_min, :age_max, :presence => true, 
@@ -22,7 +22,6 @@ class Event < ActiveRecord::Base
   validates :day, :presence => true,
     :numericality => { :only_integer => true, :greater_than => 0,
       :less_than_or_equal_to => Proc.new { |event| event.competition.length } }
-  validates :stage, :presence => true, :inclusion => STAGES
 
   validate :age_max_must_not_be_less_than_age_min
 

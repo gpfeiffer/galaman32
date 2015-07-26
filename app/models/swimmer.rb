@@ -12,7 +12,7 @@ class Swimmer < ActiveRecord::Base
   has_many :supporters, :through => :supports, :source => :user
   belongs_to :user
 
-  GENDERS = ["f", "m"]
+  GENDERS = %w{ F M }
 
   validates :first, :last, :birthday, :gender, :club_id, :presence => true
   validates :gender, :inclusion => GENDERS
