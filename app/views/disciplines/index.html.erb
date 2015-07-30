@@ -4,24 +4,18 @@
 
 <h2><%= { 'SC' => "Short",  'LC' => "Long" }[course] %> Course</h2>
 
-<% disciplines_course.sort_by(&:gender).group_by(&:gender).each do |gender, disciplines_gender| %>
-
-<h3><%= { 'f' => "Female", 'm' => "Male" }[gender] %></h3>
-
 <ul>
-<% disciplines_gender.sort_by(&:mode).group_by(&:mode).each do |mode, disciplines_mode| %>
+<% disciplines_course.sort_by(&:mode).group_by(&:mode).each do |mode, disciplines_mode| %>
 <% disciplines_mode.sort_by { |x| Discipline::STROKES.index(x.stroke) }.group_by(&:stroke).each do |stroke, disciplines| %>
 
 <li><b><%= disciplines.first.stroke_in_words %>:</b>
-<%= raw disciplines.sort_by(&:distance).map { |discipline| link_to discipline.distance_in_words, discipline }.to_sentence %>.
+<%= raw disciplines.sort_by(&:distance).map { |discipline| link_to(discipline.distance_in_words, discipline) + " [#{discipline.events.count}||#{discipline.qualification_times.count}]" }.to_sentence %>.
 </li>
 
 <% end %>
 <% end %>
 </ul>
 <% end %>
-<% end %>
-
 
 <hr />
 <% if can? :create, Discipline %>

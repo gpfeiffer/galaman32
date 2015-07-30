@@ -29,7 +29,7 @@ class Result < ActiveRecord::Base
   end
 
   def as_json(options = {})
-    super(root: false, methods: [:age_in_days, :symbol, :name])
+    super(root: false, methods: [:age_in_days, :symbol, :name, :gender])
   end
 
   # revert natural order if one time is 0

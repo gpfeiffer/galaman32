@@ -155,14 +155,6 @@ function draw(data) {
 
 <h1><%= @discipline %></h1>
 
-<% r = @discipline.sample_result %>
-<% if r %>
-<p>
-  <b>Sample Time:</b>
-  <%= r %> (<%= r.entry.name %>, <%= r.entry.club.symbol %>, <%= r.date %>)
-</p>
-<% end %>
-
 <p>
   <b>Differential:</b> <%= time_to_msc @discipline.differential %>
 </p>
@@ -174,27 +166,37 @@ function draw(data) {
   d3.json("<%= discipline_path(@discipline, :json) %>", draw);
 </script>
 
-<h2>Competitions</h2>
+<% @discipline.events.group_by(&:gender).each do |gender, events| %>
+
+<h2><%= { 'F' => "Girls", 'M' => "Boys", 'X' => "Mixed" }[gender] %> Competitions</h2>
 
 <ul>
-<% @discipline.events.sort_by { |x| x.competition.date }.reverse_each do |event| %>
+<% events.sort_by { |x| x.competition.date }.reverse_each do |event| %>
 <% competition = event.competition %>
 <li><%= competition.date %>: <%= link_to competition.name, event %> (<%= competition.location %>)</li>
 <% end %>
 </ul>
+<% end %>
+
 
 <h2>Qualification Times</h2>
 
 <% @qts_by_qualification.each do |qualification, times| %>
 <h3><%= link_to qualification.name, qualification %></h3>
+<% times.group_by(&:gender).each do |gender, times_by_gender| %>
 <table class="fact-sheet">
-  <% times.sort_by(&:age_min).each do |time| %>
+<tr class="times-major">
+  <th><%= { 'F' => "Girls", 'M' => "Boys", 'X' => "Mixed" }[gender] %></th>
+  <td></td>
+</tr>
+  <% times_by_gender.sort_by(&:age_min).each do |time| %>
 <tr class="times-major">
    <th align="right"><%= ages_to_words(time.age_range) %>: </th>
    <td align="right"><%= time %></td>
 </tr>
   <% end %>
 </table>
+<% end %>
 <% end %>
 
 <hr />

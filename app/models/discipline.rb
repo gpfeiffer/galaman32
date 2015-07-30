@@ -37,7 +37,7 @@ class Discipline < ActiveRecord::Base
   end
 
   def name
-    sprintf("%s [%s] %s%dm (%s)", stroke, gender, is_relay? ? "4x" : "", distance, course)
+    sprintf("%s %s%dm (%s)", stroke, is_relay? ? "4x" : "", distance, course)
   end
 
   def nickname
@@ -53,9 +53,9 @@ class Discipline < ActiveRecord::Base
 
   def to_words
     if is_relay? then
-      sprintf("%s 4x%dm %s Relay %s",  { 'f' => "Girls", 'm' => "Boys" }[gender], distance, course, stroke == "Ind Medley" ? "Medley" : stroke)
+      sprintf("4x%dm %s Relay %s", distance, course, stroke == "Ind Medley" ? "Medley" : stroke)
     else
-      sprintf("%s %dm %s %s",  { 'f' => "Girls", 'm' => "Boys" }[gender], distance, course, stroke)
+      sprintf("%dm %s %s", distance, course, stroke)
     end
   end
 
@@ -87,13 +87,8 @@ class Discipline < ActiveRecord::Base
     to_words
   end
 
-  def sample_result
-    event = events.sample
-    event.results.sample if event
-  end
-
   def to_hash
-    keys = %w(gender distance course stroke mode)
+    keys = %w(distance course stroke mode)
     attributes.select { |k, v| keys.include? k }
   end
 
