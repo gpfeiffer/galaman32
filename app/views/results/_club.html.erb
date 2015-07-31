@@ -4,7 +4,7 @@
 
 <% @results.group_by(&:gender).each do |gender, results_gender| %>
 
-<h3><%= { 'f' => 'Girls', 'm' => 'Boys' }[gender] %></h3>
+<h3><%= gender_word gender %></h3>
 
 <table class="fact-sheet">
 <tr class="times-major">
@@ -46,7 +46,7 @@
 
 <% results_age.group_by(&:gender).each do |gender, results_gender| %>
 
-<h3><%= { 'f' => 'Girls', 'm' => 'Boys' }[gender] %> (<%= age %>)</h3>
+<h3><%= gender_word gender %> (<%= age %>)</h3>
 
 <table class="fact-sheet">
 <tr class="times-major">
