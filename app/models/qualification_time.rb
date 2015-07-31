@@ -8,7 +8,7 @@ class QualificationTime < ActiveRecord::Base
   validates :age_min, :age_max, :presence => true, 
     :numericality => { :only_integer => true, :greater_than_or_equal_to => 0 }
 
-  validates :qualification_id, :discipline_id, :time, :presence => true
+  validates :qualification_id, :discipline_id, :time, :gender, :presence => true
 
   attr_accessor :mins, :secs, :cens
 
