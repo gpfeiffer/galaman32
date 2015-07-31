@@ -23,8 +23,9 @@
 <h3>Swimmers.</h3>
 
 <%= @club.swimmers.count %> swimmers:
-<%= @club.swimmers.find_all_by_gender('f').count %> girls,
-<%= @club.swimmers.find_all_by_gender('m').count %> boys.
+<% @club.swimmers.group_by(&:gender).each do |gender, swimmers| %>
+  <%= "#{swimmers.count} #{gender_word(gender).downcase}" %>
+<% end %>
 <br />
 <br />
 
