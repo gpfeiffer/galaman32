@@ -19,11 +19,11 @@ module ApplicationHelper
       if ages.last == 99
         'all ages'
       else
-        "#{ages.last} years and under"
+        "#{ages.last} and under"
       end
     else
       if ages.last == 99
-        "#{ages.first} years and over"
+        "#{ages.first} and over"
       else
         "#{ages.first} - #{ages.last} years"
       end

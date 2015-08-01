@@ -156,7 +156,7 @@ function draw(data) {
 
 <% content_for :level do %>
   <h3><%= @event.competition.name %></h3>
-  <ul><%= render :partial => "level_event", :collection => @event.competition.events %></ul>
+  <ul><%= render :partial => "events/level_event", :collection => @event.competition.events %></ul>
 <% end %>
 
 <%= render 'events/navigation' %> 
