@@ -2,7 +2,7 @@
   <% times_by_course.group_by(&:gender).each do |gender, times_by_gender| %>
     <table class="qualification">
       <tr>
-        <th><%= {'f' => "Female", 'm' => "Male"}[gender] %> (<%= course %>)</th>
+        <th><%= gender_word gender %> (<%= course %>)</th>
         <% age_ranges = times_by_gender.map(&:age_range).sort_by(&:first).uniq %>
         <% age_ranges.each do |ages| %>
           <th><%= ages_to_s(ages) %></th>

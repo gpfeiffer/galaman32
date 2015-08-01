@@ -41,7 +41,7 @@ class Result < ActiveRecord::Base
     end
   end
 
-
+  # convert between SC and LC
   def conversion
     time + discipline.differential
   end
@@ -110,9 +110,13 @@ class Result < ActiveRecord::Base
 
   # convert result into FINA points
   def fina_points
-    qualification = Qualification.find_by_name("FINA Base")
-    base_time = QualificationTime.find_by_qualification_id_and_discipline_id(qualification.id, discipline.id)
-  base_time ? ((10 * base_time.time.quo(time))**3).to_i : nil
+    return if time == 0
+    fina_base = Qualification.find_by_name("FINA Base")
+    base_time = fina_base.qualification_times.where(
+      discipline_id: discipline.id, 
+      gender: gender
+    ).first
+    return ((10 * base_time.time.quo(time))**3).to_i if base_time
   end
 
   # is this result a swimmer's best result up to now?
