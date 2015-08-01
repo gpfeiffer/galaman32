@@ -17,15 +17,13 @@
 <% entry.results.each do |result| %>
   <tr class="times-major">
     <td></td>
-    <td><%= { 
-        "P" => "Prelims",
-        "S" => "Semis",
-        "F" => "Finals",
-      }[result.stage] %></td>
+    <td><%= stage_word result.stage %></td>
     <td style="text-align: right;">
-      <%= link_to(result, result) %>
+      <%= link_to result, result %>
     </td>
-    <td style="text-align: right;"><%= "#{result.place}." %></td>
+    <td style="text-align: right;">
+      <%= ordinal_number result.place %>
+    </td>
     <td style="text-align: right;">
       <% if result and result.time %>
         <% pb = result.personal_best %>
