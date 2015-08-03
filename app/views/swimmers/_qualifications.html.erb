@@ -10,7 +10,7 @@
     <% times = aim.qualification.qualification_times.select { |x| x.gender == gender and x.age_range.include? age } %>
     <% if times.any? %>
     <h3>
-      <%= girls_or_boys(gender) %> (<%= age %>)
+      <%= gender_word gender %> (<%= age %>)
     </h3>
 
     <table class="fact-sheet">

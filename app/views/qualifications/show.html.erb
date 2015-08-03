@@ -29,7 +29,7 @@
   <% times_by_gender.group_by(&:age_range).sort_by { |key, value| key.first }.each do |ages, times_by_ages| %>
     <% if times_by_ages.any? %>
     <h3>
-      <%= girls_or_boys(gender) %> (<%= ages_to_words(ages) %>)
+      <%= gender_word gender %> (<%= ages_to_words(ages) %>)
     </h3>
 
     <table class="fact-sheet">

@@ -81,12 +81,5 @@ module ApplicationHelper
       'Ind Medley' => 'Medley' 
     }[stroke]
   end
-
-  def girls_or_boys(gender)
-    { 
-      'f' => "Girls", 
-      'm' => "Boys" 
-    }[gender]
-  end
 end
 

@@ -4,7 +4,7 @@
 <% content_for :level do %>
   <h3><%= @swimmer.club %></h3>
   <% @swimmer.club.swimmers.group_by(&:gender).each do |gender, swimmers| %>
-    <h4><%= girls_or_boys(gender) %></h4>
+    <h4><%= gender_word gender %></h4>
     <ul><%= render swimmers %></ul>
   <% end %>
 <% end %>

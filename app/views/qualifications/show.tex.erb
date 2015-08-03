@@ -10,7 +10,7 @@
   <% times_by_gender.group_by(&:age_range).sort_by { |key, value| key.first }.each do |ages, times_by_ages| %>
     <% if times_by_ages.any? %>
     \begin{tabular}{r|<%= 'r' * Discipline::STROKES.count %>}
-    \multicolumn{6}{c}{\textbf{<%= girls_or_boys(gender) %> <%= ages_to_words(ages) %>}} \\
+    \multicolumn{6}{c}{\textbf{<%= gender_word gender %> <%= ages_to_words(ages) %>}} \\
     \toprule
 <% Discipline::STROKES.each do |stroke| %>
 & {\hfill <%= short_stroke_name(stroke) -%>\hfill} 
