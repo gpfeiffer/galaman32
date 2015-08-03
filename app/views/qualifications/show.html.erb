@@ -38,14 +38,19 @@
         <% end %>
       </tr>
       <% times_by_ages.group_by(&:distance_course).sort_by  { |key, value| [key[0..-5].to_i, 100-key[-2].ord] }.each do |label, times_by_label| %>
-        <tr class="pb-lo" align="right">
+        <tr class="pb-lo <%= label[-2,2] %>" align="right">
           <th>
             <%= label %>
           </th>
           <% Discipline::STROKES.each do |stroke| %>
             <td>
               <% qt = times_by_label.select { |x| x.stroke == stroke }.first %>
-              <%= content_tag(:span, link_to(qt, qt), :title => "#{qt.fina_points}") if qt %>
+              <% if qt %>
+                <%= link_to qt, qt %><br />
+                <span style="font-size:x-small;">
+                  <%= qt.fina_points %> FINA pts
+                </span>
+              <% end %>
             </td>
           <% end %>
         <tr>
