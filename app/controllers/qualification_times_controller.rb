@@ -22,7 +22,7 @@ class QualificationTimesController < ApplicationController
   # GET /qualification_times/new
   # GET /qualification_times/new.xml
   def new
-    @qualification_time[:qualification_id] = params[:qualification_id]
+    @qualification_time.qualification = Qualification.find(params[:qualification_id])
 
     respond_to do |format|
       format.html # new.html.erb
@@ -37,8 +37,8 @@ class QualificationTimesController < ApplicationController
   # POST /qualification_times
   # POST /qualification_times.xml
   def create
-    @qualification_time[:time] = time_from_msc(params[:qualification_time])
-    @qualification_time[:discipline_id] = find_discipline_id(params[:qualification_time])
+    @qualification_time.time = time_from_msc(params[:qualification_time])
+    @qualification_time.discipline = find_discipline(params[:qualification_time])
 
     respond_to do |format|
       if @qualification_time.save
@@ -54,8 +54,8 @@ class QualificationTimesController < ApplicationController
   # PUT /qualification_times/1
   # PUT /qualification_times/1.xml
   def update
-    @qualification_time[:time] = time_from_msc(params[:qualification_time])
-    @qualification_time[:discipline_id] = find_discipline_id(params[:qualification_time])
+    @qualification_time.time = time_from_msc(params[:qualification_time])
+    @qualification_time.discipline = find_discipline(params[:qualification_time])
 
     respond_to do |format|
       if @qualification_time.update_attributes(params[:qualification_time])

@@ -53,7 +53,7 @@ class EventsController < ApplicationController
   # POST /events
   # POST /events.xml
   def create
-    @event[:discipline_id] = find_discipline_id(params[:event])
+    @event.discipline = find_discipline(params[:event])
 
     respond_to do |format|
       if @event.save
@@ -69,7 +69,7 @@ class EventsController < ApplicationController
   # PUT /events/1
   # PUT /events/1.xml
   def update
-    @event[:discipline_id] = find_discipline_id(params[:event])
+    @event.discipline = find_discipline(params[:event])
 
     respond_to do |format|
       if @event.update_attributes(params[:event])
