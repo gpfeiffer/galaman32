@@ -17,11 +17,14 @@
   
   <div class="field">
     <%= f.label :discipline_id %><br />
-    <%= f.select :gender, Swimmer::GENDERS, :include_blank => true %>
     <%= f.select :distance, Discipline::DISTANCES, :include_blank => true %>
     <%= f.select :course, Discipline::COURSES %>
     <%= f.select :stroke, Discipline::STROKES, :include_blank => true %>
     <%= f.select :mode, Discipline::MODES %>
+  </div>
+  <div class="field">
+    <%= f.label :gender %>
+    <%= f.select :gender, Swimmer::GENDERS, :include_blank => true %>
   </div>
   <div class="field">
     <%= f.label :age_min, "Age from" %>

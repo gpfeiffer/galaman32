@@ -28,13 +28,12 @@ class ApplicationController < ActionController::Base
   end
 
   # how to find the discipline, or create a new one
-  def find_discipline_id(opts)
+  def find_discipline(opts)
     #FIXME: Why do these have to be strings, and not keys:
     #FIXME: find list of keys automatically in discipline model
-    keys = ['gender', 'distance', 'course', 'stroke', 'mode']
+    keys = ['distance', 'course', 'stroke', 'mode']
     subs = opts.reject { |k, v| not keys.include?(k) }
-    discipline = Discipline.where(subs).first || Discipline.create(subs)
-    return discipline.id
+    Discipline.where(subs).first || Discipline.create(subs)
   end
 
 end
