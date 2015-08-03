@@ -49,9 +49,14 @@ class QualificationTime < ActiveRecord::Base
   end
 
   # convert into FINA points
+  ##  FIXME: Result model has exactly the same function
   def fina_points
-    qualification = Qualification.find_by_name("FINA Base")
-    qt = QualificationTime.find_by_qualification_id_and_discipline_id(qualification.id, discipline.id)
-    qt ? ((10 * qt.time / time.to_f)**3).to_i : nil
+    return if time == 0
+    fina_base = Qualification.find_by_name("FINA Base")
+    base_time = fina_base.qualification_times.where(
+      discipline_id: discipline.id, 
+      gender: gender
+    ).first
+    return ((10 * base_time.time.quo(time))**3).to_i if base_time
   end
 end

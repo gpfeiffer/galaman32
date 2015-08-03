@@ -10,7 +10,7 @@ class Result < ActiveRecord::Base
 
   attr_accessor :mins, :secs, :cens
 
-  STAGES = ["P", "S", "F"]
+  STAGES = %w{ P S F }
 
   # validates :entry_id, :presence => true, :uniqueness => true
 
