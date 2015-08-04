@@ -87,6 +87,7 @@ results in a particular stroke.
   <% competition = docket.competition %>
   <li>
     <%= competition.date %>: 
+    <%= docket.club.code %> -
     <%= link_to competition.name, docket %> 
     (<%= competition.location %>)
   </li>
