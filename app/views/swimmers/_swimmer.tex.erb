@@ -5,16 +5,16 @@
 \begin{tabular}{|r|<%= 'p{1.1cm}|'*Discipline::STROKES.count %>}
 \toprule
 <% Discipline::STROKES.each do |stroke| %>
-&  \textbf{<%= { 'Freestyle' => 'Free', 'Backstroke' => 'Back', 'Breaststroke' => 'Breast', 'Butterfly' => 'Fly', 'Ind Medley' => 'Medley' }[stroke] %>}
+&  \textbf{<%= short_stroke_name stroke %>}
 <% end %>
-<% swimmer.entries.group_by(&:distance_course_code).sort.each do |row, entries_row| %>
-  <% entries = entries_row.group_by(&:stroke) %>
+<% swimmer.results.group_by(&:distance_course_code).sort.each do |row, results_row| %>
+  <% results = results_row.group_by(&:stroke) %>
 \\\midrule
     \textbf{<%= distance_course(row) %>}
     <% Discipline::STROKES.each do |stroke| %>
 &
-        <% if entries[stroke] %>
-          <% best = best_result(entries[stroke].map(&:result).compact) %>
+        <% if results[stroke] %>
+          <% best = best_result(results[stroke].compact) %>
 	  <% if best %>
             {\hfill <%= best %>\newline\mbox{}\hfill{\scriptsize <%= best.date.strftime("%d/%m/%y") %>}}
           <% end %>
