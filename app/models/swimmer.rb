@@ -1,22 +1,22 @@
 class Swimmer < ActiveRecord::Base
-  default_scope :order => [:last, :first]
+  default_scope order: [:last, :first]
 
   belongs_to :club
-  has_many :dockets, :dependent => :destroy
-  has_many :competitions, :through => :dockets
-  has_many :entries, :through => :dockets
-  has_many :results, :through => :entries
-  has_many :aims, :dependent => :destroy
-  has_many :qualifications, :through => :aims
-  has_many :supports, :dependent => :destroy
-  has_many :supporters, :through => :supports, :source => :user
+  has_many :dockets, dependent: :destroy
+  has_many :competitions, through: :dockets
+  has_many :entries, through: :dockets
+  has_many :results, through: :entries
+  has_many :aims, dependent: :destroy
+  has_many :qualifications, through: :aims
+  has_many :supports, dependent: :destroy
+  has_many :supporters, through: :supports, source: :user
   belongs_to :user
 
   GENDERS = %w{ F M }
 
-  validates :first, :last, :birthday, :gender, :club_id, :presence => true
-  validates :gender, :inclusion => GENDERS
-  validates :number, :uniqueness => true, :allow_blank => true
+  validates :first, :last, :birthday, :gender, :club_id, presence: true
+  validates :gender, inclusion: GENDERS
+  validates :number, uniqueness: true, allow_blank: true
 
   def last_first
     "#{last}, #{first}"
