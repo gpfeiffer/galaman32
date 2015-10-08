@@ -22,9 +22,9 @@
 
 <h3>Swimmers.</h3>
 
-<%= @club.swimmers.count %> swimmers:
+<%= pluralize(@club.swimmers.count, 'swimmer') %>:
 <% @club.swimmers.group_by(&:gender).each do |gender, swimmers| %>
-  <%= "#{swimmers.count} #{gender_word(gender).downcase}" %>
+  <%= pluralize(swimmers.count, gender_word(gender).downcase) %>
 <% end %>
 <br />
 <br />
