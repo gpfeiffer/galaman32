@@ -44,7 +44,7 @@ class Event < ActiveRecord::Base
   end
 
   def permits?(docket)
-    [gender, 'X'].include? docket.gender and age_range.include? docket.age
+    [docket.gender, 'X'].include? gender and age_range.include? docket.age
   end
 
   # customize json representation
