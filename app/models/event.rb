@@ -14,9 +14,9 @@ class Event < ActiveRecord::Base
   attr_writer :distance, :course, :stroke, :mode
 
   GENDERS = %w{ F M X }
-  STAGES = ["P", "S", "F"]
+  STAGES = %w{ P S F }
 
-  validates :age_min, :age_max, :presence => true, 
+  validates :age_min, :age_max, :presence => true,
     :numericality => { :only_integer => true, :greater_than_or_equal_to => 0 }
   validates :competition_id, :discipline_id, :presence => true
   validates :day, :presence => true,
@@ -44,7 +44,7 @@ class Event < ActiveRecord::Base
   end
 
   def permits?(docket)
-    docket.swimmer.gender == gender and age_range.include? docket.age
+    [gender, 'X'].include? docket.gender and age_range.include? docket.age
   end
 
   # customize json representation
@@ -55,7 +55,7 @@ class Event < ActiveRecord::Base
   # list entries for seeding
   def entries_for_seeding
     seeded = entries.group_by(&:seeded?)
-    seeded.default = []  
+    seeded.default = []
     seeded[true].sort_by(&:time) + seeded[false].sort_by(&:no_time)
   end
 
@@ -66,7 +66,7 @@ class Event < ActiveRecord::Base
   end
 
   # how to compute the heat and lane of entry 'index' out of 'total'
-  # with given 'width' lanes, the first one at position 'start'. 
+  # with given 'width' lanes, the first one at position 'start'.
   # We alternate the slowest swimmer between lane 1 and lane 'width'.
   # We arrange the surplus as heats with width - 1 lanes if possible.
   def seed!(width, start)
@@ -78,7 +78,7 @@ class Event < ActiveRecord::Base
     entries_for_seeding.each_with_index do |entry, index|
 
       # compute coordinates: basically, index = heat * width + lane
-      if index < base then 
+      if index < base then
         heat, lane = index.divmod(narrow + 1)
       else
         heat, lane = (index - base).divmod narrow
@@ -115,7 +115,7 @@ class Event < ActiveRecord::Base
   def qtimes
     if competition.qualifications.any?
       competition.qualifications.map do |q|
-        q.qualification_times.where(:discipline_id => discipline).select do |x| 
+        q.qualification_times.where(:discipline_id => discipline).select do |x|
           age_range.include? x.age_range
         end
       end.sum
@@ -135,11 +135,11 @@ class Event < ActiveRecord::Base
   def listed_results(ages)
     if is_relay? then
       list = results.select { |x| ages.include? x.entry.age_range }
-      list.select { |x| x.time and x.time > 0 }.sort_by(&:time) + 
+      list.select { |x| x.time and x.time > 0 }.sort_by(&:time) +
         list.select { |x| x.time == 0 }.sort_by { |x| x.entry.name }
     else
       list = results.select { |x| ages.include? x.entry.age }
-      list.select { |x| x.time and x.time > 0 }.sort_by(&:time) + 
+      list.select { |x| x.time and x.time > 0 }.sort_by(&:time) +
         list.select { |x| x.time == 0 }.sort_by { |x| x.entry.swimmer.birthday }
     end
   end
@@ -167,13 +167,13 @@ class Event < ActiveRecord::Base
   def hyv_line
     stroke_no = {
       "Freestyle" => 1,
-      "Backstroke" => 2, 
-      "Breaststroke" => 3, 
-      "Butterfly" => 4, 
+      "Backstroke" => 2,
+      "Breaststroke" => 3,
+      "Butterfly" => 4,
       "Ind Medley" => 5,
     }[stroke]
     age_top = age_max == 99 ? 0 : age_max
-    "#{pos};#{stage};#{gender.upcase};#{mode};#{age_min};#{age_top};" + 
+    "#{pos};#{stage};#{gender.upcase};#{mode};#{age_min};#{age_top};" +
       "#{distance};#{stroke_no};;;;4;;;;;;"
   end
 
