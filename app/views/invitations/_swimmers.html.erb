@@ -4,12 +4,12 @@
 <% relays_by_gender = @invitation.relays.group_by(&:gender) %>
 
 <% Swimmer::GENDERS.each do |sex| %>
-  <% events = (events_by_gender[sex] || []) + mixed_events %>
+  <% events = ((events_by_gender[sex] || []) + mixed_events).sort_by(&:pos) %>
   <% dockets = dockets_by_gender[sex] || [] %>
   <% relays = relays_by_gender[sex] || [] %>
   <table class="fact-sheet">
     <tr class="times-major">
-      <th>Swimmer (<%= sex.upcase %>)</th>
+      <th>Swimmer (<%= sex %>)</th>
       <th>Birthday</th>
       <th>Age</th>
       <% events.each do |event| %>
