@@ -1,9 +1,10 @@
 <% events_by_gender = @invitation.competition.individual_events.group_by(&:gender) %>
+<% mixed_events = events_by_gender['X'] || [] %>
 <% dockets_by_gender = @invitation.dockets.group_by(&:gender) %>
 <% relays_by_gender = @invitation.relays.group_by(&:gender) %>
 
 <% Swimmer::GENDERS.each do |sex| %>
-  <% events = events_by_gender[sex] || [] %>
+  <% events = (events_by_gender[sex] || []) + mixed_events %>
   <% dockets = dockets_by_gender[sex] || [] %>
   <% relays = relays_by_gender[sex] || [] %>
   <table class="fact-sheet">
@@ -25,7 +26,7 @@
         <th>
           <%= content_tag :span, :title => relay.name do %>
             R<%= @invitation.relays.index(relay) + 1 %>
-          <% end %> 
+          <% end %>
         </th>
       <% end %>
     </tr>
@@ -43,7 +44,7 @@
             <%= link_to entry, entry %>
 	  <% else %>
             <% if can?(:update, docket) and event.permits? docket %>
-              <%= link_to (raw "&square;"), new_entry_path(:event_id => event, :subject_id => docket, :subject_type => "Docket") %> 
+              <%= link_to (raw "&square;"), new_entry_path(:event_id => event, :subject_id => docket, :subject_type => "Docket") %>
             <% end %>
           <% end %>
           </td>
@@ -54,7 +55,7 @@
 	    <% if seat %>
               <%= link_to 'X', seat %>
 	    <% elsif relay.permits? docket %>
-	      <%= link_to '_', new_seat_path(:relay_id => relay.id, :docket_id => docket.id) %> 
+	      <%= link_to '_', new_seat_path(:relay_id => relay.id, :docket_id => docket.id) %>
             <% end %>
           </td>
         <% end %>
