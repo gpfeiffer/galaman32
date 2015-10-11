@@ -1,0 +1,71 @@
+\onecolumn
+\tiny
+\tabcolsep2pt
+\pagestyle{empty}
+\thispagestyle{empty}
+
+\section*{Club Records: <%= club.full_name %>.}
+
+<% @results.group_by(&:gender).each do |gender, results_gender| %>
+\begin{tabular}[t]{|c|<%= "p{1.45cm}|" * Discipline::STROKES.length %>}
+\toprule
+\textbf{<%= gender_word gender %>}
+<% Discipline::STROKES.each do |stroke| %>
+  & {\hfil\textbf{<%= short_stroke_name stroke %>}\hfil}
+<% end %>
+\\
+<% results_gender.group_by(&:distance_course_code).sort.each do |row, results_row| %>
+\midrule
+<% results = results_row.group_by(&:stroke) %>
+\textbf{<%= distance_course(row) %>}
+<% Discipline::STROKES.each do |stroke| %>
+& <% if results[stroke] %>
+    <% best = best_result(results[stroke]) %>
+    <% if best %>
+      {\raggedleft
+      <%= best %>$|$\makebox[6.5mm][r]{<%= best.fina_points %> pts}\\
+      <%= raw best.swimmer.first_last %>\\\hfill
+      (<%= best.date %>)}
+    <% end %>
+  <% end %>
+<% end %>
+\\
+<% end %>
+\bottomrule
+\end{tabular}
+\qquad
+<% end %>
+\par
+
+<% @results.group_by(&:age).sort.each do |age, results_age| %>
+<% results_age.group_by(&:gender).each do |gender, results_gender| %>
+\begin{tabular}[t]{|c|<%= "p{1.45cm}|" * Discipline::STROKES.length %>}
+\toprule
+\textbf{<%= gender_word gender %> (<%= age %>)}
+<% Discipline::STROKES.each do |stroke| %>
+  & {\hfil\textbf{<%= short_stroke_name stroke %>}\hfil}
+<% end %>
+\\
+<% results_gender.group_by(&:distance_course_code).sort.each do |row, results_row| %>
+\midrule
+<% results = results_row.group_by(&:stroke) %>
+\textbf{<%= distance_course(row) %>}
+<% Discipline::STROKES.each do |stroke| %>
+& <% if results[stroke] %>
+    <% best = best_result(results[stroke]) %>
+    <% if best %>
+      {\raggedleft
+      <%= best %>$|$\makebox[6.5mm][r]{<%= best.fina_points %> pts}\\
+      <%= raw best.swimmer.first_last %>\\\hfill
+      <%= best.date %>}
+    <% end %>
+  <% end %>
+<% end %>
+\\
+<% end %>
+\bottomrule
+\end{tabular}
+\qquad
+<% end %>
+\par
+<% end %>
