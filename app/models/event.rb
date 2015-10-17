@@ -115,7 +115,7 @@ class Event < ActiveRecord::Base
   def qtimes
     if competition.qualifications.any?
       competition.qualifications.map do |q|
-        q.qualification_times.where(:discipline_id => discipline).select do |x|
+        q.qualification_times.where(discipline_id: discipline, gender: gender).select do |x|
           age_range.include? x.age_range
         end
       end.sum
