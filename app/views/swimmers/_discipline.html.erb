@@ -108,7 +108,8 @@
 
 <% names.each_with_index do |name, index| %> 
 <% qualification = Qualification.find_by_name(name) %>
-<% qualification_times = QualificationTime.find_all_by_discipline_id_and_qualification_id(discipline.id, qualification.id) %>
+<!% qualification_times = QualificationTime.find_all_by_discipline_id_and_qualification_id(discipline.id, qualification.id) %>
+<% qualification_times = qualification.qualification_times.where(discipline_id: discipline, gender: @swimmer.gender) %>
 <% if qualification_times %>
 <table>
 <% qualification_times.each do |qt| %>
