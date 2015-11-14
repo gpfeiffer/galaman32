@@ -2,7 +2,7 @@
   <h3><%= @docket.invitation.club %></h3>
   <% @docket.invitation.dockets.group_by(&:gender).each do |gender, dockets| %>
     <h4><%= { 'f' => 'Girls', 'm' => 'Boys' }[gender] %></h4>
-    <ul><%= render dockets %></ul>
+    <ul><%= render dockets.sort_by(&:name) %></ul>
   <% end %>
 <% end %>
 
