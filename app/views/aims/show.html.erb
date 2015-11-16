@@ -9,58 +9,44 @@
   <%= @aim.date %>
 </p>
 
+<% if @times.any? %>
+<h3>
+  <%= gender_word @aim.gender %> (<%= @aim.age %>)
+</h3>
 
-<% aim = @aim %>
-<% swimmer = @aim.swimmer %>
-    <% age = swimmer.age(aim.date) %>
-    <% gender = swimmer.gender %>
-
-    <% times = aim.qualification.qualification_times.select { |x| x.gender == gender and x.age_range.include? age } %>
-    <% if times.any? %>
-    <h3>
-      <%= { 'f' => "Girls", 'm' => "Boys" }[gender] %> (<%= age %>)
-    </h3>
-
-    <table class="fact-sheet">
-      <tr class="pb-hi">
-        <th class="pb-tl" style="width:84px"></th>
-        <% Discipline::STROKES.each do |stroke| %>
-          <th style="width:84px">
-            <%= short_stroke_name(stroke) %>
-          </th>
-        <% end %>
-      </tr>
-      <% times.group_by(&:distance_course).sort_by  { |key, value| [key[0..-5].to_i, 100-key[-2].ord] }.each do |label, times_by_label| %>
-        <tr class="pb-lo" align="right">
-          <th><%= label %></th>
-          <% times_by_stroke = times_by_label.group_by(&:stroke) %>
-          <% Discipline::STROKES.each do |stroke| %>
-            <% qt = times_by_stroke[stroke] && times_by_stroke[stroke].first %>
-            <% qt = times_by_stroke[stroke] %>
-            <% if qt %>
-              <% qt = qt.first %>
-              <% pb = swimmer.personal_best(qt.discipline) %>
-              <% if pb %>
-                <% time = qt.time - pb.time %>
-                <% if time < 0 %>
-                  <%= content_tag(:td, time_to_msc(time), :style => "background-color:#FF9999") %>
-                <% else %>
-                  <%= content_tag(:td, time_to_msc(time), :style => "background-color:#99CC99") %>
-                <% end %>
-              <% else %>
-                <%= content_tag(:td, qt, :style => "color:lightgray") %>
-              <% end %>
-            <% else %>
-              <%= content_tag :td %>
-            <% end %>
+<table class="fact-sheet">
+  <tr class="pb-hi">
+    <th class="pb-tl" style="width:84px"></th>
+    <% Discipline::STROKES.each do |stroke| %>
+      <th style="width:84px">
+        <%= short_stroke_name(stroke) %>
+      </th>
+    <% end %>
+  </tr>
+  <% @times.group_by(&:distance_course).sort_by { |key, value| [key[0..-5].to_i, 100-key[-2].ord] }.each do |label, times_by_label| %>
+    <tr class="pb-lo" align="right">
+      <th><%= label %></th>
+      <% times_by_stroke = times_by_label.group_by(&:stroke) %>
+      <% Discipline::STROKES.each do |stroke| %>
+        <% qt = times_by_stroke[stroke] %>
+        <% if qt %>
+          <% qt = qt.first %>
+          <% pb = @aim.swimmer.personal_best(qt.discipline) %>
+          <% if pb %>
+            <% time = qt.time - pb.time %>
+            <%= content_tag(:td, time_to_msc(time), class: time < 0 ? "slow" : "fast") %>
+          <% else %>
+            <%= content_tag(:td, qt, style: "color:lightgray") %>
           <% end %>
-        <tr>
+        <% else %>
+          <%= content_tag :td %>
+        <% end %>
       <% end %>
-    </table>
-    <% end%>
-    <br />
-    <br />
-
+    <tr>
+  <% end %>
+</table>
+<% end%>
+<br />
 
 <p>
 The table shows the <b>difference</b> between the <b>swimmer's PB</b> and the 

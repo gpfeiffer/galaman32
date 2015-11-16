@@ -83,7 +83,7 @@
 <tr class="fact-title" x="0" y="0"><th colspan="3">Aims</th></tr>
   <% @swimmer.aims.each do |aim| %>
     <% if can? :view, aim %>
-      <% qt = aim.qualification.qualification_times.find_all_by_discipline_id(discipline.id).select { |x| x.age_range.include?(@swimmer.age(aim.date)) }.first %>
+      <% qt = aim.qtime(discipline) %>
       <% if qt %>
         <tr class="fact-major" x="0" y="0">
           <td><%= aim.date %></td>

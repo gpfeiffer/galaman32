@@ -13,6 +13,7 @@ class AimsController < ApplicationController
   # GET /aims/1
   # GET /aims/1.xml
   def show
+    @times = @aim.qtimes
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @aim }

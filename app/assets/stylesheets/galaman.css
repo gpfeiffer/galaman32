@@ -292,6 +292,14 @@ tr.LC td {
   background: #dbff94;
 }
 
+tr.pb-lo td.slow {
+  background: #ff9999;
+}
+
+tr.pb-lo td.fast {
+  background: #99cc99;
+}
+
 hr {
     color: blue;
     background-color: blue;
