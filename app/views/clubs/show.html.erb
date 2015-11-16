@@ -24,7 +24,7 @@
 
 <%= pluralize(@club.swimmers.count, 'swimmer') %>:
 <% @club.swimmers.group_by(&:gender).each do |gender, swimmers| %>
-  <%= pluralize(swimmers.count, gender_word(gender).downcase) %>
+  <%= pluralize(swimmers.count, boy_or_girl(gender)) %>
 <% end %>
 <br />
 <br />

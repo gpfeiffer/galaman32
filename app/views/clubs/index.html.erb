@@ -5,7 +5,7 @@
   <tr class="fact-major">
     <td><%= link_to club.name, club %></td>
     <td>:</td>
-    <td align="right"><%= club.swimmers.count %> swimmers</td>
+    <td align="right"><%= pluralize(club.swimmers.count, 'swimmer') %></td>
   </tr>
 <% end %>
 </table>
