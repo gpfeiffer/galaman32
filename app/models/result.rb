@@ -65,12 +65,10 @@ class Result < ActiveRecord::Base
   end
 
   def qualify
-    if time == 0
-      return nil
-    end
+    return nil if time == 0
     best = nil
-    entry.competition.qualifications.includes(:qualification_times).each do |qualification|
-      qt = qualification.qualification_times.select { |x| x.discipline == discipline and x.gender == gender and x.age_range.include? entry.age }.first
+    entry.competition.qualifications.includes(:qualification_times).map do |q|
+      qt = q.qualification_times.where(discipline_id: discipline, gender: gender).select { |x| x.age_range.include? entry.age }.first
       if qt and qt.time > time and (not best or qt.time < best[:time])
         best = { :time => qt.time, :qualification => qualification }
       end
