@@ -153,7 +153,7 @@ class Event < ActiveRecord::Base
   end
 
   def to_s
-    "%s. %s %s" % [pos, { 'f' => "Girls", 'm' => "Boys" }[gender], discipline.nickname]
+    "%s. %s %s" % [pos, { 'F' => "Girls", 'M' => "Boys" }[gender], discipline.nickname]
   end
 
   def nickname
