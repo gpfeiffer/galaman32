@@ -113,15 +113,11 @@ class Event < ActiveRecord::Base
   end
 
   def qtimes
-    if competition.qualifications.any?
-      competition.qualifications.map do |q|
-        q.qualification_times.where(discipline_id: discipline, gender: gender).select do |x|
-          age_range.include? x.age_range
-        end
-      end.sum
-    else
-      return []
-    end
+    competition.qualifications.map do |q|
+      q.qualification_times.where(discipline_id: discipline, gender: gender).select do |x|
+        age_range.include? x.age_range
+      end
+    end.sum || []
   end
 
   def qtimes_by_range
