@@ -1,6 +1,5 @@
 <% event = level_event %>
 <li>
   <%= link_to_unless_current event, event %>: 
-  <%= gender_word event.gender %>,
   <%= ages_to_words event.age_range %>
 </li>
