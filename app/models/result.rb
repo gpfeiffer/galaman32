@@ -70,7 +70,7 @@ class Result < ActiveRecord::Base
     entry.competition.qualifications.includes(:qualification_times).map do |q|
       qt = q.qualification_times.where(discipline_id: discipline, gender: gender).select { |x| x.age_range.include? entry.age }.first
       if qt and qt.time > time and (not best or qt.time < best[:time])
-        best = { :time => qt.time, :qualification => qualification }
+        best = { :time => qt.time, :qualification => q }
       end
     end
     return best
