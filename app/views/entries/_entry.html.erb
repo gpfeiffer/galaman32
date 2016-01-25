@@ -7,18 +7,23 @@
     <td align="right">(<%= entry %>)</td>
     <td align="right">
       <div id="<%= "entry_#{entry.id}" %>">
-      <% if entry.result and entry.result.time %>
-        <%= link_to entry.result, entry.result %>
-      <% else %>
-        <% entry.result = Result.new %>
-        <%= form_for entry.result, :remote => true do |f| %>
-          <%= f.text_field :mins, :size => 2, :maxlength => 2, :onkeyup => "moveOn(this)" %>:
-          <%= f.text_field :secs, :size => 2, :maxlength => 2, :onkeyup => "moveOn(this)" %>.
-          <%= f.text_field :cens, :size => 2, :maxlength => 2 %>
-	  <%= f.select :comment, %w(DQ DNS DNF NS), :include_blank => true %>
-          <%= f.submit '!' %>
+        <% if entry.results.any? %>
+          <% result = entry.results.first %>
+        <% else %>
+          <% result = Result.new %>
+          <% entry.results << result %>
         <% end %>
-      <% end %>
+        <% if result.time %>
+          <%= link_to result, result %>
+        <% else %>
+          <%= form_for result, :remote => true do |f| %>
+            <%= f.text_field :mins, size: 2, maxlength: 2 %>:
+            <%= f.text_field :secs, size: 2, maxlength: 2 %>.
+            <%= f.text_field :cens, size: 2, maxlength: 2 %>
+  	  <%= f.select :comment, %w(DQ DNS DNF NS), include_blank: true %>
+            <%= f.submit '!' %>
+          <% end %>
+        <% end %>
       </div>
     </td>
 </tr>
