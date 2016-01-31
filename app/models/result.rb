@@ -65,7 +65,7 @@ class Result < ActiveRecord::Base
   end
 
   def qualify
-    return nil if time == 0
+    return nil if time.nil? or time == 0
     best = nil
     entry.competition.qualifications.includes(:qualification_times).map do |q|
       qt = q.qualification_times.where(discipline_id: discipline, gender: gender).select { |x| x.age_range.include? entry.age }.first
