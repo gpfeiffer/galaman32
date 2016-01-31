@@ -19,6 +19,7 @@
 <% invitation.dockets_for_day(day).group_by(&:gender).each do |gender, dockets| %>
   <% events = dockets.map(&:events).reduce(:|).select { |x| x.day == day }.sort_by(&:pos) %>
 <% if events.any? %>
+  <div style="overflow-x:auto;">
   <table class="fact-sheet">
     <tr class="times-major">
       <th>Swimmer (<%= gender.upcase %>)</th>
@@ -31,7 +32,7 @@
       <% swimmer = docket.swimmer %>
       <% entries = docket.entries.group_by(&:event) %>
       <tr class="times-major">
-        <td><%= link_to swimmer.name, docket %></td>
+        <td style="white-space: nowrap"><%= link_to swimmer.name, docket %></td>
         <td align="right"><%= docket.age %></td>
         <% events.each do |event| %>
           <td align="right">
@@ -40,7 +41,7 @@
               <% result = best_result(entry.results) %>
               <%= link_to result, result if result %>
               </td>
-              <td>
+              <td style="white-space: nowrap">
               <% if result and result.time and result.time > 0 %>
                 <%= "(#{result.place}.)" if result.place %>
                 <% nr_swims += 1%>
@@ -59,6 +60,7 @@
       </tr>
     <% end %>
   </table>
+  </div>
   <br />
 <% end %>
 <% end %>

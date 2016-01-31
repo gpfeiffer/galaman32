@@ -34,7 +34,7 @@
       <% swimmer = docket.swimmer %>
       <% entries_by_event = docket.entries.index_by(&:event) %>
       <tr class="times-major">
-        <td><%= link_to swimmer.name, docket %></td>
+        <td style="white-space: nowrap"><%= link_to swimmer.name, docket %></td>
         <td><%= swimmer.birthday %></td>
         <td align="right"><%= docket.age %></td>
         <% events.each do |event| %>
