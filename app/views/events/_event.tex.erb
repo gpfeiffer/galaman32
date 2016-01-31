@@ -31,14 +31,14 @@ Age Range
 \begin{center}
 \tablefirsthead{%
 \toprule
-& {\footnotesize Name, Age} & {\footnotesize Team} & \hbox to 15mm{}\llap{\footnotesize Seed Time} & {\footnotesize Result} \\
+& {\footnotesize Name, Age} & {\footnotesize Team} & \hbox to 13mm{}\llap{\footnotesize Seed Time} & {\footnotesize Result} \\
 \midrule%
 }
 \tablehead{%
 \toprule
 \multicolumn{4}{l}{\textbf{\ldots\ Event <%= event.pos %>. <%= event.discipline.to_words %>}}\\
 \midrule%
-& {\footnotesize Name, Age} & {\footnotesize Team} & \hbox to 15mm{}\llap{\footnotesize Seed Time} & {\footnotesize Result} \\
+& {\footnotesize Name, Age} & {\footnotesize Team} & \hbox to 13mm{}\llap{\footnotesize Seed Time} & {\footnotesize Result} \\
 \midrule%
 }
 \tabletail{%
@@ -47,7 +47,7 @@ Age Range
 \tablelasttail{%
 \bottomrule%
 }
-\begin{supertabular}{r@{ }p{35mm}p{8mm}rc}
+\begin{supertabular}{r@{ }p{36mm}p{8mm}rc}
 <% event.entries_for_seeding.each_with_index do |entry, index| %>
   <%= render :partial => 'events/entry', :object => entry, :locals => { :index => index } -%>
 <% end %>
