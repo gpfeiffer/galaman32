@@ -13,7 +13,7 @@ class SwimmersController < ApplicationController
   # GET /swimmers/1
   # GET /swimmers/1.xml
   def show
-    @results = @swimmer.results.select { |x| x.time > 0 }
+    @results = @swimmer.results.select { |x| x.time and x.time > 0 }
     if params[:discipline_id]
       @discipline = Discipline.find(params[:discipline_id])
       @results = @results.group_by(&:discipline)
