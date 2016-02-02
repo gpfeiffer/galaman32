@@ -64,7 +64,7 @@ class Entry < ActiveRecord::Base
   end
 
   def personal_best
-    results.map(&:personal_best).map(&:to_i).max || 0
+    results.map(&:personal_best).compact.map(&:to_i).max || 0
   end
 
   def qualify
