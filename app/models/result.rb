@@ -127,7 +127,7 @@ class Result < ActiveRecord::Base
 
   # return '*' for first time, centiseconds if PB, and nil otherwise.
   def personal_best
-    return nil if time == 0 
+    return nil if time.nil? or time == 0 
     old = swimmer.results.group_by(&:discipline)[discipline]
     old = old.select { |x| x.date < date and x.time > 0 }
     if old.any?
