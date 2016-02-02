@@ -119,7 +119,7 @@ class Result < ActiveRecord::Base
 
   # is this result a swimmer's best result up to now?
   def personal_best?
-    return false if time == 0 
+    return false if time.nil? or time == 0 
     old = swimmer.results.group_by(&:discipline)[discipline]
     old = old.select { |x| x.date < date and x.time > 0 }
     old.any? ? time < old.map(&:time).min : true
