@@ -1,6 +1,9 @@
-<% qu = result.qualify %>
 <%= ordinal_number(result.place) -%> 
  & <%= raw result.name_and_ages -%> 
  & <%= result.club.symbol -%>
+ & (<%= result.entry -%>)
+<% qu = result.entry.qualify %>
+ & <%= qu and qu[:qualification].short -%>
  & <%= result -%>
+<% qu = result.qualify %>
  & <%= qu and qu[:qualification].short %> \\
