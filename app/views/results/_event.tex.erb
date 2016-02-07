@@ -1,5 +1,5 @@
 \onecolumn
-\subsection*{Event <%= event.pos %>. <%= event.discipline.to_words %>}
+\subsection*{Event <%= event.to_words %>}
 
 <% event.qualification_age_ranges.sort_by(&:min).each do |ages| %>
 <% results = event.listed_results(ages) %>
@@ -13,7 +13,7 @@
 }
 \tablehead{%
 \toprule
-\multicolumn{4}{l}{\textbf{\ldots\ <%= event.pos %>. <%= event.discipline.to_words %>} <%= raw ages_to_tex(ages) %>}\\
+\multicolumn{4}{l}{\textbf{\ldots\ <%= event.to_words %>} <%= raw ages_to_tex(ages) %>}\\
 \midrule%
 {\footnotesize Plc} & {\footnotesize Name, Age} & {\footnotesize Team} & \hbox to 15mm{}\llap{\footnotesize (Seed Time)} & & \hbox to 15mm{}\llap{\footnotesize Result} \\
 \midrule%

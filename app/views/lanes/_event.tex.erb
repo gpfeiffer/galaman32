@@ -1,7 +1,7 @@
 <% heats = (1..event.heats.count) %>
 <% event.lanes.sort.each do |index, lane| %>
 \clearpage
-\subsection*{Event <%= event.pos %>. <%= event.discipline.to_words %>}
+\subsection*{Event <%= event.to_words %>}
 \vbox{
 \section*{Lane <%= index %>.}
 \begin{tabular}{rp{5cm}p{15mm}rc}

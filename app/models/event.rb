@@ -161,6 +161,10 @@ class Event < ActiveRecord::Base
     "%s %s" % [discipline.nickname, { 'P' => 'Pre', 'F' => '' }[stage]]
   end
 
+  def to_words
+    "%s. %s %s" % [pos, { 'F' => "Girls", 'M' => "Boys" }[gender], discipline.to_words]
+  end
+
   def hyv_line
     stroke_no = {
       "Freestyle" => 1,

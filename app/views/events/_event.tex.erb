@@ -1,4 +1,4 @@
-\subsection*{Event <%= event.pos %>. <%= gender_word(event.gender) %> <%= event.discipline.to_words %>}
+\subsection*{Event <%= event.to_words %>}
 
 <% times_by_range = event.qtimes_by_range %>
 <% if times_by_range.any? %>
@@ -36,7 +36,7 @@ Age Range
 }
 \tablehead{%
 \toprule
-\multicolumn{4}{l}{\textbf{\ldots\ Event <%= event.pos %>. <%= event.discipline.to_words %>}}\\
+\multicolumn{4}{l}{\textbf{\ldots\ Event <%= event.to_words %>}}\\
 \midrule%
 & {\footnotesize Name, Age} & {\footnotesize Team} & \hbox to 13mm{}\llap{\footnotesize Seed Time} & {\footnotesize Result} \\
 \midrule%
