@@ -93,6 +93,7 @@ class Entry < ActiveRecord::Base
 
   # sdif
   def to_d0
+    result = results.first  # FIXME
     ranges = event.qualification_age_ranges.sort_by(&:min)
     index = ranges.find_index{ |r| r.include? subject.age }
     range = ranges[index]
