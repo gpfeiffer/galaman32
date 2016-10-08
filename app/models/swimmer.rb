@@ -91,7 +91,7 @@ class Swimmer < ActiveRecord::Base
   def a_times
     times = Hash[Discipline::STROKES.map { |stroke|  [stroke, []] }]
     q = Qualification.find_by_name("A")
-    q.disciplines.uniq.select { |x| x.gender == gender }.each do |discipline|
+    q.disciplines.uniq.each do |discipline|
       a_time = sticking_achievement(q, discipline)
       times[discipline.stroke] << a_time if a_time
     end
