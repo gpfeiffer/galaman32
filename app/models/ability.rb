@@ -12,29 +12,29 @@ class Ability
       can :show, User do |u|
         u == user
       end
-      
+
     end
 
     if user.role? :parent
-      can :read, [Swimmer, Club, Docket, Entry, Result, Event, Invitation]
+      can :read, [Swimmer, Club, Docket, Entry, Result, Event, Invitation, Competiton]
       can :manage, Aim, { :swimmer => { :id => user.beneficiary_ids } }
     end
-        
+
     if user.role? :swimmer
-      can :read, [Swimmer, Club, Docket, Entry, Result, Event, Invitation]
+      can :read, [Swimmer, Club, Docket, Entry, Result, Event, Invitation, Competition]
       can :manage, Aim, { :swimmer => user.swimmer }
     end
 
     if user.role? :coach
-      can :read, [Swimmer, Club, Docket, Entry, Result, Event, Invitation]
+      can :read, [Swimmer, Club, Docket, Entry, Result, Event, Invitation, Competition]
 #      can :manage, Result
       can [:create, :update], Swimmer
 #      can :manage, Aim do |aim|
 #        aim.swimmer.supporters.include? user
 #      end
-      can :manage, Aim 
+      can :manage, Aim
     end
-        
+
 
     # Define abilities for the passed in user here. For example:
     #
@@ -45,12 +45,12 @@ class Ability
     #     can :read, :all
     #   end
     #
-    # The first argument to `can` is the action you are giving the user 
+    # The first argument to `can` is the action you are giving the user
     # permission to do.
     # If you pass :manage it will apply to every action. Other common actions
     # here are :read, :create, :update and :destroy.
     #
-    # The second argument is the resource the user can perform the action on. 
+    # The second argument is the resource the user can perform the action on.
     # If you pass :all it will apply to every resource. Otherwise pass a Ruby
     # class of the resource.
     #
