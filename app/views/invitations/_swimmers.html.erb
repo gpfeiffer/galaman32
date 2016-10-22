@@ -1,15 +1,20 @@
-<% events_by_gender = @invitation.competition.individual_events.group_by(&:gender) %>
-<% mixed_events = events_by_gender['X'] || [] %>
-<% dockets_by_gender = @invitation.dockets.group_by(&:gender) %>
+<% competition = @invitation.competition %>
 <% relays_by_gender = @invitation.relays.group_by(&:gender) %>
 
-<% Swimmer::GENDERS.each do |sex| %>
-  <% events = ((events_by_gender[sex] || []) + mixed_events).sort_by(&:pos) %>
-  <% dockets = dockets_by_gender[sex] || [] %>
-  <% relays = relays_by_gender[sex] || [] %>
+<% competition.days.each do |day| %>
+<% if competition.length > 1 %>
+<h4>Day <%= day %> (<%= competition.date + (day - 1).days %>)</h4>
+<% end %>
+
+<% @invitation.dockets_for_day(day).group_by(&:gender).each do |gender, dockets| %>
+
+  <% events = dockets.map(&:events).reduce(:|).select { |x| x.day == day }.sort_by(&:pos) %>
+<% if events.any? %>
+
+  <% relays = relays_by_gender[gender] || [] %>
   <table class="fact-sheet">
     <tr class="times-major">
-      <th>Swimmer (<%= sex %>)</th>
+      <th>Swimmer (<%= gender %>)</th>
       <th>Birthday</th>
       <th>Age</th>
       <% events.each do |event| %>
@@ -18,7 +23,6 @@
             <%= event.pos %>. <%= event.discipline.distance %>m
             <br />
             <%= short_stroke_name(event.discipline.stroke) %>
-            <%= { 'P' => 'Pre', 'F' => '' }[event.stage] %>
           </span>
         </th>
       <% end %>
@@ -64,6 +68,9 @@
   </table>
   <br />
   <br />
+<% end %>
+<% end %>
+
 <% end %>
 
 <% if can? :update, @invitation %>
