@@ -16,7 +16,7 @@ class Ability
     end
 
     if user.role? :parent
-      can :read, [Swimmer, Club, Docket, Entry, Result, Event, Invitation, Competiton]
+      can :read, [Swimmer, Club, Docket, Entry, Result, Event, Invitation, Competition]
       can :manage, Aim, { :swimmer => { :id => user.beneficiary_ids } }
     end
 
