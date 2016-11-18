@@ -6,9 +6,9 @@
 <h4>Day <%= day %> (<%= competition.date + (day - 1).days %>)</h4>
 <% end %>
 
-<% @invitation.dockets_for_day(day).group_by(&:gender).each do |gender, dockets| %>
+<% @invitation.dockets.group_by(&:gender).each do |gender, dockets| %>
 
-  <% events = dockets.map(&:events).reduce(:|).select { |x| x.day == day }.sort_by(&:pos) %>
+  <% events = competition.events.group_by(&:gender)[gender].group_by(&:day)[day] || [] %>
 <% if events.any? %>
 
   <% relays = relays_by_gender[gender] || [] %>
