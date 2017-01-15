@@ -13,6 +13,6 @@ module ResultsHelper
 
   def best_result(results)
     result = results.min
-    return result if result.time > 0
+    return result if result.time and result.time > 0
   end
 end
