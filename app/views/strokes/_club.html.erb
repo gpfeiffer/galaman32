@@ -1,0 +1,48 @@
+<% content_for :level do %>
+  <h3>Strokes</h3>
+  <ul>
+    <% Stroke.all.each do |stroke| %>
+    <li>
+      <%= link_to_unless_current stroke, stroke_path(stroke, club_id: club) %>
+    </li>
+    <% end %>
+  </ul>
+<% end %>
+
+<h3><%= club.name %></h3>
+<h1><%= @stroke %></h1>
+
+<% @results.group_by(&:course).each do |course, results| %>
+<h2><%= course %></h2>
+<%= results.count %> results:
+<% distances = results.map(&:distance).uniq.sort %>
+
+<table class="fact-sheet">
+  <tr class="pb-hi">
+    <th> Swimmer </th>
+    <% distances.each do |distance| %>
+      <th><%= distance %>m</th>
+    <% end %>
+  </tr>
+  <% results.group_by(&:swimmer).each do |swimmer, results_by_swimmer| %>
+  <tr class="pb-lo" align="right">
+    <th><%= swimmer.first_last %>, <%= swimmer.age %></th>
+      <% results_distance = results_by_swimmer.group_by(&:distance) %>
+      <% distances.each do |distance| %>
+    <td style="line-height:14px; padding-top:4px;">
+        <% if results_distance[distance] %>
+          <% best = best_result(results_distance[distance].compact) %>
+	  <% if best %>
+              <%= link_to best, best %><br />
+              <span style="font-size:x-small;">
+              <%= best.date.strftime("%d/%m/%y") %><br />
+              <%= best.fina_points %> FINA pts
+	      </span>
+          <% end %>
+        <% end %>
+    </td>
+      <% end %>
+    <tr>
+  <% end %>
+</table>
+<% end %>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150720105142) do
+ActiveRecord::Schema.define(:version => 20170115153437) do
 
   create_table "aims", :force => true do |t|
     t.integer   "swimmer_id"
@@ -80,6 +80,7 @@ ActiveRecord::Schema.define(:version => 20150720105142) do
     t.string   "subject_type"
     t.integer  "heat"
     t.string   "stage"
+    t.integer  "group",        :default => 99
   end
 
   create_table "events", :force => true do |t|
@@ -93,6 +94,7 @@ ActiveRecord::Schema.define(:version => 20150720105142) do
     t.integer   "day"
     t.string    "stage"
     t.timestamp "seeded_at"
+    t.string    "gender"
   end
 
   create_table "heats", :force => true do |t|
@@ -117,6 +119,7 @@ ActiveRecord::Schema.define(:version => 20150720105142) do
     t.integer   "time"
     t.timestamp "created_at"
     t.timestamp "updated_at"
+    t.string    "gender"
   end
 
   create_table "qualifications", :force => true do |t|
@@ -167,11 +170,27 @@ ActiveRecord::Schema.define(:version => 20150720105142) do
     t.timestamp "updated_at"
   end
 
+  create_table "splits", :force => true do |t|
+    t.integer  "time"
+    t.integer  "length"
+    t.integer  "result_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "standards", :force => true do |t|
     t.integer   "competition_id"
     t.integer   "qualification_id"
     t.timestamp "created_at"
     t.timestamp "updated_at"
+  end
+
+  create_table "strokes", :force => true do |t|
+    t.string   "name"
+    t.string   "short"
+    t.integer  "code"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "supports", :force => true do |t|
