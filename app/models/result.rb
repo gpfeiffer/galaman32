@@ -32,12 +32,14 @@ class Result < ActiveRecord::Base
     super(root: false, methods: [:age_in_days, :symbol, :name, :gender])
   end
 
-  # revert natural order if one time is 0
+  # revert natural order if one time is 0 or nil
   def <=> other
-    if time == other.time
+    mtime = time.nil? ? 0 : time
+    otime = other.time.nil? ? 0 : other.time
+    if mtime == otime
       name <=> other.name
     else
-      time * other.time == 0 ? other.time - time : time - other.time
+      mtime * otime == 0 ? otime - mtime : mtime - otime
     end
   end
 
