@@ -32,12 +32,12 @@ $(document).ready(function()
 
 <% distances = results.map(&:distance).uniq.sort %>
 
-<table id="<%= "myTable#{course}" %>" class="fact-sheet">
+<table id="<%= "myTable#{course}" %>" class="fact-sheet tablesorter-blue">
   <thead>
   <tr class="pb-hi">
     <th> Swimmer </th>
     <% distances.each do |distance| %>
-      <th><%= distance %>m</th>
+      <th class="header"><%= distance %>m</th>
     <% end %>
   </tr>
   </thead>
