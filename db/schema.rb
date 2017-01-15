@@ -186,11 +186,27 @@ ActiveRecord::Schema.define(:version => 20150726090228) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "splits", :force => true do |t|
+    t.integer  "time"
+    t.integer  "length"
+    t.integer  "result_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "standards", :force => true do |t|
     t.integer  "competition_id"
     t.integer  "qualification_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "strokes", :force => true do |t|
+    t.string   "name"
+    t.string   "short"
+    t.integer  "code"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "supports", :force => true do |t|

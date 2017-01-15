@@ -1,0 +1,27 @@
+<h1>Listing strokes</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Short</th>
+    <th>Code</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @strokes.each do |stroke| %>
+  <tr>
+    <td><%= stroke.name %></td>
+    <td><%= stroke.short %></td>
+    <td><%= stroke.code %></td>
+    <td><%= link_to 'Show', stroke %></td>
+    <td><%= link_to 'Edit', edit_stroke_path(stroke) %></td>
+    <td><%= link_to 'Destroy', stroke, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Stroke', new_stroke_path %>

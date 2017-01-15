@@ -1,11 +1,12 @@
 class Result < ActiveRecord::Base
   belongs_to :entry
   has_one :event, through: :entry
+  has_one :subject, through: :entry
   has_one :competition, through: :event
   has_many :splits, dependent: :destroy
 
-  delegate :discipline, :swimmer, :name, 
-    :name_and_ages, :club, :invitation, :age, :group,
+  delegate :discipline, :swimmer, :name,
+    :name_and_ages, :club, :invitation, :age, :group, :distance,
     :course, :date, :distance_course_code, :stroke, to: :entry
 
   attr_accessor :mins, :secs, :cens

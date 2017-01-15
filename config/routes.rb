@@ -1,4 +1,7 @@
 Galaman::Application.routes.draw do
+  resources :strokes
+
+
   resources :splits
 
 

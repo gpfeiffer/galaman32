@@ -10,7 +10,7 @@ class Entry < ActiveRecord::Base
   validates :event, presence: true
 
   delegate :club, :name, :first_last, :age, :invitation, :gender, :number, to: :subject
-  delegate :course, :date, to: :event
+  delegate :distance, :course, :date, to: :event
 
   attr_accessor :mins, :secs, :cens
 
