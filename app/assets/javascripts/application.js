@@ -11,6 +11,7 @@
 // GO AFTER THE REQUIRES BELOW.
 //
 //= require jquery
+//= require jquery-tablesorter
 //= require rails
 //= require galaman
 //= require d3

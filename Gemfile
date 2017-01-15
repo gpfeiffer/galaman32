@@ -44,6 +44,7 @@ end
 gem 'yaml_db'
 
 gem 'jquery-rails'
+gem 'jquery-tablesorter'
 
 gem 'devise'
 gem 'cancan'

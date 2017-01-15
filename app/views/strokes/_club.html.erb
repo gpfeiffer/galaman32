@@ -1,3 +1,17 @@
+<script>
+var myTextExtraction = function(node)
+{
+    // extract data from markup and return it
+    return node.getAttribute("y");
+}
+$(document).ready(function()
+    {
+        $("#myTableSC").tablesorter( {textExtraction: myTextExtraction} );
+        $("#myTableLC").tablesorter( {textExtraction: myTextExtraction} );
+    }
+);
+</script>
+
 <% content_for :level do %>
   <h3>Strokes</h3>
   <ul>
@@ -15,23 +29,28 @@
 <% @results.group_by(&:course).each do |course, results| %>
 <h2><%= course %></h2>
 <%= results.count %> results:
+
 <% distances = results.map(&:distance).uniq.sort %>
 
-<table class="fact-sheet">
+<table id=<%= "myTable#{course}" %> class="fact-sheet, tablesorter">
+  <thead>
   <tr class="pb-hi">
     <th> Swimmer </th>
     <% distances.each do |distance| %>
       <th><%= distance %>m</th>
     <% end %>
   </tr>
+  </thead>
+  <tbody>
   <% results.group_by(&:swimmer).each do |swimmer, results_by_swimmer| %>
   <tr class="pb-lo" align="right">
     <th><%= swimmer.first_last %>, <%= swimmer.age %></th>
       <% results_distance = results_by_swimmer.group_by(&:distance) %>
       <% distances.each do |distance| %>
-    <td style="line-height:14px; padding-top:4px;">
         <% if results_distance[distance] %>
           <% best = best_result(results_distance[distance].compact) %>
+        <% end %>
+    <td style="line-height:14px; padding-top:4px;" y=<%= "#{best.time}" if best %>>
 	  <% if best %>
               <%= link_to best, best %><br />
               <span style="font-size:x-small;">
@@ -39,10 +58,10 @@
               <%= best.fina_points %> FINA pts
 	      </span>
           <% end %>
-        <% end %>
     </td>
       <% end %>
-    <tr>
+  </tr>
   <% end %>
+  </tbody>
 </table>
 <% end %>
