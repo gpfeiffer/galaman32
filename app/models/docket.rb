@@ -14,7 +14,7 @@ class Docket < ActiveRecord::Base
   delegate :date, :to => :competition
   delegate :club, :to => :invitation
 
-  before_create :assign_age
+  before_create :assign_age, unless: :age
   
   def age_range
     age .. age
