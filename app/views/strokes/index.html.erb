@@ -1,3 +1,14 @@
+<% if @club %>
+  <h3>Strokes</h3>
+  <h1><%= @club %></h1>
+<ul>
+  <% @strokes.each do |stroke| %>
+    <li>
+      <%= link_to stroke, stroke_path(stroke, club_id: @club.id) %>
+  </li>
+  <% end %>
+</ul>
+<% else %>
 <h1>Listing strokes</h1>
 
 <table>
@@ -25,3 +36,4 @@
 <br />
 
 <%= link_to 'New Stroke', new_stroke_path %>
+<% end %>

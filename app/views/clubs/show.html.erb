@@ -17,7 +17,8 @@
   <%= @club.email %>
 </p>
 <hr/>
-*** <%= link_to 'Club Records', results_path(:club_id => @club) %> ***
+    *** <%= link_to 'Club Records', results_path(club_id: @club) %> ***
+    <%= link_to 'Club Strokes', strokes_path(club_id: @club) %> ***
 <hr/>
 
 <h3>Swimmers.</h3>
