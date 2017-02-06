@@ -1,7 +1,7 @@
 <% content_for :level do %>
   <h3><%= @docket.invitation.club %></h3>
   <% @docket.invitation.dockets.group_by(&:gender).each do |gender, dockets| %>
-    <h4><%= { 'f' => 'Girls', 'm' => 'Boys' }[gender] %></h4>
+    <h4><%= { 'F' => 'Girls', 'M' => 'Boys' }[gender] %></h4>
     <ul><%= render dockets.sort_by(&:name) %></ul>
   <% end %>
 <% end %>
@@ -10,12 +10,12 @@
 <h3><%= link_to @docket.competition.name, @docket.competition %></h3>
 <%= @docket.competition.course %>:
 <%= @docket.competition.location_dates %>
-<h1><%= link_to @docket.swimmer.name, @docket.swimmer %> (<%= link_to @docket.invitation.club.symbol, @docket.invitation %>)</h1>
+<h1><%= link_to @docket.name, @docket.swimmer %> (<%= link_to @docket.invitation.club.symbol, @docket.invitation %>)</h1>
 
 <div>
-  <%= @docket.age %> <%= @docket.swimmer.gender %>,
+  <%= @docket.age %> <%= @docket.gender %>,
   <b>ID:</b>
-  <%= @docket.swimmer.number %>.
+  <%= @docket.number %>.
 <div>
 <br />
 <br />
