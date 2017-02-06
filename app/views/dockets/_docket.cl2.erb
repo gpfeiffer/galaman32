@@ -1,3 +1,8 @@
+<% if docket.entries.any? %>
 <%= render docket.entries.first -%>
 <%= docket.to_d3 %>
 <%= render docket.entries[1..-1] -%>
+<% else %>
+<%= docket.to_d0 %>
+<%= docket.to_d3 %>
+<% end %>
