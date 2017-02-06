@@ -12,7 +12,7 @@
 for a total of 
 <%= pluralize(@invitation.i_entries_count, "individual event") -%>
 <% if @invitation.relays.present? %> 
-and
+&nbsp;and
 <%= pluralize(@invitation.r_entries_count, "relay event") -%>
 <% end %>
 .

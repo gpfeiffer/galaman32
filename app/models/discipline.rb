@@ -53,7 +53,7 @@ class Discipline < ActiveRecord::Base
 
   def to_words
     if is_relay? then
-      sprintf("4x%dm %s Relay %s", distance, course, stroke == "Ind Medley" ? "Medley" : stroke)
+      sprintf("4x%dm %s %s Relay", distance, course, stroke == "Ind Medley" ? "Medley" : stroke)
     else
       sprintf("%dm %s %s", distance, course, stroke)
     end
