@@ -174,7 +174,7 @@ class Event < ActiveRecord::Base
       "Ind Medley" => 5,
     }[stroke]
     age_top = age_max == 99 ? 0 : age_max
-    "#{pos};#{stage};#{gender.upcase};#{mode};#{age_min};#{age_top};" +
+    "#{pos};#{stage};#{gender};#{mode};#{age_min};#{age_top};" +
       "#{distance};#{stroke_no};;;;4;;;;;;"
   end
 

@@ -9,7 +9,7 @@
 
 \begin{tabular}[t]{p{3.5cm}cr<%= 'r' * events.count %>}
 \toprule
-\textbf{Swimmer (<%= sex.upcase %>)} & \textbf{DOB} & \textbf{Age}
+\textbf{Swimmer (<%= sex %>)} & \textbf{DOB} & \textbf{Age}
     <% events.each do |event| %>
       & \hskip1.2cm\llap{\textbf{<%= ordinal_number (event.pos) %>}}
     <% end %> \\

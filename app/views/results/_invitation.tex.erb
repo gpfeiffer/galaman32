@@ -13,7 +13,7 @@
   <% events = dockets.map(&:events).reduce(:|).select { |x| x.day == day }.sort_by(&:pos) %>
 \begin{tabular}{p{4cm}<%= 'r' * events.count %>}
   \toprule
-  Swimmer (<%= gender.upcase %>), Age
+  Swimmer (<%= gender %>), Age
   <% events.each do |event| %>
     & \hbox to 18mm{}\llap{<%= event.discipline.nickname %>}
   <% end %>

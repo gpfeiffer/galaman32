@@ -56,7 +56,7 @@
     <table style="vertical-align:top">
     <tr><th colspan="2">Gender</th><tr>
     <% Event::GENDERS.each do |gender| %>
-      <tr><td align="right"><%= f.label :gender, gender.upcase %></td>
+      <tr><td align="right"><%= f.label :gender, gender %></td>
       <td><%= f.radio_button :gender, gender %></td></tr>
     <% end %>
     </table>

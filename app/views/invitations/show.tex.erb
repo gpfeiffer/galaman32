@@ -48,7 +48,7 @@ and \\
   <% @invitation.relays.each do |relay| -%>
   <% entries_by_event = relay.entries.index_by(&:event) -%>
 <%= relay.name %> &
-<%= relay.gender.upcase %> &
+<%= relay.gender %> &
 <%= raw ages_to_tex(relay.age_range) %> 
       <% events.each do |event| %>
         <% entry = entries_by_event[event] %>

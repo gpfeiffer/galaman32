@@ -17,7 +17,7 @@
       <% entries_by_event = relay.entries.index_by(&:event) %>
       <td>R<%= index + 1 %></td>
       <td><%= link_to relay.name, relay %></td>
-      <td><%= relay.gender.upcase %></td>
+      <td><%= relay.gender %></td>
       <td align="right"><%= ages_to_words(relay.age_range) %></td>
       <% events.each do |event| %>
         <% entry = entries_by_event[event] %>
