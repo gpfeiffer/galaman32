@@ -1,9 +1,11 @@
 class Relay < ActiveRecord::Base
   belongs_to :invitation
-  has_one :club, :through =>:invitation
-  has_many :entries, :as => :subject, :dependent => :destroy
-  has_many :seats, :dependent => :destroy
-  has_many :dockets, :through => :seats
+  has_one :club, through: :invitation
+  has_many :entries, as: :subject, dependent: :destroy
+  has_many :seats, dependent: :destroy
+  has_many :dockets, through: :seats
+
+  validates :gender, inclusion: Event::GENDERS
 
   def age_range
     age_min .. age_max
@@ -35,6 +37,6 @@ class Relay < ActiveRecord::Base
   end
 
   def permits?(docket)
-    seats.count < 4 and docket.swimmer.gender == gender and age_max >= docket.age
+    seats.count < 4 and (gender == "X" or docket.swimmer.gender == gender) and age_max >= docket.age
   end
 end

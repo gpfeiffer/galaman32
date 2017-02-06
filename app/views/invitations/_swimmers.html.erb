@@ -1,5 +1,6 @@
 <% competition = @invitation.competition %>
 <% relays_by_gender = @invitation.relays.group_by(&:gender) %>
+<% relays_by_gender.default = [] %>
 
 <% competition.days.each do |day| %>
 <% if competition.length > 1 %>
@@ -11,7 +12,7 @@
   <% events = competition.events.group_by(&:gender)[gender].group_by(&:day)[day] || [] %>
 <% if events.any? %>
 
-  <% relays = relays_by_gender[gender] || [] %>
+  <% relays = relays_by_gender[gender] + relays_by_gender['X'] %>
   <table class="fact-sheet">
     <tr class="times-major">
       <th>Swimmer (<%= gender %>)</th>

@@ -45,12 +45,13 @@ and \\
       & <%= ordinal_number (event.pos) -%>
     <% end %> \\
 \midrule
-  <% @invitation.relays.each do |relay| %>
+  <% @invitation.relays.each do |relay| -%>
+  <% entries_by_event = relay.entries.index_by(&:event) -%>
 <%= relay.name %> &
 <%= relay.gender.upcase %> &
 <%= raw ages_to_tex(relay.age_range) %> 
       <% events.each do |event| %>
-	<% entry = Entry.find_by_event_id_and_relay_id(event, relay) %>
+        <% entry = entries_by_event[event] %>
 	& <%= entry if entry %>
       <% end %>
 \\
