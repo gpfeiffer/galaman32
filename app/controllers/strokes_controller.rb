@@ -5,6 +5,9 @@ class StrokesController < ApplicationController
 
   def index
     @strokes = Stroke.all
+    if params[:club_id]
+      @club = Club.find(params[:club_id])
+    end
     respond_with(@strokes)
   end
 
