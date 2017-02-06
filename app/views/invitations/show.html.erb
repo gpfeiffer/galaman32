@@ -1,4 +1,16 @@
 <% competition = @invitation.competition %>
+
+<% content_for :level do %>
+  <h3><%= competition.name %></h3>
+  <ul>
+    <% competition.invitations.sort_by { |x| x.club.full_name }.each do |invitation| %>
+      <li>
+        <%= link_to_unless_current invitation.club.name, invitation %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>
+
 <% club = @invitation.club %>
 <h3>
   <%= link_to competition.name, competition %>

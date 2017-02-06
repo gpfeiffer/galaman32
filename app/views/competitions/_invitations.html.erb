@@ -7,7 +7,7 @@
 <br />
 <br />
 <table class="fact-sheet">
-<% @competition.invitations.sort { |x, y| x.club.full_name <=> y.club.full_name }.each do |invitation| %>
+<% @competition.invitations.sort_by { |x| x.club.full_name }.each do |invitation| %>
   <tr class="fact-major">
     <td><%= link_to invitation.club.name, invitation %></td>
     <td align="right"><%= pluralize(invitation.dockets.count, 'swimmer') %> in</td>
