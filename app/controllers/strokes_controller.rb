@@ -15,7 +15,7 @@ class StrokesController < ApplicationController
     if params[:club_id]
       @club = Club.find(params[:club_id])
       @results = @club.swimmers.map(&:results).flatten.select {
-        |x| x.time > 0 && x.stroke == @stroke.name
+        |x| x.time && x.time > 0 && x.stroke == @stroke.name
       }
     end
     respond_with(@stroke)
