@@ -74,7 +74,7 @@ class Swimmer < ActiveRecord::Base
   # when did we get our A time?
   def sticking_achievement(qualification, discipline)
     # loop over my results in discipline
-    qts = qualification.qualification_times.group_by(&:discipline)[discipline]
+    qts = qualification.qualification_times.index_by(&:gender)[gender].group_by(&:discipline)[discipline]
     results_by_discipline = results.group_by(&:discipline)[discipline]
     if results_by_discipline
       results_by_discipline.each do |result|
