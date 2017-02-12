@@ -5,7 +5,7 @@ class Result < ActiveRecord::Base
   has_one :competition, through: :event
   has_many :splits, dependent: :destroy
 
-  delegate :discipline, :swimmer, :name,
+  delegate :discipline, :swimmer, :name, :gender,
     :name_and_ages, :club, :invitation, :age, :group, :distance,
     :course, :date, :distance_course_code, :stroke, to: :entry
 
@@ -19,10 +19,6 @@ class Result < ActiveRecord::Base
 
   def age_in_days
     swimmer.age_in_days(date)
-  end
-
-  def gender
-    swimmer.gender
   end
 
   def symbol

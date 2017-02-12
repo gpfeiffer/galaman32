@@ -12,7 +12,7 @@ class Relay < ActiveRecord::Base
   end
 
   def age
-    age_max
+    [age_max,18].min
   end
 
   def name_and_ages
@@ -24,7 +24,7 @@ class Relay < ActiveRecord::Base
   end
 
   def swimmer
-    nil
+    self
   end
 
   def first_last

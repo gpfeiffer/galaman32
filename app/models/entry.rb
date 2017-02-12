@@ -9,7 +9,7 @@ class Entry < ActiveRecord::Base
 
   validates :event, presence: true
 
-  delegate :club, :name, :first_last, :age, :invitation, :gender, :number, to: :subject
+  delegate :club, :name, :first_last, :age, :invitation, :gender, :number, :swimmer, to: :subject
   delegate :distance, :course, :date, to: :event
 
   attr_accessor :mins, :secs, :cens
@@ -27,10 +27,6 @@ class Entry < ActiveRecord::Base
 
   def name_and_ages
     subject.name_and_ages
-  end
-
-  def swimmer
-    subject.swimmer
   end
 
   # for sorting
