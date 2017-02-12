@@ -168,12 +168,12 @@ function draw(data) {
 <script type="text/javascript">
   d3.json("<%= event_path(@event, :json) %>", draw);
 </script>
+<% end %>
 
 <% if can? :update, @event %>
   <div style="float:right">
     <%= button_to 'Sort!', list_event_path(@event) %>
   </div>
-<% end %>
 <% end %>
 
 <h2>Results.</h2>
