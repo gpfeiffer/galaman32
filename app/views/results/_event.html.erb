@@ -161,6 +161,7 @@ function draw(data) {
 
 <%= render 'events/navigation' %> 
 
+<% if not @event.is_relay? %>
 <h2>Chart</h2>
 
 <div id="chart"></div>
@@ -172,6 +173,7 @@ function draw(data) {
   <div style="float:right">
     <%= button_to 'Sort!', list_event_path(@event) %>
   </div>
+<% end %>
 <% end %>
 
 <h2>Results.</h2>
