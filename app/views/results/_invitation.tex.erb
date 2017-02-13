@@ -25,11 +25,14 @@
       <% events.each do |event| %>
   & 
   	<% entry = entries[event].first if entries[event].present? %>
-        <% if entry and entry.result and entry.result.time %>
-  <%= entry.result -%>
-  <% qu = entry.result.qualify %>\rlap{%
-  <%= '*' if entry.result.time > 0 and (entry.time == 0 or entry.time > entry.result.time) -%>
+        <% if entry and entry.results.present? %>
+	<% result = best_result(entry.results) %>
+	<% if result.time %>
+  <%= result -%>
+  <% qu = result.qualify %>\rlap{%
+  <%= '*' if result.time > 0 and (entry.time == 0 or entry.time > result.time) -%>
   <%= qu and qu[:qualification].short -%>}
+        <% end %>
         <% end %>
     <% end %>
   \\
