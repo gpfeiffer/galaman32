@@ -64,7 +64,7 @@ class Relay < ActiveRecord::Base
       esex: "%1s" % event.gender,
       dist: "%4d" % event.distance,
       stro: "%d" % stroke_no,
-      evnt: "%3d%1s" % [event.pos, "ABCDE"[index]],
+      evnt: "%3d " % event.pos,
       ages: "%4s" % event.cl2_ages,
       agen: "%3s" % "",
       date: "%8s" % event.date.strftime("%m%d%Y"),
