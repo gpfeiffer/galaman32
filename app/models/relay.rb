@@ -45,17 +45,11 @@ class Relay < ActiveRecord::Base
     entry = entries.first # FIXME: there might be more than one
     event = entry.event
     result = entry.results.first  # FIXME: there might be more than one
-    ranges = event.qualification_age_ranges.sort_by(&:min)
-    index = ranges.find_index{ |r| r.include? age }
-    range = ranges[index]
-    lo = range.min == 0 ? "UN" : ("%2d" % range.min)
-    hi = range.max == 99 ? "OV" : ("%2d" % range.max)
-    ages = lo + hi
     stroke_no = {
       "Freestyle" => 1,
-      "Backstroke" => 2, 
-      "Breaststroke" => 3, 
-      "Butterfly" => 4, 
+      "Backstroke" => 2,
+      "Breaststroke" => 3,
+      "Butterfly" => 4,
       "Ind Medley" => 5,
     }[entry.stroke]
     letter = name[-1]
@@ -71,7 +65,7 @@ class Relay < ActiveRecord::Base
       dist: "%4d" % event.distance,
       stro: "%d" % stroke_no,
       evnt: "%3d%1s" % [event.pos, "ABCDE"[index]],
-      ages: "%4s" % ages,
+      ages: "%4s" % event.cl2_ages,
       agen: "%3s" % "",
       date: "%8s" % event.date.strftime("%m%d%Y"),
       tim0: "%8s" % (entry.time > 0 ? entry.to_s : ""),
