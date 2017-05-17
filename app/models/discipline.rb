@@ -51,6 +51,10 @@ class Discipline < ActiveRecord::Base
     sprintf("%s%dm %s", is_relay? ? "4x" : "", distance, dict[stroke])
   end
 
+  def nickname_course
+    "#{nickname} (#{course})"
+  end
+  
   def to_words
     if is_relay? then
       sprintf("4x%dm %s %s Relay", distance, course, stroke == "Ind Medley" ? "Medley" : stroke)

@@ -5,8 +5,12 @@ class DisciplinesController < ApplicationController
   # GET /disciplines
   # GET /disciplines.xml
   def index
+    if params[:club_id]
+      @club = Club.find(params[:club_id])
+    end
     respond_to do |format|
       format.html # index.html.erb
+      format.csv { send_data @club.to_csv }
       format.xml  { render :xml => @disciplines }
     end
   end

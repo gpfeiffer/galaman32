@@ -23,4 +23,24 @@ class Club < ActiveRecord::Base
     full_name
   end
 
+  # output spreadsheet of this year's best performances
+  def to_csv
+    date = Date.parse("August") - 1.year
+    year_results = results.select { |result| result.date > date }
+    disciplines = year_results.map(&:discipline).uniq.sort_by(&:course).sort_by(&:distance).sort_by(&:stroke)
+    headers = [ "Swimmer" ] + disciplines.map(&:nickname_course)
+    results_by_swimmer = year_results.group_by(&:swimmer)
+    CSV.generate(headers: true) do |csv|
+      csv << headers
+      results_by_swimmer.each do |swimmer, swimmer_results|
+        row = [swimmer.first_last]
+        disciplines.each do |discipline|
+          discipline_results = swimmer_results.select { |x| x.discipline == discipline and x.time.present? }
+          row << (discipline_results.any? ? ResultsController.helpers.best_result(discipline_results).to_s : "")
+        end
+        csv << row
+      end
+    end
+  end
+
 end
