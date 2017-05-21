@@ -4,7 +4,7 @@
     <%= link_to_if entry.swimmer, entry.discipline.nickname, swimmer_path(entry.swimmer, :discipline_id => entry.discipline) %>
   </th>
   <th style="text-align: right; font-size: smaller; font-weight: normal;">
-    (<%= link_to entry, edit_entry_path(entry) %>)
+    (<%= link_to entry, entry %>)
   </th>
   <th></th>
   <th style="text-align: center; font-size: smaller; font-weight: normal;">
