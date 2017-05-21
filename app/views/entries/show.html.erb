@@ -3,8 +3,8 @@
 <ul>
   <% @entry.subject.entries.each do |entry| %>
     <li>
-      <%= entry.event.pos %>
-      <%= link_to_unless_current entry.discipline.nickname, entry.event %>
+      <%= entry.event.pos %>.
+      <%= link_to_unless_current entry.discipline.nickname, entry %>
     </li>
   <% end %>
 </ul>
