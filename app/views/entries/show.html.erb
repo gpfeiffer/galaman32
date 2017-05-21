@@ -1,3 +1,15 @@
+<% content_for :level do %>
+<h3><%= @entry.swimmer %></h3>
+<ul>
+  <% @entry.docket.entries.each do |entry| %>
+    <li>
+      <%= entry.event.pos %>
+      <%= link_to_unless_current entry.discipline.nickname, entry.event %>
+    </li>
+  <% end %>
+</ul>
+<% end %>
+
 <h3><%= link_to @entry.competition.name, @entry.competition %></h3>
 <%= @entry.competition.course %>:
 <%= @entry.competition.location_dates %>
