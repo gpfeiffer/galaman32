@@ -7,8 +7,7 @@
   (<%= @competition.dates %>, <%= @competition.course %>)<br />
 </p>
 
-<%= content_tag(:p, "Age up: #{@competition.age_up}.")
-    if @competition.age_up %>
+<%= content_tag(:p, "Age up: #{@competition.age_up}.") if @competition.age_up %>
 
 <% if @competition.source.present? %>
 <p>
