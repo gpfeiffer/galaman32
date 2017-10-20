@@ -32,6 +32,12 @@
     <%= f.text_field :length, :size => 4 %> Days
   </div>
   <div class="field">
+    <%= f.label :age_up, 'Age Up' %><br />
+    <%= f.date_select :age_up,
+	default: Date.today.end_of_year(),
+	order: [:day, :month, :year] %>
+  </div>
+  <div class="field">
     <%= f.label :source %><br />
     <%= f.text_field :source %>
   </div>

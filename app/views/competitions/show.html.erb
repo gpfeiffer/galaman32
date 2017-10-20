@@ -4,12 +4,15 @@
 
 <p>
   <%= @competition.location %>
-(<%= @competition.dates %>, <%= @competition.course %>)
+  (<%= @competition.dates %>, <%= @competition.course %>)<br />
 </p>
+
+<%= content_tag(:p, "Age up: #{@competition.age_up}.")
+    if @competition.age_up %>
 
 <% if @competition.source.present? %>
 <p>
-<b>Reference:</b> 
+<b>Reference:</b>
 <%= link_to @competition.source, @competition.source_url %>,
 <%= @competition.source_date %>.
 </p>
@@ -19,7 +22,7 @@
 <% relay_text = (relay_count > 0 ? " and #{pluralize(relay_count, 'relay entry')}" : "") %>
 <%= pluralize(@competition.invitations.count, 'club has', 'clubs have') %> registered
 <%= pluralize(@competition.dockets.count, 'swimmer') %> for
-<%= pluralize(@competition.dockets.map { |x| x.entries.count }.sum, 'individual entry') + relay_text + "." %> 
+<%= pluralize(@competition.dockets.map { |x| x.entries.count }.sum, 'individual entry') + relay_text + "." %>
 
 <br />
 <br />
