@@ -1,6 +1,8 @@
 <% competition = @invitation.competition %>
 <% relays_by_gender = @invitation.relays.group_by(&:gender) %>
 <% relays_by_gender.default = [] %>
+<% events_by_gender = competition.events.group_by(&:gender) %>
+<% events_by_gender.default = [] %>
 
 <% competition.days.each do |day| %>
 <% if competition.length > 1 %>
@@ -9,7 +11,7 @@
 
 <% @invitation.dockets.group_by(&:gender).each do |gender, dockets| %>
 
-  <% events = competition.events.group_by(&:gender)[gender].group_by(&:day)[day] || [] %>
+  <% events = (events_by_gender[gender] + events_by_gender['X']).group_by(&:day)[day] || [] %>
 <% if events.any? %>
 
   <% relays = relays_by_gender[gender] + relays_by_gender['X'] %>
