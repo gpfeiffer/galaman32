@@ -14,17 +14,6 @@
 <% events = Competition.all.group_by(&:relative_date) %>
 
 <% if events[:future].present? %>
-<h3>Upcoming Events</h3>
-<ul>
-<% events[:future].each do |competition| %>
-<li>
-<%= link_to competition.name, competition %>, <%= competition.location %>
-: only <%= time_ago_in_words(competition.date) %> to go ...
-</li>
-<% end %>
-</ul>
-<% end %>
-
 <% if events[:current].present? %>
 <h3>Today's Events</h3>
 <ul>
@@ -43,6 +32,17 @@
 <li>
 <%= link_to competition.name, competition %>, <%= competition.location %>
 : <%= time_ago_in_words(competition.date + competition.length) %> ago ...
+</li>
+<% end %>
+</ul>
+<% end %>
+
+<h3>Upcoming Events</h3>
+<ul>
+<% events[:future].each do |competition| %>
+<li>
+<%= link_to competition.name, competition %>, <%= competition.location %>
+: only <%= time_ago_in_words(competition.date) %> to go ...
 </li>
 <% end %>
 </ul>
