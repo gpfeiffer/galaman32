@@ -6,7 +6,7 @@
 <% if @birthdays.any? %>
   <p>
 <%= image_tag('balloons.png', :align => 'middle', :width => '30') %>
-   Happy Birthday to <%= @birthdays.map { |birthday| birthday.first_last }.to_sentence %>!
+   Happy Birthday to <%= @birthdays.sample.first_last %>!
 <%= image_tag('balloons.png', :align => 'middle', :width => '30') %>
   </p>
 <% end %>
