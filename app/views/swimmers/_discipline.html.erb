@@ -1,7 +1,7 @@
 <% content_for :level do %>
   <h3><%= @swimmer.name %></h3>
   <ul>
-    <% @results.each_key.sort_by(&:distance).sort_by(&:stroke) do |discipline| %>
+    <% @results.keys.sort_by(&:distance).sort_by(&:stroke).each do |discipline| %>
       <li><%= link_to_unless_current discipline.distance_course_stroke, swimmer_path(@swimmer, :discipline_id => discipline) %></li>
     <% end %>
   </ul>
