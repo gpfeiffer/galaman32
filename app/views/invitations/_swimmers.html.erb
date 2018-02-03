@@ -12,6 +12,7 @@
 <% @invitation.dockets.group_by(&:gender).each do |gender, dockets| %>
 
   <% events = (events_by_gender[gender] + events_by_gender['X']).group_by(&:day)[day] || [] %>
+  <% events = events.select { |event| not event.is_relay? } %>
 <% if events.any? %>
 
   <% relays = relays_by_gender[gender] + relays_by_gender['X'] %>

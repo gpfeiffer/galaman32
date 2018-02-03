@@ -31,6 +31,9 @@ class Relay < ActiveRecord::Base
     name
   end
 
+  def personal_best(discipline)
+  end
+
   # sorting attribute in the absence of time
   def no_time
     [age, id.hash % 97]  # first by age, then somewhat random
