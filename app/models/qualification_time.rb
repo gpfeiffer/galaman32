@@ -5,7 +5,7 @@ class QualificationTime < ActiveRecord::Base
   attr_writer :mode, :course, :stroke, :distance
   delegate :distance, :course, :stroke, :mode, :is_relay?, :to => :discipline, :allow_nil => :true
 
-  validates :age_min, :age_max, :presence => true, 
+  validates :age_min, :age_max, :presence => true,
     :numericality => { :only_integer => true, :greater_than_or_equal_to => 0 }
 
   validates :qualification_id, :discipline_id, :time, :gender, :presence => true
@@ -48,13 +48,19 @@ class QualificationTime < ActiveRecord::Base
     "#{distance}m #{course}"
   end
 
+  # convert between SC and LC
+  ##  FIXME: Result model has exactly the same function
+  def conversion
+    time + discipline.differential
+  end
+
   # convert into FINA points
   ##  FIXME: Result model has exactly the same function
   def fina_points
     return if time == 0
     fina_base = Qualification.find_by_name("FINA Base")
     base_time = fina_base.qualification_times.where(
-      discipline_id: discipline.id, 
+      discipline_id: discipline.id,
       gender: gender
     ).first
     return ((10 * base_time.time.quo(time))**3).to_i if base_time
