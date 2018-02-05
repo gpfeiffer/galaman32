@@ -79,6 +79,10 @@ results in a particular stroke.
 </p>
 
 <%= render 'qualifications' if can? :read, @swimmer.aims.first %>
+<% if can? :create, Aim %>
+  <%= link_to 'Select Aims', new_aim_path(:swimmer_id => @swimmer) %>
+<% end %>
+
 
 <h2><%= @swimmer.dockets.count %> Competitions.</h2>
 
