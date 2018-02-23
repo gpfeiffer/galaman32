@@ -25,7 +25,7 @@
     <td style="text-align: right;">(<%= @result.entry %>)</td>
     <td style="text-align: right;"><%= "#{@result.place}." if @result.place %></td>
     <td style="text-align: right;">
-      <%= link_to(@result, edit_result_path(@result)) if @result %>
+      <%= link_to_if(can?(:edit, @result), @result, edit_result_path(@result)) if @result %>
     </td>
     <td><%= @result.stage %></td>
   </tr>
