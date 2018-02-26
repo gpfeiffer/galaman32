@@ -14,6 +14,8 @@ class QualificationsController < ApplicationController
   # GET /qualifications/1
   # GET /qualifications/1.xml
   def show
+    @gender = params[:gender]
+    @age = params[:age].to_i
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @qualification }

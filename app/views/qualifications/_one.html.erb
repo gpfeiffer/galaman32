@@ -1,34 +1,10 @@
-<h3><%= link_to 'Qualifications', qualifications_path %></h3>
-
-<h1>
-  <%= @qualification.name %> Times
-</h1>
-
-<% if @qualification.source.present? %>
-<p>
-<b>Source:</b> 
-<%= link_to @qualification.source, @qualification.source_url %>,
-<%= @qualification.source_date %>.
-</p>
-<% end %>
-
-<% if @qualification.description.present? %>
-<p>
- <%= @qualification.description %>
-</p>
-<% end %>
-
-<hr />
-<br />
-
-<% if @gender and @age %>
-  <%= render 'one' %>
-<% else %>
-<% @qualification.qualification_times.group_by(&:gender).each do |gender, times_by_gender| %>
+<% times_by_gender = @qualification.qualification_times %>
+<% times_by_gender = times_by_gender.group_by(&:gender)[@gender] %>
+<% times_by_gender = times_by_gender.group_by(&:age_min)[@age] %>
   <% times_by_gender.group_by(&:age_range).sort_by { |key, value| key.first }.each do |ages, times_by_ages| %>
     <% if times_by_ages.any? %>
     <h3>
-      <%= gender_word gender %> (<%= ages_to_words(ages) %>)
+      <%= gender_word @gender %> (<%= ages_to_words(ages) %>)
     </h3>
 
     <table class="fact-sheet">
@@ -61,20 +37,5 @@
     </table>
     <% end%>
   <% end %>
-<% end %>
 
 <br />
-
-<% end %>
-<hr />
-
-<% if can? :update, @qualification %>
-  <%= link_to 'Edit', edit_qualification_path(@qualification) %> |
-<% end %>
-<% if can? :destroy, @qualification %>
-  <%= link_to 'Destroy', @qualification, :confirm => 'Are you sure?', :method => :delete  %> |
-<% end %>
-<% if can? :update, @qualification %>
-  <%= link_to 'New Qualification Time', new_qualification_time_path(:qualification_id => @qualification) %> |
-<% end %>
-<%= link_to 'Back', :back %>
