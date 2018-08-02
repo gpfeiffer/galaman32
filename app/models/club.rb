@@ -25,7 +25,7 @@ class Club < ActiveRecord::Base
 
   # output spreadsheet of PBs
   def to_csv
-    results = swimmers.results.map(&:results).sum
+    results = swimmers.map(&:results).sum
     disciplines = results.map(&:discipline).uniq.sort_by(&:course).reverse.sort_by(&:distance).sort_by(&:stroke)
     headers = [ "Swimmer", "Swim Ireland ID" ] + disciplines.map(&:nickname_course)
     CSV.generate(headers: true) do |csv|
