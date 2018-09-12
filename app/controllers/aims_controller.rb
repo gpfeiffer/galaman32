@@ -1,5 +1,5 @@
 class AimsController < ApplicationController
-  load_and_authorize_resource
+  load_and_authorize_resource except: [:new]
 
   # GET /aims
   # GET /aims.xml
@@ -23,7 +23,8 @@ class AimsController < ApplicationController
   # GET /aims/new
   # GET /aims/new.xml
   def new
-    @aim[:swimmer_id] = params[:swimmer_id]
+    @aim = Aim.new(swimmer: Swimmer.find(params[:swimmer_id]))
+    authorize! :new, @aim
 
     respond_to do |format|
       format.html # new.html.erb
