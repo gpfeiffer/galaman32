@@ -47,12 +47,12 @@
   </tr>
 
   <tr class="times-major">
-  <td><%= link_to entry.event.pos, entry.event %>.</td>
+  <td><%= link_to @entry.event.pos, @entry.event %>.</td>
   <td style="text-align: right;">
-    <%= entry.heat %>
+    <%= @entry.heat %>
   </td>
   <td style="text-align: right;">
-    <%= entry.lane %>
+    <%= @entry.lane %>
   </td>
   </tr>
 </table>
