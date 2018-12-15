@@ -78,7 +78,7 @@ class Swimmer < ActiveRecord::Base
     results_by_discipline = results.group_by(&:discipline)[discipline]
     if results_by_discipline
       results_by_discipline.each do |result|
-        swimmer_age = age(result.date)
+        swimmer_age = age(result.date.end_of_year)
         qt = qts.select { |x| x.age_range.include? swimmer_age }.first
         if qt and result.time and result.time > 0 and result.time < qt.time
           return result
