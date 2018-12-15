@@ -35,9 +35,30 @@
 
   <%= render partial: 'one_entry', locals: { entry: @entry } %>
 </table>
+
 <hr>
 
 <% if user_session[:edit] %>
+<table class="fact-sheet">
+  <tr class="times-major">
+    <th></th>
+    <th>Heat</th>
+    <th>Lane</th>
+  </tr>
+
+  <tr class="times-major">
+  <td><%= link_to entry.event.pos, entry.event %>.</td>
+  <td style="text-align: right;">
+    <%= entry.heat %>
+  </td>
+  <td style="text-align: right;">
+    <%= entry.lane %>
+  </td>
+  </tr>
+</table>
+
+<hr>
+
 <%= link_to 'Edit', edit_entry_path(@entry) %> |
 <%= link_to 'Destroy', @entry, :confirm => 'Are you sure?', :method => :delete %> |
 <% end %>

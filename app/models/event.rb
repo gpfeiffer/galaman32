@@ -112,6 +112,13 @@ class Event < ActiveRecord::Base
     entries.group_by(&:lane)
   end
 
+  def swap_lanes(heat, lane1, lane2)
+    entry1 = entries.where(heat: heat, lane: lane1).first
+    entry2 = entries.where(heat: heat, lane: lane2).first
+    entry1.update_attribute(:lane, lane2)
+    entry2.update_attribute(:lane, lane1)
+  end
+
   def qtimes
     return [] unless competition.qualifications.any?
     competition.qualifications.map do |q|
