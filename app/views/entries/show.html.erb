@@ -1,7 +1,7 @@
 <% content_for :level do %>
 <h3><%= @entry.swimmer %></h3>
 <ul>
-  <% @entry.subject.entries.each do |entry| %>
+  <% @entry.subject.entries.sort_by(&:pos).each do |entry| %>
     <li>
       <%= entry.event.pos %>.
       <%= link_to_unless_current entry.discipline.nickname, entry %>
